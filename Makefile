@@ -6,13 +6,13 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/16 12:17:30 by angagnie          #+#    #+#              #
-#    Updated: 2016/02/16 15:06:50 by angagnie         ###   ########.fr        #
+#    Updated: 2016/02/16 17:30:36 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 # === Editable ===
 NAME:=fdf
-FILES:=main
+FILES:=main view controller
 # ================
 
 # ==== Standard ====
@@ -20,9 +20,9 @@ CC:=clang
 CCHPATH:=cache/
 SRCPATH:=src/
 HDRPATH:=include/
-LFLAGS:=-I $(HDRPATH)
-LIBFLAGS:=-lmlx -framework OpenGL -framework AppKit
-CFLAGS:=-Wall -Wextra -Werror
+LFLAGS:=-I $(HDRPATH) -I Libft/include/
+LIBFLAGS:=-lmlx -framework OpenGL -framework AppKit -L Libft/ -lft
+CFLAGS:=-Wall -Wextra
 # ==================
 
 # === Auto ===

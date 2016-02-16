@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   view.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/16 17:34:40 by angagnie         ###   ########.fr       */
+/*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
+/*   Updated: 2016/02/16 17:03:34 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include <fdf.h>
 
-# include <mlx.h>
-# include <libft.h>
-# include <unistd.h>
-# include <stdlib.h>
-
-# include "geometry.h"
-# include "algebra.h"
-
-typedef struct	s_work
+int		expose_hook(void *param)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	t_vec2i	wdim;
-	char	*pixel;
-	int		bits_per_pixel;
-	int		line_size;
-	int		endian;
-}				t_work;
+	t_work *w = param;
 
-int				expose_hook(void *param);
-int				key_hook(int keycode, void *param);
-
-#endif
+	ft_putstr("Repainting\n");
+	mlx_clear_window(w->mlx, w->win);
+	mlx_put_image_to_window(w->mlx, w->win, w->img, 0, 0);
+	return (0);
+}
