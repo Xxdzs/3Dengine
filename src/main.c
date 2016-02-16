@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/16 17:33:14 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/02/16 18:17:55 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ static int	init_work(t_work *const w)
 		return (4);
 	ft_putstr("Image informations Obtained\n");
 	mlx_expose_hook(w->win, &expose_hook, (void *)w);
-	mlx_key_hook(w->win, &key_hook, (void *)w);
+//	mlx_key_hook(w->win, &key_hook, (void *)w);
+	mlx_hook(w->win, 2, 0, &key_hook, (void *)w);
+	mlx_do_key_autorepeaton(w->mlx);
+	repaint(w);
 	return (0);
 }
 

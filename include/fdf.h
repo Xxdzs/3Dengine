@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/16 17:34:40 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/02/16 19:22:17 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,22 @@ typedef struct	s_work
 	int		endian;
 }				t_work;
 
+/*
+** -----===== Graphics =====-----
+** Theta : rotation along the y axis
+** Phi : rotation along the x axis
+** Sigma : rotation along the z axis
+*/
+
+typedef struct	s_grfx
+{
+	float		theta;
+	float		phi;
+	float		sigma;
+}
+
 int				expose_hook(void *param);
 int				key_hook(int keycode, void *param);
+void			repaint(t_work *const w);
 
 #endif

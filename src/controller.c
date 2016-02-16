@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:17:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/16 17:33:59 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/02/16 17:53:17 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int		key_hook(int keycode, void *param)
 
 	if (keycode == 53)
 		exit(1);
+	repaint(w);
 	return (0);
 }
