@@ -1,2 +1,5 @@
 **/.cache_exists
 *~
+**/a.out
+*.o
+fdf

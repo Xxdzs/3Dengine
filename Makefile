@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/16 12:17:30 by angagnie          #+#    #+#              #
-#    Updated: 2016/02/16 14:25:19 by angagnie         ###   ########.fr        #
+#    Updated: 2016/02/16 15:06:50 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -21,7 +21,7 @@ CCHPATH:=cache/
 SRCPATH:=src/
 HDRPATH:=include/
 LFLAGS:=-I $(HDRPATH)
-LIBFLAGS:=-lmlx -lft -framework OpenGL -framework AppKit
+LIBFLAGS:=-lmlx -framework OpenGL -framework AppKit
 CFLAGS:=-Wall -Wextra -Werror
 # ==================
 
@@ -41,17 +41,17 @@ WHITE:="\033[1;37m"
 EOC:="\033[0m"
 # ==============
 
-all : $(NAME)
+all: $(NAME)
 
-$(NAME) : miniLibX/libmlx.a Libft/libft.a $(OBJ)
+$(NAME): miniLibX/libmlx.a Libft/libft.a $(OBJ)
 	@echo $(GREEN) "Compiling $@" $(EOC)
-	@$(CC) $(LFLAGS) $(OBJ)
+	@$(CC) $(LFLAGS) $(LIBFLAGS) $(OBJ) -o $@
 
-miniLibX/libmlx.a :
+miniLibX/libmlx.a:
 	@echo $(CYAN) "Making $@" $(EOC)
 	@make -C miniLibX
 
-Libft/libft.a :
+Libft/libft.a:
 	@echo $(CYAN) "Making $@" $(EOC)
 	@make -C Libft
 
@@ -63,7 +63,7 @@ $(CCHPATH)%.o: $(SRCPATH)%.c $(CCHF)
 	@echo $(PURPLE) " - Compiling $< into $@" $(RED)
 	@$(CC) $(CFLAGS) $(LFLAGS) -c $< -o $@
 
-%.c:
+$(SRCPATH)%.c:
 	@echo $(RED) "Missing File : $@" $(EOC)
 
 norme:
@@ -81,3 +81,6 @@ fclean: clean
 test:
 	@echo "Objects :" $(OBJ)
 	@echo "Sources :" $(SRC)
+	@echo "Files :" $(FILES)
+
+re: fclean all

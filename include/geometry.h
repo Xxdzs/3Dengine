@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/16 13:13:40 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/02/16 15:19:17 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ typedef union	s_vec2i
 {
 	t_pnt2i	c;
 	int		m[2];
+	struct
+	{
+		int	width;
+		int	height;
+	}		d;
 }				t_vec2i;
 
 /*
