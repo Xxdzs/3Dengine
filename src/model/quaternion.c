@@ -6,9 +6,23 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/22 15:51:45 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/02/22 18:14:49 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+**
+*/
+
+t_qtrn	qtrn_new_carth(float a, float b, float c, float d)
+{
+	return ((t_qtrn){a, b, c, d});
+}
+
+t_qtrn	qtrn_new_polar()
+{
+
+}
 
 /*
 ** Quaternion :: Get the sum
@@ -79,6 +93,7 @@ t_qtrn	qtrn_get_inv(t_qtrn *q)
 
 /*
 ** Quaternion :: Invert
+** Side effect on the quaternion
 */
 
 void	qtrn_inv(t_qtrn *q)
@@ -105,6 +120,7 @@ t_qtrn	qtrn_get_conj(t_qtrn *q)
 
 /*
 ** Quaternion :: Conjugate
+** Side effect on the quaternion
 */
 
 void	qtrn_conj(t_qtrn *q)
@@ -113,3 +129,4 @@ void	qtrn_conj(t_qtrn *q)
 	q->c.y *= -1;
 	q->c.z *= -1;
 }
+

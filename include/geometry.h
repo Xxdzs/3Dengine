@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/22 15:18:39 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/02/22 15:59:20 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct	s_cmplx
 	float	imp;
 	float	arg;
 	float	mod;
-}				t_cmplx
+}				t_cmplx;
 
 /*
 ** -----===== 3 Dimensions =====-----

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/16 19:22:17 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/02/22 15:59:56 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ typedef struct	s_work
 
 typedef struct	s_grfx
 {
-	float		theta;
-	float		phi;
-	float		sigma;
-}
+	float	theta;
+	float	phi;
+	float	sigma;
+}				t_grfx;
 
 int				expose_hook(void *param);
 int				key_hook(int keycode, void *param);
