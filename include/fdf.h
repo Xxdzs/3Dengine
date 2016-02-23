@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/22 15:59:56 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/02/23 19:16:36 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <libft.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <math.h>
 
 # include "geometry.h"
 # include "algebra.h"

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/22 15:59:20 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/02/23 20:14:34 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct	s_pnt2i
 	int		y;
 }				t_pnt2i;
 
-typedef union	s_vec2i
+typedef union	u_vec2i
 {
 	t_pnt2i	c;
 	int		m[2];
@@ -40,7 +40,7 @@ typedef struct	s_pnt2
 	float	y;
 }				t_pnt2;
 
-typedef union	s_vec2
+typedef union	u_vec2
 {
 	t_pnt2	c;
 	float	m[2];
@@ -65,7 +65,7 @@ typedef struct	s_pnt3i
 	int		z;
 }				t_pnt3i;
 
-typedef union	s_vec3i
+typedef union	u_vec3i
 {
 	t_pnt3i	c;
 	int		m[3];
@@ -84,7 +84,7 @@ typedef struct	s_pnt3
 	float	z;
 }				t_pnt3;
 
-typedef union	s_vec3
+typedef union	u_vec3
 {
 	t_pnt3	c;
 	float	m[3];
@@ -102,15 +102,15 @@ typedef struct	s_pnt4
 	float	w;
 }				t_pnt4;
 
-typedef union	s_qtrn
+typedef union	u_qtrn
 {
+	float	m[4];
 	t_pnt4	c;
 	struct
 	{
 		t_pnt3	v;
 		float	s;
 	}		d;
-	float	m[4];
 }				t_qtrn;
 
 #endif

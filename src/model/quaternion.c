@@ -6,9 +6,11 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/22 18:14:49 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/02/23 20:16:41 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "fdf.h"
 
 /*
 **
@@ -71,10 +73,10 @@ t_qtrn	qtrn_prod(t_qtrn *q, t_qtrn *h)
 
 void	qtrn_mult(t_qtrn *q, t_qtrn *h)
 {
-	q->c.w = q->c.w * h->c.w - q->c.x * h->c.x - q->c.y * h->c.y - q->c.z * h->c.z
 	q->c.x = q->c.w * h->c.x + q->c.x * h->c.w + q->c.y * h->c.z - q->c.z * h->c.y,
 	q->c.y = q->c.w * h->c.y + q->c.y * h->c.w - q->c.x * h->c.z + q->c.z * h->c.x,
 	q->c.z = q->c.w * h->c.z + q->c.z * h->c.w + q->c.x * h->c.y - q->c.y * h->c.x,
+	q->c.w = q->c.w * h->c.w - q->c.x * h->c.x - q->c.y * h->c.y - q->c.z * h->c.z
 }
 
 /*

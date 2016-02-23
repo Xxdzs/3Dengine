@@ -6,13 +6,16 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/16 12:17:30 by angagnie          #+#    #+#              #
-#    Updated: 2016/02/16 17:30:36 by angagnie         ###   ########.fr        #
+#    Updated: 2016/02/23 20:09:39 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 # === Editable ===
 NAME:=fdf
 FILES:=main view controller
+MODEL:=calculus conversion quaternion
+# ================
+MODEL_PATH:=model/
 # ================
 
 # ==== Standard ====
@@ -26,6 +29,7 @@ CFLAGS:=-Wall -Wextra
 # ==================
 
 # === Auto ===
+FILES+=$(addprefix $(MODEL_PATH),$(MODEL))
 SRC:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES)))
 OBJ:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
 CCHF:=.cache_exists
@@ -65,6 +69,7 @@ Libft/libft.a:
 
 $(CCHF):
 	@mkdir $(CCHPATH)
+	@mkdir $(CCHPATH)$(MODEL_PATH)
 	@touch $(CCHF)
 
 $(CCHPATH)%.o: $(SRCPATH)%.c $(CCHF)
