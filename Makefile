@@ -43,13 +43,21 @@ EOC:="\033[0m"
 
 all: $(NAME)
 
-$(NAME): miniLibX/libmlx.a Libft/libft.a $(OBJ)
+osx: miniLibX_OSX/libmlx.a
+
+x11: miniLibX_X11/libmlx.a
+
+$(NAME): Libft/libft.a $(OBJ)
 	@echo $(GREEN) "Compiling $@" $(EOC)
 	@$(CC) $(LFLAGS) $(LIBFLAGS) $(OBJ) -o $@
 
-miniLibX/libmlx.a:
+miniLibX_OSX/libmlx.a:
 	@echo $(CYAN) "Making $@" $(EOC)
-	@make -C miniLibX
+	@make -C miniLibX_OSX
+
+miniLibX_X11/libmlx.a:
+	@echo $(CYAN) "Making $@" $(EOC)
+	@make -C miniLibX_X11
 
 Libft/libft.a:
 	@echo $(CYAN) "Making $@" $(EOC)
@@ -84,3 +92,5 @@ test:
 	@echo "Files :" $(FILES)
 
 re: fclean all
+
+.PHONY: re test fclean clean norme all osx x11
