@@ -6,25 +6,27 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/23 20:16:41 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/02/24 13:57:57 by sid              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 /*
-**
+** Quaternion :: Constructors
 */
 
 t_qtrn	qtrn_new_carth(float a, float b, float c, float d)
 {
-	return ((t_qtrn){a, b, c, d});
+	return ((t_qtrn){{a, b, c, d}});
 }
 
-t_qtrn	qtrn_new_polar()
+/*
+t_qtrn	qtrn_new_cylin()
 {
-
+	return ();
 }
+*/
 
 /*
 ** Quaternion :: Get the sum
@@ -32,17 +34,19 @@ t_qtrn	qtrn_new_polar()
 
 t_qtrn	qtrn_sum(t_qtrn *a, t_qtrn *b)
 {
-	return ((t_qtrn){
+	return ((t_qtrn){{
 		a->c.x + b->c.x,
 		a->c.y + b->c.y,
 		a->c.z + b->c.z,
-		a->c.w + b->c.w});
+		a->c.w + b->c.w
+		}});
 }
 
 /*
 ** Quaternion :: Add
 ** Side effect on the first quaternion
 */
+
 void	qtrn_add(t_qtrn *a, t_qtrn *b)
 {
 	int i;
@@ -73,10 +77,17 @@ t_qtrn	qtrn_prod(t_qtrn *q, t_qtrn *h)
 
 void	qtrn_mult(t_qtrn *q, t_qtrn *h)
 {
-	q->c.x = q->c.w * h->c.x + q->c.x * h->c.w + q->c.y * h->c.z - q->c.z * h->c.y,
-	q->c.y = q->c.w * h->c.y + q->c.y * h->c.w - q->c.x * h->c.z + q->c.z * h->c.x,
-	q->c.z = q->c.w * h->c.z + q->c.z * h->c.w + q->c.x * h->c.y - q->c.y * h->c.x,
-	q->c.w = q->c.w * h->c.w - q->c.x * h->c.x - q->c.y * h->c.y - q->c.z * h->c.z
+	float qx;
+	float qy;
+	float qz;
+
+	qx = q->c.w * h->c.x + q->c.x * h->c.w + q->c.y * h->c.z - q->c.z * h->c.y;
+	qy = q->c.w * h->c.y + q->c.y * h->c.w - q->c.x * h->c.z + q->c.z * h->c.x;
+	qz = q->c.w * h->c.z + q->c.z * h->c.w + q->c.x * h->c.y - q->c.y * h->c.x;
+	q->c.w = q->c.w * h->c.w - q->c.x * h->c.x - q->c.y * h->c.y - q->c.z * h->c.z;
+	q->c.x = qx;
+	q->c.y = qy;
+	q->c.z = qz;
 }
 
 /*

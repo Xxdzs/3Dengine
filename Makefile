@@ -5,84 +5,68 @@
 #                                                     +:+ +:+         +:+      #
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/02/16 12:17:30 by angagnie          #+#    #+#              #
-#    Updated: 2016/02/23 20:09:39 by angagnie         ###   ########.fr        #
+#    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
+#    Updated: 2016/01/13 13:52:07 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-# === Editable ===
+# ==== Editable ====
 NAME:=fdf
-FILES:=main view controller
-MODEL:=calculus conversion quaternion
-# ================
 MODEL_PATH:=model/
-# ================
+MODEL:=calculus quaternion conversion
+FILES:=main view controller
+# ==================
 
 # ==== Standard ====
 CC:=clang
 CCHPATH:=cache/
 SRCPATH:=src/
 HDRPATH:=include/
-LFLAGS:=-I $(HDRPATH) -I Libft/include/
-LIBFLAGS:=-lmlx -framework OpenGL -framework AppKit -L Libft/ -lft
-CFLAGS:=-Wall -Wextra
+IFLAGS=-I $(HDRPATH) -I Libft/include/
+DEFLAG=
+LFLAGS=-L Libft/ -lft
+CFLAGS=-Wall -Wextra $(IFLAGS) $(DEFLAG)
 # ==================
-
-# === Auto ===
-FILES+=$(addprefix $(MODEL_PATH),$(MODEL))
-SRC:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES)))
-OBJ:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
-CCHF:=.cache_exists
-# ============
+IFLAGS+=-I miniLibX_OSX/
+LFLAGS+=-lmlx -framework OpenGL -framework AppKit
+# ==================
 
 # === Colors ===
 BLACK:="\033[1;30m"
 RED:="\033[1;31m"
 GREEN:="\033[1;32m"
-CYAN:="\033[1;35m"
-PURPLE:="\033[1;36m"
+YELLOW:="\033[1;33m"
+BLUE:="\033[1;34m"
+PURPLE:="\033[1;35m"
+CYAN:="\033[1;36m"
 WHITE:="\033[1;37m"
 EOC:="\033[0m"
 # ==============
 
+# ====== Auto ======
+FILES+=$(addprefix $(MODEL_PATH),$(MODEL))
+SRC:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES)))
+OBJ:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
+# ==================
+CCHF:=.cache_exists
+
 all: $(NAME)
 
-osx: miniLibX_OSX/libmlx.a
+$(NAME): $(OBJ)
+	@echo $(GREEN) " - Compiling $@" $(EOC)
+	@$(CC) $< -o $@
 
-x11: miniLibX_X11/libmlx.a
+$(CCHPATH)%.o: $(SRCPATH)%.c $(CCHF)
+	@echo $(PURPLE) " - Compiling $< into $@" $(EOC)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): Libft/libft.a $(OBJ)
-	@echo $(GREEN) "Compiling $@" $(EOC)
-	@$(CC) $(LFLAGS) $(LIBFLAGS) $(OBJ) -o $@
-
-miniLibX_OSX/libmlx.a:
-	@echo $(CYAN) "Making $@" $(EOC)
-	@make -C miniLibX_OSX
-
-miniLibX_X11/libmlx.a:
-	@echo $(CYAN) "Making $@" $(EOC)
-	@make -C miniLibX_X11
-
-Libft/libft.a:
-	@echo $(CYAN) "Making $@" $(EOC)
-	@make -C Libft
+%.c:
+	@echo $(RED) "Missing file : $@" $(EOC)
 
 $(CCHF):
 	@mkdir $(CCHPATH)
 	@mkdir $(CCHPATH)$(MODEL_PATH)
 	@touch $(CCHF)
-
-$(CCHPATH)%.o: $(SRCPATH)%.c $(CCHF)
-	@echo $(PURPLE) " - Compiling $< into $@" $(RED)
-	@$(CC) $(CFLAGS) $(LFLAGS) -c $< -o $@
-
-$(SRCPATH)%.c:
-	@echo $(RED) "Missing File : $@" $(EOC)
-
-norme:
-	@echo $(RED)
-	@norminette $(SRC) $(HDRPATH) | grep -v	Norme -B1 || true
-	@echo $(END)
 
 clean:
 	@rm -rf $(CCHPATH)
@@ -91,11 +75,19 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 
-test:
-	@echo "Objects :" $(OBJ)
-	@echo "Sources :" $(SRC)
-	@echo "Files :" $(FILES)
-
 re: fclean all
 
-.PHONY: re test fclean clean norme all osx x11
+test:
+	@echo "Files :" $(FILES)
+
+norme:
+	@echo $(RED)
+	@norminette $(SRC) $(HDRPATH) | grep -v  Norme -B1 || true
+	@echo $(END)
+
+def_x11:
+	$(eval DEFLAG=-DX11)
+
+x11: def_x11 all
+
+.PHONY: all clean fclean re test norme x11 def_x11

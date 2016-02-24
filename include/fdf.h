@@ -6,21 +6,33 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/23 19:16:36 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/02/24 14:19:03 by sid              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include <mlx.h>
-# include <libft.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
+# include <sys/wait.h>
 
+# ifdef X11
+#  include <X11/Xlib.h>
+# else
+#  include "mlx.h"
+# endif
+
+# include "libft.h"
 # include "geometry.h"
 # include "algebra.h"
+# include "system_tree.h"
+
+/*
+** If X11 is defined,
+** mlx will be a pointer to the display
+*/
 
 typedef struct	s_work
 {
@@ -33,20 +45,6 @@ typedef struct	s_work
 	int		line_size;
 	int		endian;
 }				t_work;
-
-/*
-** -----===== Graphics =====-----
-** Theta : rotation along the y axis
-** Phi : rotation along the x axis
-** Sigma : rotation along the z axis
-*/
-
-typedef struct	s_grfx
-{
-	float	theta;
-	float	phi;
-	float	sigma;
-}				t_grfx;
 
 int				expose_hook(void *param);
 int				key_hook(int keycode, void *param);
