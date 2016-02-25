@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/24 14:19:03 by sid              ###   ########.fr       */
+/*   Updated: 2016/02/25 19:08:25 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ typedef struct	s_work
 int				expose_hook(void *param);
 int				key_hook(int keycode, void *param);
 void			repaint(t_work *const w);
-
+#else
+BULLSHIT
 #endif

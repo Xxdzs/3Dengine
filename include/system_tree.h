@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 16:27:17 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/25 13:02:37 by sid              ###   ########.fr       */
+/*   Updated: 2016/02/25 18:58:20 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@
 
 typedef struct	s_gnode
 {
-	struct s_gnode	parent;
+	struct s_gnode	*parent;
 	t_list			children;
 	t_vec3			pos;
 	t_qtrn			rot;
 }				t_gnode;
 
-typedef struct	s_3Dobject
+typedef struct	s_obj
 {
 	t_gnode			node;
 	t_dyna			vertices;
 	t_dyna			faces;
-}
+}				t_obj;
 
 /*
 ** The camera should not be the child of any node,

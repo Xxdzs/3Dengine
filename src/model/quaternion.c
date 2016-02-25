@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/24 13:57:57 by sid              ###   ########.fr       */
+/*   Updated: 2016/02/25 19:16:29 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ void	qtrn_add(t_qtrn *a, t_qtrn *b)
 
 t_qtrn	qtrn_prod(t_qtrn *q, t_qtrn *h)
 {
-	return ((t_qtrn){
+	return ((t_qtrn){{
 		q->c.w * h->c.x + q->c.x * h->c.w + q->c.y * h->c.z - q->c.z * h->c.y,
 		q->c.w * h->c.y + q->c.y * h->c.w - q->c.x * h->c.z + q->c.z * h->c.x,
 		q->c.w * h->c.z + q->c.z * h->c.w + q->c.x * h->c.y - q->c.y * h->c.x,
 		q->c.w * h->c.w - q->c.x * h->c.x - q->c.y * h->c.y - q->c.z * h->c.z
-		});
+		}});
 }
 
 /*
@@ -101,7 +101,7 @@ t_qtrn	qtrn_get_inv(t_qtrn *q)
 		+ q->c.y * q->c.y
 		+ q->c.z * q->c.z;
 
-	return ((t_qtrn){-q->c.x / tmp, -q->c.y / tmp, -q->c.z / tmp, q->c.w / tmp});
+	return ((t_qtrn){{-q->c.x / tmp, -q->c.y / tmp, -q->c.z / tmp, q->c.w / tmp}});
 }
 
 /*
@@ -128,7 +128,7 @@ void	qtrn_inv(t_qtrn *q)
 
 t_qtrn	qtrn_get_conj(t_qtrn *q)
 {
-	return ((t_qtrn){-q->c.x, -q->c.y, -q->c.z, q->c.w});
+	return ((t_qtrn){{-q->c.x, -q->c.y, -q->c.z, q->c.w}});
 }
 
 /*

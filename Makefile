@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/01/13 13:52:07 by angagnie         ###   ########.fr        #
+#    Updated: 2016/02/25 19:14:44 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -54,7 +54,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo $(GREEN) " - Compiling $@" $(EOC)
-	@$(CC) $< -o $@
+	@$(CC) $< -o $@ $(IFLAGS) $(LFLAGS)
 
 $(CCHPATH)%.o: $(SRCPATH)%.c $(CCHF)
 	@echo $(PURPLE) " - Compiling $< into $@" $(EOC)
@@ -79,6 +79,8 @@ re: fclean all
 
 test:
 	@echo "Files :" $(FILES)
+	@echo $(BLUE)"Objects :" $(OBJ) $(EOC)
+	@echo "Sources :" $(SRC)
 
 norme:
 	@echo $(RED)
