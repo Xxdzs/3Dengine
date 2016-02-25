@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/23 20:14:34 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/02/24 16:37:46 by sid              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,12 @@ typedef union	u_vec2
 {
 	t_pnt2	c;
 	float	m[2];
+	struct
+	{
+		float	mod;
+		float	arg;
+	}		p;
 }				t_vec2;
-
-typedef struct	s_cmplx
-{
-	float	rep;
-	float	imp;
-	float	arg;
-	float	mod;
-}				t_cmplx;
 
 /*
 ** -----===== 3 Dimensions =====-----
@@ -88,6 +85,18 @@ typedef union	u_vec3
 {
 	t_pnt3	c;
 	float	m[3];
+	struct
+	{
+		float	phi;
+		float	theta;
+		float	rho;
+	}		s;
+	struct
+	{
+		float	r;
+		float	theta;
+		float	z;
+	}		cyl;
 }				t_vec3;
 
 /*
@@ -102,13 +111,25 @@ typedef struct	s_pnt4
 	float	w;
 }				t_pnt4;
 
+/*
+** H is isomorphic to M(4,1,R), hence	m
+** -(Matrix)
+** H is isomorphic to R^4, hence		c
+** -(Carthesian Coordinates)
+** One can decompose a quaternion into
+** |	a vector part (in R^3)		v
+** |	a scalar part (in R)		s
+** |hence								d
+** -(Decomposition)
+*/
+
 typedef union	u_qtrn
 {
 	float	m[4];
 	t_pnt4	c;
 	struct
 	{
-		t_pnt3	v;
+		t_vec3	v;
 		float	s;
 	}		d;
 }				t_qtrn;

@@ -6,30 +6,43 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 12:32:44 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/23 20:16:00 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/02/25 13:04:54 by sid              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 /*
-** Because I chose vectors to be columns,
-** matrices are column-major,
-** hence the transposed source code
+** Obvious side effects
 */
 
-t_mat4x4	qtrn_to_mat(t_qtrn *q)
+void	carth2polar(t_vec2 *v)
 {
-	return ((t_mat4x4){
-		q->c.x, -q->c.y, -q->c.z, -q->c.w,
-		q->c.y, q->c.x, q->c.w, -q->c.z,
-		q->c.z, -q->c.w, q->c.x, q->c.y,
-		q->c.w, q->c.z, -q->c.y, q->c.x
-	});
+	float const		x = v->c.x;
+	float const		y = v->c.y;
+
+	v->p.mod = sqrt(x * x + y * y);
+	v->p.arg = atan2(x, y);
 }
 
-t_qtrn	mat_to_qtrn(t_mat4x4 *m)
+void	polar2carth(t_vec2 *v)
 {
-	return ((t_qtrn){m->pnt[0].x, m->pnt[1].x, m->pnt[2].x, m->pnt[3].x});
+	float const		m = v->p.mod;
+
+	v->x = m * cos(v->p.arg);
+	v->y = m * sin(v->p.arg);
 }
 
+void	carth2cylin(t_vec3 *v)
+{
+	float const		x = v->c.x;
+	float const		y = v->c.y;
+
+	v->cyl.r = sqrt(x * x + y * y);
+	v->cyl.theta = atan2(x, y);
+}
+
+void	cylin2carth(t_vec3 *v)
+{
+	
+}
