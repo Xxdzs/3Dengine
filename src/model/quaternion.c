@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/25 19:16:29 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/02/26 17:03:47 by sid              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,10 @@
 ** Quaternion :: Constructors
 */
 
-t_qtrn	qtrn_new_carth(float a, float b, float c, float d)
+t_qtrn	qtrn_new(float a, float b, float c, float d)
 {
 	return ((t_qtrn){{a, b, c, d}});
 }
-
-/*
-t_qtrn	qtrn_new_cylin()
-{
-	return ();
-}
-*/
 
 /*
 ** Quaternion :: Get the sum
@@ -142,4 +135,3 @@ void	qtrn_conj(t_qtrn *q)
 	q->c.y *= -1;
 	q->c.z *= -1;
 }
-

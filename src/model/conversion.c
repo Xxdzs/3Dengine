@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 12:32:44 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/25 21:51:53 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/02/26 17:12:43 by sid              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,19 @@ void	cylin2carth(t_vec3 *v)
 	v->c.y = r * sin(v->cyl.theta);
 }
 
-void	carth2spher()
+/*
+** Theta is the azimuth,
+** Phi is the inclinaison,
+** rho is the norme
+*/
+
+void	carth2spher(t_vec3 *v)
 {
 	float const		x = v->c.x;
 	float const		y = v->c.y;
+	float const		z = v->c.z;
 
+	v->s.rho = sqrt(x * x + y * y + z * z);
+	v->s.phi = acos(z / v->s.rho);
+	v->s.theta = atan2(x, y);
 }

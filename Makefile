@@ -25,10 +25,8 @@ HDRPATH:=include/
 IFLAGS=-I $(HDRPATH) -I Libft/include/
 DEFLAG=
 LFLAGS=-L Libft/ -lft
+DEP=Libft/libft.a
 CFLAGS=-Wall -Wextra $(IFLAGS) $(DEFLAG)
-# ==================
-IFLAGS+=-I miniLibX_OSX/
-LFLAGS+=-lmlx -framework OpenGL -framework AppKit
 # ==================
 
 # === Colors ===
@@ -52,9 +50,9 @@ CCHF:=.cache_exists
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(DEP)
 	@echo $(GREEN) " - Compiling $@" $(EOC)
-	@$(CC) $< -o $@ $(IFLAGS) $(LFLAGS)
+	$(CC) $< -o $@ $(IFLAGS) $(LFLAGS)
 
 $(CCHPATH)%.o: $(SRCPATH)%.c $(CCHF)
 	@echo $(PURPLE) " - Compiling $< into $@" $(EOC)
@@ -69,10 +67,12 @@ $(CCHF):
 	@touch $(CCHF)
 
 clean:
+	@echo $(YELLOW) "Deleting cache" $(EOC)
 	@rm -rf $(CCHPATH)
 	@rm -f $(CCHF)
 
 fclean: clean
+	@echo $(YELLOW) "Deleting binairie" $(EOC)
 	@rm -f $(NAME)
 
 re: fclean all
@@ -87,9 +87,26 @@ norme:
 	@norminette $(SRC) $(HDRPATH) | grep -v  Norme -B1 || true
 	@echo $(END)
 
+Libft/libft.a:
+	@echo $(BLUE) "Making $@" $(EOC)
+	@make -C Libft/
+	@make -C Libft clean
+
+miniLibX_OSX/libmlx.a:
+	@echo $(BLUE) "Making $@" $(EOC)
+	@make -C miniLibX_OSX/
+
 def_x11:
 	$(eval DEFLAG=-DX11)
+	$(eval LFLAGS+=-lX11)
 
 x11: def_x11 all
 
-.PHONY: all clean fclean re test norme x11 def_x11
+def_osx:
+	$(eval IFLAGS+=-I miniLibX_OSX/)
+	$(eval LFLAGS+=-lmlx -framework OpenGL -framework AppKit)
+	$(eval DEP+=miniLibX_OSX/libmlx.a)
+
+osx: def_osx all
+
+.PHONY: all clean fclean re test norme x11 def_x11 osx def_osx

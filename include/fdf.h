@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/25 19:08:25 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/02/26 17:20:57 by sid              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@
 # include "algebra.h"
 # include "system_tree.h"
 
-/*
-** If X11 is defined,
-** mlx will be a pointer to the display
-*/
-
 typedef struct	s_work
 {
+# ifdef X11
+	Display	*disp;
+	Window	*win;
+# else
 	void	*mlx;
 	void	*win;
+# endif
 	void	*img;
 	t_vec2i	wdim;
 	char	*pixel;
@@ -49,6 +49,5 @@ typedef struct	s_work
 int				expose_hook(void *param);
 int				key_hook(int keycode, void *param);
 void			repaint(t_work *const w);
-#else
-BULLSHIT
+
 #endif

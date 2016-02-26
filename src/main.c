@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/24 15:30:25 by sid              ###   ########.fr       */
+/*   Updated: 2016/02/26 18:26:17 by sid              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void		destroy_work(t_work *const w)
 {
 #ifdef X11
-	XCloseDisplay(w->mlx);
+	XCloseDisplay(w->disp);
 	free(w->win);
 #else
 	mlx_destroy_image(w->mlx, w->img);
@@ -30,19 +30,19 @@ static int	init_work(t_work *const w)
 
 	w->wdim = (t_vec2i){{1280, 720}};
 #ifdef X11
-	if (!(w->mlx = XOpenDisplay(NULL)))
+	if (!(w->disp = XOpenDisplay(NULL)))
 		return (5);
 	ft_putstr("Connected to the X server\n");
-	sd = DefaultScreen(w->mlx);
+	sd = DefaultScreen(w->disp);
 	if (!(w->win = malloc(sizeof(Window))))
 		return (6);
 	*(w->win) = XCreateSimpleWindow(
-		w->mlx, RootWindow(w->mlx, sd), 100, 200,
+		w->disp, RootWindow(w->disp, sd), 100, 200,
 		w->wdim.d.width, w->wdim.d.height, 2,
-		BlackPixel(w->mlx, sd), WhitePixel(w->mlx, sd));
+		BlackPixel(w->disp, sd), WhitePixel(w->disp, sd));
 	ft_putstr("Window Created\n");
-	XSelectInput(w->mlx, *(w->win), ExposureMask | KeyPressMask);
-	XMapWindow(w->mlx, *(w->win));
+	XSelectInput(w->disp, *((Window *)w->win), ExposureMask | KeyPressMask);
+	XMapWindow(w->disp, *((Window *)w->win));
 #else
 	(void)sd;
 	if (!(w->mlx = mlx_init()))
@@ -68,16 +68,30 @@ static int	init_work(t_work *const w)
 int			main(int ac, char **av)
 {
 	t_work	w;
+#ifdef X11
+	XEvent event;
+#endif
 
 	(void)ac;
 	(void)av;
 	if (init_work(&w))
 		ft_putstr_fd("Error : Initialisation failed\n", 2);
+#ifdef X11
+	else {
+		do {
+			XNextEvent(w.disp, &event);
+			if (event.type == Expose)
+				expose_hook(&w);
+			else if (event.type == KeyPress)
+				key_hook(((XKeyEvent)event).keycode, &w);
+		} while (event.type == KeyPress && ((XKeyEvent)event).keycode == 53);
+#else
 	else if (fork())
 		mlx_loop(w.mlx);
 	else
 	{
 		wait(0);
+#endif
 		ft_putstr("Loop killed\n");
 		destroy_work(&w);
 	}
