@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/02/25 19:14:44 by angagnie         ###   ########.fr        #
+#    Updated: 2016/02/27 23:12:41 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,7 +14,7 @@
 NAME:=fdf
 MODEL_PATH:=model/
 MODEL:=calculus quaternion conversion
-FILES:=main view controller
+FILES:=main view controller parser
 # ==================
 
 # ==== Standard ====
@@ -52,7 +52,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(DEP)
 	@echo $(GREEN) " - Compiling $@" $(EOC)
-	$(CC) $< -o $@ $(IFLAGS) $(LFLAGS)
+	$(CC) $(OBJ) -o $@ $(IFLAGS) $(LFLAGS)
 
 $(CCHPATH)%.o: $(SRCPATH)%.c $(CCHF)
 	@echo $(PURPLE) " - Compiling $< into $@" $(EOC)
