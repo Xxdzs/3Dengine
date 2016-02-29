@@ -66,3 +66,14 @@ void	carth2spher(t_vec3 *v)
 	v->s.phi = acos(z / v->s.rho);
 	v->s.theta = atan2(x, y);
 }
+
+void	spher2carth(t_vec3 *v)
+{
+	float const		r = v->s.rho;
+	float const		t = v->c.theta;
+	float const		p = v->c.phi;
+
+	v->x = r * sin(p) * cos(t);
+	v->y = r * sin(p) * sin(t);
+	v->x = r * cos(p);
+}
