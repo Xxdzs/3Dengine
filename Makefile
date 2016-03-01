@@ -13,7 +13,7 @@
 # ==== Editable ====
 NAME:=fdf
 MODEL_PATH:=model/
-MODEL:=calculus quaternion conversion
+MODEL:=calculus quaternion conversion system_tree
 FILES:=main view controller parser
 # ==================
 
@@ -52,7 +52,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(DEP)
 	@echo $(GREEN) " - Compiling $@" $(EOC)
-	$(CC) $(OBJ) -o $@ $(IFLAGS) $(LFLAGS)
+	@$(CC) $(OBJ) -o $@ $(IFLAGS) $(LFLAGS)
 
 $(CCHPATH)%.o: $(SRCPATH)%.c $(CCHF)
 	@echo $(PURPLE) " - Compiling $< into $@" $(EOC)

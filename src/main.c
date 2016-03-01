@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/26 18:26:17 by sid              ###   ########.fr       */
+/*   Updated: 2016/03/01 11:30:14 by sid              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int			main(int ac, char **av)
 			if (event.type == Expose)
 				expose_hook(&w);
 			else if (event.type == KeyPress)
-				key_hook(((XKeyEvent)event).keycode, &w);
-		} while (event.type == KeyPress && ((XKeyEvent)event).keycode == 53);
+				key_hook(event.xkey.keycode, &w);
+		} while (event.type == KeyPress && event.xkey.keycode == 53);
 #else
 	else if (fork())
 		mlx_loop(w.mlx);

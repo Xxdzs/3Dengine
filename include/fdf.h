@@ -6,12 +6,14 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/26 17:20:57 by sid              ###   ########.fr       */
+/*   Updated: 2016/03/01 16:43:31 by sid              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+
+typedef double		t_real;
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -34,11 +36,12 @@ typedef struct	s_work
 # ifdef X11
 	Display	*disp;
 	Window	*win;
+	XImage	img;
 # else
 	void	*mlx;
 	void	*win;
-# endif
 	void	*img;
+# endif
 	t_vec2i	wdim;
 	char	*pixel;
 	int		bits_per_pixel;

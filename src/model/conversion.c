@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 12:32:44 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/26 17:12:43 by sid              ###   ########.fr       */
+/*   Updated: 2016/03/01 12:45:42 by sid              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ void	carth2spher(t_vec3 *v)
 void	spher2carth(t_vec3 *v)
 {
 	float const		r = v->s.rho;
-	float const		t = v->c.theta;
-	float const		p = v->c.phi;
+	float const		t = v->s.theta;
+	float const		p = v->s.phi;
 
-	v->x = r * sin(p) * cos(t);
-	v->y = r * sin(p) * sin(t);
-	v->x = r * cos(p);
+	v->c.x = r * sin(p) * cos(t);
+	v->c.y = r * sin(p) * sin(t);
+	v->c.z = r * cos(p);
 }

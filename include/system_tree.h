@@ -6,12 +6,16 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 16:27:17 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/25 18:58:20 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/01 16:14:37 by sid              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SYSTEM_TREE_H
 # define SYSTEM_TREE_H
+
+/*
+** t_node <- t_list <- t_gnode <- t_obj
+*/
 
 /*
 ** pos : the node's origin seen by the parent
@@ -21,11 +25,23 @@
 
 typedef struct	s_gnode
 {
-	struct s_gnode	*parent;
 	t_list			children;
+	struct s_gnode	*parent;
 	t_vec3			pos;
 	t_qtrn			rot;
 }				t_gnode;
+
+typedef struct	s_vrtx
+{
+	t_vec3	vec;
+	t_vec3	normal;
+	
+}				t_vrtx;
+
+typedef struct	s_face
+{
+	int		index[4];
+}				t_face;
 
 typedef struct	s_obj
 {
