@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/02/27 23:12:41 by angagnie         ###   ########.fr        #
+#    Updated: 2016/03/03 17:05:55 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,7 +14,7 @@
 NAME:=fdf
 MODEL_PATH:=model/
 MODEL:=calculus quaternion conversion system_tree
-FILES:=main view controller parser
+FILES=main view controller parser
 # ==================
 
 # ==== Standard ====
@@ -43,10 +43,13 @@ EOC:="\033[0m"
 
 # ====== Auto ======
 FILES+=$(addprefix $(MODEL_PATH),$(MODEL))
-SRC:=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES)))
-OBJ:=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
+SRC=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES)))
+OBJ=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
 # ==================
 CCHF:=.cache_exists
+
+usage:
+	@echo "Usage : make    osx | x11    [all | re | clean | fclean | test]"
 
 all: $(NAME)
 
@@ -78,9 +81,9 @@ fclean: clean
 re: fclean all
 
 test:
-	@echo "Files :" $(FILES)
-	@echo $(BLUE)"Objects :" $(OBJ) $(EOC)
-	@echo "Sources :" $(SRC)
+	@echo $(YELLOW)"Files :\n\033[0;33m"$(FILES)
+	@echo $(BLUE)"Objects :\n\033[0;34m"$(OBJ)
+	@echo $(CYAN)"Sources :\n\033[0;36m"$(SRC)
 
 norme:
 	@echo $(RED)
@@ -97,16 +100,18 @@ miniLibX_OSX/libmlx.a:
 	@make -C miniLibX_OSX/
 
 def_x11:
+#	$(eval FILES+=main_x11)
 	$(eval DEFLAG=-DX11)
 	$(eval LFLAGS+=-lX11)
 
-x11: def_x11 all
+x11: def_x11
 
 def_osx:
+#	$(eval FILES+=main_osx)
 	$(eval IFLAGS+=-I miniLibX_OSX/)
 	$(eval LFLAGS+=-lmlx -framework OpenGL -framework AppKit)
 	$(eval DEP+=miniLibX_OSX/libmlx.a)
 
-osx: def_osx all
+osx: def_osx
 
-.PHONY: all clean fclean re test norme x11 def_x11 osx def_osx
+.PHONY: all clean fclean re test norme x11 def_x11 osx def_osx usage

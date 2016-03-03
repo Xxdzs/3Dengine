@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/24 16:37:46 by sid              ###   ########.fr       */
+/*   Updated: 2016/03/03 16:45:23 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef union	u_vec2i
 
 typedef struct	s_pnt2
 {
-	float	x;
+	t_real	x;
 	float	y;
 }				t_pnt2;
 

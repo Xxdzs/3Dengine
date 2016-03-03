@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/01 12:44:48 by sid              ###   ########.fr       */
+/*   Updated: 2016/03/03 16:46:36 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 
 int		expose_hook(void *param)
 {
-	t_work *w = param;
+	t_env *const	w = param;
 
 	ft_putstr("Exposing\n"); // <--
 #ifdef X11
+
 #else
 	mlx_clear_window(w->mlx, w->win);
 	mlx_put_image_to_window(w->mlx, w->win, w->img, 0, 0);
@@ -27,7 +28,7 @@ int		expose_hook(void *param)
 	return (0);
 }
 
-void	draw_line(t_work *const w, t_pnt2i *p1, t_pnt2i *p2)
+void	draw_line(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
 {
 	t_pnt2i		delta;
 	t_pnt2i		way;
@@ -50,13 +51,13 @@ void	draw_line(t_work *const w, t_pnt2i *p1, t_pnt2i *p2)
 				= 250;
 }
 
-void	repaint(t_work *const w)
+void	repaint(t_env *const w)
 {
 	ft_putstr("Repainting\n"); // <--
-	draw_line(w, &(t_pnt2i){10,10}, &(t_pnt2i){300,300});
-	draw_line(w, &(t_pnt2i){10,100}, &(t_pnt2i){300,300});
-	draw_line(w, &(t_pnt2i){100,10}, &(t_pnt2i){300,300});
-	draw_line(w, &(t_pnt2i){400,10}, &(t_pnt2i){300,300});
-	draw_line(w, &(t_pnt2i){10,400}, &(t_pnt2i){300,300});
+	draw_line(w, &(t_pnt2i){10, 10}, &(t_pnt2i){300, 300});
+	draw_line(w, &(t_pnt2i){10, 100}, &(t_pnt2i){300, 300});
+	draw_line(w, &(t_pnt2i){100, 10}, &(t_pnt2i){300, 300});
+	draw_line(w, &(t_pnt2i){400, 10}, &(t_pnt2i){300, 300});
+	draw_line(w, &(t_pnt2i){10, 400}, &(t_pnt2i){300, 300});
 	expose_hook(w);
 }

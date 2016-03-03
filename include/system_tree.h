@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 16:27:17 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/01 16:14:37 by sid              ###   ########.fr       */
+/*   Updated: 2016/03/03 15:51:15 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@ typedef struct	s_gnode
 
 typedef struct	s_vrtx
 {
-	t_vec3	vec;
-	t_vec3	normal;
-	
+	t_vec3		vec;
+	t_vec3		normal;
 }				t_vrtx;
 
 typedef struct	s_face
@@ -45,14 +44,15 @@ typedef struct	s_face
 
 typedef struct	s_obj
 {
-	t_gnode			node;
-	t_dyna			vertices;
-	t_dyna			faces;
+	t_gnode		node;
+	t_dyna		vertices;
+	t_dyna		faces;
 }				t_obj;
 
 /*
 ** The camera should not be the child of any node,
-** but can have a parent for a relative POV
+** but have a parent : the world
+** or any gnode for a relative POV
 */
 
 typedef struct	s_camera

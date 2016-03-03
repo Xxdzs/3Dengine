@@ -6,13 +6,13 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/01 11:30:14 by sid              ###   ########.fr       */
+/*   Updated: 2016/03/03 16:51:37 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void		destroy_work(t_work *const w)
+static void		destroy_env(t_env *const w)
 {
 #ifdef X11
 	XCloseDisplay(w->disp);
@@ -24,9 +24,11 @@ static void		destroy_work(t_work *const w)
 	ft_putstr("Clear\n");
 }
 
-static int	init_work(t_work *const w)
+static int	init_env(t_env *const w)
 {
+#ifdef X11
 	int		sd;
+#endif
 
 	w->wdim = (t_vec2i){{1280, 720}};
 #ifdef X11
@@ -44,7 +46,6 @@ static int	init_work(t_work *const w)
 	XSelectInput(w->disp, *((Window *)w->win), ExposureMask | KeyPressMask);
 	XMapWindow(w->disp, *((Window *)w->win));
 #else
-	(void)sd;
 	if (!(w->mlx = mlx_init()))
 		return (1);
 	ft_putstr("Librairy Initialised\n");
@@ -61,20 +62,26 @@ static int	init_work(t_work *const w)
 	mlx_hook(w->win, 2, 0, &key_hook, (void *)w);
 	mlx_do_key_autorepeaton(w->mlx);
 #endif
+	w->world.parent = NULL;
+	w->world.pos = (t_vec3){{0, 0, 0}};
+	w->world.rot = (t_qtrn){{1, 0, 0, 0}};
+	w->camera.fov = 60;
+	w->camera.ratio = (t_pnt2i){16, 9};
+	w->camera.node.parent = &(w->world);
 	repaint(w);
 	return (0);
 }
 
 int			main(int ac, char **av)
 {
-	t_work	w;
+	t_env	w;
 #ifdef X11
 	XEvent event;
 #endif
 
 	(void)ac;
 	(void)av;
-	if (init_work(&w))
+	if (init_env(&w))
 		ft_putstr_fd("Error : Initialisation failed\n", 2);
 #ifdef X11
 	else {
@@ -93,7 +100,7 @@ int			main(int ac, char **av)
 		wait(0);
 #endif
 		ft_putstr("Loop killed\n");
-		destroy_work(&w);
+		destroy_env(&w);
 	}
 	return (0);
 }

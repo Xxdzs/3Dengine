@@ -6,14 +6,14 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/01 14:10:06 by sid               #+#    #+#             */
-/*   Updated: 2016/03/01 16:36:49 by sid              ###   ########.fr       */
+/*   Updated: 2016/03/03 17:17:01 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 /*
-** -----===== Constructor =====-----
+** -----===== Constructors =====-----
 */
 
 t_gnode		*gnode_alloc(size_t type_size)
@@ -27,7 +27,8 @@ t_gnode		*gnode_alloc(size_t type_size)
 	ans->rot = (t_qtrn){{0, 0, 0, 0}};
 	return (ans);
 }
-t_obj		*obj_alloc()
+
+t_obj		*obj_alloc(void)
 {
 	t_obj	*ans;
 
@@ -37,4 +38,16 @@ t_obj		*obj_alloc()
 	ans->faces = ft_dyna_new(sizeof(t_face));
 	ft_dyna_datainit(&ans->faces);
 	return (ans);
+}
+
+/*
+** -----===== Methods =====-----
+*/
+
+void		gnode_add_child(t_gnode *parent, t_gnode *child, t_vec3 pos)
+{
+	child->parent = parent;
+	ftl_push_back((t_list *)parent, (t_node *)child);
+	child->pos = pos;
+	child->rot = (t_qtrn){{1, 0, 0, 0}};
 }
