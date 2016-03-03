@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/03 16:44:36 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/03 23:14:56 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ typedef struct	s_env
 	int			bits_per_pixel;
 	int			line_size;
 	int			endian;
-	t_gnode		world;
-	t_camera	camera;
+	t_grfx		g;
 }				t_env;
 
 int				expose_hook(void *param);

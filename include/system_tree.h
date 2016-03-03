@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 16:27:17 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/03 15:51:15 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/03 23:24:29 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct	s_obj
 	t_gnode		node;
 	t_dyna		vertices;
 	t_dyna		faces;
+	char		*name;
 }				t_obj;
 
 /*
@@ -61,5 +62,11 @@ typedef struct	s_camera
 	t_pnt2i		ratio;
 	int			fov;
 }				t_camera;
+
+typedef struct	s_grfx
+{
+	t_obj		*world;
+	t_camera	*cam;
+}				t_grfx;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/03 16:51:37 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/03 23:40:41 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,8 @@ static int	init_env(t_env *const w)
 	mlx_hook(w->win, 2, 0, &key_hook, (void *)w);
 	mlx_do_key_autorepeaton(w->mlx);
 #endif
-	w->world.parent = NULL;
-	w->world.pos = (t_vec3){{0, 0, 0}};
-	w->world.rot = (t_qtrn){{1, 0, 0, 0}};
-	w->camera.fov = 60;
-	w->camera.ratio = (t_pnt2i){16, 9};
-	w->camera.node.parent = &(w->world);
+	w->g.world = obj_alloc("World");
+	w->g.camera = camera_alloc();
 	repaint(w);
 	return (0);
 }

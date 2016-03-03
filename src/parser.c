@@ -6,23 +6,30 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/03/03 17:26:26 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/03 23:17:49 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	parse_fdf(t_env *w, int fd)
+void	parse_fdf(t_obj *w, int fd)
 {
-	t_gnode *cur;
+	t_gnode		*cur;
+	char		*buf;
+	char		*c;
 
 	cur = &(w->world);
+	while (get_next_line(fd, &buf) == 1)
+	{
+		c = buf;
+		while ()
+	}
 }
 
-void	parse_obj(t_env *w, int fd)
+void	parse_obj(t_obj *w, int fd)
 {
-	t_gnode *cur;
-	char	*buf;
+	t_gnode		*cur;
+	char		*buf;
 
 	cur = &(w->world);
 	while (get_next_line(fd, &buf) == 1)
@@ -30,12 +37,12 @@ void	parse_obj(t_env *w, int fd)
 		if (*buf == 'o')
 		{
 			cur = obj_alloc();
-			gnode_add_child(&w->world, t_g)
+			gnode_add_child(&w->world, cur)
 		}
 	}
 }
 
-int		read_av(t_env *w, int length, char **param)
+int		read_av(t_obj *w, int length, char **param)
 {
 	char			*c;
 	int				i;
@@ -55,7 +62,7 @@ int		read_av(t_env *w, int length, char **param)
 		if (t == sizeof(tab))
 			return (1);
 		else if ((fd = open(param[i])) != -1)
-			((void (*)(t_env *, int))(tab[t - 1]))(w, fd);
+			((void (*)(t_obj *, int))(tab[t - 1]))(w, fd);
 		else
 			return (2);
 	}
