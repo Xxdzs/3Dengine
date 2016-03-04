@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/03/03 23:17:49 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/04 19:39:55 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,28 @@
 
 void	parse_fdf(t_obj *w, int fd)
 {
-	t_gnode		*cur;
+	t_obj		*cur;
 	char		*buf;
 	char		*c;
 
-	cur = &(w->world);
-	while (get_next_line(fd, &buf) == 1)
-	{
-		c = buf;
-		while ()
-	}
 }
 
 void	parse_obj(t_obj *w, int fd)
 {
-	t_gnode		*cur;
+	t_obj		*cur;
 	char		*buf;
 
-	cur = &(w->world);
+	cur = w;
 	while (get_next_line(fd, &buf) == 1)
 	{
 		if (*buf == 'o')
 		{
-			cur = obj_alloc();
-			gnode_add_child(&w->world, cur)
+			cur = obj_alloc(buf + 2);
+			gnode_add_child(w, cur);
+		}
+		else if (*buf == '')
+		{
+
 		}
 	}
 }
