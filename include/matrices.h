@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algebra.h                                          :+:      :+:    :+:   */
+/*   matrices.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/16 13:13:56 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/23 20:13:59 by angagnie         ###   ########.fr       */
+/*   Created: 2016/03/06 10:24:36 by angagnie          #+#    #+#             */
+/*   Updated: 2016/03/06 10:25:23 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ALGEBRA_H
-# define ALGEBRA_H
+#ifndef MATRICES_H
+# define MATRICES_H
 
 typedef union	u_mat2x2i
 {

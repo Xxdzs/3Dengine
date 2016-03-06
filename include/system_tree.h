@@ -6,12 +6,15 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 16:27:17 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/03 23:24:29 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/06 12:05:28 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SYSTEM_TREE_H
 # define SYSTEM_TREE_H
+
+#include "libft.h"
+#include "geometry.h"
 
 /*
 ** t_node <- t_list <- t_gnode <- t_obj
@@ -48,6 +51,7 @@ typedef struct	s_obj
 	t_dyna		vertices;
 	t_dyna		faces;
 	char		*name;
+	t_vec3		*dim;
 }				t_obj;
 
 /*
@@ -68,5 +72,10 @@ typedef struct	s_grfx
 	t_obj		*world;
 	t_camera	*cam;
 }				t_grfx;
+
+t_gnode			*gnode_alloc(size_t type_size);
+t_obj			*obj_alloc(char *str);
+t_camera		*camera_alloc(void);
+void			gnode_add_child(t_gnode *parent, t_gnode *child);
 
 #endif

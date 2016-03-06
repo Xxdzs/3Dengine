@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/03 23:14:56 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/06 13:17:55 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@
 #  include "mlx.h"
 # endif
 
-typedef double		t_real;
-
 # include "libft.h"
 # include "geometry.h"
-# include "algebra.h"
+# include "matrices.h"
+# include "settings.h"
 # include "system_tree.h"
 
 typedef struct	s_env
@@ -53,5 +52,6 @@ typedef struct	s_env
 int				expose_hook(void *param);
 int				key_hook(int keycode, void *param);
 void			repaint(t_env *const w);
+int				read_av(t_obj *w, int length, char **param);
 
 #endif

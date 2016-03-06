@@ -11,7 +11,4 @@ It can be seen as a Proof of concept for some ideas I wanted to implement
 I would like to implement :
   - Quaternions for rotations and interpolation (SLERP)
   - A tree-like structure for relative movement, optimisations are planned
-  - Maybe matrix stack for comparison with previous point
   - Several ways of implementing lights and shadows to compare them
-
- -------------

@@ -6,12 +6,14 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/03 16:45:23 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/06 12:05:05 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GEOMETRY_H
 # define GEOMETRY_H
+
+# include "settings.h"
 
 /*
 ** -----===== 2 Dimensions =====-----
@@ -37,17 +39,22 @@ typedef union	u_vec2i
 typedef struct	s_pnt2
 {
 	t_real	x;
-	float	y;
+	t_real	y;
 }				t_pnt2;
 
 typedef union	u_vec2
 {
 	t_pnt2	c;
-	float	m[2];
+	t_real	m[2];
 	struct
 	{
-		float	mod;
-		float	arg;
+		t_real	rep;
+		t_real	imp;
+	}		r;
+	struct
+	{
+		t_real	mod;
+		t_real	arg;
 	}		p;
 }				t_vec2;
 
@@ -76,26 +83,26 @@ typedef union	u_vec3i
 
 typedef struct	s_pnt3
 {
-	float	x;
-	float	y;
-	float	z;
+	t_real	x;
+	t_real	y;
+	t_real	z;
 }				t_pnt3;
 
 typedef union	u_vec3
 {
 	t_pnt3	c;
-	float	m[3];
+	t_real	m[3];
 	struct
 	{
-		float	phi;
-		float	theta;
-		float	rho;
+		t_real	phi;
+		t_real	theta;
+		t_real	rho;
 	}		s;
 	struct
 	{
-		float	r;
-		float	theta;
-		float	z;
+		t_real	r;
+		t_real	theta;
+		t_real	z;
 	}		cyl;
 }				t_vec3;
 
@@ -105,10 +112,10 @@ typedef union	u_vec3
 
 typedef struct	s_pnt4
 {
-	float	x;
-	float	y;
-	float	z;
-	float	w;
+	t_real	x;
+	t_real	y;
+	t_real	z;
+	t_real	w;
 }				t_pnt4;
 
 /*
@@ -119,19 +126,26 @@ typedef struct	s_pnt4
 ** One can decompose a quaternion into
 ** |	a vector part (in R^3)		v
 ** |	a scalar part (in R)		s
-** |hence								d
+** | hence								d
 ** -(Decomposition)
 */
 
 typedef union	u_qtrn
 {
-	float	m[4];
+	t_real	m[4];
 	t_pnt4	c;
 	struct
 	{
 		t_vec3	v;
-		float	s;
+		t_real	s;
 	}		d;
 }				t_qtrn;
+
+void	carth2polar(t_vec2 *v);
+void	polar2carth(t_vec2 *v);
+void	carth2cylin(t_vec3 *v);
+void	cylin2carth(t_vec3 *v);
+void	carth2spher(t_vec3 *v);
+void	spher2carth(t_vec3 *v);
 
 #endif
