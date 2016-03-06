@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/03/06 13:28:15 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/06 14:14:00 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define NEXT_WORD while(*buf++ != ' ')
 
-void	parse_fdf(t_obj *w, int fd)
+int		parse_fdf(t_obj *w, int fd)
 {
 	t_obj		cur;
 	char		*buf;
@@ -33,12 +33,13 @@ void	parse_fdf(t_obj *w, int fd)
 		}
 		tmp.vec.y++;
 	}
-	gnode_add_child(w, &gnode_new("FDF_center"));
-	gnode_add_child(w->children.root.next, &tmp);
-
+	if (!(cur->dim = ft_memdup(&tmp, sizeof(tmp))))
+		return (1);
+	obj_add_center(w, &cur);
+	return (0);
 }
 
-void	parse_obj(t_obj *w, int fd)
+int		parse_obj(t_obj *w, int fd)
 {
 	t_obj		cur;
 	char		*buf;
@@ -71,6 +72,7 @@ void	parse_obj(t_obj *w, int fd)
 			ft_dyna_append(&cur.faces, &temp, 1);
 		}
 	}
+	return (0);
 }
 
 int		read_av(t_obj *w, int length, char **param)
@@ -95,7 +97,8 @@ int		read_av(t_obj *w, int length, char **param)
 		if (t == sizeof(tab))
 			continue ;
 		else if ((fd = open(param[i])) != -1)
-			((void (*)(t_obj *, int))(tab[t - 1]))(w, fd);
+			if (((void (*)(t_obj *, int))(tab[t - 1]))(w, fd))
+				return (1);
 		else
 			return (2);
 	}

@@ -6,17 +6,17 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/02/26 17:03:47 by sid              ###   ########.fr       */
+/*   Updated: 2016/03/06 15:09:01 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 /*
-** Quaternion :: Constructors
+** Quaternion :: Constructor
 */
 
-t_qtrn	qtrn_new(float a, float b, float c, float d)
+t_qtrn	qtrn_new(const t_real a, const t_real b, const t_real c, const t_real d)
 {
 	return ((t_qtrn){{a, b, c, d}});
 }
@@ -25,7 +25,7 @@ t_qtrn	qtrn_new(float a, float b, float c, float d)
 ** Quaternion :: Get the sum
 */
 
-t_qtrn	qtrn_sum(t_qtrn *a, t_qtrn *b)
+t_qtrn	qtrn_sum(const t_qtrn *a, const t_qtrn *b)
 {
 	return ((t_qtrn){{
 		a->c.x + b->c.x,
@@ -40,7 +40,7 @@ t_qtrn	qtrn_sum(t_qtrn *a, t_qtrn *b)
 ** Side effect on the first quaternion
 */
 
-void	qtrn_add(t_qtrn *a, t_qtrn *b)
+void	qtrn_add(t_qtrn *const a, const t_qtrn *const b)
 {
 	int i;
 
@@ -53,7 +53,7 @@ void	qtrn_add(t_qtrn *a, t_qtrn *b)
 ** Quaternion :: Get the product
 */
 
-t_qtrn	qtrn_prod(t_qtrn *q, t_qtrn *h)
+t_qtrn	qtrn_prod(const t_qtrn *const q, const t_qtrn *const h)
 {
 	return ((t_qtrn){{
 		q->c.w * h->c.x + q->c.x * h->c.w + q->c.y * h->c.z - q->c.z * h->c.y,
@@ -68,11 +68,11 @@ t_qtrn	qtrn_prod(t_qtrn *q, t_qtrn *h)
 ** Side effect on the first quaternion
 */
 
-void	qtrn_mult(t_qtrn *q, t_qtrn *h)
+void	qtrn_mult(t_qtrn *const q, const t_qtrn *const h)
 {
-	float qx;
-	float qy;
-	float qz;
+	t_real qx;
+	t_real qy;
+	t_real qz;
 
 	qx = q->c.w * h->c.x + q->c.x * h->c.w + q->c.y * h->c.z - q->c.z * h->c.y;
 	qy = q->c.w * h->c.y + q->c.y * h->c.w - q->c.x * h->c.z + q->c.z * h->c.x;
@@ -87,9 +87,9 @@ void	qtrn_mult(t_qtrn *q, t_qtrn *h)
 ** Quaternion :: Get the inverse
 */
 
-t_qtrn	qtrn_get_inv(t_qtrn *q)
+t_qtrn	qtrn_get_inv(const t_qtrn *const q)
 {
-	float const tmp = q->c.w * q->c.w
+	const t_real	tmp = q->c.w * q->c.w
 		+ q->c.x * q->c.x
 		+ q->c.y * q->c.y
 		+ q->c.z * q->c.z;
@@ -102,9 +102,9 @@ t_qtrn	qtrn_get_inv(t_qtrn *q)
 ** Side effect on the quaternion
 */
 
-void	qtrn_inv(t_qtrn *q)
+void	qtrn_inv(t_qtrn *const q)
 {
-	float const tmp = q->c.w * q->c.w
+	const t_real	tmp = q->c.w * q->c.w
 		+ q->c.x * q->c.x
 		+ q->c.y * q->c.y
 		+ q->c.z * q->c.z;
@@ -119,7 +119,7 @@ void	qtrn_inv(t_qtrn *q)
 ** Quaternion :: Get the conjugate
 */
 
-t_qtrn	qtrn_get_conj(t_qtrn *q)
+t_qtrn	qtrn_get_conj(const t_qtrn *const q)
 {
 	return ((t_qtrn){{-q->c.x, -q->c.y, -q->c.z, q->c.w}});
 }
@@ -129,9 +129,37 @@ t_qtrn	qtrn_get_conj(t_qtrn *q)
 ** Side effect on the quaternion
 */
 
-void	qtrn_conj(t_qtrn *q)
+void	qtrn_conj(t_qtrn *const q)
 {
 	q->c.x *= -1;
 	q->c.y *= -1;
 	q->c.z *= -1;
+}
+
+
+/*
+** Apply the rotation
+** f :	H x H	-> H
+**		(q, p)	|-> q * p * inv(q)
+*/
+
+t_qtrn	qtrn_get_rotated(const t_qtrn *const to_rotate, t_qtrn rotator)
+{
+	t_qtrn	ans;
+
+	ans = qtrn_prod(&rotator, to_rotate);
+	qtrn_inv(&rotator);
+	qtrn_mult(&ans, &rotator);
+	return (ans);
+}
+
+void	qtrn_rotate(t_qtrn *const to_rotate, t_qtrn rotator)
+{
+	t_qtrn	ans;
+
+	ans = qtrn_get_inv(&rotator);
+	qtrn_mult(to_rotate, &ans);
+	qtrn_mult(&rotator, to_rotate);
+	ft_memcpy(to_rotate, &rotator, sizeof(ans));
+	return (ans);
 }
