@@ -6,14 +6,14 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/03/06 11:38:47 by angagnie         ###   ########.fr        #
+#    Updated: 2016/03/09 12:56:23 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 # ==== Editable ====
 NAME:=fdf
 MODEL_PATH:=model/
-MODEL:=calculus quaternion conversion system_tree
+MODEL:=geometry quaternion conversion system_tree
 FILES=main view controller parser ft_ator
 # ==================
 

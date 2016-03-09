@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 16:27:17 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/06 12:05:28 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/09 12:18:07 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ typedef struct	s_grfx
 
 t_gnode			*gnode_alloc(size_t type_size);
 t_obj			*obj_alloc(char *str);
+t_obj			obj_new(char *str);
 t_camera		*camera_alloc(void);
 void			gnode_add_child(t_gnode *parent, t_gnode *child);
+int				obj_add_center(t_gnode *parent, t_obj *child);
 
 #endif

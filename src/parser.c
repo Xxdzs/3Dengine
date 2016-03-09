@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/03/06 14:14:00 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/09 12:54:38 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,17 @@ int		parse_fdf(t_obj *w, int fd)
 	{
 		while (*buf != '\0')
 		{
-			tmp.vec.z = ft_ator(buf);
-			ft_dyna_append(&cur.vertices, &tmp);
+			tmp.vec.c.z = ft_ator(buf);
+			ft_dyna_append(&cur.vertices, &tmp, 1);
 			NEXT_WORD;
-			tmp.vec.x++;
+			tmp.vec.c.x++;
 		}
-		tmp.vec.y++;
+		tmp.vec.c.y++;
 	}
-	if (!(cur->dim = ft_memdup(&tmp, sizeof(tmp))))
+	tmp.vec.c.z = 0;
+	if (!(cur.dim = ft_memdup(&tmp, sizeof(tmp))))
 		return (1);
-	obj_add_center(w, &cur);
+	obj_add_center((t_gnode *)w, &cur);
 	return (0);
 }
 
@@ -49,9 +50,9 @@ int		parse_obj(t_obj *w, int fd)
 	{
 		if (*buf == 'o')
 		{
-			if (cur.)
+			if (cur.vertices.chunck_count != 0)
+				gnode_add_child((t_gnode *)w, (t_gnode *)&cur);
 			cur = obj_new(buf + 2);
-			gnode_add_child(w, &cur);
 		}
 		else if (*buf == 'v')
 		{
@@ -96,9 +97,8 @@ int		read_av(t_obj *w, int length, char **param)
 			t += 2;
 		if (t == sizeof(tab))
 			continue ;
-		else if ((fd = open(param[i])) != -1)
-			if (((void (*)(t_obj *, int))(tab[t - 1]))(w, fd))
-				return (1);
+		else if ((fd = open(param[i], O_RDONLY)) != -1 && ((int (*)(t_obj *, int))(tab[t - 1]))(w, fd))
+			return (1);
 		else
 			return (2);
 	}

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/06 15:09:01 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/09 12:56:43 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,5 +161,4 @@ void	qtrn_rotate(t_qtrn *const to_rotate, t_qtrn rotator)
 	qtrn_mult(to_rotate, &ans);
 	qtrn_mult(&rotator, to_rotate);
 	ft_memcpy(to_rotate, &rotator, sizeof(ans));
-	return (ans);
 }

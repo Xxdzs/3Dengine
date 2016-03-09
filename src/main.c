@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/06 13:25:12 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/09 11:36:43 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ int			main(int ac, char **av)
 	(void)av;
 	if (init_env(&w))
 		ft_putstr_fd("Error : Initialisation failed\n", 2);
-	read_av(w, ac - 1, av + 1);
 #ifdef X11
 	else {
+		read_av(w.g.world, ac - 1, av + 1);
 		do {
 			XNextEvent(w.disp, &event);
 			if (event.type == Expose)
@@ -91,7 +91,10 @@ int			main(int ac, char **av)
 		} while (event.type == KeyPress && event.xkey.keycode == 53);
 #else
 	else if (fork())
+	{
+		read_av(w.g.world, ac - 1, av + 1);
 		mlx_loop(w.mlx);
+	}
 	else
 	{
 		wait(0);

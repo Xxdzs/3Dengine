@@ -6,12 +6,11 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/01 14:10:06 by sid               #+#    #+#             */
-/*   Updated: 2016/03/06 14:33:05 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/09 13:00:11 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "system_tree.h"
-#include <stdlib.h>
+#include "fdf.h"
 
 /*
 ** -----===== Constructors =====-----
@@ -65,8 +64,8 @@ t_obj		obj_new(char *str)
 
 	ftl_init((t_list *)&ans.node, sizeof(t_obj));
 	ans.node.parent = NULL;
-	ans.pos = (t_vec3){{0, 0, 0}};
-	ans.rot = (t_qtrn){{0, 0, 0, 0}};
+	ans.node.pos = (t_vec3){{0, 0, 0}};
+	ans.node.rot = (t_qtrn){{0, 0, 0, 0}};
 	ans.vertices = ft_dyna_new(sizeof(t_vrtx));
 	ft_dyna_datainit(&ans.vertices);
 	ans.faces = ft_dyna_new(sizeof(t_vrtx));
@@ -94,7 +93,9 @@ int			obj_add_center(t_gnode *parent, t_obj *child)
 {
 	t_obj	tmp;
 
+	if (child->dim == NULL)
+		return (1);
 	tmp = obj_new(ft_strjoin(child->name, "_center"));
-	memcpy(&tmp->pos, &child->pos);
-
+	ft_memcpy(&tmp.node.pos, &child->node.pos, sizeof(t_vec3));
+	return (0);
 }

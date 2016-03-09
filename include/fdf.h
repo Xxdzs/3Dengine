@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/06 13:17:55 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/09 12:52:14 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <fcntl.h>
 # include <math.h>
 # include <sys/wait.h>
 
@@ -53,5 +54,6 @@ int				expose_hook(void *param);
 int				key_hook(int keycode, void *param);
 void			repaint(t_env *const w);
 int				read_av(t_obj *w, int length, char **param);
+t_real			ft_ator(char *str);
 
 #endif
