@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/01 14:10:06 by sid               #+#    #+#             */
-/*   Updated: 2016/03/09 13:00:11 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/09 17:23:39 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_gnode		*gnode_alloc(size_t type_size)
 		ans->parent = NULL;
 		ans->pos = (t_vec3){{0, 0, 0}};
 		ans->rot = (t_qtrn){{0, 0, 0, 0}};
+		ans->scale = 1;
 	}
 	return (ans);
 }
@@ -66,6 +67,7 @@ t_obj		obj_new(char *str)
 	ans.node.parent = NULL;
 	ans.node.pos = (t_vec3){{0, 0, 0}};
 	ans.node.rot = (t_qtrn){{0, 0, 0, 0}};
+	ans.node.scale = 1;
 	ans.vertices = ft_dyna_new(sizeof(t_vrtx));
 	ft_dyna_datainit(&ans.vertices);
 	ans.faces = ft_dyna_new(sizeof(t_vrtx));
@@ -98,4 +100,9 @@ int			obj_add_center(t_gnode *parent, t_obj *child)
 	tmp = obj_new(ft_strjoin(child->name, "_center"));
 	ft_memcpy(&tmp.node.pos, &child->node.pos, sizeof(t_vec3));
 	return (0);
+}
+
+void		final(t_env *w)
+{
+
 }

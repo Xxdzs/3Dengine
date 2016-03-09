@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 16:27:17 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/09 12:18:07 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/09 17:19:33 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct	s_gnode
 	struct s_gnode	*parent;
 	t_vec3			pos;
 	t_qtrn			rot;
+	t_real			scale;
 }				t_gnode;
 
 typedef struct	s_vrtx
@@ -79,5 +80,6 @@ t_obj			obj_new(char *str);
 t_camera		*camera_alloc(void);
 void			gnode_add_child(t_gnode *parent, t_gnode *child);
 int				obj_add_center(t_gnode *parent, t_obj *child);
+
 
 #endif
