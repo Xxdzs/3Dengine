@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/03/13 17:09:43 by angagnie         ###   ########.fr        #
+#    Updated: 2016/03/13 17:24:56 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -96,7 +96,12 @@ norme:
 	@norminette $(SRC) $(HDRPATH) | grep -v  Norme -B1 || true
 	@echo $(END)
 
-Libft/libft.a:
+Libft/Makefile:
+	@echo "Updating submodule"
+	@git submodule init
+	@git submodule update
+
+Libft/libft.a: Libft/Makefile
 	@echo $(BLUE) "Making $@" $(EOC)
 	@make -C Libft/
 	@make -C Libft clean
@@ -105,25 +110,19 @@ miniLibX_OSX/libmlx.a:
 	@echo $(BLUE) "Making $@" $(EOC)
 	@make -C miniLibX_OSX/
 
-def_x11:
+x11:
 #	$(eval FILES+=main_x11)
 	$(eval DEFLAG=-DX11)
 	$(eval LFLAGS+=-lX11)
 
-x11: def_x11
-
-def_osx:
+osx:
 #	$(eval FILES+=main_osx)
 	$(eval IFLAGS+=-I miniLibX_OSX/)
 	$(eval LFLAGS+=-lmlx -framework OpenGL -framework AppKit)
 	$(eval DEP+=miniLibX_OSX/libmlx.a)
 
-osx: def_osx
-
-def_debug:
+debug: fclean
 	$(eval CFLAGS+=-g)
-	$(eval LFLAGS+=-g)
+	$(CC) $(CFLAGS) $(LFLAGS) -o $(NAME) $(SRC)
 
-debug: def_debug re
-
-.PHONY: all clean fclean re test norme x11 def_x11 osx def_osx usage debug def_debug
+.PHONY: all clean fclean re test norme x11 osx usage debug

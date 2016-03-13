@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/13 17:05:23 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/13 17:26:28 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int			main(int ac, char **av)
 #else
 	else if (fork())
 	{
-//		read_av(w.g.world, ac - 1, av + 1);
+		read_av(w.g.world, ac - 1, av + 1);
 		ft_putnbr(mlx_loop(w.mlx));
 	}
 	else
