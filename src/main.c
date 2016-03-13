@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/13 16:21:29 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/13 17:05:23 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ static int	init_env(t_env *const w)
 	int		sd;
 #endif
 
+	w->fnct.repaint = default_repaint;
+	w->fnct.key_hook = default_key_hook;
+	w->fnct.expose_hook = default_expose_hook;
 	w->wdim = (t_vec2i){{1280, 720}};
 #ifdef X11
 	if (!(w->disp = XOpenDisplay(NULL)))
@@ -64,9 +67,6 @@ static int	init_env(t_env *const w)
 #endif
 	w->g.world = obj_alloc("World");
 	w->g.cam = camera_alloc();
-	w->fnct.repaint = default_repaint;
-	w->fnct.key_hook = default_key_hook;
-	w->fnct.expose_hook = default_expose_hook;
 	w->fnct.repaint(w);
 	return (0);
 }
@@ -95,8 +95,8 @@ int			main(int ac, char **av)
 #else
 	else if (fork())
 	{
-		read_av(w.g.world, ac - 1, av + 1);
-		mlx_loop(w.mlx);
+//		read_av(w.g.world, ac - 1, av + 1);
+		ft_putnbr(mlx_loop(w.mlx));
 	}
 	else
 	{

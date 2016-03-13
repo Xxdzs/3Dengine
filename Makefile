@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/03/13 14:08:13 by angagnie         ###   ########.fr        #
+#    Updated: 2016/03/13 17:09:43 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -49,7 +49,7 @@ OBJ=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
 CCHF:=.cache_exists
 
 usage:
-	@echo "Usage : make    < osx | x11 >    < all | re | clean | fclean | test >"
+	@echo "Usage : make    < osx | x11 >    < all | re | clean | fclean | test | debug >"
 
 all: $(NAME)
 
@@ -77,13 +77,19 @@ clean:
 fclean: clean
 	@echo $(YELLOW) "Deleting binairie" $(EOC)
 	@rm -f $(NAME)
+	@rm -rf $(NAME).dSYM/
 
 re: fclean all
 
 test:
 	@echo $(YELLOW)"Files :\n\033[0;33m"$(FILES)
 	@echo $(BLUE)"Objects :\n\033[0;34m"$(OBJ)
-	@echo $(CYAN)"Sources :\n\033[0;36m"$(SRC)
+	@echo $(CYAN)"Sources :\n\033[0;36m"$(SRC)$(EOC)
+	@echo "Include flags :" $(IFLAGS)
+	@echo "Defined flags :" $(DEFLAG)
+	@echo "Librairies flags :" $(LFLAGS)
+	@echo "Dependencies :" $(DEP)
+	@echo "Compilation flags :" $(CFLAGS)
 
 norme:
 	@echo $(RED)
@@ -114,4 +120,10 @@ def_osx:
 
 osx: def_osx
 
-.PHONY: all clean fclean re test norme x11 def_x11 osx def_osx usage
+def_debug:
+	$(eval CFLAGS+=-g)
+	$(eval LFLAGS+=-g)
+
+debug: def_debug re
+
+.PHONY: all clean fclean re test norme x11 def_x11 osx def_osx usage debug def_debug
