@@ -6,11 +6,11 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/09 11:36:43 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/13 13:22:52 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "ggl.h"
 
 static void		destroy_env(t_env *const w)
 {
@@ -58,13 +58,13 @@ static int	init_env(t_env *const w)
 	if (!(w->pixel = mlx_get_data_addr(w->img, &(w->bits_per_pixel), &(w->line_size), &(w->endian))))
 		return (4);
 	ft_putstr("Image informations Obtained\n");
-	mlx_expose_hook(w->win, &expose_hook, (void *)w);
-	mlx_hook(w->win, 2, 0, &key_hook, (void *)w);
+	mlx_expose_hook(w->win, w->fnct.expose_hook, (void *)w);
+	mlx_hook(w->win, 2, 0, w->fnct.key_hook, (void *)w);
 	mlx_do_key_autorepeaton(w->mlx);
 #endif
 	w->g.world = obj_alloc("World");
 	w->g.cam = camera_alloc();
-	repaint(w);
+	w->fnct.repaint(w);
 	return (0);
 }
 

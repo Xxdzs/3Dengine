@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/03/09 12:56:23 by angagnie         ###   ########.fr        #
+#    Updated: 2016/03/13 10:04:43 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -49,7 +49,7 @@ OBJ=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
 CCHF:=.cache_exists
 
 usage:
-	@echo "Usage : make    osx | x11    [all | re | clean | fclean | test]"
+	@echo "Usage : make    < osx | x11 >    < all | re | clean | fclean | test >"
 
 all: $(NAME)
 

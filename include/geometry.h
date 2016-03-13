@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/09 13:37:13 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/13 10:32:03 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ typedef union	u_vec3
 	t_real	m[3];
 	struct
 	{
-		t_real	phi;
-		t_real	theta;
 		t_real	rho;
+		t_real	theta;
+		t_real	phi;
 	}		s;
 	struct
 	{
@@ -124,7 +124,7 @@ typedef struct	s_pnt4
 ** H is isomorphic to R^4, hence		c
 ** -(Carthesian Coordinates)
 ** One can decompose a quaternion into
-** |	a vector part (in R^3)		v
+** |	a vectorial part (in R^3)	v
 ** |	a scalar part (in R)		s
 ** | hence								d
 ** -(Decomposition)

@@ -6,13 +6,13 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:17:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/03 16:39:52 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/13 13:23:06 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "ggl.h"
 
-int		key_hook(int keycode, void *param)
+int		default_key_hook(int keycode, void *param)
 {
 	t_env	*const w = param;
 
@@ -21,6 +21,7 @@ int		key_hook(int keycode, void *param)
 	ft_putendl("");
 	if (keycode == 53)
 		exit(1);
-	repaint(w);
+	w->fnct.repaint(w);
+	w->fnct.expose_hook(w);
 	return (0);
 }

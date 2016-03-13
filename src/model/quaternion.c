@@ -6,11 +6,11 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/09 17:42:14 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/13 13:10:48 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "ggl.h"
 
 /*
 ** Quaternion :: Constructor

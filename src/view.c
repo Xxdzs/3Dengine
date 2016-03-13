@@ -6,15 +6,15 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/03 16:46:36 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/13 13:22:00 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "ggl.h"
 
 #define PIXEL(X,Y) w->pixel[(Y) * w->line_size + (X) * (w->bits_per_pixel / 8)]
 
-int		expose_hook(void *param)
+int		default_expose_hook(void *param)
 {
 	t_env *const	w = param;
 
@@ -28,7 +28,7 @@ int		expose_hook(void *param)
 	return (0);
 }
 
-void	draw_line(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
+void	draw_line_safe(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
 {
 	t_pnt2i		delta;
 	t_pnt2i		way;
@@ -51,13 +51,19 @@ void	draw_line(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
 				= 250;
 }
 
-void	repaint(t_env *const w)
+/*
+void	draw_line()
 {
-	ft_putstr("Repainting\n"); // <--
-	draw_line(w, &(t_pnt2i){10, 10}, &(t_pnt2i){300, 300});
-	draw_line(w, &(t_pnt2i){10, 100}, &(t_pnt2i){300, 300});
-	draw_line(w, &(t_pnt2i){100, 10}, &(t_pnt2i){300, 300});
-	draw_line(w, &(t_pnt2i){400, 10}, &(t_pnt2i){300, 300});
-	draw_line(w, &(t_pnt2i){10, 400}, &(t_pnt2i){300, 300});
-	expose_hook(w);
+	t_real	;
+}
+*/
+
+int		repaint(t_env *const w)
+{
+	ft_putstr("Repainting, but no custom repainting function provided\n");
+	draw_line_safe(w, &(t_pnt2i){100, 100}, &(t_pnt2i){200, 100});
+	draw_line_safe(w, &(t_pnt2i){200, 200}, &(t_pnt2i){200, 100});
+	draw_line_safe(w, &(t_pnt2i){200, 200}, &(t_pnt2i){100, 200});
+	draw_line_safe(w, &(t_pnt2i){100, 100}, &(t_pnt2i){100, 200});
+	return (0);
 }

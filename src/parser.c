@@ -6,11 +6,11 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/03/09 12:54:38 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/13 13:11:10 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "ggl.h"
 
 #define NEXT_WORD while(*buf++ != ' ')
 

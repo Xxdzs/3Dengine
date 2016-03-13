@@ -6,11 +6,11 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/01 14:10:06 by sid               #+#    #+#             */
-/*   Updated: 2016/03/09 17:23:39 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/13 13:24:50 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "ggl.h"
 
 /*
 ** -----===== Constructors =====-----
@@ -91,6 +91,7 @@ void		gnode_add_child(t_gnode *parent, t_gnode *child)
 	ftl_push_back((t_list *)parent, (t_node *)child);
 }
 
+
 int			obj_add_center(t_gnode *parent, t_obj *child)
 {
 	t_obj	tmp;
@@ -99,10 +100,13 @@ int			obj_add_center(t_gnode *parent, t_obj *child)
 		return (1);
 	tmp = obj_new(ft_strjoin(child->name, "_center"));
 	ft_memcpy(&tmp.node.pos, &child->node.pos, sizeof(t_vec3));
+	(void)parent; // <--
 	return (0);
 }
 
+/*
 void		final(t_env *w)
 {
-
+	(void)w;
 }
+*/

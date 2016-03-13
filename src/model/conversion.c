@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 12:32:44 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/09 16:44:01 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/13 13:23:31 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	spher2carth(t_vec3 *v)
 
 void	perso2rqtrn(t_qtrn *q)
 {
-	const t_real	scale = q->d.v.s.rho;
 	const t_real	theta = q->d.s / 2;
 
 	q->d.s = cos(theta);

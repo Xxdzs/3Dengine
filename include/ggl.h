@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ggl.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/09 12:52:14 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/13 13:21:33 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef GGL_H
+# define GGL_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -31,6 +31,8 @@
 # include "settings.h"
 # include "system_tree.h"
 
+typedef int	(*t_fnptr)();
+
 typedef struct	s_env
 {
 # ifdef X11
@@ -48,12 +50,18 @@ typedef struct	s_env
 	int			line_size;
 	int			endian;
 	t_grfx		g;
+	struct
+	{
+		t_fnptr	repaint;
+		t_fnptr	key_hook;
+		t_fnptr	expose_hook;
+	}			fnct;
 }				t_env;
 
-int				expose_hook(void *param);
-int				key_hook(int keycode, void *param);
-void			repaint(t_env *const w);
+int				default_expose_hook(void *param);
+int				default_key_hook(int keycode, void *param);
+int				default_repaint(t_env *const w);
 int				read_av(t_obj *w, int length, char **param);
 t_real			ft_ator(char *str);
 
-#endif
+#endif /* GGL_H */
