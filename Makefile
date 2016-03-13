@@ -6,15 +6,15 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/03/13 10:04:43 by angagnie         ###   ########.fr        #
+#    Updated: 2016/03/13 14:08:13 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 # ==== Editable ====
 NAME:=fdf
 MODEL_PATH:=model/
-MODEL:=geometry quaternion conversion system_tree
-FILES=main view controller parser ft_ator
+MODEL:=geometry quaternion conversion matrices system_tree
+FILES=main view controller render parser ft_ator
 # ==================
 
 # ==== Standard ====

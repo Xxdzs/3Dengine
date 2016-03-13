@@ -6,10 +6,13 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/09 17:42:48 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/13 14:08:52 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ggl.h"
+
 void		render(t_env *w)
 {
+	(void)w;
 }

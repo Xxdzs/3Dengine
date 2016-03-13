@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:36:22 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/13 13:10:38 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/13 14:17:34 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ t_mat2x1i	mat_proj3v2(t_mat2x3i *a, t_mat3x1i *b)
 		}});
 }
 
-t_mat3x1	mat_prod3x3v3x1(t_mat3x3 *a, t_mat3x1 *b)
+t_mat3x1	mat_3x3_times_3x1(t_mat3x3 *a, t_mat3x1 *b)
 {
+	(void)a;
+	return (*b);
 }
