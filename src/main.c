@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/13 17:26:28 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/14 21:50:39 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		destroy_env(t_env *const w)
 	mlx_destroy_image(w->mlx, w->img);
 	mlx_destroy_window(w->mlx, w->win);
 #endif
-	ft_putstr("Clear\n");
+	ft_putstr("  --==  Clear  ==--\n");
 }
 
 static int	init_env(t_env *const w)
@@ -32,7 +32,7 @@ static int	init_env(t_env *const w)
 
 	w->fnct.repaint = default_repaint;
 	w->fnct.key_hook = default_key_hook;
-	w->fnct.expose_hook = default_expose_hook;
+	w->fnct.expose = default_expose_hook;
 	w->wdim = (t_vec2i){{1280, 720}};
 #ifdef X11
 	if (!(w->disp = XOpenDisplay(NULL)))
@@ -61,7 +61,7 @@ static int	init_env(t_env *const w)
 	if (!(w->pixel = mlx_get_data_addr(w->img, &(w->bits_per_pixel), &(w->line_size), &(w->endian))))
 		return (4);
 	ft_putstr("Image informations Obtained\n");
-	mlx_expose_hook(w->win, w->fnct.expose_hook, (void *)w);
+	mlx_expose_hook(w->win, w->fnct.expose, (void *)w);
 	mlx_hook(w->win, 2, 0, w->fnct.key_hook, (void *)w);
 	mlx_do_key_autorepeaton(w->mlx);
 #endif
@@ -82,9 +82,9 @@ int			main(int ac, char **av)
 	(void)av;
 	if (init_env(&w))
 		ft_putstr_fd("Error : Initialisation failed\n", 2);
-#ifdef X11
 	else {
-		read_av(w.g.world, ac - 1, av + 1);
+		read_av(w.g.world, --ac, ++av);
+#ifdef X11
 		do {
 			XNextEvent(w.disp, &event);
 			if (event.type == Expose)
@@ -93,14 +93,8 @@ int			main(int ac, char **av)
 				key_hook(event.xkey.keycode, &w);
 		} while (event.type == KeyPress && event.xkey.keycode == 53);
 #else
-	else if (fork())
-	{
-		read_av(w.g.world, ac - 1, av + 1);
 		ft_putnbr(mlx_loop(w.mlx));
-	}
-	else
-	{
-		wait(0);
+		ft_putstr(" <- mlx_loop\n");
 #endif
 		ft_putstr("Loop killed\n");
 		destroy_env(&w);

@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/01 14:10:06 by sid               #+#    #+#             */
-/*   Updated: 2016/03/13 13:24:50 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/14 22:00:42 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_camera	*camera_alloc(void)
 		ans->fov = 60;
 		ans->ratio = (t_pnt2i){16, 9};
 	}
-	return(ans);
+	return (ans);
 }
 
 t_obj		obj_new(char *str)
@@ -90,7 +90,6 @@ void		gnode_add_child(t_gnode *parent, t_gnode *child)
 	child->parent = parent;
 	ftl_push_back((t_list *)parent, (t_node *)child);
 }
-
 
 int			obj_add_center(t_gnode *parent, t_obj *child)
 {

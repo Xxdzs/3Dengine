@@ -6,15 +6,15 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 16:27:17 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/09 17:19:33 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/14 22:01:28 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SYSTEM_TREE_H
 # define SYSTEM_TREE_H
 
-#include "libft.h"
-#include "geometry.h"
+# include "libft.h"
+# include "geometry.h"
 
 /*
 ** t_node <- t_list <- t_gnode <- t_obj
@@ -80,6 +80,5 @@ t_obj			obj_new(char *str);
 t_camera		*camera_alloc(void);
 void			gnode_add_child(t_gnode *parent, t_gnode *child);
 int				obj_add_center(t_gnode *parent, t_obj *child);
-
 
 #endif

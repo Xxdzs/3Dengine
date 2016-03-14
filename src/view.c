@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/13 16:24:17 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/14 21:55:53 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int		default_expose_hook(void *param)
 {
 	t_env *const	w = param;
 
-	ft_putstr("Exposing\n"); // <--
+	ft_putstr("Exposing\n");
 #ifdef X11
-
+	// TODO : Display Image
 #else
 	mlx_clear_window(w->mlx, w->win);
 	mlx_put_image_to_window(w->mlx, w->win, w->img, 0, 0);
@@ -42,21 +42,18 @@ int		draw_line_safe(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
 	if (delta.x > delta.y)
 		while (++i <= delta.x)
 			PIXEL(p1->x + i * way.x,
-				p1->y + ((i * delta.y) / delta.x) * way.y)
-				= 150;
+				p1->y + ((i * delta.y) / delta.x) * way.y) = 150;
 	else
 		while (++i <= delta.y)
 			PIXEL(p1->x + ((i * delta.x) / delta.y) * way.x,
-				p1->y + i * way.y)
-				= 250;
+				p1->y + i * way.y) = 250;
 	return (0);
 }
 
-
 int		draw_line(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
 {
-	t_real derr;
-	t_real err;
+	t_real	derr;
+	t_real	err;
 	t_pnt2i	local;
 
 	if (p1->x == p2->x)
@@ -69,7 +66,6 @@ int		draw_line(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
 	return (0);
 }
 
-
 int		default_repaint(t_env *const w)
 {
 	ft_putstr("Repainting, but no custom repainting function provided\n");
@@ -77,6 +73,5 @@ int		default_repaint(t_env *const w)
 	draw_line_safe(w, &(t_pnt2i){200, 200}, &(t_pnt2i){200, 100});
 	draw_line_safe(w, &(t_pnt2i){200, 200}, &(t_pnt2i){100, 200});
 	draw_line_safe(w, &(t_pnt2i){100, 100}, &(t_pnt2i){100, 200});
-	w->fnct.expose_hook(w);
 	return (0);
 }

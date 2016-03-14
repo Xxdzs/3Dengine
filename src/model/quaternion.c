@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/13 13:10:48 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/14 22:04:06 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ void	qtrn_mult(t_qtrn *const q, const t_qtrn *const h)
 	qx = q->c.w * h->c.x + q->c.x * h->c.w + q->c.y * h->c.z - q->c.z * h->c.y;
 	qy = q->c.w * h->c.y + q->c.y * h->c.w - q->c.x * h->c.z + q->c.z * h->c.x;
 	qz = q->c.w * h->c.z + q->c.z * h->c.w + q->c.x * h->c.y - q->c.y * h->c.x;
-	q->c.w = q->c.w * h->c.w - q->c.x * h->c.x - q->c.y * h->c.y - q->c.z * h->c.z;
+	q->c.w *= h->c.w;
+	q->c.w -= q->c.x * h->c.x - q->c.y * h->c.y - q->c.z * h->c.z;
+//	q->c.w = q->c.w * h->c.w - q->c.x * h->c.x - q->c.y * h->c.y - q->c.z * h->c.z;
 	q->c.x = qx;
 	q->c.y = qy;
 	q->c.z = qz;
@@ -135,7 +137,6 @@ void	qtrn_conj(t_qtrn *const q)
 	q->c.y *= -1;
 	q->c.z *= -1;
 }
-
 
 /*
 ** Apply the rotation

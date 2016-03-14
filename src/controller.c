@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:17:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/13 16:27:33 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/14 21:48:27 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int		default_key_hook(int keycode, void *param)
 	ft_putnbr(keycode);
 	ft_putendl("");
 	if (keycode == 53)
-		exit(1);
+		exit(0);
 	w->fnct.repaint(w);
+	w->fnct.expose(w);
 	return (0);
 }

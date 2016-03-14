@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/03/13 13:11:10 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/14 21:57:37 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		parse_obj(t_obj *w, int fd)
 		}
 		else if (*buf == 'v')
 		{
-			t_vrtx		tmp = (t_vrtx){{{0,0,0}},{{0,0,0}}};
+			t_vrtx		tmp = (t_vrtx){{{0, 0, 0}}, {{0, 0, 0}}};
 			for (int i = 0 ; i < 3 ; i++) {
 				NEXT_WORD;
 				tmp.vec.m[i] = ft_ator(buf);
@@ -65,7 +65,7 @@ int		parse_obj(t_obj *w, int fd)
 		}
 		else if (*buf == 'f')
 		{
-			t_face		temp = (t_face){{0,0,0,0}};
+			t_face		temp = (t_face){{0, 0, 0, 0}};
 			for (int i = 0 ; i < 4 ; i++) {
 				NEXT_WORD;
 				temp.index[i] = ft_atoi(buf);

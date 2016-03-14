@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/03/13 17:24:56 by angagnie         ###   ########.fr        #
+#    Updated: 2016/03/13 19:38:05 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -48,7 +48,7 @@ OBJ=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
 # ==================
 CCHF:=.cache_exists
 
-usage:
+usage: osx debug re
 	@echo "Usage : make    < osx | x11 >    < all | re | clean | fclean | test | debug >"
 
 all: $(NAME)
@@ -122,7 +122,8 @@ osx:
 	$(eval DEP+=miniLibX_OSX/libmlx.a)
 
 debug: fclean
+	@echo $(CYAN)"Generating debug informations"$(EOC)
 	$(eval CFLAGS+=-g)
-	$(CC) $(CFLAGS) $(LFLAGS) -o $(NAME) $(SRC)
+	@$(CC) $(CFLAGS) $(LFLAGS) -o $(NAME) $(SRC)
 
 .PHONY: all clean fclean re test norme x11 osx usage debug
