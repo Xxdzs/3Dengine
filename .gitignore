@@ -3,4 +3,6 @@
 **/a.out
 *.o
 fdf
-*.dSYM/*
+**/*.dSYM/*
+*.a
+gglib/ggl

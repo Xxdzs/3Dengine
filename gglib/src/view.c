@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/14 21:55:53 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/15 22:57:57 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,7 @@ int		default_repaint(t_env *const w)
 	draw_line_safe(w, &(t_pnt2i){200, 200}, &(t_pnt2i){200, 100});
 	draw_line_safe(w, &(t_pnt2i){200, 200}, &(t_pnt2i){100, 200});
 	draw_line_safe(w, &(t_pnt2i){100, 100}, &(t_pnt2i){100, 200});
+	draw_line_safe(w, &(t_pnt2i){100, 100}, &(t_pnt2i){200, 200});
+	draw_line_safe(w, &(t_pnt2i){100, 200}, &(t_pnt2i){200, 100});
 	return (0);
 }

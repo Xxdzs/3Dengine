@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/03/15 16:02:45 by angagnie         ###   ########.fr        #
+#    Updated: 2016/03/15 22:31:01 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -15,10 +15,10 @@ EXEC_NAME:=ggl
 NAME:=libgg.a
 MODEL_PATH:=model/
 MODEL:=quaternion conversion matrices system_tree
-FILES=ggl_main view controller render parser ft_ator
+FILES=main ggl_main view controller render parser ft_ator
 LIBFT_PATH=../Libft/
 LIBFT_HDR=../Libft/include/
-MAIN=../main
+MAIN=main
 # ==================
 
 # ==== Standard ====
@@ -60,7 +60,7 @@ all: $(NAME)
 
 exec: $(EXEC_NAME)
 
-$(EXEC_NAME): add_main $(OBJ) $(DEP)
+$(EXEC_NAME): $(OBJ) $(DEP)
 	@echo $(GREEN) " - Compiling $@" $(EOC)
 	@$(CC) $(OBJ) -o $@ $(IFLAGS) $(LFLAGS)
 
@@ -105,7 +105,7 @@ test:
 
 norme:
 	@echo $(RED)
-	@norminette $(SRC) $(HDRPATH) | grep -v  Norme -B1 || true
+	norminette $(SRC) $(HDRPATH) | grep -v  Norme -B1 || true
 	@echo $(END)
 
 $(LIBFT_PATH)libft.a:
@@ -136,4 +136,4 @@ debug:
 add_main:
 	$(eval FILES+=$(MAIN))
 
-.PHONY: all clean fclean re test norme x11 osx usage debug exec add-main
+.PHONY: all clean fclean re test norme x11 osx usage debug exec add_main

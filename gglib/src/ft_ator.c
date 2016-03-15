@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 11:03:41 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/06 11:41:35 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/15 22:54:44 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ t_real		ft_ator(char *str)
 	ans = 0;
 	pow = 1;
 	while (ft_isdigit(*str))
-		ans = 10 * ans + ('0' - *str);
+		ans = 10 * ans + (*str++ - '0');
 	if (*str == '.')
 		while (ft_isdigit(*++str))
-			ans += (pow = pow / 10) * ('0' - *str);
+			ans += (pow = pow / 10) * (*str - '0');
 	return (positive ? ans : -ans);
 }

@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/03/14 21:57:37 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/15 23:22:15 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		parse_fdf(t_obj *w, int fd)
 	tmp = (t_vrtx){{{0,0,0}},{{0,0,0}}};
 	while (get_next_line(fd, &buf) == 1)
 	{
+		tmp.vec.c.x = 0;
 		while (*buf != '\0')
 		{
 			tmp.vec.c.z = ft_ator(buf);
@@ -50,7 +51,9 @@ int		parse_obj(t_obj *w, int fd)
 	{
 		if (*buf == 'o')
 		{
-			if (cur.vertices.chunck_count != 0)
+			if (cur.vertices.chunck_count == 0)
+				obj_del(&cur);
+			else
 				gnode_add_child((t_gnode *)w, (t_gnode *)&cur);
 			cur = obj_new(buf + 2);
 		}
@@ -78,7 +81,7 @@ int		parse_obj(t_obj *w, int fd)
 
 int		read_av(t_obj *w, int length, char **param)
 {
-	char			*c;
+	char			*ext;
 	int				i;
 	unsigned int	t;
 	int				fd;
@@ -87,20 +90,18 @@ int		read_av(t_obj *w, int length, char **param)
 	i = -1;
 	while (++i < length)
 	{
-		c = param[i];
-		while (*c != '.' && *c != '\0')
-			c++;
-		if (*c == '\0')
+		ext = param[i];
+		while (*ext != '.' && *ext != '\0')
+			ext++;
+		if (*ext++ == '\0')
 			continue ;
 		t = 0;
-		while (t < sizeof(tab) && ft_strcmp(c, tab[t]))
+		while (t < 4 && ft_strcmp(ext, tab[t]))
 			t += 2;
-		if (t == sizeof(tab))
+		if (t == 4)
 			continue ;
-		else if ((fd = open(param[i], O_RDONLY)) != -1 && ((int (*)(t_obj *, int))(tab[t - 1]))(w, fd))
+		else if ((fd = open(param[i], O_RDONLY)) == -1 || ((int (*)(t_obj *, int))(tab[t + 1]))(w, fd))
 			return (1);
-		else
-			return (2);
 	}
 	return (0);
 }

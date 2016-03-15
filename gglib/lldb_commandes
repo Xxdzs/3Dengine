@@ -1,0 +1,6 @@
+br s -n read_av
+br co a 1
+br s -l 102
+continue
+DONE
+run
