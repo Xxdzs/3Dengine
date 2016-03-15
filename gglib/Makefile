@@ -6,18 +6,19 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/03/15 15:13:08 by angagnie         ###   ########.fr        #
+#    Updated: 2016/03/15 16:02:45 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 # ==== Editable ====
 EXEC_NAME:=ggl
-NAME:=gglib.a
+NAME:=libgg.a
 MODEL_PATH:=model/
 MODEL:=quaternion conversion matrices system_tree
 FILES=ggl_main view controller render parser ft_ator
 LIBFT_PATH=../Libft/
 LIBFT_HDR=../Libft/include/
+MAIN=../main
 # ==================
 
 # ==== Standard ====
@@ -65,7 +66,7 @@ $(EXEC_NAME): add_main $(OBJ) $(DEP)
 
 $(NAME): $(OBJ) $(DEP)
 	@echo $(GREEN) " - Compiling $@" $(EOC)
-	@$(LINKER) $(OBJ) -o $@ $(IFLAGS) $(LFLAGS)
+	@$(LINKER) $@ $(OBJ)
 	@ranlib $@
 
 $(CCHPATH)%.o: $(SRCPATH)%.c $(CCHF)
@@ -133,6 +134,6 @@ debug:
 	@$(CC) $(CFLAGS) $(LFLAGS) -o $(EXEC_NAME) $(SRC)
 
 add_main:
-	$(eval FILES+=main)
+	$(eval FILES+=$(MAIN))
 
-.PHONY: all clean fclean re test norme x11 osx usage debug exec
+.PHONY: all clean fclean re test norme x11 osx usage debug exec add-main
