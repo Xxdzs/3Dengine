@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/15 14:56:15 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/16 00:10:17 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static int	init_env(t_env *const w)
 #endif
 	w->g.world = obj_alloc("World");
 	w->g.cam = camera_alloc();
-	w->fnct.repaint(w);
 	return (0);
 }
 
@@ -82,6 +81,8 @@ int			ggl_main(int ac, char **av)
 		ft_putstr_fd("Error : Initialisation failed\n", 2);
 	else {
 		read_av(w.g.world, --ac, ++av);
+		w.fnct.repaint = render;
+		w.fnct.repaint(&w);
 #ifdef X11
 		do {
 			XNextEvent(w.disp, &event);

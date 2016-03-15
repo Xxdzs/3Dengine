@@ -6,13 +6,11 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/15 22:57:57 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/15 23:36:32 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
-
-#define PIXEL(X,Y) w->pixel[(Y) * w->line_size + (X) * (w->bits_per_pixel / 8)]
 
 int		default_expose_hook(void *param)
 {

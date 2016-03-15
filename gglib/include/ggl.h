@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/15 15:45:34 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/16 00:13:32 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # include "matrices.h"
 # include "settings.h"
 # include "system_tree.h"
+
+#define PIXEL(X,Y) w->pixel[(Y) * w->line_size + (X) * (w->bits_per_pixel / 8)]
 
 typedef int	(*t_fnptr)();
 
@@ -64,5 +66,7 @@ int				default_repaint(t_env *const w);
 int				read_av(t_obj *w, int length, char **param);
 t_real			ft_ator(char *str);
 int				ggl_main(int ac, char **av);
+int				render(t_env *const w);
+int				draw_line_safe(t_env *const w, t_pnt2i *p1, t_pnt2i *p2);
 
 #endif /* GGL_H */
