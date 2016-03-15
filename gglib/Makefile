@@ -6,26 +6,30 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/03/13 19:38:05 by angagnie         ###   ########.fr        #
+#    Updated: 2016/03/15 15:13:08 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 # ==== Editable ====
-NAME:=fdf
+EXEC_NAME:=ggl
+NAME:=gglib.a
 MODEL_PATH:=model/
-MODEL:=geometry quaternion conversion matrices system_tree
-FILES=main view controller render parser ft_ator
+MODEL:=quaternion conversion matrices system_tree
+FILES=ggl_main view controller render parser ft_ator
+LIBFT_PATH=../Libft/
+LIBFT_HDR=../Libft/include/
 # ==================
 
 # ==== Standard ====
 CC:=clang
+LINKER:=ar rc
 CCHPATH:=cache/
 SRCPATH:=src/
 HDRPATH:=include/
-IFLAGS=-I $(HDRPATH) -I Libft/include/
+IFLAGS=-I $(HDRPATH) -I $(LIBFT_HDR)
 DEFLAG=
-LFLAGS=-L Libft/ -lft
-DEP=Libft/libft.a
+LFLAGS=-L $(LIBFT_PATH) -lft
+DEP=$(LIBFT_PATH)libft.a
 CFLAGS=-Wall -Wextra $(IFLAGS) $(DEFLAG)
 # ==================
 
@@ -48,14 +52,21 @@ OBJ=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
 # ==================
 CCHF:=.cache_exists
 
-usage: osx debug re
-	@echo "Usage : make    < osx | x11 >    < all | re | clean | fclean | test | debug >"
+usage: osx exec debug
+	@echo $(WHITE) "Usage : make    < osx | x11 >    < all | re | clean | fclean | test | exec >     [ debug ]" $(EOC)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(DEP)
+exec: $(EXEC_NAME)
+
+$(EXEC_NAME): add_main $(OBJ) $(DEP)
 	@echo $(GREEN) " - Compiling $@" $(EOC)
 	@$(CC) $(OBJ) -o $@ $(IFLAGS) $(LFLAGS)
+
+$(NAME): $(OBJ) $(DEP)
+	@echo $(GREEN) " - Compiling $@" $(EOC)
+	@$(LINKER) $(OBJ) -o $@ $(IFLAGS) $(LFLAGS)
+	@ranlib $@
 
 $(CCHPATH)%.o: $(SRCPATH)%.c $(CCHF)
 	@echo $(PURPLE) " - Compiling $< into $@" $(EOC)
@@ -96,12 +107,7 @@ norme:
 	@norminette $(SRC) $(HDRPATH) | grep -v  Norme -B1 || true
 	@echo $(END)
 
-Libft/Makefile:
-	@echo "Updating submodule"
-	@git submodule init
-	@git submodule update
-
-Libft/libft.a: Libft/Makefile
+$(LIBFT_PATH)libft.a:
 	@echo $(BLUE) "Making $@" $(EOC)
 	@make -C Libft/
 	@make -C Libft clean
@@ -111,19 +117,22 @@ miniLibX_OSX/libmlx.a:
 	@make -C miniLibX_OSX/
 
 x11:
-#	$(eval FILES+=main_x11)
+#	$(eval FILES+=ggl_main_x11)
 	$(eval DEFLAG=-DX11)
 	$(eval LFLAGS+=-lX11)
 
 osx:
-#	$(eval FILES+=main_osx)
+#	$(eval FILES+=ggl_main_osx)
 	$(eval IFLAGS+=-I miniLibX_OSX/)
 	$(eval LFLAGS+=-lmlx -framework OpenGL -framework AppKit)
 	$(eval DEP+=miniLibX_OSX/libmlx.a)
 
-debug: fclean
+debug:
 	@echo $(CYAN)"Generating debug informations"$(EOC)
 	$(eval CFLAGS+=-g)
-	@$(CC) $(CFLAGS) $(LFLAGS) -o $(NAME) $(SRC)
+	@$(CC) $(CFLAGS) $(LFLAGS) -o $(EXEC_NAME) $(SRC)
 
-.PHONY: all clean fclean re test norme x11 osx usage debug
+add_main:
+	$(eval FILES+=main)
+
+.PHONY: all clean fclean re test norme x11 osx usage debug exec

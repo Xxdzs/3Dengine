@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ggl_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/14 21:50:39 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/15 14:56:15 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,13 @@ static int	init_env(t_env *const w)
 	return (0);
 }
 
-int			main(int ac, char **av)
+int			ggl_main(int ac, char **av)
 {
 	t_env	w;
 #ifdef X11
 	XEvent event;
 #endif
 
-	(void)ac;
-	(void)av;
 	if (init_env(&w))
 		ft_putstr_fd("Error : Initialisation failed\n", 2);
 	else {
