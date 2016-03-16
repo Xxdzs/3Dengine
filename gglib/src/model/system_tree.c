@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/01 14:10:06 by sid               #+#    #+#             */
-/*   Updated: 2016/03/16 00:30:50 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/16 13:33:52 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int			obj_add_center(t_gnode *parent, t_obj *child)
 		return (1);
 //	tmp = obj_new(ft_strjoin(child->name, "_center"));
 //	ft_memcpy(&tmp.node.pos, &child->node.pos, sizeof(t_vec3));
-	gnode_add_child(parent, child);
+	gnode_add_child(parent, (t_gnode *)child);
 	return (0);
 }
 

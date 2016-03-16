@@ -6,13 +6,13 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/03/15 23:22:15 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/16 16:33:20 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 
-#define NEXT_WORD while(*buf++ != ' ')
+#define NEXT_WORD while(*buf != ' ' && *buf != '\0')buf++
 
 int		parse_fdf(t_obj *w, int fd)
 {
@@ -37,7 +37,8 @@ int		parse_fdf(t_obj *w, int fd)
 	tmp.vec.c.z = 0;
 	if (!(cur.dim = ft_memdup(&tmp, sizeof(tmp))))
 		return (1);
-	obj_add_center((t_gnode *)w, &cur);
+//	obj_add_center((t_gnode *)w, &cur);
+	gnode_add_child((t_gnode *)w, (t_gnode *)&cur);
 	return (0);
 }
 
@@ -90,10 +91,8 @@ int		read_av(t_obj *w, int length, char **param)
 	i = -1;
 	while (++i < length)
 	{
-		ext = param[i];
-		while (*ext != '.' && *ext != '\0')
-			ext++;
-		if (*ext++ == '\0')
+		ext = ft_strrchr(param[i], '.');
+		if (ext++ == NULL)
 			continue ;
 		t = 0;
 		while (t < 4 && ft_strcmp(ext, tab[t]))

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/16 00:10:17 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/16 16:05:49 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,11 @@ int			ggl_main(int ac, char **av)
 	if (init_env(&w))
 		ft_putstr_fd("Error : Initialisation failed\n", 2);
 	else {
-		read_av(w.g.world, --ac, ++av);
-		w.fnct.repaint = render;
+		if (--ac)
+		{
+			read_av(w.g.world, ac, ++av);
+			w.fnct.repaint = render;
+		}
 		w.fnct.repaint(&w);
 #ifdef X11
 		do {
