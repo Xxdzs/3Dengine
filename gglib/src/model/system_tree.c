@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/01 14:10:06 by sid               #+#    #+#             */
-/*   Updated: 2016/03/16 13:33:52 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/21 13:21:58 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,19 +115,13 @@ void		gnode_add_child(t_gnode *parent, t_gnode *child)
 
 int			obj_add_center(t_gnode *parent, t_obj *child)
 {
-//	t_obj	tmp;
+	t_obj	tmp;
 
 	if (child->dim == NULL)
 		return (1);
-//	tmp = obj_new(ft_strjoin(child->name, "_center"));
-//	ft_memcpy(&tmp.node.pos, &child->node.pos, sizeof(t_vec3));
-	gnode_add_child(parent, (t_gnode *)child);
+	tmp = obj_new(ft_strjoin(child->name, "_center"));
+	ft_memcpy(&tmp.node.pos, &child->node.pos, sizeof(t_vec3));
+	gnode_add_child(parent, (t_gnode *)&tmp);
+	gnode_add_child((t_gnode *)&tmp, (t_gnode *)child);
 	return (0);
 }
-
-/*
-void		final(t_env *w)
-{
-	(void)w;
-}
-*/

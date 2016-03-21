@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/14 22:04:06 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/21 11:12:09 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ void	qtrn_mult(t_qtrn *const q, const t_qtrn *const h)
 	qy = q->c.w * h->c.y + q->c.y * h->c.w - q->c.x * h->c.z + q->c.z * h->c.x;
 	qz = q->c.w * h->c.z + q->c.z * h->c.w + q->c.x * h->c.y - q->c.y * h->c.x;
 	q->c.w *= h->c.w;
-	q->c.w -= q->c.x * h->c.x - q->c.y * h->c.y - q->c.z * h->c.z;
-//	q->c.w = q->c.w * h->c.w - q->c.x * h->c.x - q->c.y * h->c.y - q->c.z * h->c.z;
+	q->c.w -= q->c.x * h->c.x + q->c.y * h->c.y + q->c.z * h->c.z;
 	q->c.x = qx;
 	q->c.y = qy;
 	q->c.z = qz;
@@ -91,12 +90,13 @@ void	qtrn_mult(t_qtrn *const q, const t_qtrn *const h)
 
 t_qtrn	qtrn_get_inv(const t_qtrn *const q)
 {
-	const t_real	tmp = q->c.w * q->c.w
-		+ q->c.x * q->c.x
-		+ q->c.y * q->c.y
-		+ q->c.z * q->c.z;
+	const t_real	tmp = (q->c.w * q->c.w
 
-	return ((t_qtrn){{-q->c.x / tmp, -q->c.y / tmp, -q->c.z / tmp, q->c.w / tmp}});
+	+ q->c.x * q->c.x
+	+ q->c.y * q->c.y
+	+ q->c.z * q->c.z);
+	return ((t_qtrn){{-q->c.x / tmp, -q->c.y / tmp,
+		-q->c.z / tmp, q->c.w / tmp}});
 }
 
 /*
@@ -107,10 +107,10 @@ t_qtrn	qtrn_get_inv(const t_qtrn *const q)
 void	qtrn_inv(t_qtrn *const q)
 {
 	const t_real	tmp = q->c.w * q->c.w
-		+ q->c.x * q->c.x
-		+ q->c.y * q->c.y
-		+ q->c.z * q->c.z;
 
+	+ q->c.x * q->c.x
+	+ q->c.y * q->c.y
+	+ q->c.z * q->c.z;
 	q->c.w /= tmp;
 	q->c.x *= -1 / tmp;
 	q->c.y *= -1 / tmp;
@@ -163,10 +163,3 @@ void	qtrn_rotate(t_qtrn *const to_rotate, t_qtrn rotator)
 	qtrn_mult(&rotator, to_rotate);
 	ft_memcpy(to_rotate, &rotator, sizeof(ans));
 }
-
-/* t_mat3x3	qtrn_get_rotatation(const t_qtrn *const rotator, const t_gnode *const ) */
-/* { */
-/* 	t_mat3x3	ans; */
-
-/* 	return (ans); */
-/* } */

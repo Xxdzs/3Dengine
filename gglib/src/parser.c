@@ -6,13 +6,14 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/03/16 16:33:20 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/21 15:15:38 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 
-#define NEXT_WORD while(*buf != ' ' && *buf != '\0')buf++
+#define NEXT_WORD while(*buf != ' ' && *buf != '\0') buf++; \
+	while (*buf != '\0' && *buf == ' ')buf++
 
 int		parse_fdf(t_obj *w, int fd)
 {
@@ -89,6 +90,7 @@ int		read_av(t_obj *w, int length, char **param)
 	const void		*tab[] = {"fdf", &parse_fdf, "obj", &parse_obj};
 
 	i = -1;
+	printf("Reading the %i arguments\n", length);
 	while (++i < length)
 	{
 		ext = ft_strrchr(param[i], '.');
@@ -99,7 +101,8 @@ int		read_av(t_obj *w, int length, char **param)
 			t += 2;
 		if (t == 4)
 			continue ;
-		else if ((fd = open(param[i], O_RDONLY)) == -1 || ((int (*)(t_obj *, int))(tab[t + 1]))(w, fd))
+		else if ((fd = open(param[i], O_RDONLY)) == -1
+			|| ((int (*)(t_obj *, int))(tab[t + 1]))(w, fd))
 			return (1);
 	}
 	return (0);

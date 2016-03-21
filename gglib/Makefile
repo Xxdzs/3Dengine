@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/03/15 22:31:01 by angagnie         ###   ########.fr        #
+#    Updated: 2016/03/21 10:24:51 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -15,7 +15,7 @@ EXEC_NAME:=ggl
 NAME:=libgg.a
 MODEL_PATH:=model/
 MODEL:=quaternion conversion matrices system_tree
-FILES=main ggl_main view controller render parser ft_ator
+FILES=ggl_main_osx view controller render parser ft_ator
 LIBFT_PATH=../Libft/
 LIBFT_HDR=../Libft/include/
 MAIN=main
@@ -47,6 +47,7 @@ EOC:="\033[0m"
 # ==============
 
 # ====== Auto ======
+FILES+=$(MAIN)
 FILES+=$(addprefix $(MODEL_PATH),$(MODEL))
 SRC=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES)))
 OBJ=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
