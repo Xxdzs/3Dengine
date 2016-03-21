@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/21 15:17:36 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/21 15:50:15 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int		render(t_env *w)
 		b = (t_pnt2i){150 + 3 * (int)POINT(i).x
 					  + (int)POINT(i).y + (int)POINT(i).z,
 			30 + 4 * (int)POINT(i).y - (int)POINT(i).z};
-		draw_line_safe(w, &a, &b);
+		if (a.x != b.x || a.y != b.y)
+			draw_line(w, &a, &b);
 	}
 	return (0);
 }

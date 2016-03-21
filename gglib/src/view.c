@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/16 16:07:11 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/21 15:51:22 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		default_expose_hook(void *param)
 	return (0);
 }
 
-int		draw_line_safe(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
+int		draw_line(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
 {
 	t_pnt2i		delta;
 	t_pnt2i		way;
@@ -48,30 +48,38 @@ int		draw_line_safe(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
 	return (0);
 }
 
-int		draw_line(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
+int		draw_line_save(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
 {
 	t_real	derr;
 	t_real	err;
 	t_pnt2i	local;
 
 	if (p1->x == p2->x)
-		return (draw_line_safe(w, p1, p2));
-	derr = fabs((double)(p1->y - p2->y) / (double)(p1->x - p2->x));
-	err = 0;
-	local.y = p1->y;
-	local.x = p1->x;
-	;
+	{
+		if (p1->y == p2->y)
+			PIXEL(p1->x, p1->y) = 200;
+		else
+			draw_line(w, p1, p2);
+	}
+	else
+	{
+		derr = fabs((double)(p1->y - p2->y) / (double)(p1->x - p2->x));
+		err = 0;
+		local.y = p1->y;
+		local.x = p1->x;
+		;
+	}
 	return (0);
 }
 
 int		default_repaint(t_env *const w)
 {
 	ft_putstr("Repainting, but no custom repainting function provided\n");
-	draw_line_safe(w, &(t_pnt2i){100, 100}, &(t_pnt2i){200, 100});
-	draw_line_safe(w, &(t_pnt2i){200, 200}, &(t_pnt2i){200, 100});
-	draw_line_safe(w, &(t_pnt2i){200, 200}, &(t_pnt2i){100, 200});
-	draw_line_safe(w, &(t_pnt2i){100, 100}, &(t_pnt2i){100, 200});
-	draw_line_safe(w, &(t_pnt2i){100, 100}, &(t_pnt2i){200, 200});
-	draw_line_safe(w, &(t_pnt2i){100, 200}, &(t_pnt2i){200, 100});
+	draw_line(w, &(t_pnt2i){100, 100}, &(t_pnt2i){200, 100});
+	draw_line(w, &(t_pnt2i){200, 200}, &(t_pnt2i){200, 100});
+	draw_line(w, &(t_pnt2i){200, 200}, &(t_pnt2i){100, 200});
+	draw_line(w, &(t_pnt2i){100, 100}, &(t_pnt2i){100, 200});
+	draw_line(w, &(t_pnt2i){100, 100}, &(t_pnt2i){200, 200});
+	draw_line(w, &(t_pnt2i){100, 200}, &(t_pnt2i){200, 100});
 	return (0);
 }
