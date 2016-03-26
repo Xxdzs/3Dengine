@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/01 14:10:06 by sid               #+#    #+#             */
-/*   Updated: 2016/03/21 13:21:58 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/23 14:01:58 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_gnode		*gnode_alloc(size_t type_size)
 		ftl_init((t_list *)ans, type_size);
 		ans->parent = NULL;
 		ans->pos = (t_vec3){{0, 0, 0}};
-		ans->rot = (t_qtrn){{0, 0, 0, 0}};
+		ans->rot = (t_qtrn){{0, 0, 0, 1}};
 		ans->scale = 1;
 	}
 	return (ans);
@@ -104,7 +104,7 @@ void		obj_free(t_obj **subject)
 }
 
 /*
-** -----===== Methods =====-----
+** -----===== Member Functions =====-----
 */
 
 void		gnode_add_child(t_gnode *parent, t_gnode *child)
@@ -118,10 +118,28 @@ int			obj_add_center(t_gnode *parent, t_obj *child)
 	t_obj	tmp;
 
 	if (child->dim == NULL)
+	{
+		gnode_add_child(parent, child);
 		return (1);
+	}
 	tmp = obj_new(ft_strjoin(child->name, "_center"));
 	ft_memcpy(&tmp.node.pos, &child->node.pos, sizeof(t_vec3));
 	gnode_add_child(parent, (t_gnode *)&tmp);
 	gnode_add_child((t_gnode *)&tmp, (t_gnode *)child);
 	return (0);
+}
+
+t_gnode		*gnode_find(const t_gnode *const node, const char *const name)
+{
+	t_node	*tmp;
+	t_gnode	*ans;
+
+	if (node->chidren.size > 0)
+	{
+		tmp = node->children.root;
+		while ((tmp = tmp->next) != node->children.root)
+			if ((ans = gnode_find(tmp, name)) != NULL)
+				return (ans);
+	}
+	return (NULL);
 }

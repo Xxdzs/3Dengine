@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/03/21 15:15:38 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/23 12:29:59 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int		read_av(t_obj *w, int length, char **param)
 	const void		*tab[] = {"fdf", &parse_fdf, "obj", &parse_obj};
 
 	i = -1;
-	printf("Reading the %i arguments\n", length);
 	while (++i < length)
 	{
 		ext = ft_strrchr(param[i], '.');

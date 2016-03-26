@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/16 13:46:47 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/26 17:55:58 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct	s_env
 	void		*img;
 # endif
 	t_vec2i		wdim;
+	t_real		ratio;
 	char		*pixel;
 	int			bits_per_pixel;
 	int			line_size;
@@ -67,6 +68,6 @@ int				read_av(t_obj *w, int length, char **param);
 t_real			ft_ator(char *str);
 int				ggl_main(int ac, char **av);
 int				render(t_env *const w);
-int				draw_line_safe(t_env *const w, t_pnt2i *p1, t_pnt2i *p2);
+int				draw_line(t_env *const w, t_pnt2i *p1, t_pnt2i *p2);
 
 #endif /* GGL_H */

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/13 10:32:03 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/26 22:39:47 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 # define GEOMETRY_H
 
 # include "settings.h"
+
+typedef enum	e_type
+{
+	CARTHESIAN,
+	CYLINDRICAL,
+	SPHERICAL,
+	POLAR = CYLINDRICAL,
+	RECTANGULAR = CARTHESIAN
+}				t_type;
 
 /*
 ** -----===== 2 Dimensions =====-----
@@ -42,6 +51,13 @@ typedef struct	s_pnt2
 	t_real	y;
 }				t_pnt2;
 
+typedef struct	s_pnt2t
+{
+	t_type	type;
+	t_real	x;
+	t_real	y;
+}				t_pnt2t;
+
 typedef union	u_vec2
 {
 	t_pnt2	c;
@@ -57,6 +73,8 @@ typedef union	u_vec2
 		t_real	arg;
 	}		p;
 }				t_vec2;
+
+typedef t_vec2	t_cmplx;
 
 /*
 ** -----===== 3 Dimensions =====-----
@@ -132,8 +150,8 @@ typedef struct	s_pnt4
 
 typedef union	u_qtrn
 {
-	t_real	m[4];
 	t_pnt4	c;
+	t_real	m[4];
 	struct
 	{
 		t_vec3	v;
@@ -141,11 +159,23 @@ typedef union	u_qtrn
 	}		d;
 }				t_qtrn;
 
+# define X(p) (p->c.x)
+# define Y(p) (p->c.y)
+# define Z(p) (p->c.z)
+# define RHO(p) (p->s.rho)
+# define THETA(p) (p->s.theta)
+# define PHI(p) (p->s.phi)
+# define R(p) (p->cyl.r)
+
 void	carth2polar(t_vec2 *v);
 void	polar2carth(t_vec2 *v);
 void	carth2cylin(t_vec3 *v);
 void	cylin2carth(t_vec3 *v);
 void	carth2spher(t_vec3 *v);
 void	spher2carth(t_vec3 *v);
+
+t_qtrn	qtrn_new(const t_real a, const t_real b, const t_real c, const t_real d);
+t_qtrn  qtrn_sum(const t_qtrn *a, const t_qtrn *b);
+void    qtrn_add(t_qtrn *const a, const t_qtrn *const b);
 
 #endif
