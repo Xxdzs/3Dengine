@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/21 13:28:05 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/27 18:16:09 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int		init_env(t_env *const w)
 	w->fnct.key_hook = default_key_hook;
 	w->fnct.expose = default_expose_hook;
 	w->wdim = (t_vec2i){{1280, 720}};
+	w->ratio = w->wdim.width / w->wdim.height;
 	if (!(w->mlx = mlx_init()))
 		return (1);
 	ft_putstr("Librairy Initialised\n");
@@ -49,6 +50,7 @@ static int		init_env(t_env *const w)
 int				ggl_main(int ac, char **av)
 {
 	t_env	w;
+	void	*const lol = &ggl_main;
 
 	if (init_env(&w))
 		ft_putstr_fd("Error : Initialisation failed\n", 2);

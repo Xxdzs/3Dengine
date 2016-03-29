@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/03/21 10:24:51 by angagnie         ###   ########.fr        #
+#    Updated: 2016/03/27 16:53:23 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -15,7 +15,7 @@ EXEC_NAME:=ggl
 NAME:=libgg.a
 MODEL_PATH:=model/
 MODEL:=quaternion conversion matrices system_tree
-FILES=ggl_main_osx view controller render parser ft_ator
+FILES=view controller render parser ft_ator
 LIBFT_PATH=../Libft/
 LIBFT_HDR=../Libft/include/
 MAIN=main
@@ -54,10 +54,10 @@ OBJ=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
 # ==================
 CCHF:=.cache_exists
 
-usage: osx exec debug
-	@echo $(WHITE) "Usage : make    < osx | x11 >    < all | re | clean | fclean | test | exec >     [ debug ]" $(EOC)
+usage: osx all debug
+	@echo $(WHITE) "Usage : make    < osx | x11 >    < all | re | clean | fclean | test >     [ debug ]" $(EOC)
 
-all: $(NAME)
+all: $(NAME) $(EXEC_NAME)
 
 exec: $(EXEC_NAME)
 
@@ -119,12 +119,12 @@ miniLibX_OSX/libmlx.a:
 	@make -C miniLibX_OSX/
 
 x11:
-#	$(eval FILES+=ggl_main_x11)
+	$(eval FILES+=ggl_main_x11)
 	$(eval DEFLAG=-DX11)
 	$(eval LFLAGS+=-lX11)
 
 osx:
-#	$(eval FILES+=ggl_main_osx)
+	$(eval FILES+=ggl_main_osx)
 	$(eval IFLAGS+=-I miniLibX_OSX/)
 	$(eval LFLAGS+=-lmlx -framework OpenGL -framework AppKit)
 	$(eval DEP+=miniLibX_OSX/libmlx.a)

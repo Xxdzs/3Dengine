@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 12:32:44 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/23 15:41:44 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/27 18:58:42 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,38 +17,34 @@
 ** Obvious side effects
 */
 
-void	carth2polar(t_vec2 *v)
+void	carth2polar(t_cmplx *v)
 {
-	const t_real		x = v->c.x;
-	const t_real		y = v->c.y;
+	const t_real		x = X(v);
+	const t_real		y = Y(v);
 
-	v->p.mod = sqrt(x * x + y * y);
-	v->p.arg = atan2(x, y);
+	MOD(v) = sqrt(x * x + y * y);
+	ARG(v) = atan2(x, y);
+	v->type = POLAR;
 }
 
-void	polar2carth(t_vec2 *v)
+void	polar2carth(t_cmplx *v)
 {
-	const t_real		m = v->p.mod;
+	const t_real		m = MOD(v);
+	const t_real		a = ARG(v);
 
-	v->c.x = m * cos(v->p.arg);
-	v->c.y = m * sin(v->p.arg);
+	X(v) = m * cos(a);
+	Y(v) = m * sin(a);
+	v->type = CARTHESIAN;
 }
 
-void	carth2cylin(t_vec3 *v)
+void	carth2cylin(t_vec3t *v)
 {
-	const t_real		x = v->c.x;
-	const t_real		y = v->c.y;
-
-	v->cyl.r = sqrt(x * x + y * y);
-	v->cyl.theta = atan2(x, y);
+	carth2polar((t_vec2t *)v);
 }
 
-void	cylin2carth(t_vec3 *v)
+inline void	cylin2carth(t_vec3t *v)
 {
-	const t_real		r = v->cyl.r;
-
-	v->c.x = r * cos(v->cyl.theta);
-	v->c.y = r * sin(v->cyl.theta);
+	polar2carth((t_vec2t *)v);
 }
 
 /*
@@ -57,26 +53,26 @@ void	cylin2carth(t_vec3 *v)
 ** rho is the norme
 */
 
-void	carth2spher(t_vec3 *v)
+void	carth2spher(t_vec3t *v)
 {
-	const t_real		x = v->c.x;
-	const t_real		y = v->c.y;
-	const t_real		z = v->c.z;
+	const t_real		x = X(v);
+	const t_real		y = Y(v);
+	const t_real		z = Z(v);
 
-	v->s.rho = sqrt(x * x + y * y + z * z);
-	v->s.phi = acos(z / v->s.rho);
-	v->s.theta = atan2(x, y);
+	RHO(v) = sqrt(x * x + y * y + z * z);
+	PHI(v) = acos(z / RHO(v));
+	THETA(v) = atan2(x, y);
 }
 
-void	spher2carth(t_vec3 *v)
+void	spher2carth(t_vec3t *v)
 {
-	const t_real		r = v->s.rho;
-	const t_real		t = v->s.theta;
-	const t_real		p = v->s.phi;
+	const t_real		r = RHO(v);
+	const t_real		t = THETA(v);
+	const t_real		p = PHI(v);
 
-	v->c.x = r * sin(p) * cos(t);
-	v->c.y = r * sin(p) * sin(t);
-	v->c.z = r * cos(p);
+	X(v) = r * sin(p) * cos(t);
+	Y(v) = r * sin(p) * sin(t);
+	Z(v) = r * cos(p);
 }
 
 t_real	perso2rqtrn(t_qtrn *q)
