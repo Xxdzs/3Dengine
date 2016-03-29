@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/03/27 16:53:23 by angagnie         ###   ########.fr        #
+#    Updated: 2016/03/29 15:44:24 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -18,7 +18,6 @@ MODEL:=quaternion conversion matrices system_tree
 FILES=view controller render parser ft_ator
 LIBFT_PATH=../Libft/
 LIBFT_HDR=../Libft/include/
-MAIN=main
 # ==================
 
 # ==== Standard ====
@@ -104,7 +103,7 @@ test:
 	@echo "Dependencies :" $(DEP)
 	@echo "Compilation flags :" $(CFLAGS)
 
-norme:
+norm:
 	@echo $(RED)
 	norminette $(SRC) $(HDRPATH) | grep -v  Norme -B1 || true
 	@echo $(END)
@@ -130,11 +129,8 @@ osx:
 	$(eval DEP+=miniLibX_OSX/libmlx.a)
 
 debug:
-	@echo $(CYAN)"Generating debug informations"$(EOC)
 	$(eval CFLAGS+=-g)
+	@echo $(CYAN)"Generating debug informations"$(EOC)
 	@$(CC) $(CFLAGS) $(LFLAGS) -o $(EXEC_NAME) $(SRC)
 
-add_main:
-	$(eval FILES+=$(MAIN))
-
-.PHONY: all clean fclean re test norme x11 osx usage debug exec add_main
+.PHONY: all clean fclean re test norme x11 osx usage debug exec

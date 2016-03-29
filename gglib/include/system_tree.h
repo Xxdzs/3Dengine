@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 16:27:17 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/15 22:30:25 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/29 19:48:21 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,12 @@ typedef struct	s_gnode
 	t_list			children;
 	struct s_gnode	*parent;
 	t_vec3			pos;
+# ifdef QUATRERNIONS
 	t_qtrn			rot;
 	t_real			scale;
+# else
+	t_mat4x4		rot;
+# endif
 }				t_gnode;
 
 typedef struct	s_vrtx
@@ -74,13 +78,25 @@ typedef struct	s_grfx
 	t_camera	*cam;
 }				t_grfx;
 
+/*
+**	-----=====  Constructors  =====-----
+*/
+
 t_gnode			*gnode_alloc(size_t type_size);
 t_obj			*obj_alloc(char *str);
 t_obj			obj_new(char *str);
 t_camera		*camera_alloc(void);
 
+/*
+**	-----=====  Destructors  =====-----
+*/
+
 void			obj_del(t_obj *subject);
 void			obj_free(t_obj **subject);
+
+/*
+**	-----=====  Member Functions  =====-----
+*/
 
 void			gnode_add_child(t_gnode *parent, t_gnode *child);
 int				obj_add_center(t_gnode *parent, t_obj *child);
