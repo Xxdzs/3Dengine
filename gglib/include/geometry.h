@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/27 18:56:07 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/31 11:22:08 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,9 +167,9 @@ typedef union	u_qtrn
 	}		d;
 }				t_qtrn;
 
-# define X(p) (p->v.c.x)
-# define Y(p) (p->v.c.y)
-# define Z(p) (p->v.c.z)
+# define X(A) (A->v.c.x)
+# define Y(A) (A->v.c.y)
+# define Z(A) (A->v.c.z)
 
 # define REP(A) (A->v.r.rep)
 # define IMP(A) (A->v.r.imp)
@@ -181,6 +181,23 @@ typedef union	u_qtrn
 # define PHI(A) (A->v.s.phi)
 # define R(A) (A->v.cyl.r)
 
+/*
+** -----=====  Constructors  =====-----
+*/
+
+t_qtrn	qtrn_new(const t_real a, const t_real b, const t_real c, const t_real d);
+
+/*
+** -----=====  Destructors  =====-----
+*/
+
+/*
+** -----=====  Member Functions  =====-----
+*/
+
+t_qtrn  qtrn_sum(const t_qtrn *a, const t_qtrn *b);
+void    qtrn_add(t_qtrn *const a, const t_qtrn *const b);
+
 void	carth2polar(t_cmplx *v);
 void	polar2carth(t_cmplx *v);
 void	carth2cylin(t_vec3t *v);
@@ -188,9 +205,5 @@ void	cylin2carth(t_vec3t *v);
 void	carth2spher(t_vec3t *v);
 void	spher2carth(t_vec3t *v);
 t_real	perso2rqtrn(t_qtrn *q);
-
-t_qtrn	qtrn_new(const t_real a, const t_real b, const t_real c, const t_real d);
-t_qtrn  qtrn_sum(const t_qtrn *a, const t_qtrn *b);
-void    qtrn_add(t_qtrn *const a, const t_qtrn *const b);
 
 #endif

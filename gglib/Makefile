@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/03/29 15:44:24 by angagnie         ###   ########.fr        #
+#    Updated: 2016/03/31 10:31:18 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -89,6 +89,7 @@ clean:
 fclean: clean
 	@echo $(YELLOW) "Deleting binairie" $(EOC)
 	@rm -f $(NAME)
+	@rm -f $(EXEC_NAME)
 	@rm -rf $(NAME).dSYM/
 
 re: fclean all

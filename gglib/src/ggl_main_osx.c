@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/27 18:16:09 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/31 12:53:41 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int				ggl_main(int ac, char **av)
 		if (--ac)
 		{
 			read_av(w.g.world, ac, ++av);
-			w.fnct.repaint = render;
+//			w.fnct.repaint = render;
 		}
 		w.fnct.repaint(&w);
 		ft_putnbr(mlx_loop(w.mlx));
