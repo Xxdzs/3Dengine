@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 16:27:17 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/29 19:48:21 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/31 13:34:43 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SYSTEM_TREE_H
 
 # include "libft.h"
+# include "settings.h"
 # include "geometry.h"
 
 /*
@@ -30,19 +31,22 @@ typedef struct	s_gnode
 {
 	t_list			children;
 	struct s_gnode	*parent;
-	t_vec3			pos;
-# ifdef QUATRERNIONS
-	t_qtrn			rot;
-	t_real			scale;
-# else
+# ifdef EULER
+	t_real			alpha;
+	t_real			beta;
+	t_real			gamma;
 	t_mat4x4		rot;
+# else
+	t_vec3			pos;
+	t_real			scale;
+	t_qtrn			rot;
 # endif
 }				t_gnode;
 
 typedef struct	s_vrtx
 {
-	t_vec3		vec;
-	t_vec3		normal;
+	t_vec3t		vec;
+	t_vec3t		normal;
 }				t_vrtx;
 
 typedef struct	s_face

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/31 11:22:08 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/01 03:39:01 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ typedef struct	s_pnt4
 ** -(Decomposition)
 */
 
-typedef union	u_qtrn
+typedef union	u_vec4
 {
 	t_pnt4	c;
 	t_real	m[4];
@@ -165,7 +165,15 @@ typedef union	u_qtrn
 		t_vec3	v;
 		t_real	s;
 	}		d;
-}				t_qtrn;
+}				t_vec4;
+
+typedef struct	s_vec4t
+{
+	t_type	type;
+	t_vec4	v;
+}				t_vec4t;
+
+typedef t_vec4t	t_qtrn;
 
 # define X(A) (A->v.c.x)
 # define Y(A) (A->v.c.y)
@@ -181,6 +189,13 @@ typedef union	u_qtrn
 # define PHI(A) (A->v.s.phi)
 # define R(A) (A->v.cyl.r)
 
+# define SCALAR(Q) (Q->v.d.s)
+# define VECTOR(Q) (Q->v.d.v)
+# define QRHO(Q) (Q->v.d.v.s.rho)
+# define QTHETA(Q) (Q->v.d.v.s.theta)
+# define QPHI(Q) (Q->v.d.v.s.phi)
+# define QR(Q) (Q->v.d.v.cyl.r)
+
 /*
 ** -----=====  Constructors  =====-----
 */
@@ -191,12 +206,18 @@ t_qtrn	qtrn_new(const t_real a, const t_real b, const t_real c, const t_real d);
 ** -----=====  Destructors  =====-----
 */
 
+
+
 /*
 ** -----=====  Member Functions  =====-----
 */
 
 t_qtrn  qtrn_sum(const t_qtrn *a, const t_qtrn *b);
 void    qtrn_add(t_qtrn *const a, const t_qtrn *const b);
+
+/*
+** ---== Conversion ==---
+*/
 
 void	carth2polar(t_cmplx *v);
 void	polar2carth(t_cmplx *v);

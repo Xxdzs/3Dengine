@@ -6,13 +6,13 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/26 22:00:01 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/31 20:29:48 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 
-#define POINT(i) (((t_vrtx *)ft_dyna_get(&f->vertices, i - 1))->vec.c)
+#define POINT(i) (((t_vrtx *)ft_dyna_get(&f->vertices, i - 1))->vec.v.c)
 
 int		render(t_env *w)
 {

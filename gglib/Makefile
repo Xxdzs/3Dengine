@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/03/31 10:31:18 by angagnie         ###   ########.fr        #
+#    Updated: 2016/03/31 20:25:08 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -46,7 +46,6 @@ EOC:="\033[0m"
 # ==============
 
 # ====== Auto ======
-FILES+=$(MAIN)
 FILES+=$(addprefix $(MODEL_PATH),$(MODEL))
 SRC=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES)))
 OBJ=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))

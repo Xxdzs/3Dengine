@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/03/23 12:29:59 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/31 13:31:25 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int		parse_fdf(t_obj *w, int fd)
 
 	cur = obj_new("FDF");
 	tmp = (t_vrtx){{{0,0,0}},{{0,0,0}}};
+	if (!(cur->dim = vec3_alloc(0,0,0)))
+		return (1);
 	while (get_next_line(fd, &buf) == 1)
 	{
 		tmp.vec.c.x = 0;
@@ -32,12 +34,14 @@ int		parse_fdf(t_obj *w, int fd)
 			ft_dyna_append(&cur.vertices, &tmp, 1);
 			NEXT_WORD;
 			tmp.vec.c.x++;
+			if (cur->dim->x < tmp.vec.c.x)
+				cur->dim->x = tmp.vec.c.x;
 		}
 		tmp.vec.c.y++;
+		if (cur->dim->y < tmp.vec.c.y)
+			cur->dim->y = tmp.vec.c.y;
 	}
 	tmp.vec.c.z = 0;
-	if (!(cur.dim = ft_memdup(&tmp, sizeof(tmp))))
-		return (1);
 //	obj_add_center((t_gnode *)w, &cur);
 	gnode_add_child((t_gnode *)w, (t_gnode *)&cur);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/26 17:55:58 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/03/31 13:03:41 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 #  include "mlx.h"
 # endif
 
+# include "settings.h"
 # include "libft.h"
 # include "geometry.h"
 # include "matrices.h"
-# include "settings.h"
 # include "system_tree.h"
 
 #define PIXEL(X,Y) w->pixel[(Y) * w->line_size + (X) * (w->bits_per_pixel / 8)]
