@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/01 03:39:01 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/06 09:28:13 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,33 +175,40 @@ typedef struct	s_vec4t
 
 typedef t_vec4t	t_qtrn;
 
-# define X(A) (A->v.c.x)
-# define Y(A) (A->v.c.y)
-# define Z(A) (A->v.c.z)
+# define X(A) (A.v.c.x)
+# define Y(A) (A.v.c.y)
+# define Z(A) (A.v.c.z)
 
-# define REP(A) (A->v.r.rep)
-# define IMP(A) (A->v.r.imp)
-# define MOD(A) (A->v.p.mod)
-# define ARG(A) (A->v.p.arg)
+# define REP(A) (A.v.r.rep)
+# define IMP(A) (A.v.r.imp)
+# define MOD(A) (A.v.p.mod)
+# define ARG(A) (A.v.p.arg)
 
-# define RHO(A) (A->v.s.rho)
-# define THETA(A) (A->v.s.theta)
-# define PHI(A) (A->v.s.phi)
-# define R(A) (A->v.cyl.r)
+# define RHO(A) (A.v.s.rho)
+# define THETA(A) (A.v.s.theta)
+# define PHI(A) (A.v.s.phi)
+# define R(A) (A.v.cyl.r)
 
-# define SCALAR(Q) (Q->v.d.s)
-# define VECTOR(Q) (Q->v.d.v)
-# define QRHO(Q) (Q->v.d.v.s.rho)
-# define QTHETA(Q) (Q->v.d.v.s.theta)
-# define QPHI(Q) (Q->v.d.v.s.phi)
-# define QR(Q) (Q->v.d.v.cyl.r)
+# define SCALAR(Q) (Q.v.d.s)
+# define VECTOR(Q) (Q.v.d.v)
+# define QRHO(Q) (Q.v.d.v.s.rho)
+# define QTHETA(Q) (Q.v.d.v.s.theta)
+# define QPHI(Q) (Q.v.d.v.s.phi)
+# define QR(Q) (Q.v.d.v.cyl.r)
+
+# define CREAL const t_real
 
 /*
 ** -----=====  Constructors  =====-----
 */
 
-t_qtrn	qtrn_new(const t_real a, const t_real b, const t_real c, const t_real d);
+# define NEW_VEC2(X, Y) ((t_vec2t){CARTHESIAN, {X, Y}})
+# define NEW_VEC3(X, Y, Z) ((t_vec3t){CARTHESIAN, {X, Y, Z}})
+# define NEW_VEC4(...) ((t_vec4t){CARTHESIAN, {__VA_ARGS__}})
 
+# define NEW_CMPLX(A, B) NEW_VEC2(A, B)
+# define NEW_QTRN(...) NEW_VEC4(__VA_ARGS__)
+t_qtrn  qtrn_new(const t_real a, const t_real b, const t_real c, const t_real d);
 /*
 ** -----=====  Destructors  =====-----
 */

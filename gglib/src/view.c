@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/31 12:54:58 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/06 09:04:23 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ static int	identity(int i, int dout, int din)
 	return (i);
 }
 
-static inline int	linear_interpolation(int i, int dout, int din)
+static int	linear_interpolation(int i, int dout, int din)
 {
 	return ((i * dout) / din);
 }
 
-int					smooth_interpolation(int i, int dout, int din)
+static int	smooth_interpolation(int i, int dout, int din)
 {
 	const t_real	x = (t_real)i;
 	const t_real	out = (t_real)dout;
