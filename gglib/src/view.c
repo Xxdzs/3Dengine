@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/06 09:04:23 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/13 23:31:29 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int		interpolate(t_env *const w, t_pnt2i *p1, t_pnt2i *p2, t_fnptr algo)
 
 int		draw_line(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
 {
+	if (p1->x == p2->x && p1->y == p2->y)
+		PIXEL(p1->x, p2->y) = 255;
 	return (interpolate(w, p1, p2, &linear_interpolation));
 }
 
