@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/13 23:31:29 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/17 16:33:24 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	linear_interpolation(int i, int dout, int din)
 	return ((i * dout) / din);
 }
 
-static int	smooth_interpolation(int i, int dout, int din)
+int			smooth_interpolation(int i, int dout, int din)
 {
 	const t_real	x = (t_real)i;
 	const t_real	out = (t_real)dout;

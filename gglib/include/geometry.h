@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/17 16:28:24 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/17 16:40:02 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ typedef t_vec4t	t_qtrn;
 # define X(A) (A.v.c.x)
 # define Y(A) (A.v.c.y)
 # define Z(A) (A.v.c.z)
+# define W(A) (A.v.c.z)
 
 # define REP(A) (A.v.r.rep)
 # define IMP(A) (A.v.r.imp)
@@ -217,8 +218,9 @@ t_qtrn			qtrn_new(const t_real a, const t_real b,
 ** -----=====  Member Functions  =====-----
 */
 
-t_qtr			qtrn_sum(const t_qtrn *a, const t_qtrn *b);
+t_qtrn			qtrn_sum(const t_qtrn *a, const t_qtrn *b);
 void			qtrn_add(t_qtrn *const a, const t_qtrn *const b);
+
 
 /*
 ** ---== Conversion ==---

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/31 17:02:30 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/17 16:40:50 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ t_qtrn	*qtrn_alloc(const t_real a, const t_real b,
 	t_qtrn	*ans;
 
 	ans = (t_qtrn *)malloc(sizeof(t_qtrn));
+	X(*ans) = a;
+	Y(*ans) = a;
+	Z(*ans) = a;
+	W(*ans) = a;
 }
 
 /*
