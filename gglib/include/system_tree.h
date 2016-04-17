@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 16:27:17 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/31 13:34:43 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/14 17:21:12 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,13 @@ typedef struct	s_gnode
 {
 	t_list			children;
 	struct s_gnode	*parent;
+	t_vec3			pos;
+	t_real			scale;
 # ifdef EULER
 	t_real			alpha;
 	t_real			beta;
 	t_real			gamma;
-	t_mat4x4		rot;
 # else
-	t_vec3			pos;
-	t_real			scale;
 	t_qtrn			rot;
 # endif
 }				t_gnode;

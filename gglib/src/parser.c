@@ -6,14 +6,19 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/04/12 12:54:16 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/14 17:53:08 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 
-#define NEXT_WORD while(*buf != ' ' && *buf != '\0') buf++; \
-	while (*buf != '\0' && *buf == ' ')buf++
+static inline void	next_word(char **buf)
+{
+	while (**buf != ' ' && **buf != '\0')
+		(*buf)++;
+	while (**buf != '\0' && **buf == ' ')
+		(*buf)++;
+}
 
 int		parse_fdf(t_obj *w, int fd)
 {
@@ -22,8 +27,8 @@ int		parse_fdf(t_obj *w, int fd)
 	t_vrtx		tmp;
 
 	cur = obj_new("FDF");
-	tmp = (t_vrtx){{{0,0,0}},{{0,0,0}}};
-	if (!(cur->dim = vec3_alloc(0,0,0)))
+	tmp = (t_vrtx){{{0, 0, 0}}, {{0, 0, 0}}};
+	if (!(cur->dim = vec3_alloc(0, 0, 0)))
 		return (1);
 	while (get_next_line(fd, &buf) == 1)
 	{
@@ -32,16 +37,15 @@ int		parse_fdf(t_obj *w, int fd)
 		{
 			tmp.vec.c.z = ft_ator(buf);
 			ft_dyna_append(&cur.vertices, &tmp, 1);
-			NEXT_WORD;
+			next_word(&buf);
 			tmp.vec.c.x++;
 			if (cur->dim->x < tmp.vec.c.x)
 				cur->dim->x = tmp.vec.c.x;
 		}
 		tmp.vec.c.y++;
-		if (cur->dim->y < tmp.vec.c.y)
-			cur->dim->y = tmp.vec.c.y;
 	}
 	tmp.vec.c.z = 0;
+	cur->dim->y = tmp.vec.c.y;
 //	obj_add_center((t_gnode *)w, &cur);
 	gnode_add_child((t_gnode *)w, (t_gnode *)&cur);
 	return (0);
@@ -67,7 +71,7 @@ int		parse_obj(t_obj *w, int fd)
 		{
 			t_vrtx		tmp = (t_vrtx){{{0, 0, 0}}, {{0, 0, 0}}};
 			for (int i = 0 ; i < 3 ; i++) {
-				NEXT_WORD;
+				next_word(&buf);
 				tmp.vec.m[i] = ft_ator(buf);
 			}
 			ft_dyna_append(&cur.vertices, &tmp, 1);
@@ -76,7 +80,7 @@ int		parse_obj(t_obj *w, int fd)
 		{
 			t_face		temp = (t_face){{0, 0, 0, 0}};
 			for (int i = 0 ; i < 4 ; i++) {
-				NEXT_WORD;
+				next_word(&buf);
 				temp.index[i] = ft_atoi(buf);
 			}
 			ft_dyna_append(&cur.faces, &temp, 1);
@@ -98,12 +102,12 @@ int		read_av(t_obj *w, int length, char **param)
 	{
 		ext = ft_strrchr(param[i], '.');
 		if (ext++ == NULL)
-			continue ;
+			continue;
 		t = 0;
 		while (t < 4 && ft_strcmp(ext, tab[t]))
 			t += 2;
 		if (t == 4)
-			continue ;
+			continue;
 		else if ((fd = open(param[i], O_RDONLY)) == -1
 			|| ((int (*)(t_obj *, int))(tab[t + 1]))(w, fd))
 			return (1);

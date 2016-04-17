@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/01 14:10:06 by sid               #+#    #+#             */
-/*   Updated: 2016/03/23 14:01:58 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/14 17:35:06 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,8 @@ t_gnode		*gnode_find(const t_gnode *const node, const char *const name)
 	t_node	*tmp;
 	t_gnode	*ans;
 
+	if (node->name && name && strcmp(node->name, name) == 0)
+		return ((t_gnode *)node);
 	if (node->chidren.size > 0)
 	{
 		tmp = node->children.root;

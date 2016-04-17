@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/31 12:53:41 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/14 16:32:48 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static int		init_env(t_env *const w)
 	w->fnct.repaint = default_repaint;
 	w->fnct.key_hook = default_key_hook;
 	w->fnct.expose = default_expose_hook;
-	w->wdim = (t_vec2i){{1280, 720}};
-	w->ratio = w->wdim.width / w->wdim.height;
+	w->wdim = (t_vec2i){{DEFAULT_RESOLUTION}};
+	w->ratio = (t_real)w->wdim.width / (t_real)w->wdim.height;
 	if (!(w->mlx = mlx_init()))
 		return (1);
 	ft_putstr("Librairy Initialised\n");
@@ -33,8 +33,7 @@ static int		init_env(t_env *const w)
 		w->wdim.d.width, w->wdim.d.height, "Fil De Fer")))
 		return (2);
 	ft_putstr("Window Created\n");
-	if (!(w->img = mlx_new_image(w->mlx,
-		w->wdim.d.width, w->wdim.d.height)))
+	if (!(w->img = mlx_new_image(w->mlx, w->wdim.d.width, w->wdim.d.height)))
 		return (3);
 	ft_putstr("Image Allocated\n");
 	if (!(w->pixel = mlx_get_data_addr(w->img,
@@ -44,7 +43,9 @@ static int		init_env(t_env *const w)
 	mlx_expose_hook(w->win, w->fnct.expose, (void *)w);
 	mlx_hook(w->win, 2, 0, w->fnct.key_hook, (void *)w);
 	mlx_do_key_autorepeaton(w->mlx);
-	return (!(w->g.world = obj_alloc("World")) || !(w->g.cam = camera_alloc()));
+	if (!(w->g.world = obj_alloc("World")))
+		return (5);
+	return (!(w->g.cam = camera_alloc()));
 }
 
 int				ggl_main(int ac, char **av)

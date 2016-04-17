@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/06 09:28:13 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/17 16:28:24 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,8 +196,6 @@ typedef t_vec4t	t_qtrn;
 # define QPHI(Q) (Q.v.d.v.s.phi)
 # define QR(Q) (Q.v.d.v.cyl.r)
 
-# define CREAL const t_real
-
 /*
 ** -----=====  Constructors  =====-----
 */
@@ -208,30 +206,30 @@ typedef t_vec4t	t_qtrn;
 
 # define NEW_CMPLX(A, B) NEW_VEC2(A, B)
 # define NEW_QTRN(...) NEW_VEC4(__VA_ARGS__)
-t_qtrn  qtrn_new(const t_real a, const t_real b, const t_real c, const t_real d);
+
+t_qtrn			qtrn_new(const t_real a, const t_real b,
+	const t_real c, const t_real d);
 /*
 ** -----=====  Destructors  =====-----
 */
-
-
 
 /*
 ** -----=====  Member Functions  =====-----
 */
 
-t_qtrn  qtrn_sum(const t_qtrn *a, const t_qtrn *b);
-void    qtrn_add(t_qtrn *const a, const t_qtrn *const b);
+t_qtr			qtrn_sum(const t_qtrn *a, const t_qtrn *b);
+void			qtrn_add(t_qtrn *const a, const t_qtrn *const b);
 
 /*
 ** ---== Conversion ==---
 */
 
-void	carth2polar(t_cmplx *v);
-void	polar2carth(t_cmplx *v);
-void	carth2cylin(t_vec3t *v);
-void	cylin2carth(t_vec3t *v);
-void	carth2spher(t_vec3t *v);
-void	spher2carth(t_vec3t *v);
-t_real	perso2rqtrn(t_qtrn *q);
+void			carth2polar(t_cmplx *v);
+void			polar2carth(t_cmplx *v);
+void			carth2cylin(t_vec3t *v);
+void			cylin2carth(t_vec3t *v);
+void			carth2spher(t_vec3t *v);
+void			spher2carth(t_vec3t *v);
+t_real			perso2rqtrn(t_qtrn *q);
 
 #endif

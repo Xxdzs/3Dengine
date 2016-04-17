@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/31 20:29:48 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/14 17:58:03 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		render(t_env *w)
 	return (0);
 }
 
-int		render_julia(t_env *w)
+int		render_julia(t_env *w, t_fnptr f)
 {
 	t_real		zoom = 4;
 	t_pnt2i		p = (t_pnt2i){0, 0};
@@ -58,8 +58,6 @@ int		render_julia(t_env *w)
 				ft_putnbr(z.c.y);
 				ft_putstr(".i )\n");
 			}
-
-			while (f(z) < );
 		}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/31 13:03:41 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/14 17:35:51 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,4 @@ int				ggl_main(int ac, char **av);
 int				render(t_env *const w);
 int				draw_line(t_env *const w, t_pnt2i *p1, t_pnt2i *p2);
 
-#endif /* GGL_H */
+#endif
