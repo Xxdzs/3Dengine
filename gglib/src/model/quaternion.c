@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/21 17:19:43 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/21 17:24:58 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ void	qtrn_add(t_qtrn *const a, const t_qtrn *const b)
 t_qtrn	qtrn_prod(const t_qtrn *const q, const t_qtrn *const h)
 {
 	return ((t_qtrn){{
-		WP(q) * h->c.x + XP(q) * h->c.w + q->c.y * h->c.z - q->c.z * h->c.y,
-		WP(q) * h->c.y + q->c.y * h->c.w - XP(q) * h->c.z + q->c.z * h->c.x,
-		WP(q) * h->c.z + q->c.z * h->c.w + XP(q) * h->c.y - q->c.y * h->c.x,
-		WP(q) * h->c.w - XP(q) * h->c.x - q->c.y * h->c.y - q->c.z * h->c.z
+		WP(q) * XP(h) + XP(q) * WP(h) + YP(q) * ZP(h) - ZP(q) * YP(h),
+		WP(q) * YP(h) + YP(q) * WP(h) - XP(q) * ZP(h) + ZP(q) * XP(h),
+		WP(q) * ZP(h) + ZP(q) * WP(h) + XP(q) * YP(h) - YP(q) * XP(h),
+		WP(q) * WP(h) - XP(q) * XP(h) - YP(q) * YP(h) - ZP(q) * ZP(h)
 		}});
 }
 
@@ -85,14 +85,14 @@ void	qtrn_mult(t_qtrn *const q, const t_qtrn *const h)
 	t_real qy;
 	t_real qz;
 
-	qx = WP(q) * h->c.x + XP(q) * h->c.w + q->c.y * h->c.z - q->c.z * h->c.y;
-	qy = WP(q) * h->c.y + q->c.y * h->c.w - XP(q) * h->c.z + q->c.z * h->c.x;
-	qz = WP(q) * h->c.z + q->c.z * h->c.w + XP(q) * h->c.y - q->c.y * h->c.x;
-	WP(q) *= h->c.w;
-	WP(q) -= XP(q) * h->c.x + q->c.y * h->c.y + q->c.z * h->c.z;
+	qx = WP(q) * XP(h) + XP(q) * WP(h) + YP(q) * ZP(h) - ZP(q) * YP(h);
+	qy = WP(q) * YP(h) + YP(q) * WP(h) - XP(q) * ZP(h) + ZP(q) * XP(h);
+	qz = WP(q) * ZP(h) + ZP(q) * WP(h) + XP(q) * YP(h) - YP(q) * XP(h);
+	WP(q) *= WP(h);
+	WP(q) -= XP(q) * XP(h) + YP(q) * YP(h) + ZP(q) * ZP(h);
 	XP(q) = qx;
-	q->c.y = qy;
-	q->c.z = qz;
+	YP(q) = qy;
+	ZP(q) = qz;
 }
 
 /*
@@ -104,10 +104,10 @@ t_qtrn	qtrn_get_inv(const t_qtrn *const q)
 	const t_real	tmp = (WP(q) * WP(q)
 
 	+ XP(q) * XP(q)
-	+ q->c.y * q->c.y
-	+ q->c.z * q->c.z);
-	return ((t_qtrn){{-XP(q) / tmp, -q->c.y / tmp,
-		-q->c.z / tmp, WP(q) / tmp}});
+	+ YP(q) * YP(q)
+	+ ZP(q) * ZP(q));
+	return ((t_qtrn){{-XP(q) / tmp, -YP(q) / tmp,
+		-ZP(q) / tmp, WP(q) / tmp}});
 }
 
 /*
@@ -120,12 +120,12 @@ void	qtrn_inv(t_qtrn *const q)
 	const t_real	tmp = WP(q) * WP(q)
 
 	+ XP(q) * XP(q)
-	+ q->c.y * q->c.y
-	+ q->c.z * q->c.z;
+	+ YP(q) * YP(q)
+	+ ZP(q) * ZP(q);
 	WP(q) /= tmp;
 	XP(q) *= -1 / tmp;
-	q->c.y *= -1 / tmp;
-	q->c.z *= -1 / tmp;
+	YP(q) *= -1 / tmp;
+	ZP(q) *= -1 / tmp;
 }
 
 /*
@@ -134,7 +134,7 @@ void	qtrn_inv(t_qtrn *const q)
 
 t_qtrn	qtrn_get_conj(const t_qtrn *const q)
 {
-	return ((t_qtrn){{-XP(q), -q->c.y, -q->c.z, WP(q)}});
+	return ((t_qtrn){{-XP(q), -YP(q), -ZP(q), WP(q)}});
 }
 
 /*
@@ -145,8 +145,8 @@ t_qtrn	qtrn_get_conj(const t_qtrn *const q)
 void	qtrn_conj(t_qtrn *const q)
 {
 	XP(q) *= -1;
-	q->c.y *= -1;
-	q->c.z *= -1;
+	YP(q) *= -1;
+	ZP(q) *= -1;
 }
 
 /*
