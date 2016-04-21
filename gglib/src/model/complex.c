@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/26 18:26:09 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/17 16:29:44 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/21 16:54:26 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ t_real		cmplx_mod(t_cmplx *c)
 {
 	if (c->type == SPHERICAL)
 		return (MOD(*c));
-	return (sqrt(X(*c) * X(*c) + Y(*c) * Y(*c) + Z(*c) * Z(*c)));
+	return (sqrt(XP(c) * XP(c) + YP(c) * YP(c) + ZP(c) * ZP(c)));
 }
 
 t_real		cmplx_rep(t_cmplx *c)
 {
 	if (c->type == CARTHESIAN)
-		return (REP(*c));
-	return (MOD(*c) * sin(ARG(*c)));
+		return (REPP(c));
+	return (MODP(c) * sin(ARGP(c)));
 }

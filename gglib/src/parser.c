@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/04/14 17:53:08 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/21 16:57:31 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,25 @@ int		parse_fdf(t_obj *w, int fd)
 	t_vrtx		tmp;
 
 	cur = obj_new("FDF");
-	tmp = (t_vrtx){{{0, 0, 0}}, {{0, 0, 0}}};
-	if (!(cur->dim = vec3_alloc(0, 0, 0)))
+	tmp = NEW_VRTX;;
+	if (!(cur.dim = vec3_alloc(0, 0, 0)))
 		return (1);
 	while (get_next_line(fd, &buf) == 1)
 	{
-		tmp.vec.c.x = 0;
+		X(tmp.vec) = 0;
 		while (*buf != '\0')
 		{
-			tmp.vec.c.z = ft_ator(buf);
+			Z(tmp.vec) = ft_ator(buf);
 			ft_dyna_append(&cur.vertices, &tmp, 1);
 			next_word(&buf);
-			tmp.vec.c.x++;
-			if (cur->dim->x < tmp.vec.c.x)
-				cur->dim->x = tmp.vec.c.x;
+			X(tmp.vec)++;
+			if (XP(cur.dim) < X(tmp.vec))
+				XP(cur.dim) = X(tmp.vec);
 		}
-		tmp.vec.c.y++;
+		Y(tmp.vec)++;
 	}
-	tmp.vec.c.z = 0;
-	cur->dim->y = tmp.vec.c.y;
+	Z(tmp.vec) = 0;
+	YP(cur.dim) = Y(tmp.vec);
 //	obj_add_center((t_gnode *)w, &cur);
 	gnode_add_child((t_gnode *)w, (t_gnode *)&cur);
 	return (0);
@@ -69,10 +69,10 @@ int		parse_obj(t_obj *w, int fd)
 		}
 		else if (*buf == 'v')
 		{
-			t_vrtx		tmp = (t_vrtx){{{0, 0, 0}}, {{0, 0, 0}}};
+			t_vrtx		tmp = NEW_VRTX;
 			for (int i = 0 ; i < 3 ; i++) {
 				next_word(&buf);
-				tmp.vec.m[i] = ft_ator(buf);
+				tmp.vec.v.m[i] = ft_ator(buf);
 			}
 			ft_dyna_append(&cur.vertices, &tmp, 1);
 		}

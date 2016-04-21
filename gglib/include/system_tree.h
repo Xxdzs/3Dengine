@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 16:27:17 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/14 17:21:12 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/21 16:48:16 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct	s_gnode
 {
 	t_list			children;
 	struct s_gnode	*parent;
-	t_vec3			pos;
+	t_vec3t			pos;
 	t_real			scale;
 # ifdef EULER
 	t_real			alpha;
@@ -59,7 +59,7 @@ typedef struct	s_obj
 	t_dyna		vertices;
 	t_dyna		faces;
 	char		*name;
-	t_vec3		*dim;
+	t_vec3t		*dim;
 }				t_obj;
 
 /*
@@ -84,6 +84,8 @@ typedef struct	s_grfx
 /*
 **	-----=====  Constructors  =====-----
 */
+
+# define NEW_VRTX (t_vrtx){NEW_VEC3(0, 0, 0), NEW_VEC3(0, 0, 0)}
 
 t_gnode			*gnode_alloc(size_t type_size);
 t_obj			*obj_alloc(char *str);

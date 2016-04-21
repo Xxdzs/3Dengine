@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/21 14:02:42 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/21 16:13:22 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int		render_julia(t_env *w, t_fnptr f)
 	t_cmplx		z = NEW_CMPLX(0, 0);
 	t_cmplx		op = NEW_CMPLX(-2, 2);
 
+	(void)f;
+	(void)c;
 	for (p.x = 0 ; p.x < w->wdim.d.width ; p.x++)
 		for (p.y = 0 ; p.y < w->wdim.d.height ; p.y++)
 		{
@@ -53,9 +55,9 @@ int		render_julia(t_env *w, t_fnptr f)
 			if (p.x % 400 == 0 && p.y % 300 == 0)
 			{
 				ft_putstr("Point Actuel : ( ");
-				ft_putnbr(z.c.x);
+				ft_putnbr(X(z));
 				ft_putstr(" + ");
-				ft_putnbr(z.c.y);
+				ft_putnbr(Y(z));
 				ft_putstr(".i )\n");
 			}
 		}

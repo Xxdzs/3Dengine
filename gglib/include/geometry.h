@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/21 14:00:57 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/21 16:52:54 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,10 +180,20 @@ typedef t_vec4t	t_qtrn;
 # define Z(A) (A.v.c.z)
 # define W(A) (A.v.c.z)
 
+# define XP(A) (A->v.c.x)
+# define YP(A) (A->v.c.y)
+# define ZP(A) (A->v.c.z)
+# define WP(A) (A->v.c.z)
+
 # define REP(A) (A.v.r.rep)
 # define IMP(A) (A.v.r.imp)
 # define MOD(A) (A.v.p.mod)
 # define ARG(A) (A.v.p.arg)
+
+# define REPP(A) (A->v.r.rep)
+# define IMPP(A) (A->v.r.imp)
+# define MODP(A) (A->v.p.mod)
+# define ARGP(A) (A->v.p.arg)
 
 # define RHO(A) (A.v.s.rho)
 # define THETA(A) (A.v.s.theta)
@@ -210,6 +220,9 @@ typedef t_vec4t	t_qtrn;
 
 t_qtrn			qtrn_new(const t_real a, const t_real b,
 	const t_real c, const t_real d);
+
+t_vec3t			*vec3_alloc(const t_real a, const t_real b, const t_real c);
+
 /*
 ** -----=====  Destructors  =====-----
 */
