@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/17 16:40:50 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/21 17:19:43 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 t_qtrn	qtrn_new(const t_real a, const t_real b, const t_real c, const t_real d)
 {
-	return ((t_qtrn){CARTHESIAN, (t_vec4){a, b, c, d}});
+	return (NEW_QTRN(a, b, c, d));
 }
 
 t_qtrn	*qtrn_alloc(const t_real a, const t_real b,
@@ -26,11 +26,10 @@ t_qtrn	*qtrn_alloc(const t_real a, const t_real b,
 {
 	t_qtrn	*ans;
 
-	ans = (t_qtrn *)malloc(sizeof(t_qtrn));
-	X(*ans) = a;
-	Y(*ans) = a;
-	Z(*ans) = a;
-	W(*ans) = a;
+	if (!(ans = (t_qtrn *)malloc(sizeof(t_qtrn))))
+		return (NULL);
+	*ans = NEW_QTRN(a, b, c, d);
+	return (ans);
 }
 
 /*
@@ -39,12 +38,12 @@ t_qtrn	*qtrn_alloc(const t_real a, const t_real b,
 
 t_qtrn	qtrn_sum(const t_qtrn *a, const t_qtrn *b)
 {
-	return ((t_qtrn){{
-		a->c.x + b->c.x,
-		a->c.y + b->c.y,
-		a->c.z + b->c.z,
-		a->c.w + b->c.w
-		}});
+	return (NEW_QTRN(
+		XP(a) + XP(b),
+		YP(a) + YP(b),
+		ZP(a) + ZP(b),
+		WP(a) + WP(b)
+	));
 }
 
 /*
@@ -58,7 +57,7 @@ void	qtrn_add(t_qtrn *const a, const t_qtrn *const b)
 
 	i = 4;
 	while (i-- > 0)
-		a->m[i] += b->m[i];
+		a->v.m[i] += b->v.m[i];
 }
 
 /*
@@ -68,10 +67,10 @@ void	qtrn_add(t_qtrn *const a, const t_qtrn *const b)
 t_qtrn	qtrn_prod(const t_qtrn *const q, const t_qtrn *const h)
 {
 	return ((t_qtrn){{
-		q->c.w * h->c.x + q->c.x * h->c.w + q->c.y * h->c.z - q->c.z * h->c.y,
-		q->c.w * h->c.y + q->c.y * h->c.w - q->c.x * h->c.z + q->c.z * h->c.x,
-		q->c.w * h->c.z + q->c.z * h->c.w + q->c.x * h->c.y - q->c.y * h->c.x,
-		q->c.w * h->c.w - q->c.x * h->c.x - q->c.y * h->c.y - q->c.z * h->c.z
+		WP(q) * h->c.x + XP(q) * h->c.w + q->c.y * h->c.z - q->c.z * h->c.y,
+		WP(q) * h->c.y + q->c.y * h->c.w - XP(q) * h->c.z + q->c.z * h->c.x,
+		WP(q) * h->c.z + q->c.z * h->c.w + XP(q) * h->c.y - q->c.y * h->c.x,
+		WP(q) * h->c.w - XP(q) * h->c.x - q->c.y * h->c.y - q->c.z * h->c.z
 		}});
 }
 
@@ -86,12 +85,12 @@ void	qtrn_mult(t_qtrn *const q, const t_qtrn *const h)
 	t_real qy;
 	t_real qz;
 
-	qx = q->c.w * h->c.x + q->c.x * h->c.w + q->c.y * h->c.z - q->c.z * h->c.y;
-	qy = q->c.w * h->c.y + q->c.y * h->c.w - q->c.x * h->c.z + q->c.z * h->c.x;
-	qz = q->c.w * h->c.z + q->c.z * h->c.w + q->c.x * h->c.y - q->c.y * h->c.x;
-	q->c.w *= h->c.w;
-	q->c.w -= q->c.x * h->c.x + q->c.y * h->c.y + q->c.z * h->c.z;
-	q->c.x = qx;
+	qx = WP(q) * h->c.x + XP(q) * h->c.w + q->c.y * h->c.z - q->c.z * h->c.y;
+	qy = WP(q) * h->c.y + q->c.y * h->c.w - XP(q) * h->c.z + q->c.z * h->c.x;
+	qz = WP(q) * h->c.z + q->c.z * h->c.w + XP(q) * h->c.y - q->c.y * h->c.x;
+	WP(q) *= h->c.w;
+	WP(q) -= XP(q) * h->c.x + q->c.y * h->c.y + q->c.z * h->c.z;
+	XP(q) = qx;
 	q->c.y = qy;
 	q->c.z = qz;
 }
@@ -102,13 +101,13 @@ void	qtrn_mult(t_qtrn *const q, const t_qtrn *const h)
 
 t_qtrn	qtrn_get_inv(const t_qtrn *const q)
 {
-	const t_real	tmp = (q->c.w * q->c.w
+	const t_real	tmp = (WP(q) * WP(q)
 
-	+ q->c.x * q->c.x
+	+ XP(q) * XP(q)
 	+ q->c.y * q->c.y
 	+ q->c.z * q->c.z);
-	return ((t_qtrn){{-q->c.x / tmp, -q->c.y / tmp,
-		-q->c.z / tmp, q->c.w / tmp}});
+	return ((t_qtrn){{-XP(q) / tmp, -q->c.y / tmp,
+		-q->c.z / tmp, WP(q) / tmp}});
 }
 
 /*
@@ -118,13 +117,13 @@ t_qtrn	qtrn_get_inv(const t_qtrn *const q)
 
 void	qtrn_inv(t_qtrn *const q)
 {
-	const t_real	tmp = q->c.w * q->c.w
+	const t_real	tmp = WP(q) * WP(q)
 
-	+ q->c.x * q->c.x
+	+ XP(q) * XP(q)
 	+ q->c.y * q->c.y
 	+ q->c.z * q->c.z;
-	q->c.w /= tmp;
-	q->c.x *= -1 / tmp;
+	WP(q) /= tmp;
+	XP(q) *= -1 / tmp;
 	q->c.y *= -1 / tmp;
 	q->c.z *= -1 / tmp;
 }
@@ -135,7 +134,7 @@ void	qtrn_inv(t_qtrn *const q)
 
 t_qtrn	qtrn_get_conj(const t_qtrn *const q)
 {
-	return ((t_qtrn){{-q->c.x, -q->c.y, -q->c.z, q->c.w}});
+	return ((t_qtrn){{-XP(q), -q->c.y, -q->c.z, WP(q)}});
 }
 
 /*
@@ -145,7 +144,7 @@ t_qtrn	qtrn_get_conj(const t_qtrn *const q)
 
 void	qtrn_conj(t_qtrn *const q)
 {
-	q->c.x *= -1;
+	XP(q) *= -1;
 	q->c.y *= -1;
 	q->c.z *= -1;
 }
