@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/17 16:40:02 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/21 14:00:57 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,9 +201,9 @@ typedef t_vec4t	t_qtrn;
 ** -----=====  Constructors  =====-----
 */
 
-# define NEW_VEC2(X, Y) ((t_vec2t){CARTHESIAN, {X, Y}})
-# define NEW_VEC3(X, Y, Z) ((t_vec3t){CARTHESIAN, {X, Y, Z}})
-# define NEW_VEC4(...) ((t_vec4t){CARTHESIAN, {__VA_ARGS__}})
+# define NEW_VEC2(X, Y) ((t_vec2t){CARTHESIAN, {{X, Y}}})
+# define NEW_VEC3(X, Y, Z) ((t_vec3t){CARTHESIAN, {{X, Y, Z}}})
+# define NEW_VEC4(...) ((t_vec4t){CARTHESIAN, {{__VA_ARGS__}}})
 
 # define NEW_CMPLX(A, B) NEW_VEC2(A, B)
 # define NEW_QTRN(...) NEW_VEC4(__VA_ARGS__)
@@ -220,7 +220,8 @@ t_qtrn			qtrn_new(const t_real a, const t_real b,
 
 t_qtrn			qtrn_sum(const t_qtrn *a, const t_qtrn *b);
 void			qtrn_add(t_qtrn *const a, const t_qtrn *const b);
-
+void			qtrn_rotate(t_qtrn *const to_rotate, t_qtrn rotator);
+t_qtrn			qtrn_get_rotated(const t_qtrn *const to_rotate, t_qtrn rotator);
 
 /*
 ** ---== Conversion ==---
