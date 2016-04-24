@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/01 14:10:06 by sid               #+#    #+#             */
-/*   Updated: 2016/04/14 17:35:06 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/25 01:44:34 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ t_gnode		*gnode_alloc(size_t type_size)
 	{
 		ftl_init((t_list *)ans, type_size);
 		ans->parent = NULL;
-		ans->pos = (t_vec3){{0, 0, 0}};
-		ans->rot = (t_qtrn){{0, 0, 0, 1}};
+		ans->pos = NEW_VEC3(0, 0, 0);
+		ans->rot = NEW_QTRN(0, 0, 0, 1);
 		ans->scale = 1;
 	}
 	return (ans);
@@ -65,8 +65,8 @@ t_obj		obj_new(char *str)
 
 	ftl_init((t_list *)&ans.node, sizeof(t_obj));
 	ans.node.parent = NULL;
-	ans.node.pos = (t_vec3){{0, 0, 0}};
-	ans.node.rot = (t_qtrn){{0, 0, 0, 0}};
+	ans.node.pos = NEW_VEC3(0, 0, 0);
+	ans.node.rot = NEW_QTRN(0, 0, 0, 0);
 	ans.node.scale = 1;
 	ans.vertices = ft_dyna_new(sizeof(t_vrtx));
 	ft_dyna_datainit(&ans.vertices);
@@ -119,7 +119,7 @@ int			obj_add_center(t_gnode *parent, t_obj *child)
 
 	if (child->dim == NULL)
 	{
-		gnode_add_child(parent, child);
+		gnode_add_child(parent, (t_gnode *)child);
 		return (1);
 	}
 	tmp = obj_new(ft_strjoin(child->name, "_center"));
@@ -129,18 +129,18 @@ int			obj_add_center(t_gnode *parent, t_obj *child)
 	return (0);
 }
 
-t_gnode		*gnode_find(const t_gnode *const node, const char *const name)
+t_obj		*gnode_find(const t_obj *const node, const char *const name)
 {
 	t_node	*tmp;
 	t_gnode	*ans;
 
-	if (node->name && name && strcmp(node->name, name) == 0)
-		return ((t_gnode *)node);
-	if (node->chidren.size > 0)
+	if (node->name && name && ft_strcmp(node->name, name) == 0)
+		return ((t_obj *)node);
+	if (node->node.children.size > 0)
 	{
-		tmp = node->children.root;
-		while ((tmp = tmp->next) != node->children.root)
-			if ((ans = gnode_find(tmp, name)) != NULL)
+		tmp = (t_node *)&(node->node.children);
+		while ((tmp = tmp->next) != node->node.children.root.next)
+			if ((ans = gnode_find((t_obj *)tmp, name)) != NULL)
 				return (ans);
 	}
 	return (NULL);

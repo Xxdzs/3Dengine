@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/21 17:24:58 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/25 00:25:18 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ void	qtrn_add(t_qtrn *const a, const t_qtrn *const b)
 
 t_qtrn	qtrn_prod(const t_qtrn *const q, const t_qtrn *const h)
 {
-	return ((t_qtrn){{
+	return (NEW_QTRN(
 		WP(q) * XP(h) + XP(q) * WP(h) + YP(q) * ZP(h) - ZP(q) * YP(h),
 		WP(q) * YP(h) + YP(q) * WP(h) - XP(q) * ZP(h) + ZP(q) * XP(h),
 		WP(q) * ZP(h) + ZP(q) * WP(h) + XP(q) * YP(h) - YP(q) * XP(h),
 		WP(q) * WP(h) - XP(q) * XP(h) - YP(q) * YP(h) - ZP(q) * ZP(h)
-		}});
+		));
 }
 
 /*
@@ -106,8 +106,8 @@ t_qtrn	qtrn_get_inv(const t_qtrn *const q)
 	+ XP(q) * XP(q)
 	+ YP(q) * YP(q)
 	+ ZP(q) * ZP(q));
-	return ((t_qtrn){{-XP(q) / tmp, -YP(q) / tmp,
-		-ZP(q) / tmp, WP(q) / tmp}});
+	return (NEW_QTRN(-XP(q) / tmp, -YP(q) / tmp,
+		-ZP(q) / tmp, WP(q) / tmp));
 }
 
 /*
@@ -134,7 +134,7 @@ void	qtrn_inv(t_qtrn *const q)
 
 t_qtrn	qtrn_get_conj(const t_qtrn *const q)
 {
-	return ((t_qtrn){{-XP(q), -YP(q), -ZP(q), WP(q)}});
+	return (NEW_QTRN(-XP(q), -YP(q), -ZP(q), WP(q)));
 }
 
 /*

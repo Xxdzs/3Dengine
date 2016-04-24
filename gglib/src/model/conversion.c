@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 12:32:44 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/31 16:54:08 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/25 00:27:34 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,21 @@
 
 void	carth2polar(t_cmplx *v)
 {
-	const t_real		x = X(v);
-	const t_real		y = Y(v);
+	const t_real		x = XP(v);
+	const t_real		y = YP(v);
 
-	MOD(v) = sqrt(x * x + y * y);
-	ARG(v) = atan2(x, y);
+	MODP(v) = sqrt(x * x + y * y);
+	ARGP(v) = atan2(x, y);
 	v->type = POLAR;
 }
 
 void	polar2carth(t_cmplx *v)
 {
-	const t_real		m = MOD(v);
-	const t_real		a = ARG(v);
+	const t_real		m = MODP(v);
+	const t_real		a = ARGP(v);
 
-	X(v) = m * cos(a);
-	Y(v) = m * sin(a);
+	XP(v) = m * cos(a);
+	YP(v) = m * sin(a);
 	v->type = CARTHESIAN;
 }
 
@@ -55,34 +55,34 @@ void	cylin2carth(t_vec3t *v)
 
 void	carth2spher(t_vec3t *v)
 {
-	const t_real		x = X(v);
-	const t_real		y = Y(v);
-	const t_real		z = Z(v);
+	const t_real		x = XP(v);
+	const t_real		y = YP(v);
+	const t_real		z = ZP(v);
 
-	RHO(v) = sqrt(x * x + y * y + z * z);
-	THETA(v) = atan2(x, y);
-	PHI(v) = acos(z / RHO(v));
+	RHOP(v) = sqrt(x * x + y * y + z * z);
+	THETAP(v) = atan2(x, y);
+	PHIP(v) = acos(z / RHOP(v));
 	v->type = SPHERICAL;
 }
 
 void	spher2carth(t_vec3t *v)
 {
-	const t_real		r = RHO(v);
-	const t_real		t = THETA(v);
-	const t_real		p = PHI(v);
+	const t_real		r = RHOP(v);
+	const t_real		t = THETAP(v);
+	const t_real		p = PHIP(v);
 
-	X(v) = r * sin(p) * cos(t);
-	Y(v) = r * sin(p) * sin(t);
-	Z(v) = r * cos(p);
+	XP(v) = r * sin(p) * cos(t);
+	YP(v) = r * sin(p) * sin(t);
+	ZP(v) = r * cos(p);
 	v->type = CARTHESIAN;
 }
 
 t_real	perso2rqtrn(t_qtrn *q)
 {
-	const t_real	alpha = SCALAR(q) / 2;
-	const t_real	scale = VECTOR(q).s.rho;
+	const t_real	alpha = SCALARP(q) / 2;
+	const t_real	scale = VECTORP(q).s.rho;
 
-	SCALAR(q) = cos(alpha / 2);
-	VECTOR(q).s.rho = sin(alpha / 2);
+	SCALARP(q) = cos(alpha / 2);
+	VECTORP(q).s.rho = sin(alpha / 2);
 	return (scale);
 }

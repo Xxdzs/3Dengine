@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/21 16:52:54 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/25 00:29:00 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,12 +200,24 @@ typedef t_vec4t	t_qtrn;
 # define PHI(A) (A.v.s.phi)
 # define R(A) (A.v.cyl.r)
 
+# define RHOP(A) (A->v.s.rho)
+# define THETAP(A) (A->v.s.theta)
+# define PHIP(A) (A->v.s.phi)
+# define RP(A) (A->v.cyl.r)
+
 # define SCALAR(Q) (Q.v.d.s)
 # define VECTOR(Q) (Q.v.d.v)
 # define QRHO(Q) (Q.v.d.v.s.rho)
 # define QTHETA(Q) (Q.v.d.v.s.theta)
 # define QPHI(Q) (Q.v.d.v.s.phi)
 # define QR(Q) (Q.v.d.v.cyl.r)
+
+# define SCALARP(Q) (Q->v.d.s)
+# define VECTORP(Q) (Q->v.d.v)
+# define QRHOP(Q) (Q->v.d.v.s.rho)
+# define QTHETAP(Q) (Q->v.d.v.s.theta)
+# define QPHIP(Q) (Q->v.d.v.s.phi)
+# define QRP(Q) (Q->v.d.v.cyl.r)
 
 /*
 ** -----=====  Constructors  =====-----
