@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/03/31 20:25:08 by angagnie         ###   ########.fr        #
+#    Updated: 2016/04/27 06:05:09 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,8 +14,8 @@
 EXEC_NAME:=ggl
 NAME:=libgg.a
 MODEL_PATH:=model/
-MODEL:=quaternion conversion matrices system_tree
-FILES=view controller render parser ft_ator
+MODEL:=quaternion conversion matrices system_tree geometry
+FILES=view controller render parser ft_ator ggl_main_osx main
 LIBFT_PATH=../Libft/
 LIBFT_HDR=../Libft/include/
 # ==================
@@ -23,8 +23,8 @@ LIBFT_HDR=../Libft/include/
 # ==== Standard ====
 CC:=clang
 LINKER:=ar rc
-CCHPATH:=cache/
-SRCPATH:=src/
+CCHPATH=cache/
+SRCPATH=src/
 HDRPATH:=include/
 IFLAGS=-I $(HDRPATH) -I $(LIBFT_HDR)
 DEFLAG=
@@ -118,12 +118,12 @@ miniLibX_OSX/libmlx.a:
 	@make -C miniLibX_OSX/
 
 x11:
-	$(eval FILES+=ggl_main_x11)
+#	$(eval FILES+=ggl_main_x11)
 	$(eval DEFLAG=-DX11)
 	$(eval LFLAGS+=-lX11)
 
 osx:
-	$(eval FILES+=ggl_main_osx)
+#	$(eval FILES+=ggl_main_osx)
 	$(eval IFLAGS+=-I miniLibX_OSX/)
 	$(eval LFLAGS+=-lmlx -framework OpenGL -framework AppKit)
 	$(eval DEP+=miniLibX_OSX/libmlx.a)

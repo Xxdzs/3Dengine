@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/14 16:37:55 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/27 06:01:58 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	init_env(t_env *const w)
 	w->fnct.key_hook = default_key_hook;
 	w->fnct.expose = default_expose_hook;
 	w->wdim = (t_vec2i){{DEFAULT_RESOLUTION}};
-	w->ratio = ((t_real)w->wdim.width) / (t_real)w->wdim.height;
+	w->ratio = ((t_real)w->wdim.d.width) / (t_real)w->wdim.d.height;
 #ifdef X11
 	if (!(w->disp = XOpenDisplay(NULL)))
 		return (5);

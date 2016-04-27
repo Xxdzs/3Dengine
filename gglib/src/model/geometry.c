@@ -6,15 +6,17 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 18:14:08 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/21 16:25:40 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/04/27 06:00:45 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "ggl.h"
 
 t_vec3t		*vec3_alloc(const t_real a, const t_real b, const t_real c)
 {
 	t_vec3t	*ans;
 
-	ans = (t_vec3 *)malloc(sizeof(t_vec3));
+	ans = (t_vec3t *)malloc(sizeof(t_vec3));
 	*ans = NEW_VEC3(a, b, c);
 	return (ans);
 }
