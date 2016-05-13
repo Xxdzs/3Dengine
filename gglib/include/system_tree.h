@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 16:27:17 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/21 16:48:16 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/13 15:05:56 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct	s_gnode
 # else
 	t_qtrn			rot;
 # endif
+	int				is_obj;
 }				t_gnode;
 
 typedef struct	s_vrtx
@@ -105,5 +106,6 @@ void			obj_free(t_obj **subject);
 
 void			gnode_add_child(t_gnode *parent, t_gnode *child);
 int				obj_add_center(t_gnode *parent, t_obj *child);
+t_obj			*obj_find(const t_obj *const node, const char *const name);
 
 #endif
