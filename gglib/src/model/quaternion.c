@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/17 16:46:21 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/17 17:50:50 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_qtrn	*qtrn_alloc(const t_real a, const t_real b,
 }
 
 /*
-** Quaternion :: Get the external product : multiply by a scalar
+** Quaternion :: Get the external product : multiplied by a scalar
 */
 
 t_qtrn	qtrn_external_prod(const t_qtrn *const a, const t_real s)
@@ -44,17 +44,26 @@ t_qtrn	qtrn_external_prod(const t_qtrn *const a, const t_real s)
 	ans.type = a->type;
 	if (a->type == CARTHESIAN)
 	{
-		QX(ans) = QXP(a) * s;
-		QY(ans) = QYP(a) * s;
-		QZ(ans) = QZP(a) * s;
-		QW(ans) = QWP(a) * s;
+		X(ans) = XP(a) * s;
+		Y(ans) = YP(a) * s;
+		Z(ans) = ZP(a) * s;
+		W(ans) = WP(a) * s;
 	}
 	else if (a->type == CYLINDRICAL)
 	{
 		QR(ans) = QRP(a) * s;
 		QTHETA(ans) = QTHETA(a);
-		QZ(ans) = QZP(a) * s;
+		Z(ans) = ZP(a) * s;
+		W(ans) = WP(a) * s;
 	}
+	else
+	{
+		QRHO(ans) = QRHOP(a) * s;
+		QTHETA(ans) = QTHETAP(a);
+		QPHI(ans) = QPHIP(a);
+		W(ans) = WP(a) * s;
+	}
+	return (ans);
 }
 
 /*
@@ -64,10 +73,24 @@ t_qtrn	qtrn_external_prod(const t_qtrn *const a, const t_real s)
 
 void	qtrn_external_mult(t_qtrn *const a, const t_real s)
 {
-	XP(a) *= s;
-	YP(a) *= s;
-	ZP(a) *= s;
-	WP(a) *= s;
+	if (a->type == CARTHESIAN)
+	{
+		XP(a) *= s;
+		YP(a) *= s;
+		ZP(a) *= s;
+		WP(a) *= s;
+	}
+	else if (a->type == CYLINDRICAL)
+	{
+		QRP(a) *= s;
+		ZP(a) *= s;
+		QWP(a) *= s;
+	}
+	else
+	{
+		QRHOP(a) *= s;
+		WP(a) *= s;
+	}
 }
 
 
@@ -77,12 +100,24 @@ void	qtrn_external_mult(t_qtrn *const a, const t_real s)
 
 t_qtrn	qtrn_sum(const t_qtrn *a, const t_qtrn *b)
 {
-	return (NEW_QTRN(
-		XP(a) + XP(b),
-		YP(a) + YP(b),
-		ZP(a) + ZP(b),
-		WP(a) + WP(b)
-	));
+	t_qtrn ans;
+	t_qtrn tmp;
+
+	ans = *a;
+	tmp = *b;
+	if (ans.type == CYLINDRICAL)
+		cylin2carth(&ans);
+	else if (ans.type == SPERICAL)
+		spher2carth(&ans);
+	if (tmp.type == CYLINDRICAL)
+		cylin2carth(&tmp);
+	else if (tmp.type == SPERICAL)
+		spher2carth(&tmp);
+	X(ans) += X(tmp);
+	Y(ans) += Y(tmp);
+	Z(ans) += Z(tmp);
+	W(ans) += W(tmp);
+	return (ans);
 }
 
 /*
@@ -92,8 +127,17 @@ t_qtrn	qtrn_sum(const t_qtrn *a, const t_qtrn *b)
 
 void	qtrn_add(t_qtrn *const a, const t_qtrn *const b)
 {
-	int i;
+	int		i;
+	t_type	;
 
+	if (a->type == CYLINDRICAL)
+		cylin2carth(a);
+	else if (a->type == SPERICAL)
+		spher2carth(a);
+	if (b->type == CYLINDRICAL)
+		cylin2carth(b);
+	else if (a->type == SPERICAL)
+		spher2carth(b);
 	i = 4;
 	while (i-- > 0)
 		a->v.m[i] += b->v.m[i];
