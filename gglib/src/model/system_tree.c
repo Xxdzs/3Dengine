@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/01 14:10:06 by sid               #+#    #+#             */
-/*   Updated: 2016/05/13 16:14:09 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/17 10:14:34 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ t_obj		obj_new(char *str)
 	if (ft_dyna_datainit(&ans.vertices) || ft_dyna_datainit(&ans.faces))
 		ft_exit("obj_new", "Out of memory (malloc failed)");
 	if (!(ans.name = ft_strdup(str)))
-		write(2, "ERROR\tobj_new : Malloc failed\n", 30);
+		ft_putstr_fd("ERROR\tobj_new : Malloc failed\n", 2);
 	ans.dim = 0;
-	ans.is_obj = 1;
+	ans.node.is_obj = 1;
 	return (ans);
 }
 
@@ -139,7 +139,7 @@ t_obj		*obj_find(const t_obj *const node, const char *const name)
 	if (node->node.children.size > 0)
 	{
 		tmp = (t_node *)&(node->node.children);
-		while ((tmp = tmp->next) != node->node.children.root)
+		while ((tmp = tmp->next) != &(node->node.children.root))
 			if ((ans = obj_find((t_obj *)tmp, name)) != NULL)
 				return (ans);
 	}
