@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/17 10:37:45 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/17 15:21:17 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int			default_expose_hook(void *param)
 #ifdef X11
 	// TODO : Display Image
 #else
-	mlx_clear_window(w->mlx, w->win);
 	mlx_put_image_to_window(w->mlx, w->win, w->img, 0, 0);
 #endif
 	return (0);
@@ -72,7 +71,7 @@ int			draw_line(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
 {
 	if (p1->x == p2->x && p1->y == p2->y)
 		PIXEL(p1->x, p2->y) = 255;
-	return (interpolate(w, p1, p2, &smooth_interpolation));
+	return (interpolate(w, p1, p2, &linear_interpolation));
 }
 
 /*

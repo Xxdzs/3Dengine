@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/17 12:38:07 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/17 16:46:21 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,22 @@ t_qtrn	*qtrn_alloc(const t_real a, const t_real b,
 
 t_qtrn	qtrn_external_prod(const t_qtrn *const a, const t_real s)
 {
-	return (NEW_QTRN(
-		XP(a) * s,
-		YP(a) * s,
-		ZP(a) * s,
-		WP(a) * s
-	));
+	t_qtrn	ans;
+
+	ans.type = a->type;
+	if (a->type == CARTHESIAN)
+	{
+		QX(ans) = QXP(a) * s;
+		QY(ans) = QYP(a) * s;
+		QZ(ans) = QZP(a) * s;
+		QW(ans) = QWP(a) * s;
+	}
+	else if (a->type == CYLINDRICAL)
+	{
+		QR(ans) = QRP(a) * s;
+		QTHETA(ans) = QTHETA(a);
+		QZ(ans) = QZP(a) * s;
+	}
 }
 
 /*

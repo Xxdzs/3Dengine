@@ -6,11 +6,13 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/05/17 10:42:50 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/17 15:17:58 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
+
+#include <stdio.h> // <==
 
 static inline void	next_word(char **buf)
 {

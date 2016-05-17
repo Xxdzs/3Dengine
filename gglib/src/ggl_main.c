@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/17 11:15:38 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/17 16:05:50 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static int	init_env(t_env *const w)
 	mlx_do_key_autorepeaton(w->mlx);
 #endif
 	w->g.world = obj_alloc("World");
+	w->g.world->node.rot.type = SPHERICAL;
 	w->g.cam = camera_alloc();
 	return (0);
 }

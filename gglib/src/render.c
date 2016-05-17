@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/17 12:39:17 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/17 15:46:04 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,30 @@
 
 int		render(t_env *w)
 {
+	char *tmp; // <--
 	t_pnt2i		a;
+	t_pnt2i		b = {0, 0};
 	t_qtrn		q;
 	t_qtrn		r;
 	t_obj		*f = (t_obj *)w->g.world->node.children.root.next;
 
+	ft_bzero(w->pixel, w->wdim.d.width * w->wdim.d.height * w->bits_per_pixel / 8);
 	ft_putstr("\t--==  Renderin ");
 	ft_putstr(f->name);
 	ft_putstr("  ==--\n");
 	for (size_t i = 0 ; i < f->vertices.chunck_count ; i++)
 	{
 		r = f->node.rot;
-		f->node.scale = perso2rqtrn(&r);
+		perso2rqtrn(&r);
 		q = NEW_QTRN(POINT(i).x, POINT(i).y, POINT(i).z, 0.0);
-		printf("Point actuel : %s\n", qtrn_to_string(&q)); // <--
-		qtrn_external_mult(&q, f->node.scale);
-//		qtrn_rotate(&q, f->node.rot);
+		qtrn_external_mult(&q, w->g.world->node.scale);
+		printf("Point actuel : %s\n", tmp = qtrn_to_string(&q)); // <--
+		free(tmp); // <--
+		qtrn_rotate(&q, r);
 		a = (t_pnt2i){X(q), Y(q)};
-		PIXEL(a.x, a.y) = 200;
+		//PIXEL(a.x, a.y) = 200;
+		draw_line(w, &a, &b);
+		b = a;
 	}
 	return (0);
 }
