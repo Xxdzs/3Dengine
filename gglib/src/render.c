@@ -6,11 +6,13 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/17 11:16:59 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/17 12:39:17 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
+
+#include <stdio.h> // <==
 
 #define POINT(i) (((t_vrtx *)ft_dyna_get(&f->vertices, i - 1))->vec.v.c)
 
@@ -27,10 +29,11 @@ int		render(t_env *w)
 	for (size_t i = 0 ; i < f->vertices.chunck_count ; i++)
 	{
 		r = f->node.rot;
-		perso2rqtrn(&r);
+		f->node.scale = perso2rqtrn(&r);
 		q = NEW_QTRN(POINT(i).x, POINT(i).y, POINT(i).z, 0.0);
+		printf("Point actuel : %s\n", qtrn_to_string(&q)); // <--
+		qtrn_external_mult(&q, f->node.scale);
 //		qtrn_rotate(&q, f->node.rot);
-
 		a = (t_pnt2i){X(q), Y(q)};
 		PIXEL(a.x, a.y) = 200;
 	}

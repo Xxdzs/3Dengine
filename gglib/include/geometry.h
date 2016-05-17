@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/25 00:29:00 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/17 12:44:03 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,10 +243,19 @@ t_vec3t			*vec3_alloc(const t_real a, const t_real b, const t_real c);
 ** -----=====  Member Functions  =====-----
 */
 
+t_qtrn			qtrn_external_prod(const t_qtrn *const a, const t_real s);
+void			qtrn_external_mult(t_qtrn *const a, const t_real s);
 t_qtrn			qtrn_sum(const t_qtrn *a, const t_qtrn *b);
 void			qtrn_add(t_qtrn *const a, const t_qtrn *const b);
-void			qtrn_rotate(t_qtrn *const to_rotate, t_qtrn rotator);
+t_qtrn			qtrn_prod(const t_qtrn *const q, const t_qtrn *const h);
+void			qtrn_mult(t_qtrn *const q, const t_qtrn *const h);
+t_qtrn			qtrn_get_inv(const t_qtrn *const q);
+void			qtrn_inv(t_qtrn *const q);
+t_qtrn			qtrn_get_conj(const t_qtrn *const q);
+void			qtrn_conj(t_qtrn *const q);
 t_qtrn			qtrn_get_rotated(const t_qtrn *const to_rotate, t_qtrn rotator);
+void			qtrn_rotate(t_qtrn *const to_rotate, t_qtrn rotator);
+char			*qtrn_to_string(const t_qtrn *const q);
 
 /*
 ** ---== Conversion ==---

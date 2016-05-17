@@ -6,10 +6,11 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/25 00:25:18 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/17 12:38:07 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "geometry.h"
 #include "ggl.h"
 
 /*
@@ -31,6 +32,34 @@ t_qtrn	*qtrn_alloc(const t_real a, const t_real b,
 	*ans = NEW_QTRN(a, b, c, d);
 	return (ans);
 }
+
+/*
+** Quaternion :: Get the external product : multiply by a scalar
+*/
+
+t_qtrn	qtrn_external_prod(const t_qtrn *const a, const t_real s)
+{
+	return (NEW_QTRN(
+		XP(a) * s,
+		YP(a) * s,
+		ZP(a) * s,
+		WP(a) * s
+	));
+}
+
+/*
+** Quaternion :: External product : multiply by a scalar
+** Side effect on the quaternion
+*/
+
+void	qtrn_external_mult(t_qtrn *const a, const t_real s)
+{
+	XP(a) *= s;
+	YP(a) *= s;
+	ZP(a) *= s;
+	WP(a) *= s;
+}
+
 
 /*
 ** Quaternion :: Get the sum
@@ -150,7 +179,7 @@ void	qtrn_conj(t_qtrn *const q)
 }
 
 /*
-** Apply the rotation
+** Quaternion :: Get the rotation
 ** f :	H x H	-> H
 **		(q, p)	|-> q * p * inv(q)
 */
@@ -165,6 +194,12 @@ t_qtrn	qtrn_get_rotated(const t_qtrn *const to_rotate, t_qtrn rotator)
 	return (ans);
 }
 
+/*
+** Quaternion :: Apply the rotation
+** f :	H x H	-> H
+**		(q, p)	|-> q * p * inv(q)
+*/
+
 void	qtrn_rotate(t_qtrn *const to_rotate, t_qtrn rotator)
 {
 	t_qtrn	ans;
@@ -173,4 +208,30 @@ void	qtrn_rotate(t_qtrn *const to_rotate, t_qtrn rotator)
 	qtrn_mult(to_rotate, &ans);
 	qtrn_mult(&rotator, to_rotate);
 	ft_memcpy(to_rotate, &rotator, sizeof(ans));
+}
+
+/*
+** Quaternion :: To string
+*/
+
+char	*qtrn_to_string(const t_qtrn *const q)
+{
+	t_dyna	acc;
+	char	*tmp;
+	int		i;
+
+	acc = ft_dyna_new(sizeof(char));
+	ft_dyna_datainit(&acc);
+	i = 0;
+	ft_dyna_append(&acc, "(", 1);
+	while (i < 4)
+	{
+		tmp = ft_itoa(q->v.m[i]);
+		ft_dyna_append(&acc, tmp, ft_strlen(tmp));
+		free(tmp);
+		if (i++ < 3)
+			ft_dyna_append(&acc, ", ", 2);
+	}
+	ft_dyna_append(&acc, ")\0", 2);
+	return ((char *)acc.data);
 }
