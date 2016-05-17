@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/04/27 06:05:09 by angagnie         ###   ########.fr        #
+#    Updated: 2016/05/17 10:26:39 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -15,7 +15,7 @@ EXEC_NAME:=ggl
 NAME:=libgg.a
 MODEL_PATH:=model/
 MODEL:=quaternion conversion matrices system_tree geometry
-FILES=view controller render parser ft_ator ggl_main_osx main
+FILES=view controller render parser ft_ator ggl_main main
 LIBFT_PATH=../Libft/
 LIBFT_HDR=../Libft/include/
 # ==================

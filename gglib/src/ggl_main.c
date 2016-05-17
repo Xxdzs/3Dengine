@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/27 06:01:58 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/17 11:15:38 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int			ggl_main(int ac, char **av)
 		if (--ac > 0)
 		{
 			read_av(w.g.world, ac, ++av);
-//			w.fnct.repaint = render;
+			w.fnct.repaint = render;
 		}
 		w.fnct.repaint(&w);
 #ifdef X11

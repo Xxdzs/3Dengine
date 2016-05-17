@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/26 10:42:47 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/17 11:16:59 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		render(t_env *w)
 		r = f->node.rot;
 		perso2rqtrn(&r);
 		q = NEW_QTRN(POINT(i).x, POINT(i).y, POINT(i).z, 0.0);
-		qtrn_rotate(&q, f->node.rot);
+//		qtrn_rotate(&q, f->node.rot);
 
 		a = (t_pnt2i){X(q), Y(q)};
 		PIXEL(a.x, a.y) = 200;

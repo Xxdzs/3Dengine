@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/04/21 16:57:31 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/17 10:42:50 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ int		parse_fdf(t_obj *w, int fd)
 	char		*buf;
 	t_vrtx		tmp;
 
+	printf("--> fdf-parsin\n"); // <--
 	cur = obj_new("FDF");
-	tmp = NEW_VRTX;;
+	tmp = NEW_VRTX;
 	if (!(cur.dim = vec3_alloc(0, 0, 0)))
 		return (1);
 	while (get_next_line(fd, &buf) == 1)
@@ -56,6 +57,7 @@ int		parse_obj(t_obj *w, int fd)
 	t_obj		cur;
 	char		*buf;
 
+	printf("--> obj-parsin\n"); // <--
 	cur = obj_new("Others");
 	while (get_next_line(fd, &buf) == 1)
 	{

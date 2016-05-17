@@ -6,13 +6,13 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/17 16:33:24 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/17 10:37:45 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 
-int		default_expose_hook(void *param)
+int			default_expose_hook(void *param)
 {
 	t_env *const	w = param;
 
@@ -47,7 +47,7 @@ int			smooth_interpolation(int i, int dout, int din)
 	return ((int)(out * (1 - cos(x * M_PI / in)) / 2));
 }
 
-int		interpolate(t_env *const w, t_pnt2i *p1, t_pnt2i *p2, t_fnptr algo)
+int			interpolate(t_env *const w, t_pnt2i *p1, t_pnt2i *p2, t_fnptr algo)
 {
 	t_pnt2i	delta;
  	t_pnt2i	way;
@@ -68,11 +68,11 @@ int		interpolate(t_env *const w, t_pnt2i *p1, t_pnt2i *p2, t_fnptr algo)
 	return (0);
 }
 
-int		draw_line(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
+int			draw_line(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
 {
 	if (p1->x == p2->x && p1->y == p2->y)
 		PIXEL(p1->x, p2->y) = 255;
-	return (interpolate(w, p1, p2, &linear_interpolation));
+	return (interpolate(w, p1, p2, &smooth_interpolation));
 }
 
 /*
@@ -101,14 +101,14 @@ int		draw_line_save(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
 }
 */
 
-int		default_repaint(t_env *const w)
+int			default_repaint(t_env *const w)
 {
 	ft_putstr("Repainting, but no custom repainting function provided\n");
-	draw_line(w, &(t_pnt2i){100, 100}, &(t_pnt2i){200, 100});
-	draw_line(w, &(t_pnt2i){200, 200}, &(t_pnt2i){200, 100});
-	draw_line(w, &(t_pnt2i){200, 200}, &(t_pnt2i){100, 200});
-	draw_line(w, &(t_pnt2i){100, 100}, &(t_pnt2i){100, 200});
-	draw_line(w, &(t_pnt2i){100, 100}, &(t_pnt2i){200, 200});
-	draw_line(w, &(t_pnt2i){100, 200}, &(t_pnt2i){200, 100});
+	draw_line(w, &(t_pnt2i){100, 100}, &(t_pnt2i){400, 100});
+	draw_line(w, &(t_pnt2i){400, 300}, &(t_pnt2i){400, 100});
+	draw_line(w, &(t_pnt2i){400, 300}, &(t_pnt2i){100, 300});
+	draw_line(w, &(t_pnt2i){100, 100}, &(t_pnt2i){100, 300});
+	draw_line(w, &(t_pnt2i){100, 100}, &(t_pnt2i){400, 300});
+	draw_line(w, &(t_pnt2i){100, 300}, &(t_pnt2i){400, 100});
 	return (0);
 }
