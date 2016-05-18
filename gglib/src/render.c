@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/17 15:46:04 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/18 20:33:41 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,11 @@ int		render(t_env *w)
 		perso2rqtrn(&r);
 		q = NEW_QTRN(POINT(i).x, POINT(i).y, POINT(i).z, 0.0);
 		qtrn_external_mult(&q, w->g.world->node.scale);
-		printf("Point actuel : %s\n", tmp = qtrn_to_string(&q)); // <--
-		free(tmp); // <--
+//		if (i % 100 == 0)
+//		{
+			printf("Point actuel : %s\n", tmp = qtrn_to_string(&q)); // <--
+			free(tmp); // <--
+//		}
 		qtrn_rotate(&q, r);
 		a = (t_pnt2i){X(q), Y(q)};
 		//PIXEL(a.x, a.y) = 200;
