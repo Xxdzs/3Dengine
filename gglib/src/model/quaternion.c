@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/18 12:43:09 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/18 20:29:18 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,13 +204,19 @@ void	qtrn_mult(t_qtrn *const a, const t_qtrn *const b)
 
 t_qtrn	qtrn_get_inv(const t_qtrn *const q)
 {
-	const t_real	tmp = (WP(q) * WP(q)
+	t_qtrn	ans;
+	t_real	tmp;
 
-	+ XP(q) * XP(q)
-	+ YP(q) * YP(q)
-	+ ZP(q) * ZP(q));
-	return (NEW_QTRN(-XP(q) / tmp, -YP(q) / tmp,
-		-ZP(q) / tmp, WP(q) / tmp));
+	ans = qtrn_get_conj(q);
+	if (ans.type == CARTHESIAN)
+		tmp = X(ans) * X(ans) + Y(ans) * Y(ans)
+			+ Z(ans) * Z(ans) + W(ans) * W(ans);
+	else if (ans.type == CYLINDRICAL)
+		tmp = Z(ans) * Z(ans) + QR(ans) * QR(ans);
+	else
+		tmp = QRHO(ans);
+	qtrn_external_mult(&ans, 1 / tmp);
+	return (ans);
 }
 
 /*
@@ -220,15 +226,17 @@ t_qtrn	qtrn_get_inv(const t_qtrn *const q)
 
 void	qtrn_inv(t_qtrn *const q)
 {
-	const t_real	tmp = WP(q) * WP(q)
+	t_real	tmp;
 
-	+ XP(q) * XP(q)
-	+ YP(q) * YP(q)
-	+ ZP(q) * ZP(q);
-	WP(q) /= tmp;
-	XP(q) *= -1 / tmp;
-	YP(q) *= -1 / tmp;
-	ZP(q) *= -1 / tmp;
+	qtrn_conj(q);
+	if (q->type == CARTHESIAN)
+		tmp = XP(q) * XP(q) + YP(q) * YP(q)
+			+ ZP(q) * ZP(q) + WP(q) * WP(q);
+	else if (q->type == CYLINDRICAL)
+		tmp = ZP(q) * ZP(q) + QRP(q) * QRP(q);
+	else
+		tmp = QRHOP(q);
+	qtrn_external_mult(q, 1 / tmp);
 }
 
 /*
@@ -243,7 +251,7 @@ t_qtrn	qtrn_get_conj(const t_qtrn *const q)
 		return ((t_qtrn){CYLINDRICAL, {{
 			QRP(q), QTHETAP(q) + M_PI, -ZP(q), WP(q)}}});
 	return ((t_qtrn){SPHERICAL, {{
-		QRHOP(q), THETAP(q) + M_PI, QPHIP(q) + M_PI, WP(q)}}});
+		QRHOP(q), QTHETAP(q) + M_PI, QPHIP(q) + M_PI, WP(q)}}});
 }
 
 /*
@@ -317,6 +325,12 @@ char	*qtrn_to_string(const t_qtrn *const q)
 	ft_dyna_datainit(&acc);
 	i = 0;
 	ft_dyna_append(&acc, "(", 1);
+	if (q->type == CARTHESIAN)
+		ft_dyna_append(&acc, "carth ", 6);
+	else if (q->type == CYLINDRICAL)
+		ft_dyna_append(&acc, "cylin ", 6);
+	else
+		ft_dyna_append(&acc, "spher ", 6);
 	while (i < 4)
 	{
 		tmp = ft_itoa(q->v.m[i]);
