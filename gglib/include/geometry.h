@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/17 15:38:37 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/18 11:07:24 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,8 +247,8 @@ t_qtrn			qtrn_external_prod(const t_qtrn *const a, const t_real s);
 void			qtrn_external_mult(t_qtrn *const a, const t_real s);
 t_qtrn			qtrn_sum(const t_qtrn *a, const t_qtrn *b);
 void			qtrn_add(t_qtrn *const a, const t_qtrn *const b);
-t_qtrn			qtrn_prod(const t_qtrn *const q, const t_qtrn *const h);
-void			qtrn_mult(t_qtrn *const q, const t_qtrn *const h);
+t_qtrn			qtrn_prod(const t_qtrn *const a, const t_qtrn *const b);
+void			qtrn_mult(t_qtrn *const a, const t_qtrn *const b);
 t_qtrn			qtrn_get_inv(const t_qtrn *const q);
 void			qtrn_inv(t_qtrn *const q);
 t_qtrn			qtrn_get_conj(const t_qtrn *const q);
@@ -267,6 +267,8 @@ void			carth2cylin(t_vec3t *v);
 void			cylin2carth(t_vec3t *v);
 void			carth2spher(t_vec3t *v);
 void			spher2carth(t_vec3t *v);
+void			spher2cylin(t_vec3t *v);
+void			cylin2spher(t_vec3t *v);
 t_real			perso2rqtrn(t_qtrn *q);
 
 #endif

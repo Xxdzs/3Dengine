@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/17 15:21:17 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/18 11:00:17 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			interpolate(t_env *const w, t_pnt2i *p1, t_pnt2i *p2, t_fnptr algo)
 	delta.y = abs(p1->y - p2->y);
 	fx = (delta.x < delta.y ? algo : &identity);
 	fy = (delta.x > delta.y ? algo : &identity);
-	i = delta.x + 1;
+	i = (delta.x > delta.y ? delta.x : delta.y) + 1;
 	while (i-- > 0)
 		PIXEL(p1->x + fx(i, delta.x, delta.y) * way.x,
 			p1->y + fy(i, delta.y, delta.x) * way.y) = 150;
@@ -103,11 +103,12 @@ int		draw_line_save(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
 int			default_repaint(t_env *const w)
 {
 	ft_putstr("Repainting, but no custom repainting function provided\n");
-	draw_line(w, &(t_pnt2i){100, 100}, &(t_pnt2i){400, 100});
-	draw_line(w, &(t_pnt2i){400, 300}, &(t_pnt2i){400, 100});
-	draw_line(w, &(t_pnt2i){400, 300}, &(t_pnt2i){100, 300});
-	draw_line(w, &(t_pnt2i){100, 100}, &(t_pnt2i){100, 300});
-	draw_line(w, &(t_pnt2i){100, 100}, &(t_pnt2i){400, 300});
-	draw_line(w, &(t_pnt2i){100, 300}, &(t_pnt2i){400, 100});
+	interpolate(w, &(t_pnt2i){100, 100}, &(t_pnt2i){400, 200}, &smooth_interpolation);
+	interpolate(w, &(t_pnt2i){400, 300}, &(t_pnt2i){100, 400}, &smooth_interpolation);
+	interpolate(w, &(t_pnt2i){100, 100}, &(t_pnt2i){400, 300}, &smooth_interpolation);
+	interpolate(w, &(t_pnt2i){100, 400}, &(t_pnt2i){400, 200}, &smooth_interpolation);
+	draw_line(w, &(t_pnt2i){100, 400}, &(t_pnt2i){400, 400});
+	draw_line(w, &(t_pnt2i){400, 400}, &(t_pnt2i){400, 100});
+	draw_line(w, &(t_pnt2i){400, 100}, &(t_pnt2i){100, 100});
 	return (0);
 }

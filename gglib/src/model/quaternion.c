@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/17 17:50:50 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/18 11:06:45 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,35 @@
 t_qtrn	qtrn_new(const t_real a, const t_real b, const t_real c, const t_real d)
 {
 	return (NEW_QTRN(a, b, c, d));
+}
+
+t_qtrn	qtrn_cpy(const t_qtrn *const q, const t_type t)
+{
+	t_qtrn	ans;
+
+	ans = *q;
+	if (t == CARTHESIAN)
+	{
+		if (q->type == SPHERICAL)
+			spher2carth((t_vec3t *)&ans);
+		else if (q->type == CYLINDRICAL)
+			cylin2carth((t_vec3t *)&ans);
+	}
+	else if (t == CYLINDRICAL)
+	{
+		if (q->type == CARTHESIAN)
+			carth2cylin((t_vec3t *)&ans);
+		else if (q->type == SPHERICAL)
+			spher2cylin((t_vec3t *)&ans);
+	}
+	else
+	{
+		if (q->type == CARTHESIAN)
+			carth2spher((t_vec3t *)&ans);
+		else if (q->type == CYLINDRICAL)
+			cylin2spher((t_vec3t *)&ans);
+	}
+	return (ans);
 }
 
 t_qtrn	*qtrn_alloc(const t_real a, const t_real b,
@@ -52,7 +81,7 @@ t_qtrn	qtrn_external_prod(const t_qtrn *const a, const t_real s)
 	else if (a->type == CYLINDRICAL)
 	{
 		QR(ans) = QRP(a) * s;
-		QTHETA(ans) = QTHETA(a);
+		QTHETA(ans) = QTHETAP(a);
 		Z(ans) = ZP(a) * s;
 		W(ans) = WP(a) * s;
 	}
@@ -84,7 +113,7 @@ void	qtrn_external_mult(t_qtrn *const a, const t_real s)
 	{
 		QRP(a) *= s;
 		ZP(a) *= s;
-		QWP(a) *= s;
+		WP(a) *= s;
 	}
 	else
 	{
@@ -103,16 +132,8 @@ t_qtrn	qtrn_sum(const t_qtrn *a, const t_qtrn *b)
 	t_qtrn ans;
 	t_qtrn tmp;
 
-	ans = *a;
-	tmp = *b;
-	if (ans.type == CYLINDRICAL)
-		cylin2carth(&ans);
-	else if (ans.type == SPERICAL)
-		spher2carth(&ans);
-	if (tmp.type == CYLINDRICAL)
-		cylin2carth(&tmp);
-	else if (tmp.type == SPERICAL)
-		spher2carth(&tmp);
+	ans = qtrn_cpy(a, CARTHESIAN);
+	tmp = qtrn_cpy(b, CARTHESIAN);
 	X(ans) += X(tmp);
 	Y(ans) += Y(tmp);
 	Z(ans) += Z(tmp);
@@ -127,34 +148,36 @@ t_qtrn	qtrn_sum(const t_qtrn *a, const t_qtrn *b)
 
 void	qtrn_add(t_qtrn *const a, const t_qtrn *const b)
 {
-	int		i;
-	t_type	;
+	int				i;
+	const t_type	save = a->type;
+	t_qtrn			tmp;
+	t_qtrn			ans;
 
-	if (a->type == CYLINDRICAL)
-		cylin2carth(a);
-	else if (a->type == SPERICAL)
-		spher2carth(a);
-	if (b->type == CYLINDRICAL)
-		cylin2carth(b);
-	else if (a->type == SPERICAL)
-		spher2carth(b);
+	ans = qtrn_cpy(a, CARTHESIAN);
+	tmp = qtrn_cpy(b, CARTHESIAN);
 	i = 4;
 	while (i-- > 0)
-		a->v.m[i] += b->v.m[i];
+		ans.v.m[i] += tmp.v.m[i];
+	*a = qtrn_cpy(&ans, save);
 }
 
 /*
 ** Quaternion :: Get the product
 */
 
-t_qtrn	qtrn_prod(const t_qtrn *const q, const t_qtrn *const h)
+t_qtrn	qtrn_prod(const t_qtrn *const a, const t_qtrn *const b)
 {
-	return (NEW_QTRN(
-		WP(q) * XP(h) + XP(q) * WP(h) + YP(q) * ZP(h) - ZP(q) * YP(h),
-		WP(q) * YP(h) + YP(q) * WP(h) - XP(q) * ZP(h) + ZP(q) * XP(h),
-		WP(q) * ZP(h) + ZP(q) * WP(h) + XP(q) * YP(h) - YP(q) * XP(h),
-		WP(q) * WP(h) - XP(q) * XP(h) - YP(q) * YP(h) - ZP(q) * ZP(h)
-		));
+	t_qtrn		q;
+	t_qtrn		h;
+
+	q = qtrn_cpy(a, CARTHESIAN);
+	h = qtrn_cpy(b, CARTHESIAN);
+    return (NEW_QTRN(
+		W(q) * X(h) + X(q) * W(h) + Y(q) * Z(h) - Z(q) * Y(h),
+		W(q) * Y(h) + Y(q) * W(h) - X(q) * Z(h) + Z(q) * X(h),
+		W(q) * Z(h) + Z(q) * W(h) + X(q) * Y(h) - Y(q) * X(h),
+		W(q) * W(h) - X(q) * X(h) - Y(q) * Y(h) - Z(q) * Z(h)
+	));
 }
 
 /*
@@ -162,7 +185,7 @@ t_qtrn	qtrn_prod(const t_qtrn *const q, const t_qtrn *const h)
 ** Side effect on the first quaternion
 */
 
-void	qtrn_mult(t_qtrn *const q, const t_qtrn *const h)
+void	qtrn_mult(t_qtrn *const a, const t_qtrn *const b)
 {
 	t_real qx;
 	t_real qy;

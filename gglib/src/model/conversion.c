@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 12:32:44 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/25 00:27:34 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/18 10:40:57 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	carth2polar(t_cmplx *v)
 	const t_real		y = YP(v);
 
 	MODP(v) = sqrt(x * x + y * y);
-	ARGP(v) = atan2(x, y);
+	ARGP(v) = atan2(y, x);
 	v->type = POLAR;
 }
 
@@ -50,7 +50,7 @@ void	cylin2carth(t_vec3t *v)
 /*
 ** Theta is the azimuth,
 ** Phi is the inclinaison,
-** rho is the norme
+** Rho is the norm
 */
 
 void	carth2spher(t_vec3t *v)
@@ -60,7 +60,7 @@ void	carth2spher(t_vec3t *v)
 	const t_real		z = ZP(v);
 
 	RHOP(v) = sqrt(x * x + y * y + z * z);
-	THETAP(v) = atan2(x, y);
+	THETAP(v) = atan2(y, x);
 	PHIP(v) = acos(z / RHOP(v));
 	v->type = SPHERICAL;
 }
@@ -76,6 +76,31 @@ void	spher2carth(t_vec3t *v)
 	ZP(v) = r * cos(p);
 	v->type = CARTHESIAN;
 }
+
+void	cylin2spher(t_vec3t *v)
+{
+	const t_real		z = ZP(v);
+	const t_real		r = RP(v);
+
+	RHOP(v) = sqrt(z * z + r * r);
+	THETAP(v) = atan2(r, z);
+	v->type = SPHERICAL;
+}
+
+void	spher2cylin(t_vec3t	*v)
+{
+	const t_real		rho = RHOP(v);
+	const t_real		theta = THETAP(v);
+
+	ZP(v) = cos(theta) * rho;
+	RP(v) = sin(theta) * rho;
+	v->type = CYLINDRICAL;
+}
+
+/*
+** p = a + s * u
+** q = cos(a/2) + sin(a/2) * u
+*/
 
 t_real	perso2rqtrn(t_qtrn *q)
 {
