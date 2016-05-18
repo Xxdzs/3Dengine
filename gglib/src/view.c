@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/18 11:00:17 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/18 11:28:47 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ int			default_repaint(t_env *const w)
 	interpolate(w, &(t_pnt2i){400, 300}, &(t_pnt2i){100, 400}, &smooth_interpolation);
 	interpolate(w, &(t_pnt2i){100, 100}, &(t_pnt2i){400, 300}, &smooth_interpolation);
 	interpolate(w, &(t_pnt2i){100, 400}, &(t_pnt2i){400, 200}, &smooth_interpolation);
-	draw_line(w, &(t_pnt2i){100, 400}, &(t_pnt2i){400, 400});
-	draw_line(w, &(t_pnt2i){400, 400}, &(t_pnt2i){400, 100});
-	draw_line(w, &(t_pnt2i){400, 100}, &(t_pnt2i){100, 100});
+	draw_line(w, &(t_pnt2i){120, 400}, &(t_pnt2i){400, 350});
+	draw_line(w, &(t_pnt2i){400, 350}, &(t_pnt2i){400, 150});
+	draw_line(w, &(t_pnt2i){400, 150}, &(t_pnt2i){125, 100});
 	return (0);
 }

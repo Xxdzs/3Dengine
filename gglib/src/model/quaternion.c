@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/18 11:06:45 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/18 12:43:09 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,11 +167,9 @@ void	qtrn_add(t_qtrn *const a, const t_qtrn *const b)
 
 t_qtrn	qtrn_prod(const t_qtrn *const a, const t_qtrn *const b)
 {
-	t_qtrn		q;
-	t_qtrn		h;
+	const t_qtrn		q = qtrn_cpy(a, CARTHESIAN);
+	const t_qtrn		h = qtrn_cpy(b, CARTHESIAN);
 
-	q = qtrn_cpy(a, CARTHESIAN);
-	h = qtrn_cpy(b, CARTHESIAN);
     return (NEW_QTRN(
 		W(q) * X(h) + X(q) * W(h) + Y(q) * Z(h) - Z(q) * Y(h),
 		W(q) * Y(h) + Y(q) * W(h) - X(q) * Z(h) + Z(q) * X(h),
@@ -187,18 +185,17 @@ t_qtrn	qtrn_prod(const t_qtrn *const a, const t_qtrn *const b)
 
 void	qtrn_mult(t_qtrn *const a, const t_qtrn *const b)
 {
-	t_real qx;
-	t_real qy;
-	t_real qz;
+	const t_qtrn		q = qtrn_cpy(a, CARTHESIAN);
+	const t_qtrn		h = qtrn_cpy(b, CARTHESIAN);
+	t_qtrn		ans;
 
-	qx = WP(q) * XP(h) + XP(q) * WP(h) + YP(q) * ZP(h) - ZP(q) * YP(h);
-	qy = WP(q) * YP(h) + YP(q) * WP(h) - XP(q) * ZP(h) + ZP(q) * XP(h);
-	qz = WP(q) * ZP(h) + ZP(q) * WP(h) + XP(q) * YP(h) - YP(q) * XP(h);
-	WP(q) *= WP(h);
-	WP(q) -= XP(q) * XP(h) + YP(q) * YP(h) + ZP(q) * ZP(h);
-	XP(q) = qx;
-	YP(q) = qy;
-	ZP(q) = qz;
+	ans = NEW_QTRN(
+		W(q) * X(h) + X(q) * W(h) + Y(q) * Z(h) - Z(q) * Y(h),
+		W(q) * Y(h) + Y(q) * W(h) - X(q) * Z(h) + Z(q) * X(h),
+		W(q) * Z(h) + Z(q) * W(h) + X(q) * Y(h) - Y(q) * X(h),
+		W(q) * W(h) - X(q) * X(h) + Y(q) * Y(h) + Z(q) * Z(h)
+	);
+	*a = qtrn_cpy(&ans, a->type);
 }
 
 /*
@@ -240,7 +237,13 @@ void	qtrn_inv(t_qtrn *const q)
 
 t_qtrn	qtrn_get_conj(const t_qtrn *const q)
 {
-	return (NEW_QTRN(-XP(q), -YP(q), -ZP(q), WP(q)));
+	if (q->type == CARTHESIAN)
+		return (NEW_QTRN(-XP(q), -YP(q), -ZP(q), WP(q)));
+	else if (q->type == CYLINDRICAL)
+		return ((t_qtrn){CYLINDRICAL, {{
+			QRP(q), QTHETAP(q) + M_PI, -ZP(q), WP(q)}}});
+	return ((t_qtrn){SPHERICAL, {{
+		QRHOP(q), THETAP(q) + M_PI, QPHIP(q) + M_PI, WP(q)}}});
 }
 
 /*
@@ -250,9 +253,22 @@ t_qtrn	qtrn_get_conj(const t_qtrn *const q)
 
 void	qtrn_conj(t_qtrn *const q)
 {
-	XP(q) *= -1;
-	YP(q) *= -1;
-	ZP(q) *= -1;
+	if (q->type == CARTHESIAN)
+	{
+		XP(q) *= -1;
+		YP(q) *= -1;
+		ZP(q) *= -1;
+	}
+	else if (q->type == CYLINDRICAL)
+	{
+		QTHETAP(q) += M_PI;
+		ZP(q) *= -1;
+	}
+	else
+	{
+		QTHETAP(q) += M_PI;
+		QPHIP(q) += M_PI;
+	}
 }
 
 /*
