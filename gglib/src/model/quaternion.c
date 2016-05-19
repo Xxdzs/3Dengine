@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/18 20:29:18 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/19 12:49:33 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ void	qtrn_external_mult(t_qtrn *const a, const t_real s)
 	}
 }
 
-
 /*
 ** Quaternion :: Get the sum
 */
@@ -170,12 +169,11 @@ t_qtrn	qtrn_prod(const t_qtrn *const a, const t_qtrn *const b)
 	const t_qtrn		q = qtrn_cpy(a, CARTHESIAN);
 	const t_qtrn		h = qtrn_cpy(b, CARTHESIAN);
 
-    return (NEW_QTRN(
+	return (NEW_QTRN(
 		W(q) * X(h) + X(q) * W(h) + Y(q) * Z(h) - Z(q) * Y(h),
 		W(q) * Y(h) + Y(q) * W(h) - X(q) * Z(h) + Z(q) * X(h),
 		W(q) * Z(h) + Z(q) * W(h) + X(q) * Y(h) - Y(q) * X(h),
-		W(q) * W(h) - X(q) * X(h) - Y(q) * Y(h) - Z(q) * Z(h)
-	));
+		W(q) * W(h) - X(q) * X(h) - Y(q) * Y(h) - Z(q) * Z(h)));
 }
 
 /*
@@ -187,14 +185,13 @@ void	qtrn_mult(t_qtrn *const a, const t_qtrn *const b)
 {
 	const t_qtrn		q = qtrn_cpy(a, CARTHESIAN);
 	const t_qtrn		h = qtrn_cpy(b, CARTHESIAN);
-	t_qtrn		ans;
+	t_qtrn				ans;
 
 	ans = NEW_QTRN(
 		W(q) * X(h) + X(q) * W(h) + Y(q) * Z(h) - Z(q) * Y(h),
 		W(q) * Y(h) + Y(q) * W(h) - X(q) * Z(h) + Z(q) * X(h),
 		W(q) * Z(h) + Z(q) * W(h) + X(q) * Y(h) - Y(q) * X(h),
-		W(q) * W(h) - X(q) * X(h) + Y(q) * Y(h) + Z(q) * Z(h)
-	);
+		W(q) * W(h) - X(q) * X(h) + Y(q) * Y(h) + Z(q) * Z(h));
 	*a = qtrn_cpy(&ans, a->type);
 }
 
@@ -208,14 +205,7 @@ t_qtrn	qtrn_get_inv(const t_qtrn *const q)
 	t_real	tmp;
 
 	ans = qtrn_get_conj(q);
-	if (ans.type == CARTHESIAN)
-		tmp = X(ans) * X(ans) + Y(ans) * Y(ans)
-			+ Z(ans) * Z(ans) + W(ans) * W(ans);
-	else if (ans.type == CYLINDRICAL)
-		tmp = Z(ans) * Z(ans) + QR(ans) * QR(ans);
-	else
-		tmp = QRHO(ans);
-	qtrn_external_mult(&ans, 1 / tmp);
+	qtrn_external_mult(&ans, 1 / qtrn_get_norm(q));
 	return (ans);
 }
 
@@ -229,14 +219,7 @@ void	qtrn_inv(t_qtrn *const q)
 	t_real	tmp;
 
 	qtrn_conj(q);
-	if (q->type == CARTHESIAN)
-		tmp = XP(q) * XP(q) + YP(q) * YP(q)
-			+ ZP(q) * ZP(q) + WP(q) * WP(q);
-	else if (q->type == CYLINDRICAL)
-		tmp = ZP(q) * ZP(q) + QRP(q) * QRP(q);
-	else
-		tmp = QRHOP(q);
-	qtrn_external_mult(q, 1 / tmp);
+	qtrn_external_mult(q, 1 / qtrn_get_norm(q));
 }
 
 /*
@@ -250,8 +233,9 @@ t_qtrn	qtrn_get_conj(const t_qtrn *const q)
 	else if (q->type == CYLINDRICAL)
 		return ((t_qtrn){CYLINDRICAL, {{
 			QRP(q), QTHETAP(q) + M_PI, -ZP(q), WP(q)}}});
-	return ((t_qtrn){SPHERICAL, {{
-		QRHOP(q), QTHETAP(q) + M_PI, QPHIP(q) + M_PI, WP(q)}}});
+	else
+		return ((t_qtrn){SPHERICAL, {{
+			QRHOP(q), QTHETAP(q) + M_PI, QPHIP(q) + M_PI, WP(q)}}});
 }
 
 /*
@@ -279,19 +263,34 @@ void	qtrn_conj(t_qtrn *const q)
 	}
 }
 
+t_real	qtrn_get_norm(const t_qtrn *const q)
+{
+	if (q->type == CARTHESIAN)
+		return (XP(q) * XP(q) + YP(q) * YP(q)
+			+ ZP(q) * ZP(q) + WP(q) * WP(q));
+	else if (q->type == CYLINDRICAL)
+		return (ZP(q) * ZP(q) + QRP(q) * QRP(q));
+	else
+		return (QRHOP(q));
+}
+
+t_real	qtrn_get_modulus(const t_qtrn *const q)
+{
+	return (sqrt(qtrn_get_norm(t_qtrn *q)));
+}
+
 /*
 ** Quaternion :: Get the rotation
 ** f :	H x H	-> H
 **		(q, p)	|-> q * p * inv(q)
 */
 
-t_qtrn	qtrn_get_rotated(const t_qtrn *const to_rotate, t_qtrn rotator)
+t_qtrn	qtrn_get_rotated(const t_qtrn *const a, const t_qtrn *const b)
 {
 	t_qtrn	ans;
 
-	ans = qtrn_prod(&rotator, to_rotate);
-	qtrn_inv(&rotator);
-	qtrn_mult(&ans, &rotator);
+	ans = qtrn_prod(b, a);
+	qtrn_mult(&ans, &qtrn_get_inv(b));
 	return (ans);
 }
 
@@ -301,15 +300,8 @@ t_qtrn	qtrn_get_rotated(const t_qtrn *const to_rotate, t_qtrn rotator)
 **		(q, p)	|-> q * p * inv(q)
 */
 
-void	qtrn_rotate(t_qtrn *const to_rotate, t_qtrn rotator)
-{
-	t_qtrn	ans;
-
-	ans = qtrn_get_inv(&rotator);
-	qtrn_mult(to_rotate, &ans);
-	qtrn_mult(&rotator, to_rotate);
-	ft_memcpy(to_rotate, &rotator, sizeof(ans));
-}
+void	qtrn_rotate(t_qtrn *const a, const t_qtrn *const b)
+{}
 
 /*
 ** Quaternion :: To string
@@ -333,7 +325,11 @@ char	*qtrn_to_string(const t_qtrn *const q)
 		ft_dyna_append(&acc, "spher ", 6);
 	while (i < 4)
 	{
-		tmp = ft_itoa(q->v.m[i]);
+		tmp = ft_itoa((int)(q->v.m[i]));
+		ft_dyna_append(&acc, tmp, ft_strlen(tmp));
+		free(tmp);
+		ft_dyna_append(&acc, ".", 1);
+		tmp = ft_itoa((int)((q->v.m[i] - floor(q->v.m[i])) * 10000000));
 		ft_dyna_append(&acc, tmp, ft_strlen(tmp));
 		free(tmp);
 		if (i++ < 3)

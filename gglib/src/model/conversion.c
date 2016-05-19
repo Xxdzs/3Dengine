@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 12:32:44 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/18 10:40:57 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/19 12:30:58 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,11 @@ void	cylin2spher(t_vec3t *v)
 	const t_real		r = RP(v);
 
 	RHOP(v) = sqrt(z * z + r * r);
-	THETAP(v) = atan2(r, z);
+	PHIP(v) = atan2(r, z);
 	v->type = SPHERICAL;
 }
 
-void	spher2cylin(t_vec3t	*v)
+void	spher2cylin(t_vec3t *v)
 {
 	const t_real		rho = RHOP(v);
 	const t_real		theta = THETAP(v);

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/18 11:07:24 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/19 12:44:46 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,8 +253,9 @@ t_qtrn			qtrn_get_inv(const t_qtrn *const q);
 void			qtrn_inv(t_qtrn *const q);
 t_qtrn			qtrn_get_conj(const t_qtrn *const q);
 void			qtrn_conj(t_qtrn *const q);
-t_qtrn			qtrn_get_rotated(const t_qtrn *const to_rotate, t_qtrn rotator);
-void			qtrn_rotate(t_qtrn *const to_rotate, t_qtrn rotator);
+t_qtrn			qtrn_get_rotated(const t_qtrn *const a, const t_qtrn *const b);
+t_real			qtrn_get_norm(const t_qtrn *const q);
+t_real			qtrn_get_modulus(const t_qtrn *const q);
 char			*qtrn_to_string(const t_qtrn *const q);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 18:14:08 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/27 06:00:45 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/19 12:46:23 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,3 @@ void		vec3_ensure_carth(t_vec3t *v)
 	if (v->type == SPHERICAL)
 		spher2carth(v);
 }
-
