@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/19 12:49:33 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/19 14:57:14 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,10 +170,10 @@ t_qtrn	qtrn_prod(const t_qtrn *const a, const t_qtrn *const b)
 	const t_qtrn		h = qtrn_cpy(b, CARTHESIAN);
 
 	return (NEW_QTRN(
-		W(q) * X(h) + X(q) * W(h) + Y(q) * Z(h) - Z(q) * Y(h),
-		W(q) * Y(h) + Y(q) * W(h) - X(q) * Z(h) + Z(q) * X(h),
-		W(q) * Z(h) + Z(q) * W(h) + X(q) * Y(h) - Y(q) * X(h),
-		W(q) * W(h) - X(q) * X(h) - Y(q) * Y(h) - Z(q) * Z(h)));
+		X(q) * W(h) + Y(q) * Z(h) - Z(q) * Y(h) + W(q) * X(h),
+		-X(q) * Z(h) + Y(q) * W(h) + Z(q) * X(h) + W(q) * Y(h),
+		X(q) * Y(h) - Y(q) * X(h) + Z(q) * W(h) + W(q) * Z(h),
+		-X(q) * X(h) - Y(q) * Y(h) - Z(q) * Z(h) + W(q) * W(h)));
 }
 
 /*
@@ -183,16 +183,7 @@ t_qtrn	qtrn_prod(const t_qtrn *const a, const t_qtrn *const b)
 
 void	qtrn_mult(t_qtrn *const a, const t_qtrn *const b)
 {
-	const t_qtrn		q = qtrn_cpy(a, CARTHESIAN);
-	const t_qtrn		h = qtrn_cpy(b, CARTHESIAN);
-	t_qtrn				ans;
-
-	ans = NEW_QTRN(
-		W(q) * X(h) + X(q) * W(h) + Y(q) * Z(h) - Z(q) * Y(h),
-		W(q) * Y(h) + Y(q) * W(h) - X(q) * Z(h) + Z(q) * X(h),
-		W(q) * Z(h) + Z(q) * W(h) + X(q) * Y(h) - Y(q) * X(h),
-		W(q) * W(h) - X(q) * X(h) + Y(q) * Y(h) + Z(q) * Z(h));
-	*a = qtrn_cpy(&ans, a->type);
+	*a = qtrn_cpy(&qtrn_prod(), a->type);
 }
 
 /*
