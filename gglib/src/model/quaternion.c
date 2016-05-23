@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/19 14:57:14 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/23 08:30:31 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,10 @@ t_qtrn	qtrn_prod(const t_qtrn *const a, const t_qtrn *const b)
 
 void	qtrn_mult(t_qtrn *const a, const t_qtrn *const b)
 {
-	*a = qtrn_cpy(&qtrn_prod(), a->type);
+	t_qtrn	tmp;
+
+	tmp = qtrn_prod(a, b);
+	*a = qtrn_cpy(&tmp, a->type);
 }
 
 /*
@@ -193,7 +196,6 @@ void	qtrn_mult(t_qtrn *const a, const t_qtrn *const b)
 t_qtrn	qtrn_get_inv(const t_qtrn *const q)
 {
 	t_qtrn	ans;
-	t_real	tmp;
 
 	ans = qtrn_get_conj(q);
 	qtrn_external_mult(&ans, 1 / qtrn_get_norm(q));
@@ -207,8 +209,6 @@ t_qtrn	qtrn_get_inv(const t_qtrn *const q)
 
 void	qtrn_inv(t_qtrn *const q)
 {
-	t_real	tmp;
-
 	qtrn_conj(q);
 	qtrn_external_mult(q, 1 / qtrn_get_norm(q));
 }
@@ -267,7 +267,7 @@ t_real	qtrn_get_norm(const t_qtrn *const q)
 
 t_real	qtrn_get_modulus(const t_qtrn *const q)
 {
-	return (sqrt(qtrn_get_norm(t_qtrn *q)));
+	return (sqrt(qtrn_get_norm(q)));
 }
 
 /*
@@ -279,9 +279,11 @@ t_real	qtrn_get_modulus(const t_qtrn *const q)
 t_qtrn	qtrn_get_rotated(const t_qtrn *const a, const t_qtrn *const b)
 {
 	t_qtrn	ans;
+	t_qtrn	tmp;
 
 	ans = qtrn_prod(b, a);
-	qtrn_mult(&ans, &qtrn_get_inv(b));
+	tmp = qtrn_get_inv(b);
+	qtrn_mult(&ans, &tmp);
 	return (ans);
 }
 
@@ -289,10 +291,13 @@ t_qtrn	qtrn_get_rotated(const t_qtrn *const a, const t_qtrn *const b)
 ** Quaternion :: Apply the rotation
 ** f :	H x H	-> H
 **		(q, p)	|-> q * p * inv(q)
+** Side effect on the first quaternion
 */
 
 void	qtrn_rotate(t_qtrn *const a, const t_qtrn *const b)
-{}
+{
+	*a = qtrn_get_rotated(a, b);
+}
 
 /*
 ** Quaternion :: To string

@@ -6,10 +6,11 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/18 20:33:41 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/23 08:31:36 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "geometry.h"
 #include "ggl.h"
 
 #include <stdio.h> // <==
@@ -40,7 +41,7 @@ int		render(t_env *w)
 			printf("Point actuel : %s\n", tmp = qtrn_to_string(&q)); // <--
 			free(tmp); // <--
 //		}
-		qtrn_rotate(&q, r);
+		qtrn_rotate(&q, &r);
 		a = (t_pnt2i){X(q), Y(q)};
 		//PIXEL(a.x, a.y) = 200;
 		draw_line(w, &a, &b);
