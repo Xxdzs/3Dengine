@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/23 08:33:43 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/31 22:22:15 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,32 @@
 
 #include <stdio.h> // <==
 
-#define POINT(i) (((t_vrtx *)ft_dyna_get(&f->vertices, i - 1))->vec.v.c)
+#define POINT(i) (((t_vrtx *)ft_dyna_get(&f->vertices, i))->vec.v.c)
 
 int		render(t_env *w)
 {
 	char *tmp; // <--
 	t_pnt2i		a;
 	t_pnt2i		b = {0, 0};
+#ifdef EULER
+	t_mat3x1	p;
+	t_mat3x3	m;
+#else
 	t_qtrn		q;
 	t_qtrn		r;
+#endif
 	t_obj		*f = (t_obj *)w->g.world->node.children.root.next;
 
 	ft_bzero(w->pixel, w->wdim.d.width * w->wdim.d.height * w->bits_per_pixel / 8);
 	ft_putstr("\t--==  Renderin ");
 	ft_putstr(f->name);
 	ft_putstr("  ==--\n");
+#ifdef EULER
+
+#endif
 	for (size_t i = 0 ; i < f->vertices.chunck_count ; i++)
 	{
+#ifndef EULER
 		r = f->node.rot;
 		perso2rqtrn(&r);
 		q = NEW_QTRN(POINT(i).x, POINT(i).y, POINT(i).z, 0.0);
@@ -46,6 +55,7 @@ int		render(t_env *w)
 		//PIXEL(a.x, a.y) = 200;
 		draw_line(w, &a, &b);
 		b = a;
+#endif
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/31 17:01:44 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/31 18:38:11 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_qtrn	qtrn_get_rotated(const t_qtrn *const a, const t_qtrn *const b)
 	ans = qtrn_prod(b, a);
 	tmp = qtrn_get_inv(b);
 	printf("inv(b) = (%f, %f, %f, %f)\n",
-		   b->v.m[0], b->v.m[1], b->v.m[2], b->v.m[3]); // < --
+		b->v.m[0], b->v.m[1], b->v.m[2], b->v.m[3]);
 	qtrn_mult(&ans, &tmp);
 	return (ans);
 }
