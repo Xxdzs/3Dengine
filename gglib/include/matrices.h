@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 10:24:36 by angagnie          #+#    #+#             */
-/*   Updated: 2016/03/31 13:56:42 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/31 22:52:56 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,9 @@ typedef t_vec2	t_mat2x1;
 typedef t_vec3i	t_mat3x1i;
 typedef t_vec3	t_mat3x1;
 typedef t_vec4	t_mat4x1;
+
+t_mat2x1i		mat_2x3i_times_3x1i(const t_mat2x3i *a, const t_mat3x1i *b);
+t_mat3x1		mat_3x3_times_3x1(const t_mat3x3 *a, const t_mat3x1 *b);
+t_mat3x3		mat_3x3_times_3x3(const t_mat3x3 *a, const t_mat3x3 *b);
 
 #endif

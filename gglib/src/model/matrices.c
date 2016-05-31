@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:36:22 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/31 18:33:45 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/31 22:52:22 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 **
 */
 
-t_mat2x1i	mat_2x3i_times_3x1i(t_mat2x3i *a, t_mat3x1i *b)
+t_mat2x1i	mat_2x3i_times_3x1i(const t_mat2x3i *a, const t_mat3x1i *b)
 {
 	return ((t_mat2x1i){{
 		a->pnt[0].x * b->c.x + a->pnt[1].x * b->c.y + a->pnt[2].x * b->c.z,
@@ -28,7 +28,7 @@ t_mat2x1i	mat_2x3i_times_3x1i(t_mat2x3i *a, t_mat3x1i *b)
 		}});
 }
 
-t_mat3x1	mat_3x3_times_3x1(t_mat3x3 *a, t_mat3x1 *b)
+t_mat3x1	mat_3x3_times_3x1(const t_mat3x3 *a, const t_mat3x1 *b)
 {
 	return ((t_mat3x1){{
 		a->pnt[0].x * b->c.x + a->pnt[1].x * b->c.y + a->pnt[2].x * b->c.z,
@@ -42,7 +42,7 @@ t_mat3x1	mat_3x3_times_3x1(t_mat3x3 *a, t_mat3x1 *b)
 **						(a, b)		|->		a * b
 */
 
-void		mat_3x3_times_3x3(t_mat3x3 *a, t_mat3x3 *b)
+t_mat3x3		mat_3x3_times_3x3(const t_mat3x3 *a, const t_mat3x3 *b)
 {
 	return ((t_mat3x3){{
 		a->pnt[0].x * b->pnt[0].x + a->pnt[1].x * b->pnt[0].y

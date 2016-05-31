@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/31 22:22:15 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/31 22:45:14 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 
 int		render(t_env *w)
 {
-	char *tmp; // <--
-	t_pnt2i		a;
-	t_pnt2i		b = {0, 0};
 #ifdef EULER
 	t_mat3x1	p;
 	t_mat3x3	m;
@@ -36,20 +33,19 @@ int		render(t_env *w)
 	ft_putstr(f->name);
 	ft_putstr("  ==--\n");
 #ifdef EULER
-
+	m = mat_xaxis(f->node.alpha);
+	m = matrix_3x3_times_3x3(&m, &mat_yaxis(f->node.beta));
+	m = matrix_3x3_times_3x3(&m, &mat_zaxis(f->node.gamma));
 #endif
 	for (size_t i = 0 ; i < f->vertices.chunck_count ; i++)
 	{
-#ifndef EULER
+#ifdef EULER
+		p = ((t_vrtx *)ft_dyna_get(&f->vertices, i))->vec.v;
+		p = mat_3x3_times_3x1(&m, &p);
+#else
 		r = f->node.rot;
 		perso2rqtrn(&r);
 		q = NEW_QTRN(POINT(i).x, POINT(i).y, POINT(i).z, 0.0);
-		qtrn_external_mult(&q, w->g.world->node.scale);
-		if (i % 100 == 0)
-		{
-			printf("Point actuel : %s\n", tmp = qtrn_to_string(&q)); // <--
-			free(tmp); // <--
-		}
 		qtrn_rotate(&q, &r);
 		a = (t_pnt2i){X(q), Y(q)};
 		//PIXEL(a.x, a.y) = 200;
