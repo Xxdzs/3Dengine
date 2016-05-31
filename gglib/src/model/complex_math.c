@@ -1,52 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   complex.c                                          :+:      :+:    :+:   */
+/*   complex_math.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/26 18:26:09 by angagnie          #+#    #+#             */
-/*   Updated: 2016/04/21 16:54:26 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/31 17:23:41 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "geometry.h"
-
-void		complx_ensure_carth(t_cmplx *c)
-{
-	if (c->type == POLAR)
-		polar2carth(v);
-}
-
-void		complx_ensure_polar(t_cmplx *c)
-{
-	if (c->type == CARTHESIAN)
-		carth2polar(v);
-}
+#include <math.h>
 
 t_cmplx		cmplx_log(t_cmplx *c)
 {
-	ensure_polar(c);
-	return (NEW_CMPLX(log(c->p.mod), c->p.arg));
+	const t_cmplx		tmp = cmplx_cpy(c, POLAR);
+
+	return (NEW_CMPLX(log(MOD(tmp)), ARG(tmp)));
 }
 
 t_cmplx		cmplx_cos(t_cmplx *c)
 {
-	ensure_carth(c);
-	return (NEW_CMPLX(cos(c->c.x) * cosh(c->c.y), sin(c->c.x) * sinh(c->c.y)));
+	const t_cmplx		tmp = cmplx_cpy(c, CARTHESIAN);
+
+	return (NEW_CMPLX(cos(X(tmp)) * cosh(Y(tmp)), sin(X(tmp)) * sinh(Y(tmp))));
 }
 
 t_cmplx		cmplx_sin(t_cmplx *c)
 {
-	ensure_carth(c);
-	return (NEW_CMPLX(sin(c->c.x) * cosh(c->c.y), cos(c->c.x) * sinh(c->c.y)));
+	const t_cmplx		tmp = cmplx_cpy(c, CARTHESIAN);
+
+	return (NEW_CMPLX(sin(X(tmp)) * cosh(Y(tmp)), cos(X(tmp)) * sinh(Y(tmp))));
 }
 
 t_real		cmplx_mod(t_cmplx *c)
 {
-	if (c->type == SPHERICAL)
-		return (MOD(*c));
-	return (sqrt(XP(c) * XP(c) + YP(c) * YP(c) + ZP(c) * ZP(c)));
+	if (c->type != CARTHESIAN)
+		return (MODP(c));
+	return (sqrt(XP(c) * XP(c) + YP(c) * YP(c)));
 }
 
 t_real		cmplx_rep(t_cmplx *c)

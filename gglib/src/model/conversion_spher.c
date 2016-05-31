@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 12:32:44 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/31 14:35:27 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/31 17:18:14 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,10 @@
 
 /*
 ** \ < 2D & 3D >
-** - Carthesian to Polar
-** - Polar to Carthesian
+** - Carthesian to Polar & Cylindrical
+** - Polar & Cylindrical to Carthesian
 ** /
 ** \ < 3D >
-** - Carthesian to Cylindrical
-** - Cylindrical to Carthesian
-** |
 ** - Carthesian to Spherical
 ** - Spherical to Carthesian
 ** |
@@ -39,36 +36,6 @@
 ** /
 ** Obvious side effects
 */
-
-void	carth2polar(t_cmplx *v)
-{
-	const t_real		x = XP(v);
-	const t_real		y = YP(v);
-
-	MODP(v) = sqrt(x * x + y * y);
-	ARGP(v) = atan2(y, x);
-	v->type = POLAR;
-}
-
-void	polar2carth(t_cmplx *v)
-{
-	const t_real		m = MODP(v);
-	const t_real		a = ARGP(v);
-
-	XP(v) = m * cos(a);
-	YP(v) = m * sin(a);
-	v->type = CARTHESIAN;
-}
-
-void	carth2cylin(t_vec3t *v)
-{
-	carth2polar((t_vec2t *)v);
-}
-
-void	cylin2carth(t_vec3t *v)
-{
-	polar2carth((t_vec2t *)v);
-}
 
 /*
 ** Theta is the azimuth,
@@ -118,19 +85,4 @@ void	spher2cylin(t_vec3t *v)
 	ZP(v) = cos(theta) * rho;
 	RP(v) = sin(theta) * rho;
 	v->type = CYLINDRICAL;
-}
-
-/*
-** p = a + s * u
-** q = cos(a/2) + sin(a/2) * u
-*/
-
-t_real	perso2rqtrn(t_qtrn *q)
-{
-	const t_real	alpha = SCALARP(q) / 2;
-	const t_real	scale = VECTORP(q).s.rho;
-
-	SCALARP(q) = cos(alpha / 2);
-	VECTORP(q).s.rho = sin(alpha / 2);
-	return (scale);
 }

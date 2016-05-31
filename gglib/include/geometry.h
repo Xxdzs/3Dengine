@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/23 08:31:58 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/31 17:29:59 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,18 +230,19 @@ typedef t_vec4t	t_qtrn;
 # define NEW_CMPLX(A, B) NEW_VEC2(A, B)
 # define NEW_QTRN(...) NEW_VEC4(__VA_ARGS__)
 
-t_qtrn			qtrn_new(const t_real a, const t_real b,
-	const t_real c, const t_real d);
-
+t_qtrn			qtrn_cpy(const t_qtrn *const q, const t_type t);
+t_cmplx			cmplx_cpy(const t_cmplx *const z, const t_type t);
 t_vec3t			*vec3_alloc(const t_real a, const t_real b, const t_real c);
-
-/*
-** -----=====  Destructors  =====-----
-*/
 
 /*
 ** -----=====  Member Functions  =====-----
 */
+
+t_cmplx			cmplx_log(t_cmplx *c);
+t_cmplx			cmplx_cos(t_cmplx *c);
+t_cmplx			cmplx_sin(t_cmplx *c);
+t_real			cmplx_mod(t_cmplx *c);
+t_real			cmplx_rep(t_cmplx *c);
 
 t_qtrn			qtrn_external_prod(const t_qtrn *const a, const t_real s);
 void			qtrn_external_mult(t_qtrn *const a, const t_real s);

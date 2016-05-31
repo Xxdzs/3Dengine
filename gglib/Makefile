@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/05/17 10:26:39 by angagnie         ###   ########.fr        #
+#    Updated: 2016/05/31 17:20:02 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,7 +14,11 @@
 EXEC_NAME:=ggl
 NAME:=libgg.a
 MODEL_PATH:=model/
-MODEL:=quaternion conversion matrices system_tree geometry
+MODEL:=matrices system_tree geometry \
+	complex_math complex_new \
+	conversion_polar conversion_spher \
+	quaternion_conj quaternion_misc quaternion_new quaternion_prod \
+	quaternion_rotate quaternion_sum
 FILES=view controller render parser ft_ator ggl_main main
 LIBFT_PATH=../Libft/
 LIBFT_HDR=../Libft/include/

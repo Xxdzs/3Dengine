@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/23 08:30:31 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/05/29 17:44:27 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,6 +283,7 @@ t_qtrn	qtrn_get_rotated(const t_qtrn *const a, const t_qtrn *const b)
 
 	ans = qtrn_prod(b, a);
 	tmp = qtrn_get_inv(b);
+	printf("inv(b) = (%f, %f, %f, %f)\n", b->v.m[0], b->v.m[1], b->v.m[2], b->v.m[3]);
 	qtrn_mult(&ans, &tmp);
 	return (ans);
 }
@@ -325,7 +326,7 @@ char	*qtrn_to_string(const t_qtrn *const q)
 		ft_dyna_append(&acc, tmp, ft_strlen(tmp));
 		free(tmp);
 		ft_dyna_append(&acc, ".", 1);
-		tmp = ft_itoa((int)((q->v.m[i] - floor(q->v.m[i])) * 10000000));
+		tmp = ft_itoa((int)((q->v.m[i] - trunc(q->v.m[i])) * 10000));
 		ft_dyna_append(&acc, tmp, ft_strlen(tmp));
 		free(tmp);
 		if (i++ < 3)
