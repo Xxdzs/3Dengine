@@ -6,11 +6,25 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/18 11:28:47 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/01 13:30:08 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
+
+void		pxl_on(t_env *w, int x, int y, unsigned int color)
+{
+	char			*t;
+	unsigned int	*c;
+
+	if (0 <= x && x < w->wdim.d.width
+		&& 0 <= y && y < w->wdim.d.height)
+	{
+		t = w->pixel + y * w->line_size + x * w->bits_per_pixel / 8;
+		c = (unsigned int *)t;
+		*c = color;
+	}
+}
 
 int			default_expose_hook(void *param)
 {
@@ -62,8 +76,8 @@ int			interpolate(t_env *const w, t_pnt2i *p1, t_pnt2i *p2, t_fnptr algo)
 	fy = (delta.x > delta.y ? algo : &identity);
 	i = (delta.x > delta.y ? delta.x : delta.y) + 1;
 	while (i-- > 0)
-		PIXEL(p1->x + fx(i, delta.x, delta.y) * way.x,
-			p1->y + fy(i, delta.y, delta.x) * way.y) = 150;
+		pxl_on(w, p1->x + fx(i, delta.x, delta.y) * way.x,
+			   p1->y + fy(i, delta.y, delta.x) * way.y, 200 << 16);
 	return (0);
 }
 
@@ -110,5 +124,6 @@ int			default_repaint(t_env *const w)
 	draw_line(w, &(t_pnt2i){120, 400}, &(t_pnt2i){400, 350});
 	draw_line(w, &(t_pnt2i){400, 350}, &(t_pnt2i){400, 150});
 	draw_line(w, &(t_pnt2i){400, 150}, &(t_pnt2i){125, 100});
+	ft_putstr("Let me understand\n");
 	return (0);
 }

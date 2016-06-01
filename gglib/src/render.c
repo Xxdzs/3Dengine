@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/01 13:13:59 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/01 13:41:30 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int		render(t_env *w)
 	ft_putstr("\t--==  Renderin ");
 	ft_putstr(f->name);
 	ft_putstr("  ==--\n");
-	printf("(%f, %f)\n", XP(f->dim), YP(f->dim));
 #ifdef EULER
 	m = mat_xaxis(w->g.world->node.alpha);
 	mt = mat_yaxis(w->g.world->node.beta);
