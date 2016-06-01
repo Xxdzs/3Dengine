@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/01 13:41:30 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/01 19:12:54 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@
 #include <stdio.h> // <==
 
 #define POINT(i) (((t_vrtx *)ft_dyna_get(&f->vertices, i))->vec.v.c)
+#define PROJECT(i) (t_pnt2i){(int)POINT(i).x, (int)POINT(i).z}
 
 int		render(t_env *w)
 {
-	t_pnt2i		h[2] = {{0,0},{0,0}};
+	t_dyna		l;
 #ifdef EULER
-	t_mat3x1	p;
+	t_pnt2i		p[2];
 	t_mat3x3	m;
 	t_mat3x3	mt;
 #else
@@ -40,19 +41,19 @@ int		render(t_env *w)
 	m = mat_3x3_times_3x3(&m, &mt);
 	mt = mat_zaxis(w->g.world->node.gamma);
 	m = mat_3x3_times_3x3(&m, &mt);
+	l = ft_dyna_new(sizeof(t_vrtx));
+	ft_dyna_append(&l, f->vertices.data, f->vertices.chunck_count);
+	ft_dyna_iter1(&l, &vrtx_transform, &m);
 #endif
 	for (size_t i = 0 ; i < f->vertices.chunck_count ; i++)
 	{
 #ifdef EULER
-		p = ((t_vrtx *)ft_dyna_get(&f->vertices, i))->vec.v;
-		p.c.x = p.c.x * w->g.world->node.scale + X(f->node.pos);
-		p.c.y = p.c.y * w->g.world->node.scale + Y(f->node.pos);
-		p.c.z = p.c.z * w->g.world->node.scale + Z(f->node.pos);
-		p = mat_3x3_times_3x1(&m, &p);
-		*h = (t_pnt2i){w->wdim.d.width / 2 + (int)p.c.x,
-			  w->wdim.d.height / 2 + (int)p.c.z};
-		draw_line(w, h, h+1);
-		h[1] = h[0];
+		if (i % ((unsigned)XP(f->dim) + 1) < (unsigned)trunc(XP(f->dim)))
+		{
+			*p = PROJECT(i);
+			p[1] = PROJECT(i + 1);
+			draw_line(w, p, p + 1);
+		}
 #endif
 	}
 	return (0);

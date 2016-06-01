@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/29 17:44:27 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/01 16:28:27 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,18 +286,6 @@ t_qtrn	qtrn_get_rotated(const t_qtrn *const a, const t_qtrn *const b)
 	printf("inv(b) = (%f, %f, %f, %f)\n", b->v.m[0], b->v.m[1], b->v.m[2], b->v.m[3]);
 	qtrn_mult(&ans, &tmp);
 	return (ans);
-}
-
-/*
-** Quaternion :: Apply the rotation
-** f :	H x H	-> H
-**		(q, p)	|-> q * p * inv(q)
-** Side effect on the first quaternion
-*/
-
-void	qtrn_rotate(t_qtrn *const a, const t_qtrn *const b)
-{
-	*a = qtrn_get_rotated(a, b);
 }
 
 /*

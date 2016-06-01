@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quaternion.c                                       :+:      :+:    :+:   */
+/*   matrices_misc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/22 13:04:21 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/01 16:28:47 by angagnie         ###   ########.fr       */
+/*   Created: 2016/06/01 19:26:09 by angagnie          #+#    #+#             */
+/*   Updated: 2016/06/01 19:39:19 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "geometry.h"
-#include "ggl.h"
-
-/*
-** Quaternion :: Get the rotation
-** f :	H x H	-> H
-**		(q, p)	|-> q * p * inv(q)
-*/
-
-t_qtrn	qtrn_get_rotated(const t_qtrn *const a, const t_qtrn *const b)
+char	*mat3x3_print(const t_mat3x3 *const m)
 {
-	t_qtrn	ans;
-	t_qtrn	tmp;
+	size_t	i;
 
-	ans = qtrn_prod(b, a);
-	tmp = qtrn_get_inv(b);
-	qtrn_mult(&ans, &tmp);
-	return (ans);
+	ft_putstr("/");
+	i = 0;
+	while (i < 9)
+	{
+		ft_putnbr(m.raw[3 * (i % 3) + i / 3]);
+		if (i == 2)
+			ft_pustr("\\\n|");
+		else if (i == 5)
+			ft_pustr("|\n\\");
+		else if (i == 8)
+			ft_pustr("/\n");
+		else
+			ft_pustr(" ");
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 16:27:17 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/13 15:05:56 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/01 18:51:39 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ void			obj_free(t_obj **subject);
 void			gnode_add_child(t_gnode *parent, t_gnode *child);
 int				obj_add_center(t_gnode *parent, t_obj *child);
 t_obj			*obj_find(const t_obj *const node, const char *const name);
+void			vrtx_transform(const t_mat3x3 *m, t_vrtx *v);
 
 #endif

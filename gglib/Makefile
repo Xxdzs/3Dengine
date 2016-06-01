@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/06/01 11:18:14 by angagnie         ###   ########.fr        #
+#    Updated: 2016/06/01 18:49:45 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,7 +16,7 @@ NAME:=libgg.a
 MODEL_PATH:=model/
 MODEL:=geometry \
 	matrices_mult matrices_axis \
-	system_tree_add system_tree_del system_tree_new \
+	system_tree_add system_tree_del system_tree_new system_tree_misc \
 	complex_math complex_new conversion_polar conversion_spher \
 	quaternion_conj quaternion_misc quaternion_new quaternion_prod \
 	quaternion_rotate quaternion_sum

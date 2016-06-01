@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/01 14:10:06 by sid               #+#    #+#             */
-/*   Updated: 2016/06/01 11:28:45 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/01 18:45:20 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,4 +156,11 @@ t_obj		*obj_find(const t_obj *const node, const char *const name)
 				return (ans);
 	}
 	return (NULL);
+}
+
+void	vrtx_tranform(t_mat3x3 *m, t_vrtx *v)
+{
+#ifdef EULER
+	v->vec = mat_3x3_times_3x1(m, &(v->vec.v));
+#endif
 }
