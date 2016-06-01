@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/01 14:10:06 by sid               #+#    #+#             */
-/*   Updated: 2016/05/17 10:14:34 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/01 11:28:45 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,13 @@ t_gnode		*gnode_alloc(size_t type_size)
 		ftl_init((t_list *)ans, type_size);
 		ans->parent = NULL;
 		ans->pos = NEW_VEC3(0, 0, 0);
+#ifdef EULER
+		ans->alpha = 0;
+		ans->beta = 0;
+		ans->gamma = 0;
+#else
 		ans->rot = NEW_QTRN(0, 0, 0, 1);
+#endif
 		ans->scale = 1;
 		ans->is_obj = (type_size == sizeof(t_obj));
 	}
@@ -67,7 +73,13 @@ t_obj		obj_new(char *str)
 	ftl_init((t_list *)&ans.node, sizeof(t_obj));
 	ans.node.parent = NULL;
 	ans.node.pos = NEW_VEC3(0, 0, 0);
+#ifdef EULER
+	ans.node.alpha = alpha;
+	ans.node.alpha = beta;
+	ans.node.alpha = gamma;
+#else
 	ans.node.rot = NEW_QTRN(0, 0, 0, 0);
+#endif
 	ans.node.scale = 1;
 	ans.vertices = ft_dyna_new(sizeof(t_vrtx));
 	ans.faces = ft_dyna_new(sizeof(t_vrtx));
