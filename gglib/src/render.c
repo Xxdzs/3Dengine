@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/01 11:10:33 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/01 13:13:59 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 int		render(t_env *w)
 {
+	t_pnt2i		h[2] = {{0,0},{0,0}};
 #ifdef EULER
 	t_mat3x1	p;
 	t_mat3x3	m;
@@ -33,27 +34,26 @@ int		render(t_env *w)
 	ft_putstr("\t--==  Renderin ");
 	ft_putstr(f->name);
 	ft_putstr("  ==--\n");
+	printf("(%f, %f)\n", XP(f->dim), YP(f->dim));
 #ifdef EULER
-	m = mat_xaxis(f->node.alpha);
-	mt = mat_yaxis(f->node.beta);
+	m = mat_xaxis(w->g.world->node.alpha);
+	mt = mat_yaxis(w->g.world->node.beta);
 	m = mat_3x3_times_3x3(&m, &mt);
-	mt = mat_zaxis(f->node.gamma);
+	mt = mat_zaxis(w->g.world->node.gamma);
 	m = mat_3x3_times_3x3(&m, &mt);
 #endif
 	for (size_t i = 0 ; i < f->vertices.chunck_count ; i++)
 	{
 #ifdef EULER
 		p = ((t_vrtx *)ft_dyna_get(&f->vertices, i))->vec.v;
+		p.c.x = p.c.x * w->g.world->node.scale + X(f->node.pos);
+		p.c.y = p.c.y * w->g.world->node.scale + Y(f->node.pos);
+		p.c.z = p.c.z * w->g.world->node.scale + Z(f->node.pos);
 		p = mat_3x3_times_3x1(&m, &p);
-#else
-		r = f->node.rot;
-		perso2rqtrn(&r);
-		q = NEW_QTRN(POINT(i).x, POINT(i).y, POINT(i).z, 0.0);
-		qtrn_rotate(&q, &r);
-		a = (t_pnt2i){X(q), Y(q)};
-		//PIXEL(a.x, a.y) = 200;
-		draw_line(w, &a, &b);
-		b = a;
+		*h = (t_pnt2i){w->wdim.d.width / 2 + (int)p.c.x,
+			  w->wdim.d.height / 2 + (int)p.c.z};
+		draw_line(w, h, h+1);
+		h[1] = h[0];
 #endif
 	}
 	return (0);
