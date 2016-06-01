@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrices.c                                         :+:      :+:    :+:   */
+/*   matrices_mult.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:36:22 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/31 22:52:22 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/01 10:50:11 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@
 ** mat_2x3i_times_3x1i	:	M(2,3,Z) x M(3,1,Z)	 ->	M(2,1,Z)
 ** |							(a, b)			|->	a * b
 ** No side effect
-**
 */
 
-t_mat2x1i	mat_2x3i_times_3x1i(const t_mat2x3i *a, const t_mat3x1i *b)
+t_mat2x1i		mat_2x3i_times_3x1i(const t_mat2x3i *a, const t_mat3x1i *b)
 {
 	return ((t_mat2x1i){{
 		a->pnt[0].x * b->c.x + a->pnt[1].x * b->c.y + a->pnt[2].x * b->c.z,
@@ -28,7 +27,7 @@ t_mat2x1i	mat_2x3i_times_3x1i(const t_mat2x3i *a, const t_mat3x1i *b)
 		}});
 }
 
-t_mat3x1	mat_3x3_times_3x1(const t_mat3x3 *a, const t_mat3x1 *b)
+t_mat3x1		mat_3x3_times_3x1(const t_mat3x3 *a, const t_mat3x1 *b)
 {
 	return ((t_mat3x1){{
 		a->pnt[0].x * b->c.x + a->pnt[1].x * b->c.y + a->pnt[2].x * b->c.z,
@@ -39,7 +38,7 @@ t_mat3x1	mat_3x3_times_3x1(const t_mat3x3 *a, const t_mat3x1 *b)
 
 /*
 ** mat_3x3_times_3x3 :	M(3,R)^2	->		M(3,R)
-**						(a, b)		|->		a * b
+** |					(a, b)		|->		a * b
 */
 
 t_mat3x3		mat_3x3_times_3x3(const t_mat3x3 *a, const t_mat3x3 *b)

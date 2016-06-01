@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/31 22:45:14 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/01 11:10:33 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		render(t_env *w)
 #ifdef EULER
 	t_mat3x1	p;
 	t_mat3x3	m;
+	t_mat3x3	mt;
 #else
 	t_qtrn		q;
 	t_qtrn		r;
@@ -34,8 +35,10 @@ int		render(t_env *w)
 	ft_putstr("  ==--\n");
 #ifdef EULER
 	m = mat_xaxis(f->node.alpha);
-	m = matrix_3x3_times_3x3(&m, &mat_yaxis(f->node.beta));
-	m = matrix_3x3_times_3x3(&m, &mat_zaxis(f->node.gamma));
+	mt = mat_yaxis(f->node.beta);
+	m = mat_3x3_times_3x3(&m, &mt);
+	mt = mat_zaxis(f->node.gamma);
+	m = mat_3x3_times_3x3(&m, &mt);
 #endif
 	for (size_t i = 0 ; i < f->vertices.chunck_count ; i++)
 	{
