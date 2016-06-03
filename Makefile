@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/06/01 18:49:45 by angagnie         ###   ########.fr        #
+#    Updated: 2016/06/03 09:46:36 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -21,8 +21,8 @@ MODEL:=geometry \
 	quaternion_conj quaternion_misc quaternion_new quaternion_prod \
 	quaternion_rotate quaternion_sum
 FILES=view controller render parser ft_ator ggl_main main
-LIBFT_PATH=../Libft/
-LIBFT_HDR=../Libft/include/
+LIBFT_PATH=Libft/
+LIBFT_HDR=Libft/include/
 # ==================
 
 # ==== Standard ====
@@ -94,7 +94,7 @@ fclean: clean
 	@echo $(YELLOW) "Deleting binairie" $(EOC)
 	@rm -f $(NAME)
 	@rm -f $(EXEC_NAME)
-	@rm -rf $(NAME).dSYM/
+	@rm -rf $(EXEC_NAME).dSYM/
 
 re: fclean all
 

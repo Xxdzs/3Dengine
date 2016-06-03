@@ -5,4 +5,4 @@
 fdf
 **/*.dSYM/*
 *.a
-gglib/ggl
+ggl
