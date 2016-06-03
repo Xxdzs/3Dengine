@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/03 10:32:54 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/03 11:21:40 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int		render(t_env *w)
 	t_dyna		l;
 	t_pnt2i		p[2];
 	t_mat3x3	m;
-	t_mat3x3	mt;
 	t_obj		*f = (t_obj *)w->g.world->node.children.root.next;
 
 	ft_bzero(w->pixel, w->wdim.d.width * w->wdim.d.height * w->bits_per_pixel / 8);

@@ -6,11 +6,23 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 19:26:09 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/01 19:39:19 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/03 11:23:17 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*mat3x3_print(const t_mat3x3 *const m)
+t_mat3x3	mat_get_tranformation(t_gnode *n)
+{
+	t_mat3x3	ans;
+	t_mat3x3	tmp;
+
+	ans = mat_xaxis(n->alpha);
+    tmp = mat_yaxis(n->beta);
+    ans = mat_3x3_times_3x3(&ans, &tmp);
+    tmp = mat_zaxis(n->gamma);
+    ans = mat_3x3_times_3x3(&ans, &tmp);
+}
+
+char		*mat3x3_print(const t_mat3x3 *const m)
 {
 	size_t	i;
 
