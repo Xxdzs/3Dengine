@@ -6,7 +6,7 @@
 /*   By: sid <angagnie@student.42.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/01 14:10:06 by sid               #+#    #+#             */
-/*   Updated: 2016/06/01 19:25:32 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/03 10:00:47 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,5 @@
 
 void	vrtx_transform(const t_mat3x3 *m, t_vrtx *v)
 {
-#ifdef EULER
 	v->vec.v = mat_3x3_times_3x1(m, &(v->vec.v));
-#endif
 }

@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/06/03 09:46:36 by angagnie         ###   ########.fr        #
+#    Updated: 2016/06/03 10:20:25 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -20,7 +20,7 @@ MODEL:=geometry \
 	complex_math complex_new conversion_polar conversion_spher \
 	quaternion_conj quaternion_misc quaternion_new quaternion_prod \
 	quaternion_rotate quaternion_sum
-FILES=view controller render parser ft_ator ggl_main main
+FILES=view controller render reader parser ft_ator ggl_main main
 LIBFT_PATH=Libft/
 LIBFT_HDR=Libft/include/
 # ==================

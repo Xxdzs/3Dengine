@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 16:27:17 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/01 18:51:39 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/03 10:23:29 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,9 @@ typedef struct	s_gnode
 	struct s_gnode	*parent;
 	t_vec3t			pos;
 	t_real			scale;
-# ifdef EULER
 	t_real			alpha;
 	t_real			beta;
 	t_real			gamma;
-# else
-	t_qtrn			rot;
-# endif
 	int				is_obj;
 }				t_gnode;
 

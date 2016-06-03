@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:17:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/01 12:38:00 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/03 10:16:41 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 
 static void		part1(int keycode, t_env *w)
 {
-#ifdef EULER
 	if (keycode == 43)
 		w->g.world->node.alpha += 0.1;
 	else if (keycode == 47)
@@ -48,18 +47,22 @@ static void		part1(int keycode, t_env *w)
 	else if (keycode == 78)
 		w->g.world->node.scale *= 0.8;
 	else if (keycode == 86)
-		X(((t_gnode *)w->g.world->node.children.root.next)->pos)++;
+		X(((t_gnode *)w->g.world->node.children.root.next)->pos) += 2;
 	else if (keycode == 88)
-		X(((t_gnode *)w->g.world->node.children.root.next)->pos)--;
+		X(((t_gnode *)w->g.world->node.children.root.next)->pos) -= 2;
 	else if (keycode == 84)
-		Y(((t_gnode *)w->g.world->node.children.root.next)->pos)++;
+		Y(((t_gnode *)w->g.world->node.children.root.next)->pos) += 2;
 	else if (keycode == 91)
-		Y(((t_gnode *)w->g.world->node.children.root.next)->pos)--;
+		Y(((t_gnode *)w->g.world->node.children.root.next)->pos) -= 2;
 	else if (keycode == 83)
-		Z(((t_gnode *)w->g.world->node.children.root.next)->pos)++;
+		Z(((t_gnode *)w->g.world->node.children.root.next)->pos) += 2;
 	else if (keycode == 89)
-		Z(((t_gnode *)w->g.world->node.children.root.next)->pos)--;
-	else if (keycode == 123)
+		Z(((t_gnode *)w->g.world->node.children.root.next)->pos) -= 2;
+}
+
+static void		part2(int keycode, t_env *w)
+{
+	if (keycode == 123)
 		w->g.world->node.beta += 0.1;
 	else if (keycode == 124)
 		w->g.world->node.beta -= 0.1;
@@ -67,17 +70,6 @@ static void		part1(int keycode, t_env *w)
 		w->g.world->node.gamma += 0.1;
 	else if (keycode == 126)
 		w->g.world->node.gamma -= 0.1;
-#else
-	if (keycode == 43)			SCALAR(w->g.world->node.rot)++; // <
-	else if (keycode == 47)		SCALAR(w->g.world->node.rot)--; // >
-	else if (keycode == 53)		exit(0); // esc
-	else if (keycode == 69)		w->g.world->node.scale *= 1.25; // +
-	else if (keycode == 78)		w->g.world->node.scale *= 0.8; // -
-	else if (keycode == 123)	QTHETA(w->g.world->node.rot)++; // <-
-	else if (keycode == 124)	QTHETA(w->g.world->node.rot)--; // ->
-	else if (keycode == 125)	QPHI(w->g.world->node.rot)++; // \/
-	else if (keycode == 126)	QPHI(w->g.world->node.rot)--; // /\...
-#endif
 }
 
 int				default_key_hook(int keycode, void *param)
@@ -88,6 +80,7 @@ int				default_key_hook(int keycode, void *param)
 	ft_putnbr(keycode);
 	ft_putendl("");
 	part1(keycode, w);
+	part2(keycode, w);
 	w->fnct.repaint(w);
 	w->fnct.expose(w);
 	return (0);
