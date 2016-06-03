@@ -1,6 +1,0 @@
-br s -F render
-br co a 1
-br s -l 38
-continue
-DONE
-run
