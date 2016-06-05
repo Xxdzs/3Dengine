@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:17:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/05 14:02:30 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/05 20:53:59 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,13 @@ static void		part1(int keycode, t_env *w)
 	else if (keycode == 78)
 		((t_gnode *)w->g.world->node.children.root.next)->scale *= 0.8;
 	else if (keycode == 86)
-		X(((t_gnode *)w->g.world->node.children.root.next)->pos) += 2;
+		X(((t_gnode *)w->g.world->node.children.root.next)->pos) -= 4;
 	else if (keycode == 88)
-		X(((t_gnode *)w->g.world->node.children.root.next)->pos) -= 2;
+		X(((t_gnode *)w->g.world->node.children.root.next)->pos) += 4;
 	else if (keycode == 84)
-		Y(((t_gnode *)w->g.world->node.children.root.next)->pos) += 2;
+		Z(((t_gnode *)w->g.world->node.children.root.next)->pos) += 4;
 	else if (keycode == 91)
-		Y(((t_gnode *)w->g.world->node.children.root.next)->pos) -= 2;
-	else if (keycode == 83)
-		Z(((t_gnode *)w->g.world->node.children.root.next)->pos) += 2;
-	else if (keycode == 89)
-		Z(((t_gnode *)w->g.world->node.children.root.next)->pos) -= 2;
+		Z(((t_gnode *)w->g.world->node.children.root.next)->pos) -= 4;
 }
 
 static void		part2(int keycode, t_env *w)
