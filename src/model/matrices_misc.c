@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 19:26:09 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/05 17:51:04 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/05 18:10:13 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ t_mat4x4	mat4_get_transformation(t_gnode *n)
 	ans = mat_4x4_times_4x4(&ans, &tmp);
 	tmp = mat4_zaxis(n->gamma);
 	ans = mat_4x4_times_4x4(&ans, &tmp);
-	ans.vec[3].x = X(n->pos);
-	ans.vec[3].y = Y(n->pos);
-	ans.vec[3].z = Z(n->pos);
+	ans.pnt[3].x = X(n->pos);
+	ans.pnt[3].y = Y(n->pos);
+	ans.pnt[3].z = Z(n->pos);
 	return (ans);
 }
 

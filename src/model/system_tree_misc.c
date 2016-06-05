@@ -6,15 +6,21 @@
 /*   By: sid <angagnie@student.42.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/01 14:10:06 by sid               #+#    #+#             */
-/*   Updated: 2016/06/05 15:44:03 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/05 19:51:21 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 
-void	vrtx_transform(const t_mat3x3 *m, t_vrtx *v)
+void	vrtx_transform(const t_mat4x4 *m, t_vrtx *v)
 {
-	v->vec.v = mat_3x3_times_3x1(m, &(v->vec.v));
+	t_mat4x1	tmp;
+
+	tmp = (t_mat4x1){{X(v->vec), Y(v->vec), Z(v->vec), 1}};
+	tmp = mat_4x4_times_4x1(m, &tmp);
+	X(v->vec) = tmp.c.x;
+	Y(v->vec) = tmp.c.y;
+	Z(v->vec) = tmp.c.z;
 }
 
 t_obj	*obj_find(const t_gnode *const node, const char *const name)

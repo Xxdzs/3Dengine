@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/03 15:58:45 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/05 19:38:06 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ int				draw_line(t_env *const w, t_pnt2i *p1, t_pnt2i *p2);
 int				parse_fdf(t_obj *w, int fd);
 int				parse_obj(t_obj *w, int fd);
 t_mat3x3		mat_get_transformation(t_gnode *n);
+t_mat4x4		mat4_get_transformation(t_gnode *n);
 
 #endif
