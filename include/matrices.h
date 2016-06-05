@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 10:24:36 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/03 15:52:14 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/05 13:20:37 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,7 @@ t_mat3x3		mat_3x3_times_3x3(const t_mat3x3 *a, const t_mat3x3 *b);
 t_mat3x3		mat_xaxis(t_real a);
 t_mat3x3		mat_yaxis(t_real a);
 t_mat3x3		mat_zaxis(t_real a);
+t_mat3x3		mat_scale(t_real a);
+void			mat3x3_print(const t_mat3x3 *const m);
 
 #endif

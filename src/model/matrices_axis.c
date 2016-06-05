@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 10:50:40 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/01 11:23:56 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/05 13:18:12 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,21 @@ t_mat3x3	mat_zaxis(t_real a)
 			{cos(a), sin(a), 0},
 			{-sin(a), cos(a), 0},
 			{0, 0, 1}
+		}});
+}
+
+/*
+** mat_scale :	R	 ->	M(3,R)
+** |					{	a		0		0
+** |			a	|->	{	0		a		0
+** |					{	0		0		a
+*/
+
+t_mat3x3	mat_scale(t_real a)
+{
+	return ((t_mat3x3){{
+			{a, 0, 0},
+			{0, a, 0},
+			{0, 0, a}
 		}});
 }

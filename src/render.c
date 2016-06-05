@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/03 15:55:10 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/05 13:19:43 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int		render(t_env *w)
 	ft_putstr("\t--==  Renderin ");
 	ft_putstr(f->name);
 	ft_putstr("  ==--\n");
-	m = mat_get_transformation(&f->node);
+	m = mat_get_transformation((t_gnode *)f);
+	mat3x3_print(&m);
 	l = ft_dyna_new(sizeof(t_vrtx));
 	ft_dyna_append(&l, f->vertices.data, f->vertices.chunck_count);
 	ft_dyna_iter1(&l, &vrtx_transform, &m);
