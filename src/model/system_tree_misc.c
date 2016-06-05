@@ -6,7 +6,7 @@
 /*   By: sid <angagnie@student.42.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/01 14:10:06 by sid               #+#    #+#             */
-/*   Updated: 2016/06/05 12:42:06 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/05 15:44:03 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,20 @@ void	vrtx_transform(const t_mat3x3 *m, t_vrtx *v)
 	v->vec.v = mat_3x3_times_3x1(m, &(v->vec.v));
 }
 
-t_obj       *obj_find(const t_gnode *const node, const char *const name)
+t_obj	*obj_find(const t_gnode *const node, const char *const name)
 {
-    t_node  *tmp;
-    t_obj   *ans;
+	t_node	*tmp;
+	t_obj	*ans;
 
-    if (node->is_obj && ((t_obj *)node)->name && name && ft_strcmp(((t_obj *)node)->name, name) == 0)
-        return ((t_obj *)node);
-    if (node->children.size > 0)
-    {
-        tmp = (t_node *)&(node->children.root);
-        while ((tmp = tmp->next) != &(node->children.root))
-            if ((ans = obj_find((t_gnode *)tmp, name)) != NULL)
-                return (ans);
-    }
-    return (NULL);
+	if (node->is_obj && ((t_obj *)node)->name && name
+		&& ft_strcmp(((t_obj *)node)->name, name) == 0)
+		return ((t_obj *)node);
+	if (node->children.size > 0)
+	{
+		tmp = (t_node *)&(node->children.root);
+		while ((tmp = tmp->next) != &(node->children.root))
+			if ((ans = obj_find((t_gnode *)tmp, name)) != NULL)
+				return (ans);
+	}
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:36:22 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/01 18:38:16 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/05 17:53:29 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ t_mat3x1		mat_3x3_times_3x1(const t_mat3x3 *a, const t_mat3x1 *b)
 		a->pnt[0].x * b->c.x + a->pnt[1].x * b->c.y + a->pnt[2].x * b->c.z,
 		a->pnt[0].y * b->c.x + a->pnt[1].y * b->c.y + a->pnt[2].y * b->c.z,
 		a->pnt[0].z * b->c.x + a->pnt[1].z * b->c.y + a->pnt[2].z * b->c.z
+	}});
+}
+
+t_mat4x1		mat_4x4_times_4x1(const t_mat4x4 *a, const t_mat4x1 *b)
+{
+	return ((t_mat4x1){{
+		a->pnt[0].x * b->c.x + a->pnt[1].x * b->c.y + a->pnt[2].x * b->c.z,
+		a->pnt[0].y * b->c.x + a->pnt[1].y * b->c.y + a->pnt[2].y * b->c.z,
+		a->pnt[0].z * b->c.x + a->pnt[1].z * b->c.y + a->pnt[2].z * b->c.z,
+		a->pnt[0].w * b->c.x + a->pnt[1].w * b->c.y + a->pnt[2].w * b->c.z
 	}});
 }
 
@@ -67,4 +77,26 @@ t_mat3x3		mat_3x3_times_3x3(const t_mat3x3 *a, const t_mat3x3 *b)
 		+ a->pnt[2].z * b->pnt[2].z
 			}
 		}});
+}
+
+/*
+** mat_4x4_times_4x4 :	M(4,R)^2	->		M(4,R)
+** |					(a, b)		|->		a * b
+*/
+
+t_mat4x4		mat_4x4_times_4x4(const t_mat4x4 *a, const t_mat4x4 *b)
+{
+	t_mat4x4	ans;
+	t_pnt3i		i;
+
+	ans = *a;
+	i.x = 4;
+	while (i.x-- > 0 && (i.y = 4))
+		while (i.y-- > 0 && (i.z = 4))
+		{
+			ans.vec[i.x].m[i.y] = 0;
+			while (i.z-- > 0)
+				ans.vec[i.x].m[i.y] = a->vec[i.z].m[i.y] * b->vec[i.x].m[i.z];
+		}
+	return (ans);
 }
