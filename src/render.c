@@ -6,10 +6,11 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/03 11:21:40 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/03 15:55:10 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "system_tree.h"
 #include "geometry.h"
 #include "ggl.h"
 
@@ -27,11 +28,7 @@ int		render(t_env *w)
 	ft_putstr("\t--==  Renderin ");
 	ft_putstr(f->name);
 	ft_putstr("  ==--\n");
-	m = mat_xaxis(w->g.world->node.alpha);
-	mt = mat_yaxis(w->g.world->node.beta);
-	m = mat_3x3_times_3x3(&m, &mt);
-	mt = mat_zaxis(w->g.world->node.gamma);
-	m = mat_3x3_times_3x3(&m, &mt);
+	m = mat_get_transformation(&f->node);
 	l = ft_dyna_new(sizeof(t_vrtx));
 	ft_dyna_append(&l, f->vertices.data, f->vertices.chunck_count);
 	ft_dyna_iter1(&l, &vrtx_transform, &m);

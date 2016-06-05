@@ -6,10 +6,11 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/03 10:27:36 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/03 15:29:52 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "geometry.h"
 #include "ggl.h"
 
 void		pxl_on(t_env *w, int x, int y, unsigned int color)

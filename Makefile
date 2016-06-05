@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/06/03 10:20:25 by angagnie         ###   ########.fr        #
+#    Updated: 2016/06/03 15:57:19 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -15,12 +15,13 @@ EXEC_NAME:=ggl
 NAME:=libgg.a
 MODEL_PATH:=model/
 MODEL:=geometry \
-	matrices_mult matrices_axis \
+	matrices_mult matrices_axis matrices_misc \
 	system_tree_add system_tree_del system_tree_new system_tree_misc \
 	complex_math complex_new conversion_polar conversion_spher \
 	quaternion_conj quaternion_misc quaternion_new quaternion_prod \
 	quaternion_rotate quaternion_sum
-FILES=view controller render reader parser ft_ator ggl_main main
+FILES=controller render reader parser ft_ator ggl_main main \
+	view view_defaults view_interpolate
 LIBFT_PATH=Libft/
 LIBFT_HDR=Libft/include/
 # ==================

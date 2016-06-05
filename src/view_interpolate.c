@@ -6,25 +6,25 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/03 10:32:23 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/03 15:58:10 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 
-static int	identity(int i, int dout, int din)
+static int	identity(int const i, int const dout, const int din)
 {
 	(void)dout;
 	(void)din;
 	return (i);
 }
 
-static int	linear_interpolation(int i, int dout, int din)
+int			linear_interpolation(int const i, int const dout, int const din)
 {
 	return ((i * dout) / din);
 }
 
-int			smooth_interpolation(int i, int dout, int din)
+int			smooth_interpolation(int const i, int const dout, int const din)
 {
 	const t_real	x = (t_real)i;
 	const t_real	out = (t_real)dout;
@@ -33,7 +33,8 @@ int			smooth_interpolation(int i, int dout, int din)
 	return ((int)(out * (1 - cos(x * M_PI / in)) / 2));
 }
 
-int			interpolate(t_env *const w, t_pnt2i *p1, t_pnt2i *p2, t_fnptr algo)
+int			interpolate(t_env *const w, const t_pnt2i *p1,
+	const t_pnt2i *p2, const t_fnptr algo)
 {
 	t_pnt2i	delta;
 	t_pnt2i	way;

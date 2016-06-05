@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/03 10:22:53 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/03 15:58:45 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,16 @@ int				read_av(t_obj *w, int length, char **param);
 t_real			ft_ator(char *str);
 int				ggl_main(int ac, char **av);
 int				render(t_env *const w);
+void			pxl_on(t_env *w, int x, int y, unsigned int color);
+int				linear_interpolation(int const i,
+					int const dout, int const din);
+int				smooth_interpolation(int const i,
+					int const dout, int const din);
+int				interpolate(t_env *const w, const t_pnt2i *p1,
+					const t_pnt2i *p2, const t_fnptr algo);
 int				draw_line(t_env *const w, t_pnt2i *p1, t_pnt2i *p2);
 int				parse_fdf(t_obj *w, int fd);
 int				parse_obj(t_obj *w, int fd);
+t_mat3x3		mat_get_transformation(t_gnode *n);
 
 #endif
