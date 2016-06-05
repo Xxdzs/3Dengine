@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/05 13:19:43 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/05 14:22:44 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,13 @@
 #include "geometry.h"
 #include "ggl.h"
 
-#define POINT(i) (((t_vrtx *)ft_dyna_get(&f->vertices, i))->vec.v.c)
+#define POINT(i) (((t_vrtx *)ft_dyna_get(&l, i))->vec.v.c)
 #define PROJECT(i) (t_pnt2i){(int)POINT(i).x, (int)POINT(i).z}
+
+void	vrtx_print(t_vrtx *v)
+{
+	printf("(%f, %f, %f)\n", X(v->vec), Y(v->vec), Z(v->vec));
+}
 
 int		render(t_env *w)
 {
@@ -28,12 +33,14 @@ int		render(t_env *w)
 	ft_putstr("\t--==  Renderin ");
 	ft_putstr(f->name);
 	ft_putstr("  ==--\n");
+	printf("Dim : (%f, %f)\n", XP(f->dim), YP(f->dim));
 	m = mat_get_transformation((t_gnode *)f);
 	mat3x3_print(&m);
 	l = ft_dyna_new(sizeof(t_vrtx));
 	ft_dyna_append(&l, f->vertices.data, f->vertices.chunck_count);
 	ft_dyna_iter1(&l, &vrtx_transform, &m);
-	for (size_t i = 0 ; i < f->vertices.chunck_count ; i++)
+	ft_dyna_iter(&l, &vrtx_print);
+	for (size_t i = 0 ; i < l.chunck_count ; i++)
 	{
 		if (i % ((unsigned)XP(f->dim) + 1) < (unsigned)trunc(XP(f->dim)))
 		{

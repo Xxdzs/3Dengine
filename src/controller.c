@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:17:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/05 12:55:13 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/05 14:02:30 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ static void		part2(int keycode, t_env *w)
 	else if (keycode == 123)
 		((t_gnode *)w->g.world->node.children.root.next)->beta += 0.1;
 	else if (keycode == 124)
-		((t_gnode *)w->g.world->node.children.root.next)->gamma += 0.1;
+		((t_gnode *)w->g.world->node.children.root.next)->beta -= 0.1;
 	else if (keycode == 125)
-		((t_gnode *)w->g.world->node.children.root.next)->gamma -= 0.1;
+		((t_gnode *)w->g.world->node.children.root.next)->gamma += 0.1;
 	else if (keycode == 126)
-		w->g.world->node.gamma -= 0.1;
+		((t_gnode *)w->g.world->node.children.root.next)->gamma -= 0.1;
 }
 
 int				default_key_hook(int keycode, void *param)

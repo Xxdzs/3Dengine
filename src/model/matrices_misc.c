@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/01 19:26:09 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/05 13:23:49 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/05 14:18:57 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_mat3x3	mat_get_transformation(t_gnode *n)
 	t_mat3x3	tmp;
 
 	ans = mat_scale(n->scale);
-    tmp = mat_yaxis(n->alpha);
+    tmp = mat_xaxis(n->alpha);
     ans = mat_3x3_times_3x3(&ans, &tmp);
     tmp = mat_yaxis(n->beta);
     ans = mat_3x3_times_3x3(&ans, &tmp);
