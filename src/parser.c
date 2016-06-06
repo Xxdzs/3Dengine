@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/06/03 10:18:54 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/06 16:42:12 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,30 @@ static inline void	next_word(char **buf)
 		(*buf)++;
 }
 
-int					parse_fdf(t_obj *w, int fd)
+void				vrtx_offset(t_real *x, t_real *y, t_vrtx *v)
+{
+	X(v->vec) += *x;
+	Y(v->vec) += *y;
+}
+
+void				obj_adjust(t_obj *o)
+{
+	const t_vec2i	dim = (t_vec2i){{DEFAULT_RESOLUTION}};
+	const t_real	ref = XP(o->dim) < YP(o->dim) ? YP(o->dim) : XP(o->dim);
+	const int		rep = dim.c.x > dim.c.y ? dim.c.y : dim.c.x;
+	t_real			tmp[2];
+
+	X(o->node.pos) = dim.d.width / 2;
+	Z(o->node.pos) = dim.d.height / 2;
+	o->node.alpha = 1;
+	o->node.gamma = 0.1;
+	o->node.scale = rep / (ref + 2);
+	tmp[0] = -XP(o->dim) / 2;
+	tmp[1] = -YP(o->dim) / 2;
+	ft_dyna_iter2(&o->vertices, &vrtx_offset, tmp, tmp + 1);
+}
+
+int					parse_fdf(t_obj *o, int fd)
 {
 	t_obj		cur;
 	char		*buf;
@@ -35,7 +58,7 @@ int					parse_fdf(t_obj *w, int fd)
 		X(tmp.vec) = 0;
 		while (*buf != '\0')
 		{
-			Z(tmp.vec) = ft_ator(buf);
+			Z(tmp.vec) = -ft_ator(buf);
 			ft_dyna_append(&cur.vertices, &tmp, 1);
 			next_word(&buf);
 			X(tmp.vec)++;
@@ -45,7 +68,8 @@ int					parse_fdf(t_obj *w, int fd)
 		Y(tmp.vec)++;
 	}
 	YP(cur.dim) = Y(tmp.vec);
-	gnode_add_child((t_gnode *)w, (t_gnode *)&cur);
+	obj_adjust(&cur);
+	gnode_add_child((t_gnode *)o, (t_gnode *)&cur);
 	return (0);
 }
 

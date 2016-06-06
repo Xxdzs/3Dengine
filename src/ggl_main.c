@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/03 10:30:57 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/06 15:54:31 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void		destroy_env(t_env *const w)
 {
 	mlx_destroy_image(w->mlx, w->img);
 	mlx_destroy_window(w->mlx, w->win);
+	obj_free(&(w->g.world));
+	free(w->g.cam);
 	ft_putstr("  --==  Clear  ==--\n");
 }
 

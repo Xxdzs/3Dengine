@@ -6,12 +6,12 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/06/05 15:39:37 by angagnie         ###   ########.fr        #
+#    Updated: 2016/06/06 13:51:41 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 # ==== Editable ====
-EXEC_NAME:=ggl
+EXEC_NAME:=fdf
 NAME:=libgg.a
 MODEL_PATH:=model/
 MODEL:=geometry \
@@ -32,10 +32,10 @@ LINKER:=ar rc
 CCHPATH=cache/
 SRCPATH=src/
 HDRPATH:=include/
-IFLAGS=-I $(HDRPATH) -I $(LIBFT_HDR)
+IFLAGS=-I $(HDRPATH) -I $(LIBFT_HDR) -I miniLibX_OSX/
 DEFLAG=
-LFLAGS=-L $(LIBFT_PATH) -lft
-DEP=$(LIBFT_PATH)libft.a
+LFLAGS=-L $(LIBFT_PATH) -lft -lmlx -framework OpenGL -framework AppKit
+DEP=$(LIBFT_PATH)libft.a miniLibX_OSX/libmlx.a
 CFLAGS=-Wall -Wextra $(IFLAGS) $(DEFLAG)
 # ==================
 
@@ -58,12 +58,11 @@ OBJ=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
 # ==================
 CCHF:=.cache_exists
 
-usage: osx all debug
+
+all: $(EXEC_NAME)
+
+usage:
 	@echo $(WHITE) "Usage : make    < osx | x11 >    < all | re | clean | fclean | test >     [ debug ]" $(EOC)
-
-all: $(NAME) $(EXEC_NAME)
-
-exec: $(EXEC_NAME)
 
 $(EXEC_NAME): $(OBJ) $(DEP)
 	@echo $(GREEN) " - Compiling $@" $(EOC)
@@ -123,20 +122,9 @@ miniLibX_OSX/libmlx.a:
 	@echo $(BLUE) "Making $@" $(EOC)
 	@make -C miniLibX_OSX/
 
-x11:
-#	$(eval FILES+=ggl_main_x11)
-	$(eval DEFLAG=-DX11)
-	$(eval LFLAGS+=-lX11)
-
-osx:
-#	$(eval FILES+=ggl_main_osx)
-	$(eval IFLAGS+=-I miniLibX_OSX/)
-	$(eval LFLAGS+=-lmlx -framework OpenGL -framework AppKit)
-	$(eval DEP+=miniLibX_OSX/libmlx.a)
-
 debug:
 	$(eval CFLAGS+=-g)
 	@echo $(CYAN)"Generating debug informations"$(EOC)
 	@$(CC) $(CFLAGS) $(LFLAGS) -o $(EXEC_NAME) $(SRC)
 
-.PHONY: all clean fclean re test norme x11 osx usage debug exec
+.PHONY: all clean fclean re test norm usage debug

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/05 20:50:48 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/06 15:22:59 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,15 @@ int					render(t_env *w)
 	i = 0;
 	while (i < l.chunck_count)
 	{
-		if (i % (unsigned)XP(f->dim) < (unsigned)trunc(XP(f->dim) - 1))
+		if (i + 1 < l.chunck_count
+			&& i % (unsigned)XP(f->dim) < (unsigned)trunc(XP(f->dim) - 1))
 		{
 			*p = PROJECT(i);
 			p[1] = PROJECT(i + 1);
 			draw_line(w, p, p + 1);
 		}
-		if (i / (unsigned)XP(f->dim) < (unsigned)trunc(YP(f->dim) - 1))
+		if (i + (unsigned)XP(f->dim) < l.chunck_count
+			&& i / (unsigned)XP(f->dim) < (unsigned)trunc(YP(f->dim) - 1))
 		{
 			*p = PROJECT(i);
 			p[1] = PROJECT(i + (unsigned)XP(f->dim));
