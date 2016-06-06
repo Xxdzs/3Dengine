@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/06 15:54:31 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/06 23:02:35 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int				ggl_main(int ac, char **av)
 		ft_putstr_fd("Error : Initialisation failed\n", 2);
 	else
 	{
+		w.bonus = 0;
 		if (--ac > 0)
 		{
 			read_av(w.g.world, ac, ++av);

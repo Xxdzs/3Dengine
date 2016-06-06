@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/05 19:38:06 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/06 23:10:04 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct	s_env
 		t_fnptr	key_hook;
 		t_fnptr	expose;
 	}			fnct;
+	int			bonus;
 }				t_env;
 
 int				default_expose_hook(void *param);
@@ -60,6 +61,8 @@ void			pxl_on(t_env *w, int x, int y, unsigned int color);
 int				linear_interpolation(int const i,
 					int const dout, int const din);
 int				smooth_interpolation(int const i,
+					int const dout, int const din);
+int				ez_interpolation(int const i,
 					int const dout, int const din);
 int				interpolate(t_env *const w, const t_pnt2i *p1,
 					const t_pnt2i *p2, const t_fnptr algo);

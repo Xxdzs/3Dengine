@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/03 15:58:10 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/06 23:29:23 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,15 @@ int			smooth_interpolation(int const i, int const dout, int const din)
 	const t_real	in = (t_real)din;
 
 	return ((int)(out * (1 - cos(x * M_PI / in)) / 2));
+}
+
+int			ez_interpolation(int const i, int const dout, int const din)
+{
+	const t_real	x = (t_real)i;
+	const t_real	out = (t_real)dout;
+	const t_real	in = (t_real)din;
+
+	return ((int)(out * sin(M_PI_2 * x / in)));
 }
 
 int			interpolate(t_env *const w, const t_pnt2i *p1,
