@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/06 23:58:55 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/07 00:38:30 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int					render(t_env *w)
 	size_t			i;
 	const t_obj		*f = get_vertices(w, &l);
 
+//	printf("\\ Renderin\n"); // <--
 	ft_bzero(w->pixel,
 		w->wdim.d.width * w->wdim.d.height * w->bits_per_pixel / 8);
 	i = 0;
@@ -60,5 +61,6 @@ int					render(t_env *w)
 		}
 		i++;
 	}
+//	printf("/ Rendered\n"); // <--
 	return (0);
 }

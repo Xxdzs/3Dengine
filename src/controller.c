@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:17:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/06 23:11:59 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/07 00:13:31 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void		part1(int keycode, t_env *w)
 		Z(((t_gnode *)w->g.world->node.children.root.next)->pos) += 5;
 	else if (keycode == KEY_UP)
 		Z(((t_gnode *)w->g.world->node.children.root.next)->pos) -= 5;
+	else if (keycode == KEY_KP_5)
+		obj_reset((t_obj *)w->g.world->node.children.root.next);
 }
 
 static void		part2(int keycode, t_env *w)

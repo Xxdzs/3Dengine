@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/06/07 00:06:13 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/07 00:37:38 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int					parse_fdf(t_obj *o, int fd)
 	char		*buf;
 	t_vrtx		tmp;
 
+//	printf("\\ Parsin\n"); // <--
 	cur = obj_new("FDF");
 	tmp = NEW_VRTX;
 	if (!(cur.dim = vec3_alloc(0, 0, 0)))
@@ -45,6 +46,7 @@ int					parse_fdf(t_obj *o, int fd)
 	}
 	YP(cur.dim) = Y(tmp.vec);
 	gnode_add_child((t_gnode *)o, obj_adjust(&cur));
+//	printf("/ Parsed\n"); // <--
 	return (0);
 }
 
