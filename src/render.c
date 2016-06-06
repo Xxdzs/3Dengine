@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/07 00:38:30 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/07 00:44:44 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,10 @@ int					render(t_env *w)
 	size_t			i;
 	const t_obj		*f = get_vertices(w, &l);
 
-//	printf("\\ Renderin\n"); // <--
 	ft_bzero(w->pixel,
 		w->wdim.d.width * w->wdim.d.height * w->bits_per_pixel / 8);
-	i = 0;
-	while (i < l.chunck_count)
+	i = l.chunck_count;
+	while (i-- > 0)
 	{
 		if (i + 1 < l.chunck_count
 			&& i % (unsigned)XP(f->dim) < (unsigned)trunc(XP(f->dim) - 1))
@@ -59,8 +58,6 @@ int					render(t_env *w)
 			p[1] = PROJECT(i + (unsigned)XP(f->dim));
 			draw_line(w, p, p + 1);
 		}
-		i++;
 	}
-//	printf("/ Rendered\n"); // <--
 	return (0);
 }
