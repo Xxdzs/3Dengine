@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/07 00:09:14 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/07 16:33:46 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,5 @@ t_mat4x4		mat4_get_transformation(t_gnode *n);
 t_gnode			*obj_adjust(t_obj *o);
 void			vrtx_offset(t_real *x, t_real *y, t_vrtx *v);
 void			obj_reset(t_obj *o);
-
 
 #endif
