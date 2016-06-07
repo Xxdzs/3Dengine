@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 13:32:26 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/07 00:44:44 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/07 15:29:51 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int					render(t_env *w)
 	size_t			i;
 	const t_obj		*f = get_vertices(w, &l);
 
-	ft_bzero(w->pixel,
-		w->wdim.d.width * w->wdim.d.height * w->bits_per_pixel / 8);
+	ft_bzero(w->pixel, w->wdim.c.x * w->wdim.c.y * w->bits_per_pixel / 8);
 	i = l.chunck_count;
 	while (i-- > 0)
 	{

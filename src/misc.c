@@ -6,11 +6,12 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/06/07 00:58:53 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/07 15:22:25 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
+
 void				vrtx_offset(t_real *x, t_real *y, t_vrtx *v)
 {
 	X(v->vec) += *x;

@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/06/07 00:41:32 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/07 15:22:53 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static inline void	next_word(char **buf)
 	while (**buf != '\0' && **buf == ' ')
 		(*buf)++;
 }
+
 int					parse_fdf(t_obj *o, int fd)
 {
 	t_obj		cur;
