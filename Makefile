@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/06/03 09:46:36 by angagnie         ###   ########.fr        #
+#    Updated: 2016/06/08 17:49:47 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -15,12 +15,13 @@ EXEC_NAME:=ggl
 NAME:=libgg.a
 MODEL_PATH:=model/
 MODEL:=geometry \
-	matrices_mult matrices_axis \
+	matrices_mult matrices_axis matrices_axis4 matrices_misc \
 	system_tree_add system_tree_del system_tree_new system_tree_misc \
 	complex_math complex_new conversion_polar conversion_spher \
 	quaternion_conj quaternion_misc quaternion_new quaternion_prod \
 	quaternion_rotate quaternion_sum
-FILES=view controller render parser ft_ator ggl_main main
+FILES=controller render parser ft_ator ggl_main main misc \
+	view view_defaults view_interpolate
 LIBFT_PATH=Libft/
 LIBFT_HDR=Libft/include/
 # ==================
@@ -123,12 +124,10 @@ miniLibX_OSX/libmlx.a:
 	@make -C miniLibX_OSX/
 
 x11:
-#	$(eval FILES+=ggl_main_x11)
 	$(eval DEFLAG=-DX11)
 	$(eval LFLAGS+=-lX11)
 
 osx:
-#	$(eval FILES+=ggl_main_osx)
 	$(eval IFLAGS+=-I miniLibX_OSX/)
 	$(eval LFLAGS+=-lmlx -framework OpenGL -framework AppKit)
 	$(eval DEP+=miniLibX_OSX/libmlx.a)
@@ -138,4 +137,4 @@ debug:
 	@echo $(CYAN)"Generating debug informations"$(EOC)
 	@$(CC) $(CFLAGS) $(LFLAGS) -o $(EXEC_NAME) $(SRC)
 
-.PHONY: all clean fclean re test norme x11 osx usage debug exec
+.PHONY: all clean fclean re test norm x11 osx usage debug exec
