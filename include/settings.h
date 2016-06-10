@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 11:07:04 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/31 22:40:47 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/10 15:44:39 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@
 ** (and lightweight)
 */
 
-typedef float	t_real;
+typedef double	t_real;
 
 # define DEFAULT_FOV 60
-# define DEFAULT_RESOLUTION 1280, 720
-//# define QUATERNIONS
+# define DEFAULT_RESOLUTION 1920, 1080
 # define EULER
 # define OPENCL
 

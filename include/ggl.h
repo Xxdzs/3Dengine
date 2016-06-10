@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/05/19 12:47:00 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/10 15:42:53 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,21 @@ int				read_av(t_obj *w, int length, char **param);
 t_real			ft_ator(char *str);
 int				ggl_main(int ac, char **av);
 int				render(t_env *const w);
+int				linear_interpolation(int const i,
+					int const dout, int const din);
+int				smooth_interpolation(int const i,
+					int const dout, int const din);
+int				ez_interpolation(int const i,
+					int const dout, int const din);
+int				interpolate(t_env *const w, const t_pnt2i *p1,
+					const t_pnt2i *p2, const t_fnptr algo);
 int				draw_line(t_env *const w, t_pnt2i *p1, t_pnt2i *p2);
+int				parse_fdf(t_obj *w, int fd);
+int				parse_obj(t_obj *w, int fd);
+t_mat3x3		mat_get_transformation(t_gnode *n);
+t_mat4x4		mat4_get_transformation(t_gnode *n);
+t_gnode			*obj_adjust(t_obj *o);
+void			vrtx_offset(t_real *x, t_real *y, t_vrtx *v);
+void			obj_reset(t_obj *o);
 
 #endif

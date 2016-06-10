@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 10:24:36 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/01 11:08:35 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/05 18:08:41 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,17 @@ typedef t_vec4	t_mat4x1;
 
 t_mat2x1i		mat_2x3i_times_3x1i(const t_mat2x3i *a, const t_mat3x1i *b);
 t_mat3x1		mat_3x3_times_3x1(const t_mat3x3 *a, const t_mat3x1 *b);
+t_mat4x1		mat_4x4_times_4x1(const t_mat4x4 *a, const t_mat4x1 *b);
 t_mat3x3		mat_3x3_times_3x3(const t_mat3x3 *a, const t_mat3x3 *b);
+t_mat4x4		mat_4x4_times_4x4(const t_mat4x4 *a, const t_mat4x4 *b);
 t_mat3x3		mat_xaxis(t_real a);
 t_mat3x3		mat_yaxis(t_real a);
 t_mat3x3		mat_zaxis(t_real a);
+t_mat3x3		mat_scale(t_real a);
+t_mat4x4		mat4_xaxis(t_real a);
+t_mat4x4		mat4_yaxis(t_real a);
+t_mat4x4		mat4_zaxis(t_real a);
+t_mat4x4		mat4_scale(t_real a);
+void			mat3x3_print(const t_mat3x3 *const m);
 
 #endif

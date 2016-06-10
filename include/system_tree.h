@@ -6,13 +6,14 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 16:27:17 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/01 18:51:39 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/10 15:49:29 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SYSTEM_TREE_H
 # define SYSTEM_TREE_H
 
+# include "matrices.h"
 # include "libft.h"
 # include "settings.h"
 # include "geometry.h"
@@ -33,13 +34,13 @@ typedef struct	s_gnode
 	struct s_gnode	*parent;
 	t_vec3t			pos;
 	t_real			scale;
-# ifdef EULER
+#ifdef EULER
 	t_real			alpha;
 	t_real			beta;
 	t_real			gamma;
-# else
+#else
 	t_qtrn			rot;
-# endif
+#endif
 	int				is_obj;
 }				t_gnode;
 
@@ -106,7 +107,7 @@ void			obj_free(t_obj **subject);
 
 void			gnode_add_child(t_gnode *parent, t_gnode *child);
 int				obj_add_center(t_gnode *parent, t_obj *child);
-t_obj			*obj_find(const t_obj *const node, const char *const name);
-void			vrtx_transform(const t_mat3x3 *m, t_vrtx *v);
+t_obj			*obj_find(const t_gnode *const node, const char *const name);
+void			vrtx_transform(const t_mat4x4 *m, t_vrtx *v);
 
 #endif
