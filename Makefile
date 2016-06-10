@@ -6,12 +6,12 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/06/08 17:49:47 by angagnie         ###   ########.fr        #
+#    Updated: 2016/06/10 16:26:09 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 # ==== Editable ====
-EXEC_NAME:=ggl
+EXEC_NAME:=fractol
 NAME:=libgg.a
 MODEL_PATH:=model/
 MODEL:=geometry \
@@ -58,10 +58,10 @@ OBJ=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
 # ==================
 CCHF:=.cache_exists
 
-usage: osx all debug
+usage: all
 	@echo $(WHITE) "Usage : make    < osx | x11 >    < all | re | clean | fclean | test >     [ debug ]" $(EOC)
 
-all: $(NAME) $(EXEC_NAME)
+all: osx $(EXEC_NAME)
 
 exec: $(EXEC_NAME)
 

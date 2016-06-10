@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/10 15:42:53 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/10 16:27:43 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct	s_env
 		t_fnptr	key_hook;
 		t_fnptr	expose;
 	}			fnct;
+	int			bonus;
 }				t_env;
 
 int				default_expose_hook(void *param);

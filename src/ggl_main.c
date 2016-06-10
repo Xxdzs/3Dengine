@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/08 18:28:08 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/10 16:30:02 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ static int		init_env(t_env *const w)
 		w->wdim.d.height, "Fil De Fer")))
 		return (2);
 	ft_putstr("Window Created\n");
-	if (!(w->img = mlx_new_image(w->mlx, w->wdim.d.width
+	if (!(w->img = mlx_new_image(w->mlx, w->wdim.d.width,
 		w->wdim.d.height)))
 		return (3);
 	ft_putstr("Image Allocated\n");
-	if (!(w->pixel = mlx_get_data_addr(w->img, &(w->bits_per_pixel),
-		&(w->line_size), &(w->endian))))
+	if (!(w->pixel = mlx_get_data_addr(w->img,
+		&(w->bits_per_pixel), &(w->line_size), &(w->endian))))
 		return (4);
 	ft_putstr("Image informations Obtained\n");
 	mlx_expose_hook(w->win, w->fnct.expose, (void *)w);
