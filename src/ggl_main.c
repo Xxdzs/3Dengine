@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/10 16:30:02 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/10 17:47:49 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static int		init_env(t_env *const w)
 #endif
 	w->g.world = obj_alloc("World");
 	w->g.cam = camera_alloc();
+	w->bonus = 0;
 	return (0);
 }
 
