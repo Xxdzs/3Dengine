@@ -6,12 +6,12 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/06/10 16:36:15 by angagnie         ###   ########.fr        #
+#    Updated: 2016/06/10 16:49:09 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 # ==== Editable ====
-EXEC_NAME:=fdf
+EXEC_NAME:=ggl
 NAME:=libgg.a
 MODEL_PATH:=model/
 MODEL:=geometry \
@@ -32,10 +32,10 @@ LINKER:=ar rc
 CCHPATH=cache/
 SRCPATH=src/
 HDRPATH:=include/
-IFLAGS=-I $(HDRPATH) -I $(LIBFT_HDR) -I miniLibX_OSX/
+IFLAGS=-I $(HDRPATH) -I $(LIBFT_HDR)
 DEFLAG=
-LFLAGS=-L $(LIBFT_PATH) -lft -lmlx -framework OpenGL -framework AppKit
-DEP=$(LIBFT_PATH)libft.a miniLibX_OSX/libmlx.a
+LFLAGS=-L $(LIBFT_PATH) -lft
+DEP=$(LIBFT_PATH)libft.a
 CFLAGS=-Wall -Wextra $(IFLAGS) $(DEFLAG)
 # ==================
 
@@ -59,10 +59,10 @@ OBJ=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
 CCHF:=.cache_exists
 
 
-all: $(EXEC_NAME)
-
-usage:
+usage: all
 	@echo $(WHITE) "Usage : make    < osx | x11 >    < all | re | clean | fclean | test >     [ debug ]" $(EOC)
+
+all: osx $(EXEC_NAME)
 
 $(EXEC_NAME): $(OBJ) $(DEP)
 	@echo $(GREEN) " - Compiling $@" $(EOC)
