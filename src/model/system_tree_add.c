@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/01 14:10:06 by sid               #+#    #+#             */
-/*   Updated: 2016/05/31 17:36:26 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/03 16:07:28 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,4 @@ int			obj_add_center(t_gnode *parent, t_obj *child)
 	gnode_add_child(parent, (t_gnode *)&tmp);
 	gnode_add_child((t_gnode *)&tmp, (t_gnode *)child);
 	return (0);
-}
-
-t_obj		*obj_find(const t_obj *const node, const char *const name)
-{
-	t_node	*tmp;
-	t_obj	*ans;
-
-	if (node->name && name && ft_strcmp(node->name, name) == 0)
-		return ((t_obj *)node);
-	if (node->node.children.size > 0)
-	{
-		tmp = (t_node *)&(node->node.children);
-		while ((tmp = tmp->next) != &(node->node.children.root))
-			if ((ans = obj_find((t_obj *)tmp, name)) != NULL)
-				return (ans);
-	}
-	return (NULL);
 }

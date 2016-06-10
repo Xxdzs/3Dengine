@@ -6,12 +6,12 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/06/08 17:49:47 by angagnie         ###   ########.fr        #
+#    Updated: 2016/06/10 16:36:15 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 # ==== Editable ====
-EXEC_NAME:=ggl
+EXEC_NAME:=fdf
 NAME:=libgg.a
 MODEL_PATH:=model/
 MODEL:=geometry \
@@ -20,7 +20,7 @@ MODEL:=geometry \
 	complex_math complex_new conversion_polar conversion_spher \
 	quaternion_conj quaternion_misc quaternion_new quaternion_prod \
 	quaternion_rotate quaternion_sum
-FILES=controller render parser ft_ator ggl_main main misc \
+FILES=controller render reader parser ft_ator ggl_main main misc \
 	view view_defaults view_interpolate
 LIBFT_PATH=Libft/
 LIBFT_HDR=Libft/include/
@@ -32,10 +32,10 @@ LINKER:=ar rc
 CCHPATH=cache/
 SRCPATH=src/
 HDRPATH:=include/
-IFLAGS=-I $(HDRPATH) -I $(LIBFT_HDR)
+IFLAGS=-I $(HDRPATH) -I $(LIBFT_HDR) -I miniLibX_OSX/
 DEFLAG=
-LFLAGS=-L $(LIBFT_PATH) -lft
-DEP=$(LIBFT_PATH)libft.a
+LFLAGS=-L $(LIBFT_PATH) -lft -lmlx -framework OpenGL -framework AppKit
+DEP=$(LIBFT_PATH)libft.a miniLibX_OSX/libmlx.a
 CFLAGS=-Wall -Wextra $(IFLAGS) $(DEFLAG)
 # ==================
 
@@ -58,12 +58,11 @@ OBJ=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
 # ==================
 CCHF:=.cache_exists
 
-usage: osx all debug
+
+all: $(EXEC_NAME)
+
+usage:
 	@echo $(WHITE) "Usage : make    < osx | x11 >    < all | re | clean | fclean | test >     [ debug ]" $(EOC)
-
-all: $(NAME) $(EXEC_NAME)
-
-exec: $(EXEC_NAME)
 
 $(EXEC_NAME): $(OBJ) $(DEP)
 	@echo $(GREEN) " - Compiling $@" $(EOC)

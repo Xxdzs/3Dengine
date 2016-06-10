@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/10 15:42:53 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/10 16:37:00 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <sys/wait.h>
-
-# ifdef X11
-#  include <X11/Xlib.h>
-# else
-#  include "mlx.h"
-# endif
-
+# include "mlx.h"
 # include "settings.h"
 # include "libft.h"
 # include "geometry.h"
@@ -37,15 +31,9 @@ typedef int	(*t_fnptr)();
 
 typedef struct	s_env
 {
-# ifdef X11
-	Display		*disp;
-	Window		*win;
-	XImage		img;
-# else
 	void		*mlx;
 	void		*win;
 	void		*img;
-# endif
 	t_vec2i		wdim;
 	t_real		ratio;
 	char		*pixel;
@@ -59,6 +47,7 @@ typedef struct	s_env
 		t_fnptr	key_hook;
 		t_fnptr	expose;
 	}			fnct;
+	int			bonus;
 }				t_env;
 
 int				default_expose_hook(void *param);
@@ -68,6 +57,7 @@ int				read_av(t_obj *w, int length, char **param);
 t_real			ft_ator(char *str);
 int				ggl_main(int ac, char **av);
 int				render(t_env *const w);
+void			pxl_on(t_env *w, int x, int y, unsigned int color);
 int				linear_interpolation(int const i,
 					int const dout, int const din);
 int				smooth_interpolation(int const i,
