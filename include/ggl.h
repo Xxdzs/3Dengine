@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/10 17:47:35 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/10 18:21:28 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 
 # define PIXEL(X,Y) w->pixel[(Y) * w->line_size + (X) * (w->bits_per_pixel / 8)]
 
-typedef int	(*t_fnptr)();
+typedef int		(*t_fnptr)();
+typedef t_cmplx	(*t_fun)();
 
 typedef struct	s_env
 {
