@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 22:47:46 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 23:26:36 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/13 01:33:52 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@
 # define KEY_R 15
 # define KEY_A 0
 # define KEY_S 1
-# define KEY_D 3
-# define KEY_F 4
+# define KEY_D 2
+# define KEY_F 3
 # define KEY_H 5
-# define KEY_G 6
+# define KEY_G 4
 # define KEY_J 38
 # define KEY_K 40
 # define KEY_L 37

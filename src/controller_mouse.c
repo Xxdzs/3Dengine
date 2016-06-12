@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 22:31:25 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 22:31:48 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/13 01:26:44 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ int				default_mouse_hook(int button, int x, int y, void *param)
 	ft_putstr("Mouse click : ");
 	ft_putnbr(button);
 	ft_putstr("\n");
-	if (button == 1)
-		frac_zoom(w, (t_pnt2i){x, y});
-	else if (button == 2)
+	if (button == 1 || button == 4)
+		frac_zoom(w, (t_pnt2i){x, y}, 0.8);
+	else if (button == 2 || button == 5)
+		frac_zoom(w, (t_pnt2i){x, y}, 1.25);
+	else if (button == 3)
 		w->frc.cntr = frac_transform(w, (t_pnt2i){x, y});
 	w->fnct.repaint(w);
 	w->fnct.expose(w);

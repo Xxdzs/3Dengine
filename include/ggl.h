@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 23:29:19 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/13 01:27:42 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ t_gnode			*obj_adjust(t_obj *o);
 void			vrtx_offset(t_real *x, t_real *y, t_vrtx *v);
 void			obj_reset(t_obj *o);
 t_cmplx			frac_transform(t_env *w, t_pnt2i p);
-void			frac_zoom(t_env *w, t_pnt2i p);
+void			frac_zoom(t_env *w, t_pnt2i p, t_real zoom);
 
 #endif
