@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractals_functions.c                               :+:      :+:    :+:   */
+/*   fractals_misc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/12 12:42:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 19:39:58 by angagnie         ###   ########.fr       */
+/*   Created: 2016/06/12 17:54:01 by angagnie          #+#    #+#             */
+/*   Updated: 2016/06/12 18:27:05 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 
-t_cmplx		cmplx_julia(t_cmplx *z, t_cmplx *c)
+void	frac_zoom(t_env *w, t_pnt2i p)
 {
-	t_cmplx		ans;
+	t_cmplx		z;
 
-	ans = NEW_CMPLX(
-		(XP(z) + YP(z)) * (XP(z) - YP(z)) + XP(c),
-		2 * XP(z) * YP(z) + YP(c)
-	);
-	return (ans);
-}
-
-t_cmplx		frac_apply(t_cmplx *z, t_cmplx *c, t_fun fnct)
-{
-	t_cmplx ans;
-
-	ans = fnct(z);
-	X(ans) += XP(c);
-	Y(ans) += YP(c);
-	return (ans);
+	z = frac_transform(w, p);
+	X(w->frc.cntr) = X(z);
+	Y(w->frc.cntr) = Y(z);
+	w->frc.zoom *= 0.7;
+	z = frac_transform(w, p);
+	X(w->frc.cntr) += X(w->frc.cntr) - X(z);
+	Y(w->frc.cntr) += Y(w->frc.cntr) - Y(z);
 }

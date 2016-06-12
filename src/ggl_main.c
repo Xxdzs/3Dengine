@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 12:24:59 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 18:07:46 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,21 @@ static void		destroy_env(t_env *const w)
 	ft_putstr("  --==  Clear  ==--\n");
 }
 
+static void		init_fnct(t_env *const w)
+{
+	w->fnct.repaint = default_repaint;
+	w->fnct.key_hook = default_key_hook;
+	w->fnct.expose = default_expose_hook;
+	w->fnct.mouse_click = default_mouse_hook;
+}
+
 static int		init_env(t_env *const w)
 {
 #ifdef X11
 	int		sd;
 #endif
 
-	w->fnct.repaint = default_repaint;
-	w->fnct.key_hook = default_key_hook;
-	w->fnct.expose = default_expose_hook;
+	init_fnct(w);
 	w->wdim = (t_vec2i){{DEFAULT_RESOLUTION}};
 	w->ratio = ((t_real)w->wdim.d.width) / (t_real)w->wdim.d.height;
 #ifdef X11
@@ -69,6 +75,7 @@ static int		init_env(t_env *const w)
 	ft_putstr("Image informations Obtained\n");
 	mlx_expose_hook(w->win, w->fnct.expose, (void *)w);
 	mlx_hook(w->win, 2, 0, w->fnct.key_hook, (void *)w);
+	mlx_mouse_hook(w->win, w->fnct.mouse_click, (void *)w);
 	mlx_do_key_autorepeaton(w->mlx);
 #endif
 	w->g.world = obj_alloc("World");

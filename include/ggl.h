@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 13:05:56 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 18:12:39 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct	s_env
 		t_fnptr	repaint;
 		t_fnptr	key_hook;
 		t_fnptr	expose;
+		t_fnptr mouse_click;
+		t_fnptr mouse_move;
 	}			fnct;
 	int			bonus;
 	t_frac		frc;
@@ -54,6 +56,7 @@ typedef struct	s_env
 
 int				default_expose_hook(void *param);
 int				default_key_hook(int keycode, void *param);
+int				default_mouse_hook(int button, int x, int y, void *param);
 int				default_repaint(t_env *const w);
 int				read_av(t_obj *w, int length, char **param);
 t_real			ft_ator(char *str);
@@ -77,5 +80,7 @@ t_mat4x4		mat4_get_transformation(t_gnode *n);
 t_gnode			*obj_adjust(t_obj *o);
 void			vrtx_offset(t_real *x, t_real *y, t_vrtx *v);
 void			obj_reset(t_obj *o);
+t_cmplx			frac_transform(t_env *w, t_pnt2i p);
+void			frac_zoom(t_env *w, t_pnt2i p);
 
 #endif
