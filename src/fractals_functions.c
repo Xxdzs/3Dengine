@@ -6,13 +6,13 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 12:42:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 19:39:58 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 19:51:59 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 
-t_cmplx		cmplx_julia(t_cmplx *z, t_cmplx *c)
+t_cmplx		frac_julia(t_cmplx *z, t_cmplx *c)
 {
 	t_cmplx		ans;
 

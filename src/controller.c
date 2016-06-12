@@ -6,14 +6,12 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:17:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 18:45:41 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 21:17:11 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keys.h"
 #include "ggl.h"
-
-
 
 static void		part1(int keycode, t_env *w)
 {
@@ -35,6 +33,12 @@ static void		part1(int keycode, t_env *w)
 		w->frc.max_iter = w->frc.max_iter * 0.8 + 1;
 	else if (keycode == KEY_PLUS)
 		w->frc.max_iter = w->frc.max_iter * 1.25;
+	else if (keycode == KEY_0)
+		w->frc.max_iter = 20;
+	else if (keycode == KEY_9)
+		w->frc.max_iter = 600;
+	else if (keycode == KEY_DELETE)
+		frac_reset(&w->frc);
 }
 
 static void		part2(int keycode, t_env *w)

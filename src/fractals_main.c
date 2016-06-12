@@ -6,26 +6,35 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 11:48:15 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 18:36:21 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 21:04:01 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 
+void	frac_reset(t_frac *f)
+{
+	f->cntr = NEW_CMPLX(0, 0);
+	f->zoom = 4;
+	f->power = 2;
+	f->max_iter = 40;
+	f->light = 127;
+	f->speed = NEW_VEC3(80, 100, 70);
+}
+
 int		frac_submain(t_env *w, int ac, char **av)
 {
 	(void)ac;
+	frac_reset(&w->frc);
 	w->frc.is_julia = 0;
-	w->frc.lock = 0;
+	w->frc.is_locked = 0;
+	w->frc.is_bonus = 0;
+	w->frc.f = &cmplx_exp;
 	w->frc.c = NEW_CMPLX(0.285, 0.01);
-	w->frc.f = &cmplx_julia;
-	w->frc.cntr = NEW_CMPLX(0, 0);
-	w->frc.zoom = 4;
-	w->frc.max_iter = 40;
-	w->frc.light = 127;
-	w->frc.speed = NEW_VEC3(80, 100, 70);
 	if (!ft_strcmp(*av, "julia"))
 		w->frc.is_julia = 1;
+	if (!ft_strcmp(*av, "whatever"))
+		w->frc.is_bonus = 1;
 	w->fnct.repaint = &frac_render;
 	return (0);
 }

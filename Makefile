@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/06/12 17:57:02 by angagnie         ###   ########.fr        #
+#    Updated: 2016/06/12 20:14:45 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -17,9 +17,10 @@ MODEL_PATH:=model/
 MODEL:=geometry \
 	matrices_mult matrices_axis matrices_axis4 matrices_misc \
 	system_tree_add system_tree_del system_tree_new system_tree_misc \
-	complex_math complex_new conversion_polar conversion_spher \
+	conversion_polar conversion_spher \
 	quaternion_conj quaternion_misc quaternion_new quaternion_prod \
-	quaternion_rotate quaternion_sum
+	quaternion_rotate quaternion_sum \
+	complex_math complex_math2 complex_new
 FILES=controller render reader parser ft_ator ggl_main main misc \
 	view view_defaults view_interpolate \
 	fractals_main fractals_render fractals_functions fractals_misc

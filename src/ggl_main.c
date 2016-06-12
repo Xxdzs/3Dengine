@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 18:07:46 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 21:08:26 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ static void		destroy_env(t_env *const w)
 	mlx_destroy_image(w->mlx, w->img);
 	mlx_destroy_window(w->mlx, w->win);
 #endif
-	obj_free(&(w->g.world));
-	free(w->g.cam);
 	ft_putstr("  --==  Clear  ==--\n");
 }
 
@@ -62,7 +60,7 @@ static int		init_env(t_env *const w)
 		return (1);
 	ft_putstr("Librairy Initialised\n");
 	if (!(w->win = mlx_new_window(w->mlx, w->wdim.d.width,
-		w->wdim.d.height, "Fil De Fer")))
+		w->wdim.d.height, "Fractol")))
 		return (2);
 	ft_putstr("Window Created\n");
 	if (!(w->img = mlx_new_image(w->mlx, w->wdim.d.width,
@@ -78,8 +76,6 @@ static int		init_env(t_env *const w)
 	mlx_mouse_hook(w->win, w->fnct.mouse_click, (void *)w);
 	mlx_do_key_autorepeaton(w->mlx);
 #endif
-	w->g.world = obj_alloc("World");
-	w->g.cam = camera_alloc();
 	w->bonus = 0;
 	return (0);
 }

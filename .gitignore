@@ -7,3 +7,5 @@ fdf
 *.a
 ggl
 fractol
+julia
+mandelbrot
