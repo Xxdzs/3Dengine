@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 18:12:39 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 21:52:01 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct	s_env
 int				default_expose_hook(void *param);
 int				default_key_hook(int keycode, void *param);
 int				default_mouse_hook(int button, int x, int y, void *param);
+int				default_mouse_move_hook(int x, int y, void *param);
 int				default_repaint(t_env *const w);
 int				read_av(t_obj *w, int length, char **param);
 t_real			ft_ator(char *str);

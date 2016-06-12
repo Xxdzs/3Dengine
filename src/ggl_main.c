@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 21:08:26 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 21:51:09 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void		init_fnct(t_env *const w)
 	w->fnct.key_hook = default_key_hook;
 	w->fnct.expose = default_expose_hook;
 	w->fnct.mouse_click = default_mouse_hook;
+	w->fnct.mouse_move = default_mouse_move_hook;
 }
 
 static int		init_env(t_env *const w)
@@ -73,6 +74,7 @@ static int		init_env(t_env *const w)
 	ft_putstr("Image informations Obtained\n");
 	mlx_expose_hook(w->win, w->fnct.expose, (void *)w);
 	mlx_hook(w->win, 2, 0, w->fnct.key_hook, (void *)w);
+	mlx_hook(w->win, 6, 4, w->fnct.mouse_move, (void *)w);
 	mlx_mouse_hook(w->win, w->fnct.mouse_click, (void *)w);
 	mlx_do_key_autorepeaton(w->mlx);
 #endif

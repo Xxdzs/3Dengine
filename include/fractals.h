@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 18:17:22 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 21:18:15 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 22:06:28 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ typedef struct s_frac
 int				frac_main(int ac, char **av);
 unsigned int	frac_color(size_t ite, t_frac *f);
 t_cmplx			frac_julia(t_cmplx *z, t_cmplx *c);
-t_cmplx			frac_apply(t_cmplx *z, t_cmplx *c, t_fun fnct);
+t_cmplx			frac_apply(t_cmplx *z, t_cmplx *c, t_real pow, t_fun fnct);
 void			frac_reset(t_frac *f);

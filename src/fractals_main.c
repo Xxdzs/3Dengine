@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 11:48:15 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 21:04:01 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 22:10:12 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	frac_reset(t_frac *f)
 {
 	f->cntr = NEW_CMPLX(0, 0);
 	f->zoom = 4;
-	f->power = 2;
+	f->power = 3;
 	f->max_iter = 40;
 	f->light = 127;
 	f->speed = NEW_VEC3(80, 100, 70);

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:17:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 21:17:11 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 22:22:02 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ static void		part2(int keycode, t_env *w)
 		Z(w->frc.speed) += 10;
 	else if (keycode == KEY_F)
 		Z(w->frc.speed) -= 10;
+	else if (keycode == KEY_L)
+		w->frc.is_locked ^= 1;
+	else if (keycode == KEY_J)
+		w->frc.is_julia ^= 1;
 }
 
 int				default_key_hook(int keycode, void *param)
@@ -88,7 +92,22 @@ int				default_mouse_hook(int button, int x, int y, void *param)
 	ft_putstr("\n");
 	if (button == 1)
 		frac_zoom(w, (t_pnt2i){x, y});
+	else if (button == 2)
+		w->frc.cntr = frac_transform(w, (t_pnt2i){x, y});
 	w->fnct.repaint(w);
 	w->fnct.expose(w);
+	return (0);
+}
+
+int				default_mouse_move_hook(int x, int y, void *param)
+{
+	t_env *const	w = param;
+
+	if (!w->frc.is_locked)
+	{
+		w->frc.c = frac_transform(w, (t_pnt2i){x, y});
+		w->fnct.repaint(w);
+		w->fnct.expose(w);
+	}
 	return (0);
 }
