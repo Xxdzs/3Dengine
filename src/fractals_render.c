@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 18:13:34 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 16:12:28 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 16:41:29 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ unsigned int	frac_color(size_t ite, t_real lightness)
 	t_real			tmp;
 	unsigned int	ans;
 
-	tmp = lightness * (1 - cos((t_real)ite / 50));
+	tmp = lightness * (1 - cos((t_real)ite / 80));
 	ans = (unsigned)tmp << 16;
-	tmp = lightness * (1 + sin((t_real)ite / 40));
+	tmp = lightness * (1 + sin((t_real)ite / 100));
 	ans += (unsigned)tmp << 8;
-	tmp = lightness * (1 - sin((t_real)ite / 60));
+	tmp = lightness * (1 - sin((t_real)ite / 70));
 	ans += (unsigned)tmp ;
 	return (ans);
 }

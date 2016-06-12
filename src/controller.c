@@ -6,12 +6,14 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:17:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 16:07:13 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 16:54:12 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "keys.h"
 #include "ggl.h"
+
+
 
 static void		part1(int keycode, t_env *w)
 {
@@ -22,13 +24,13 @@ static void		part1(int keycode, t_env *w)
 	else if (keycode == KEY_KP_MINUS)
 		w->frc.zoom *= 1.25;
 	else if (keycode == KEY_LEFT)
-		X(w->frc.cntr)--;
+		X(w->frc.cntr) -= w->frc.zoom / 3;
 	else if (keycode == KEY_RIGHT)
-		X(w->frc.cntr)++;
+		X(w->frc.cntr) += w->frc.zoom / 3;
 	else if (keycode == KEY_DOWN)
-		Y(w->frc.cntr)--;
+		Y(w->frc.cntr) -= w->frc.zoom / 3;
 	else if (keycode == KEY_UP)
-		Y(w->frc.cntr)++;
+		Y(w->frc.cntr) += w->frc.zoom / 3;
 }
 
 static void		part2(int keycode, t_env *w)

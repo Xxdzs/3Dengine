@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 15:38:53 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 16:27:46 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,8 +243,7 @@ t_cmplx			cmplx_cos(t_cmplx *c);
 t_cmplx			cmplx_sin(t_cmplx *c);
 t_real			cmplx_mod(t_cmplx *c);
 t_real			cmplx_rep(t_cmplx *c);
-
-t_cmplx			cmplx_square(t_cmplx *z, t_cmplx *c);
+t_cmplx			cmplx_square(t_cmplx *z);
 
 t_qtrn			qtrn_external_prod(const t_qtrn *const a, const t_real s);
 void			qtrn_external_mult(t_qtrn *const a, const t_real s);

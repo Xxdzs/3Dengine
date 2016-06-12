@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 11:48:15 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 15:43:04 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 16:54:49 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		frac_submain(t_env *w, int ac, char **av)
 	w->frc.is_julia = 0;
 	w->frc.lock = 0;
 	w->frc.c = NEW_CMPLX(0.285, 0.01);
-	w->frc.f = &cmplx_julia;
+	w->frc.f = &cmplx_log2;
 	w->frc.cntr = NEW_CMPLX(0, 0);
 	w->frc.zoom = 4;
 	w->frc.max_iter = 40;
