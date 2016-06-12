@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 22:47:46 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/06 22:49:24 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 15:57:06 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@
 # define KEY_CH_LEFT 43
 # define KEY_CH_RIGHT 47
 # define KEY_ESC 53
-# define KEY_PLUS 69
-# define KEY_MINUS 78
+# define KEY_PLUS 24
+# define KEY_MINUS 27
+
 # define KEY_KP_1 83
 # define KEY_KP_2 84
 # define KEY_KP_3 85
@@ -49,6 +50,14 @@
 # define KEY_KP_7 89
 # define KEY_KP_8 91
 # define KEY_KP_9 92
+# define KEY_KP_PLUS 69
+# define KEY_KP_MINUS 78
+
+# define KEY_Q 12
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 # define KEY_DOWN 125

@@ -6,14 +6,27 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 12:42:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 12:56:30 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 15:39:26 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-t_cmplx		cmplx_square(t_cmplx *c)
+#include "ggl.h"
+
+t_cmplx		cmplx_square(t_cmplx *z, t_cmplx *c)
 {
-	if (c->type == CARTHESIAN)
-		return (NEW_CMPLX((XP(c) + YP(c)) * (XP(c) - YP(c)),
-			2 * XP(c) * YP(c)));
-	return ((t_cmplx){POLAR, {{MODP(c) * MODP(c), 2 * ARGP(c)}}});
+	(void)c;
+	if (z->type == CARTHESIAN)
+		return (NEW_CMPLX((XP(z) + YP(z)) * (XP(z) - YP(z)),
+			2 * XP(z) * YP(z)));
+	return ((t_cmplx){POLAR, {{MODP(z) * MODP(z), 2 * ARGP(z)}}});
+}
+
+t_cmplx		cmplx_julia(t_cmplx *z, t_cmplx *c)
+{
+	t_cmplx		ans;
+
+	ans = cmplx_square(z, c);
+	X(ans) += XP(c);
+	Y(ans) += YP(c);
+	return (ans);
 }
