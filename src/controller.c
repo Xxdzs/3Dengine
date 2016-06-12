@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:17:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 22:22:02 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/13 00:24:11 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static void		part1(int keycode, t_env *w)
 {
 	if (keycode == KEY_ESC)
-		exit(0);
+		exit(destroy_env(w));
 	else if (keycode == KEY_KP_PLUS)
 		w->frc.zoom *= 0.8;
 	else if (keycode == KEY_KP_MINUS)
@@ -43,9 +43,9 @@ static void		part1(int keycode, t_env *w)
 
 static void		part2(int keycode, t_env *w)
 {
-	if (keycode == KEY_CH_RIGHT)
+	if (keycode == KEY_CH_RIGHT && w->bonus < 6)
 		w->bonus++;
-	else if (keycode == KEY_CH_LEFT)
+	else if (keycode == KEY_CH_LEFT && w->bonus > 0)
 		w->bonus--;
 	else if (keycode == KEY_Q && w->frc.light < 120)
 		w->frc.light += 8;
@@ -69,6 +69,20 @@ static void		part2(int keycode, t_env *w)
 		w->frc.is_julia ^= 1;
 }
 
+static void		part3(int keycode, t_env *w)
+{
+	if (keycode == KEY_PG_UP)
+		w->frc.power++;
+	else if (keycode == KEY_PG_DOWN)
+		w->frc.power--;
+	else if (keycode == KEY_KP_STAR)
+		w->frc.power += 0.1;
+	else if (keycode == KEY_KP_SLASH)
+		w->frc.power -= 0.1;
+	else if (keycode == KEY_KP_EQUAL)
+		w->frc.power = 2;
+}
+
 int				default_key_hook(int keycode, void *param)
 {
 	t_env	*const w = param;
@@ -78,36 +92,8 @@ int				default_key_hook(int keycode, void *param)
 	ft_putendl("");
 	part1(keycode, w);
 	part2(keycode, w);
+	part3(keycode, w);
 	w->fnct.repaint(w);
 	w->fnct.expose(w);
-	return (0);
-}
-
-int				default_mouse_hook(int button, int x, int y, void *param)
-{
-	t_env *const	w = param;
-
-	ft_putstr("Mouse click : ");
-	ft_putnbr(button);
-	ft_putstr("\n");
-	if (button == 1)
-		frac_zoom(w, (t_pnt2i){x, y});
-	else if (button == 2)
-		w->frc.cntr = frac_transform(w, (t_pnt2i){x, y});
-	w->fnct.repaint(w);
-	w->fnct.expose(w);
-	return (0);
-}
-
-int				default_mouse_move_hook(int x, int y, void *param)
-{
-	t_env *const	w = param;
-
-	if (!w->frc.is_locked)
-	{
-		w->frc.c = frac_transform(w, (t_pnt2i){x, y});
-		w->fnct.repaint(w);
-		w->fnct.expose(w);
-	}
 	return (0);
 }

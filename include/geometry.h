@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 22:07:57 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/13 00:28:28 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,8 @@ t_cmplx			cmplx_log(t_cmplx *c);
 t_cmplx			cmplx_exp(t_cmplx *c);
 t_cmplx			cmplx_cos(t_cmplx *c);
 t_cmplx			cmplx_sin(t_cmplx *c);
+t_cmplx			cmplx_sinh(t_cmplx *c);
+
 t_cmplx			cmplx_pow(t_cmplx *c, t_real n);
 t_real			cmplx_mod(t_cmplx *c);
 t_real			cmplx_rep(t_cmplx *c);

@@ -6,13 +6,13 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 21:51:09 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 23:28:57 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 
-static void		destroy_env(t_env *const w)
+int		destroy_env(t_env *const w)
 {
 #ifdef X11
 	XCloseDisplay(w->disp);
@@ -22,6 +22,7 @@ static void		destroy_env(t_env *const w)
 	mlx_destroy_window(w->mlx, w->win);
 #endif
 	ft_putstr("  --==  Clear  ==--\n");
+	return (0);
 }
 
 static void		init_fnct(t_env *const w)

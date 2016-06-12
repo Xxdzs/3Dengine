@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 18:13:34 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 22:06:43 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 22:36:42 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int				frac_render(t_env *w)
 			iter = f.max_iter;
 			while (iter-- && X(z) * X(z) + Y(z) * Y(z) < 4)
 				if (f.is_bonus)
-					z = frac_apply(&z, &f.c, f.power, f.f);
+					z = frac_apply(&z, &f.c, f.power, w->bonus);
 				else
 					z = frac_julia(&z, &f.c);
 			pxl_on(w, p.x, p.y, frac_color(f.max_iter - iter, &f));

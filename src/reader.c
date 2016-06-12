@@ -6,7 +6,7 @@
 /*   By: sid <angagnie@student.42.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/06/07 16:37:48 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 23:07:48 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int					read_av(t_obj *w, int length, char **param)
 		else if ((fd = open(param[i], O_RDONLY)) == -1
 			|| ((int (*)(t_obj *, int))(tab[t + 1]))(w, fd))
 			return (1);
+		exit(0);
 	}
 	return (0);
 }

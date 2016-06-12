@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 21:52:01 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 23:29:19 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int				default_key_hook(int keycode, void *param);
 int				default_mouse_hook(int button, int x, int y, void *param);
 int				default_mouse_move_hook(int x, int y, void *param);
 int				default_repaint(t_env *const w);
+int				destroy_env(t_env *const w);
 int				read_av(t_obj *w, int length, char **param);
 t_real			ft_ator(char *str);
 int				ggl_main(int ac, char **av, t_fnptr submain);

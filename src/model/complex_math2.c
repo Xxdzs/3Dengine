@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 18:54:00 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 22:13:55 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/13 00:32:16 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,18 @@ t_cmplx		cmplx_pow(t_cmplx *z, t_real n)
 	const t_cmplx	tmp = cmplx_cpy(z, POLAR);
 
 	return ((t_cmplx){POLAR, {{
-			pow(MODP(z), n),
-			n * ARGP(z)
+			pow(MOD(tmp), n),
+			n * ARG(tmp)
 		}}});
+}
+
+t_cmplx		cmplx_sinh(t_cmplx *z)
+{
+	const t_cmplx		ez = cmplx_exp(z);
+	const t_cmplx		mz = NEW_CMPLX(-XP(z), -YP(z));
+	const t_cmplx		e_z = cmplx_exp(&mz);
+
+	return (NEW_CMPLX(
+			(X(ez) - X(e_z)) / 2,
+			(Y(ez) - Y(e_z)) / 2));
 }
