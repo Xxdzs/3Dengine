@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractals.h                                         :+:      :+:    :+:   */
+/*   fractals_functions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/10 18:17:22 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 13:45:20 by angagnie         ###   ########.fr       */
+/*   Created: 2016/06/12 12:42:57 by angagnie          #+#    #+#             */
+/*   Updated: 2016/06/12 12:56:30 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "settings.h"
-#include "geometry.h"
-
-typedef t_cmplx (*t_fun)();
-
-typedef struct s_frac
+t_cmplx		cmplx_square(t_cmplx *c)
 {
-	int		is_julia;
-	int		lock;
-	t_cmplx	c;
-	t_fun	f;
-	t_cmplx	cntr;
-	t_real	zoom;
-	size_t	max_iter;
-}				t_frac;
-
-int				frac_main(int ac, char **av);
+	if (c->type == CARTHESIAN)
+		return (NEW_CMPLX((XP(c) + YP(c)) * (XP(c) - YP(c)),
+			2 * XP(c) * YP(c)));
+	return ((t_cmplx){POLAR, {{MODP(c) * MODP(c), 2 * ARGP(c)}}});
+}

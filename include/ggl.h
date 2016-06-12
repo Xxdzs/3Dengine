@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/10 18:21:28 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 13:05:56 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 # include "geometry.h"
 # include "matrices.h"
 # include "system_tree.h"
+# include "fractals.h"
 
 # define PIXEL(X,Y) w->pixel[(Y) * w->line_size + (X) * (w->bits_per_pixel / 8)]
 
 typedef int		(*t_fnptr)();
-typedef t_cmplx	(*t_fun)();
 
 typedef struct	s_env
 {
@@ -49,6 +49,7 @@ typedef struct	s_env
 		t_fnptr	expose;
 	}			fnct;
 	int			bonus;
+	t_frac		frc;
 }				t_env;
 
 int				default_expose_hook(void *param);
@@ -56,8 +57,9 @@ int				default_key_hook(int keycode, void *param);
 int				default_repaint(t_env *const w);
 int				read_av(t_obj *w, int length, char **param);
 t_real			ft_ator(char *str);
-int				ggl_main(int ac, char **av);
+int				ggl_main(int ac, char **av, t_fnptr submain);
 int				render(t_env *const w);
+int				frac_render(t_env *const w);
 void			pxl_on(t_env *w, int x, int y, unsigned int color);
 int				linear_interpolation(int const i,
 					int const dout, int const din);

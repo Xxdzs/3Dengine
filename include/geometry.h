@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/01 11:07:56 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/12 13:02:59 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,7 @@ t_vec3t			*vec3_alloc(const t_real a, const t_real b, const t_real c);
 t_cmplx			cmplx_log(t_cmplx *c);
 t_cmplx			cmplx_cos(t_cmplx *c);
 t_cmplx			cmplx_sin(t_cmplx *c);
+t_cmplx			cmplx_square(t_cmplx *c);
 t_real			cmplx_mod(t_cmplx *c);
 t_real			cmplx_rep(t_cmplx *c);
 
