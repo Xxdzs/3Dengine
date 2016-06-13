@@ -6,14 +6,14 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 18:54:00 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/13 00:32:16 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/13 01:51:54 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 #include <math.h>
 
-t_cmplx		cmplx_square(t_cmplx *z)
+t_cmplx		cmplx_square(const t_cmplx *z)
 {
 	if (z->type == CARTHESIAN)
 		return (NEW_CMPLX(
@@ -40,7 +40,7 @@ t_cmplx		cmplx_prod(t_cmplx *a, t_cmplx *b)
 		}}});
 }
 
-t_cmplx		cmplx_exp(t_cmplx *z)
+t_cmplx		cmplx_exp(const t_cmplx *z)
 {
 	const t_cmplx	tmp = cmplx_cpy(z, CARTHESIAN);
 
@@ -49,7 +49,7 @@ t_cmplx		cmplx_exp(t_cmplx *z)
 			exp(X(tmp)) * sin(Y(tmp))));
 }
 
-t_cmplx		cmplx_pow(t_cmplx *z, t_real n)
+t_cmplx		cmplx_pow(const t_cmplx *z, const t_real n)
 {
 	const t_cmplx	tmp = cmplx_cpy(z, POLAR);
 
@@ -59,7 +59,7 @@ t_cmplx		cmplx_pow(t_cmplx *z, t_real n)
 		}}});
 }
 
-t_cmplx		cmplx_sinh(t_cmplx *z)
+t_cmplx		cmplx_sinh(const t_cmplx *z)
 {
 	const t_cmplx		ez = cmplx_exp(z);
 	const t_cmplx		mz = NEW_CMPLX(-XP(z), -YP(z));

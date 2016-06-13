@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/13 00:28:28 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/13 01:54:27 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,16 +238,16 @@ t_vec3t			*vec3_alloc(const t_real a, const t_real b, const t_real c);
 ** -----=====  Member Functions  =====-----
 */
 
-t_cmplx			cmplx_log(t_cmplx *c);
-t_cmplx			cmplx_exp(t_cmplx *c);
-t_cmplx			cmplx_cos(t_cmplx *c);
-t_cmplx			cmplx_sin(t_cmplx *c);
-t_cmplx			cmplx_sinh(t_cmplx *c);
+t_cmplx			cmplx_log(const t_cmplx *c);
+t_cmplx			cmplx_exp(const t_cmplx *c);
+t_cmplx			cmplx_cos(const t_cmplx *c);
+t_cmplx			cmplx_sin(const t_cmplx *c);
+t_cmplx			cmplx_sinh(const t_cmplx *c);
 
-t_cmplx			cmplx_pow(t_cmplx *c, t_real n);
-t_real			cmplx_mod(t_cmplx *c);
-t_real			cmplx_rep(t_cmplx *c);
-t_cmplx			cmplx_square(t_cmplx *z);
+t_cmplx			cmplx_pow(const t_cmplx *c, const t_real n);
+t_real			cmplx_mod(const t_cmplx *c);
+t_real			cmplx_rep(const t_cmplx *c);
+t_cmplx			cmplx_square(const t_cmplx *z);
 
 t_qtrn			qtrn_external_prod(const t_qtrn *const a, const t_real s);
 void			qtrn_external_mult(t_qtrn *const a, const t_real s);

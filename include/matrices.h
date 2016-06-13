@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/06 10:24:36 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/12 12:59:20 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/13 01:48:26 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef union	u_mat2x3i
 {
 	t_pnt2i	pnt[3];
 	t_vec2i vec[3];
-	t_real		raw[6];
+	int		raw[6];
 }				t_mat2x3i;
 
 typedef t_vec2i	t_mat2x1i;

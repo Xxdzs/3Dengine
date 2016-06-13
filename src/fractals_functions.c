@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 12:42:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/13 00:27:27 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/06/13 01:44:05 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ t_cmplx		frac_apply(t_cmplx *z, t_cmplx *c, t_real pow, int b)
 {
 	t_cmplx		ans;
 	const void	*fnct[] = {cmplx_id, cmplx_log, cmplx_exp, cmplx_cos,
+		cmplx_sin, cmplx_sinh, cmplx_cool};
 
-	cmplx_sin, cmplx_sinh, cmplx_cool};
 	ans = cmplx_pow(z, pow);
 	polar2carth(&ans);
 	ans = ((t_cmplx (*)(t_cmplx *))fnct[b])(&ans);
