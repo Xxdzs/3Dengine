@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controller.c                                       :+:      :+:    :+:   */
+/*   wolf.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/16 17:17:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/06 05:56:56 by angagnie         ###   ########.fr       */
+/*   Created: 2016/09/06 05:18:16 by angagnie          #+#    #+#             */
+/*   Updated: 2016/09/06 05:47:24 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "keys.h"
-#include "ggl.h"
+#ifndef WOLF_H
+# define WOLF_H
 
-int				default_key_hook(int keycode, void *param)
+typedef enum	e_block
 {
-	t_env	*const w = param;
+	NONE = 0,
+	FLOOR,
+	CEIL,
+	BOTH,
+	PREV,
+	NEXT = 8,
 
-	ft_putstr("Key Pressed : ");
-	ft_putnbr(keycode);
-	ft_putendl("");
-	w->fnct.repaint(w);
-	w->fnct.expose(w);
-	return (0);
-}
+	CEILING = CEIL,
+	FLOOR_CEILING = BOTH,
+	CEILING_FLOOR = BOTH,
+	PREVIOUS = PREV
+}				t_block;
+
+typedef struct	s_cell
+{
+	char		wall;
+	t_block		block;
+	// Textures
+}				t_cell;
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/06 03:51:14 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/06 06:38:48 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "matrices.h"
 # include "system_tree.h"
 # include "fractals.h"
+# include "wolf.h"
 
 # define PIXEL(X,Y) w->pixel[(Y) * w->line_size + (X) * (w->bits_per_pixel / 8)]
 # define UINT unsigned
@@ -71,7 +72,6 @@ t_real			ft_ator(char *str);
 int				ggl_main(int ac, char **av, t_fnptr submain);
 int				render(t_env *w);
 int				raytrace(t_env *w);
-unsigned		frac_render(t_env *w, t_pnt2i p, t_pnt2i d);
 void			pxl_on(t_env *w, int x, int y, unsigned int color);
 int				linear_interpolation(int const i,
 					int const dout, int const din);
@@ -86,10 +86,22 @@ int				parse_fdf(t_obj *w, int fd);
 int				parse_obj(t_obj *w, int fd);
 t_mat3x3		mat_get_transformation(t_gnode *n);
 t_mat4x4		mat4_get_transformation(t_gnode *n);
+
 t_gnode			*obj_adjust(t_obj *o);
 void			vrtx_offset(t_real *x, t_real *y, t_vrtx *v);
 void			obj_reset(t_obj *o);
+
 t_cmplx			frac_transform(t_env *w, t_pnt2i p, t_pnt2i d);
 void			frac_zoom(t_env *w, t_pnt2i p, t_real zoom);
+int				frac_submain(t_env *w, int ac, char **av);
+unsigned		frac_render(t_env *w, t_pnt2i p, t_pnt2i d);
+int				frac_key_hook(int keycode, void *param);
+int				frac_mouse_click(int button, int x, int y, void *param);
+int				frac_mouse_move(int x, int y, void *param);
+
+int				editor_repaint(t_env *w);
+int				editor_key_hook(int keycode, void *param);
+int				editor_mouse_click(int button, int x, int y, void *param);
+int				editor_mouse_move(int x, int y, void *param);
 
 #endif

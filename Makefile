@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/09/05 17:37:04 by angagnie         ###   ########.fr        #
+#    Updated: 2016/09/06 05:55:29 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -23,9 +23,11 @@ MODEL:=geometry \
 	complex_math complex_math2 complex_new
 FILES=render reader parser ft_ator ggl_main main misc \
 	controller controller_mouse \
+	editor_controller editor_controller_mouse \
+	fractals_controller fractals_controller_mouse \
 	view view_defaults view_interpolate \
 	fractals_main fractals_render fractals_functions fractals_misc \
-	wolf_main
+	wolf_main editor
 LIBFT_PATH=Libft/
 LIBFT_HDR=Libft/include/
 # ==================

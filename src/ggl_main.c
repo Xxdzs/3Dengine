@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/06 04:25:04 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/06 06:30:00 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,16 @@ int				destroy_env(t_env *const w)
 
 static void		init_fnct(t_env *const w)
 {
-	w->fnct.repaint = default_repaint;
-	w->fnct.key_hook = default_key_hook;
-	w->fnct.expose = default_expose_hook;
-	w->fnct.mouse_click = default_mouse_hook;
-	w->fnct.mouse_move = default_mouse_move_hook;
+	mlx_expose_hook(w->win, w->fnct.expose, (void *)w);
+	mlx_hook(w->win, 2, 0, w->fnct.key_hook, (void *)w);
+	mlx_hook(w->win, 6, 4, w->fnct.mouse_move, (void *)w);
+	mlx_mouse_hook(w->win, w->fnct.mouse_click, (void *)w);
 }
 
 #ifdef DEBUG
 
 static int		init_env(t_env *const w)
 {
-	init_fnct(w);
 	w->wdim = (t_vec2i){{DEFAULT_RESOLUTION}};
 	w->ratio = ((t_real)w->wdim.d.width) / (t_real)w->wdim.d.height;
 	if (!(w->mlx = mlx_init()))
@@ -51,12 +49,13 @@ static int		init_env(t_env *const w)
 		&(w->bits_per_pixel), &(w->line_size), &(w->endian))))
 		return (4);
 	ft_putstr("Image informations Obtained\n");
-	mlx_expose_hook(w->win, w->fnct.expose, (void *)w);
-	mlx_hook(w->win, 2, 0, w->fnct.key_hook, (void *)w);
-	mlx_hook(w->win, 6, 4, w->fnct.mouse_move, (void *)w);
-	mlx_mouse_hook(w->win, w->fnct.mouse_click, (void *)w);
+	w->fnct.repaint = default_repaint;
+	w->fnct.key_hook = default_key_hook;
+	w->fnct.expose = default_expose_hook;
+	w->fnct.mouse_click = default_mouse_hook;
+	w->fnct.mouse_move = default_mouse_move_hook;
+	init_fnct(w);
 	mlx_do_key_autorepeaton(w->mlx);
-	w->bonus = 0;
 	return (0);
 }
 
@@ -64,13 +63,12 @@ static int		init_env(t_env *const w)
 
 static int		init_env(t_env *const w)
 {
-	init_fnct(w);
 	w->wdim = (t_vec2i){{DEFAULT_RESOLUTION}};
 	w->ratio = ((t_real)w->wdim.d.width) / (t_real)w->wdim.d.height;
 	if (!(w->mlx = mlx_init()))
 		return (1);
 	if (!(w->win = mlx_new_window(w->mlx, w->wdim.d.width,
-		w->wdim.d.height, "Wolf 3D")))
+		w->wdim.d.height, "Fractol")))
 		return (2);
 	if (!(w->img = mlx_new_image(w->mlx, w->wdim.d.width,
 		w->wdim.d.height)))
@@ -78,12 +76,13 @@ static int		init_env(t_env *const w)
 	if (!(w->pixel = mlx_get_data_addr(w->img,
 		&(w->bits_per_pixel), &(w->line_size), &(w->endian))))
 		return (4);
-	mlx_expose_hook(w->win, w->fnct.expose, (void *)w);
-	mlx_hook(w->win, 2, 0, w->fnct.key_hook, (void *)w);
-	mlx_hook(w->win, 6, 4, w->fnct.mouse_move, (void *)w);
-	mlx_mouse_hook(w->win, w->fnct.mouse_click, (void *)w);
+	w->fnct.repaint = default_repaint;
+	w->fnct.key_hook = default_key_hook;
+	w->fnct.expose = default_expose_hook;
+	w->fnct.mouse_click = default_mouse_hook;
+	w->fnct.mouse_move = default_mouse_move_hook;
+	init_fnct(w);
 	mlx_do_key_autorepeaton(w->mlx);
-	w->bonus = 0;
 	return (0);
 }
 
@@ -93,11 +92,13 @@ int				ggl_main(int ac, char **av, t_fnptr submain)
 {
 	t_env	w;
 
+	w.bonus = 0;
 	if (init_env(&w))
 		ft_putstr_fd("Error : Initialisation failed\n", 2);
 	else
 	{
 		submain(&w, ac, av);
+		init_fnct(&w);
 		w.fnct.repaint(&w);
 		mlx_loop(w.mlx);
 		destroy_env(&w);
