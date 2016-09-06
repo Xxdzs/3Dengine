@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 22:31:25 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/06 06:47:19 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/06 08:32:15 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int				editor_mouse_click(int button, int x, int y, void *param)
 {
 	t_env *const	w = param;
 
+	(void)x;
+	(void)y;
 	ft_putstr("Mouse click : ");
 	ft_putnbr(button);
 	ft_putstr("\n");

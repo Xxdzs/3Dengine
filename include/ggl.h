@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/06 06:38:48 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/06 08:01:55 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct	s_env
 	}			fnct;
 	int			bonus;
 	t_frac		frc;
+	t_edtr		data;
 }				t_env;
 
 int				the_main(int ac, char **av);

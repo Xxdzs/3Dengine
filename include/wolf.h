@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/06 05:18:16 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/06 05:47:24 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/06 08:03:30 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,10 @@ typedef struct	s_cell
 	t_block		block;
 	// Textures
 }				t_cell;
+
+typedef struct	s_edtr
+{
+	size_t		tile;
+}				t_edtr;
 
 #endif
