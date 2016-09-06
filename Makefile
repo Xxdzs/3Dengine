@@ -6,12 +6,12 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/06/12 22:30:50 by angagnie         ###   ########.fr        #
+#    Updated: 2016/09/05 17:37:04 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 # ==== Editable ====
-EXEC_NAME:=fractol
+EXEC_NAME:=wolf3d
 NAME:=libgg.a
 MODEL_PATH:=model/
 MODEL:=geometry \
@@ -24,7 +24,8 @@ MODEL:=geometry \
 FILES=render reader parser ft_ator ggl_main main misc \
 	controller controller_mouse \
 	view view_defaults view_interpolate \
-	fractals_main fractals_render fractals_functions fractals_misc
+	fractals_main fractals_render fractals_functions fractals_misc \
+	wolf_main
 LIBFT_PATH=Libft/
 LIBFT_HDR=Libft/include/
 # ==================
@@ -134,7 +135,7 @@ osx:
 	$(eval DEP+=miniLibX_OSX/libmlx.a)
 
 debug:
-	$(eval CFLAGS+=-g)
+	$(eval CFLAGS+=-g -DDEBUG)
 	@echo $(CYAN)"Generating debug informations"$(EOC)
 	@$(CC) $(CFLAGS) $(LFLAGS) -o $(EXEC_NAME) $(SRC)
 

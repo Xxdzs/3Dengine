@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 11:48:15 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/13 00:57:04 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/06 02:16:03 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int		frac_submain(t_env *w, int ac, char **av)
 		w->frc.is_julia = 1;
 	if (!ft_strcmp(*av, "whatever"))
 		w->frc.is_bonus = 1;
-	w->fnct.repaint = &frac_render;
+	w->fnct.raytrace = &frac_render;
+	w->fnct.repaint = &raytrace;
 	return (0);
 }
 

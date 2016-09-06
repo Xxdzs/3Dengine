@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/13 01:45:47 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/06 04:25:04 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void		init_fnct(t_env *const w)
 	w->fnct.mouse_click = default_mouse_hook;
 	w->fnct.mouse_move = default_mouse_move_hook;
 }
+
+#ifdef DEBUG
 
 static int		init_env(t_env *const w)
 {
@@ -58,6 +60,35 @@ static int		init_env(t_env *const w)
 	return (0);
 }
 
+#else
+
+static int		init_env(t_env *const w)
+{
+	init_fnct(w);
+	w->wdim = (t_vec2i){{DEFAULT_RESOLUTION}};
+	w->ratio = ((t_real)w->wdim.d.width) / (t_real)w->wdim.d.height;
+	if (!(w->mlx = mlx_init()))
+		return (1);
+	if (!(w->win = mlx_new_window(w->mlx, w->wdim.d.width,
+		w->wdim.d.height, "Wolf 3D")))
+		return (2);
+	if (!(w->img = mlx_new_image(w->mlx, w->wdim.d.width,
+		w->wdim.d.height)))
+		return (3);
+	if (!(w->pixel = mlx_get_data_addr(w->img,
+		&(w->bits_per_pixel), &(w->line_size), &(w->endian))))
+		return (4);
+	mlx_expose_hook(w->win, w->fnct.expose, (void *)w);
+	mlx_hook(w->win, 2, 0, w->fnct.key_hook, (void *)w);
+	mlx_hook(w->win, 6, 4, w->fnct.mouse_move, (void *)w);
+	mlx_mouse_hook(w->win, w->fnct.mouse_click, (void *)w);
+	mlx_do_key_autorepeaton(w->mlx);
+	w->bonus = 0;
+	return (0);
+}
+
+#endif
+
 int				ggl_main(int ac, char **av, t_fnptr submain)
 {
 	t_env	w;
@@ -68,9 +99,7 @@ int				ggl_main(int ac, char **av, t_fnptr submain)
 	{
 		submain(&w, ac, av);
 		w.fnct.repaint(&w);
-		ft_putnbr(mlx_loop(w.mlx));
-		ft_putstr(" <- mlx_loop\n");
-		ft_putstr("Loop killed\n");
+		mlx_loop(w.mlx);
 		destroy_env(&w);
 	}
 	return (0);
