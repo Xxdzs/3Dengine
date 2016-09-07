@@ -1,36 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controller_mouse.c                                 :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/12 22:31:25 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/08 00:37:09 by angagnie         ###   ########.fr       */
+/*   Created: 2016/09/08 00:23:12 by angagnie          #+#    #+#             */
+/*   Updated: 2016/09/08 00:47:12 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "keys.h"
-#include "ggl.h"
+#include "libft.h"
 
-int				default_mouse_hook(int button, int x, int y, void *param)
+#ifdef DEBUG
+
+void	db_putstr(char const *str)
 {
-	t_env *const	w = param;
-
-	(void)x;
-	(void)y;
-	db_putvalue("Mouse click : ", button, "");
-	w->fnct.repaint(w);
-	w->fnct.expose(w);
-	return (0);
+	ft_putendl(str);
 }
 
-int				default_mouse_move_hook(int x, int y, void *param)
+void	db_putvalue(char *str, int n, char *end)
 {
-	t_env *const	w = param;
-
-	(void)x;
-	(void)y;
-	(void)w;
-	return (0);
+	ft_putstr(str);
+	ft_putnbr(n);
+	ft_putstr(end);
 }
+
+#else
+
+void	db_putstr(char const *str)
+{
+	(void)str;
+}
+
+void	db_putvalue(char const *str, int n, char const *end)
+{
+	(void)str;
+	(void)n;
+	(void)end;
+}
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 22:31:25 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/06 06:40:44 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/08 00:47:43 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ int				frac_mouse_click(int button, int x, int y, void *param)
 {
 	t_env *const	w = param;
 
-	ft_putstr("Mouse click : ");
-	ft_putnbr(button);
-	ft_putstr("\n");
+	db_putvalue("Mouse click : ", button, "");
 	if (button == 1 || button == 4)
 		frac_zoom(w, (t_pnt2i){x, y}, 0.8);
 	else if (button == 2 || button == 5)

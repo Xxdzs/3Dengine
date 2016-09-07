@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 22:31:25 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/06 08:32:15 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/08 00:41:12 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int				editor_mouse_click(int button, int x, int y, void *param)
 
 	(void)x;
 	(void)y;
-	ft_putstr("Mouse click : ");
-	ft_putnbr(button);
-	ft_putstr("\n");
+	db_putvalue("Mouse click : ", button, "");
 	if (button == 1 || button == 4)
 		;
 	else if (button == 2 || button == 5)

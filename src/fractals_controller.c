@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:17:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/06 05:53:20 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/07 23:49:43 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ static void		part1(int keycode, t_env *w)
 
 static void		part2(int keycode, t_env *w)
 {
-	if (keycode == KEY_CH_RIGHT && w->bonus < 6)
-		w->bonus++;
-	else if (keycode == KEY_CH_LEFT && w->bonus > 0)
-		w->bonus--;
+	if (keycode == KEY_CH_RIGHT && w->frc.function < 6)
+		w->frc.function++;
+	else if (keycode == KEY_CH_LEFT && w->frc.function > 0)
+		w->frc.function--;
 	else if (keycode == KEY_Q && w->frc.light < 120)
 		w->frc.light += 8;
 	else if (keycode == KEY_A && w->frc.light > 7)

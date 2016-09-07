@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 18:13:34 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/06 03:44:16 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/07 23:50:29 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ unsigned	frac_render(t_env *w, t_pnt2i p, t_pnt2i d)
 	iter = f.max_iter;
 	while (iter-- && X(z) * X(z) + Y(z) * Y(z) < 4)
 		if (f.is_bonus)
-			z = frac_apply(&z, &f.c, f.power, w->bonus);
+			z = frac_apply(&z, &f.c, f.power, w->frc.function);
 		else
 			z = frac_julia(&z, &f.c);
 	return (frac_color(f.max_iter - iter, &f));
@@ -49,8 +49,9 @@ unsigned	frac_color(size_t ite, t_frac *f)
 	t_real			tmp;
 	unsigned int	ans;
 
+	ans = 255 << 24;
 	tmp = f->light * (1 - cos((t_real)ite / X(f->speed)));
-	ans = (unsigned)tmp << 16;
+	ans += (unsigned)tmp << 16;
 	tmp = f->light * (1 + sin((t_real)ite / Y(f->speed)));
 	ans += (unsigned)tmp << 8;
 	tmp = f->light * (1 - sin((t_real)ite / Z(f->speed)));

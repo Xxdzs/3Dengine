@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 18:17:22 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/13 01:47:43 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/07 23:43:18 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct	s_frac
 	char	is_locked;
 	char	is_bonus;
 	char	is_julia;
+	char	function;;
 	t_real	zoom;
 	t_real	light;
 	t_real	power;

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/06 02:57:26 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/08 00:51:29 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ int			default_expose_hook(void *param)
 {
 	t_env *const	w = param;
 
-	ft_putstr("Exposing\n");
+	db_putstr("Exposing");
 	mlx_put_image_to_window(w->mlx, w->win, w->img, 0, 0);
 	return (0);
 }
 
 int			default_repaint(t_env *const w)
 {
-	ft_putstr("Repainting, but no custom repainting function provided\n");
+	db_putstr("Repainting, but no custom repainting function provided");
 	interpolate(w, &(t_pnt2i){100, 100}, &(t_pnt2i){400, 200},
 		&smooth_interpolation);
 	interpolate(w, &(t_pnt2i){400, 300}, &(t_pnt2i){100, 400},

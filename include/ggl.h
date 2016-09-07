@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/06 08:01:55 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/08 00:36:09 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@
 # include "wolf.h"
 
 # define PIXEL(X,Y) w->pixel[(Y) * w->line_size + (X) * (w->bits_per_pixel / 8)]
+# define NEW_COLOR_ARGB(A,R,G,B) ((A << 24) + (R << 16) + (G << 8) + B)
+# define NEW_COLOR_RGB(R,G,B) NEW_COLOR_ARGB(255,R,G,B)
 # define UINT unsigned
 
 typedef int		(*t_fnptr)();
 typedef UINT	(*t_fnray)();
-
-# undef UINT
 
 typedef struct	s_env
 {
@@ -56,10 +56,17 @@ typedef struct	s_env
 		t_fnptr	mouse_move;
 		t_fnray	raytrace;
 	}			fnct;
-	int			bonus;
 	t_frac		frc;
-	t_edtr		data;
+	t_edtr		edit;
+	struct
+	{
+		UINT	color;
+		char	line_style;
+		char	gap;
+	}			draw;
 }				t_env;
+
+# undef UINT
 
 int				the_main(int ac, char **av);
 int				default_expose_hook(void *param);
@@ -91,6 +98,14 @@ t_mat4x4		mat4_get_transformation(t_gnode *n);
 t_gnode			*obj_adjust(t_obj *o);
 void			vrtx_offset(t_real *x, t_real *y, t_vrtx *v);
 void			obj_reset(t_obj *o);
+
+void			db_putstr(char const *str);
+void			db_putvalue(char const *str, int n, char const *end);
+
+unsigned		stripesA(t_env *w, t_pnt2i p, t_pnt2i d);
+unsigned		stripesB(t_env *w, t_pnt2i p, t_pnt2i d);
+unsigned		stripesC(t_env *w, t_pnt2i p, t_pnt2i d);
+unsigned		stripesD(t_env *w, t_pnt2i p, t_pnt2i d);
 
 t_cmplx			frac_transform(t_env *w, t_pnt2i p, t_pnt2i d);
 void			frac_zoom(t_env *w, t_pnt2i p, t_real zoom);

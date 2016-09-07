@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/09/06 05:55:29 by angagnie         ###   ########.fr        #
+#    Updated: 2016/09/08 00:26:45 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -21,8 +21,8 @@ MODEL:=geometry \
 	quaternion_conj quaternion_misc quaternion_new quaternion_prod \
 	quaternion_rotate quaternion_sum \
 	complex_math complex_math2 complex_new
-FILES=render reader parser ft_ator ggl_main main misc \
-	controller controller_mouse \
+FILES=render reader parser ft_ator ggl_main main misc render_functions1 \
+	controller controller_mouse debug \
 	editor_controller editor_controller_mouse \
 	fractals_controller fractals_controller_mouse \
 	view view_defaults view_interpolate \

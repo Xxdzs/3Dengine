@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/06 23:47:32 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/07 23:39:49 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,24 @@
 
 void		pxl_on(t_env *w, int x, int y, unsigned int color)
 {
-	char			*t;
+	unsigned char	*t;
 	unsigned int	*c;
+	int				i;
 
 	if (0 <= x && x < w->wdim.d.width
 		&& 0 <= y && y < w->wdim.d.height)
 	{
-		t = w->pixel + y * w->line_size + x * w->bits_per_pixel / 8;
+		t = (unsigned char *)w->pixel
+			+ y * w->line_size + x * w->bits_per_pixel / 8;
 		c = (unsigned int *)t;
-		*c = color;
+		if (*t == 255)
+			*c = color;
+		else
+		{
+			i = 3;
+			while (i-- > 0)
+				t[i] += ((color - t[i]) * *t) / 255;
+		}
 	}
 }
 
@@ -41,21 +50,21 @@ int			draw_line(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
 {
 	if (p1->x == p2->x && p1->y == p2->y)
 		pxl_on(w, p1->x, p2->y, 200 << 16);
-	if (w->bonus == 1)
+	if (w->draw.line_style == 1)
 		return (interpolate(w, p1, p2, &smooth_interpolation));
-	else if (w->bonus == 2)
+	else if (w->draw.line_style == 2)
 		return (interpolate(w, p1, p2, &ez_interpolation));
-	else if (w->bonus == 3)
+	else if (w->draw.line_style == 3)
 	{
 		plot_on(w, p1->x, p1->y, 3);
 		return (plot_on(w, p2->x, p2->y, 3));
 	}
-	else if (w->bonus == 4)
+	else if (w->draw.line_style == 4)
 	{
 		plot_on(w, p1->x, p1->y, 5);
 		return (plot_on(w, p2->x, p2->y, 5));
 	}
-	else if (w->bonus == 5)
+	else if (w->draw.line_style == 5)
 	{
 		plot_on(w, p1->x, p1->y, 7);
 		return (plot_on(w, p2->x, p2->y, 7));
