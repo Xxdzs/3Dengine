@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/30 19:15:59 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/08 00:53:33 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/08 02:24:00 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		wolf_submain(t_env *w, int ac, char **av)
 	return (0);
 }
 
-int		wolf_main(int ac, char **av)
+int		the_main(int ac, char **av)
 {
 	if (ac == 0)
 		db_putstr("Missing arguments !!");

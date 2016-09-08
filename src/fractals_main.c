@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 11:48:15 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/08 01:17:53 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/08 02:23:50 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int			frac_submain(t_env *w, int ac, char **av)
 	return (0);
 }
 
-int			the_main(int ac, char **av)
+int			frac_main(int ac, char **av)
 {
 	if (!ac || (ft_strcmp("julia", *av) && ft_strcmp("mandelbrot", *av)
 		&& ft_strcmp("whatever", *av)))
