@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 18:13:34 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/07 23:50:29 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/08 01:25:24 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,8 @@ unsigned	frac_color(size_t ite, t_frac *f)
 	t_real			tmp;
 	unsigned int	ans;
 
-	ans = 255 << 24;
 	tmp = f->light * (1 - cos((t_real)ite / X(f->speed)));
-	ans += (unsigned)tmp << 16;
+	ans = (unsigned)tmp << 16;
 	tmp = f->light * (1 + sin((t_real)ite / Y(f->speed)));
 	ans += (unsigned)tmp << 8;
 	tmp = f->light * (1 - sin((t_real)ite / Z(f->speed)));

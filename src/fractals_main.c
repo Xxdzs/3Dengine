@@ -6,13 +6,13 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 11:48:15 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/07 23:48:37 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/08 01:17:53 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 
-void	frac_reset(t_frac *f)
+void		frac_reset(t_frac *f)
 {
 	f->cntr = NEW_CMPLX(0, 0);
 	f->zoom = 4;
@@ -21,7 +21,7 @@ void	frac_reset(t_frac *f)
 	f->speed = NEW_VEC3(81, 101, 71);
 }
 
-int		frac_submain(t_env *w, int ac, char **av)
+int			frac_submain(t_env *w, int ac, char **av)
 {
 	(void)ac;
 	frac_reset(&w->frc);
@@ -37,10 +37,13 @@ int		frac_submain(t_env *w, int ac, char **av)
 		w->frc.is_bonus = 1;
 	w->fnct.raytrace = &frac_render;
 	w->fnct.repaint = &raytrace;
+	w->fnct.mouse_click = &frac_mouse_click;
+	w->fnct.mouse_move = &frac_mouse_move;
+	w->fnct.key_hook = &frac_key_hook;
 	return (0);
 }
 
-int		frac_main(int ac, char **av)
+int			the_main(int ac, char **av)
 {
 	if (!ac || (ft_strcmp("julia", *av) && ft_strcmp("mandelbrot", *av)
 		&& ft_strcmp("whatever", *av)))

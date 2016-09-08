@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/08 00:23:12 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/08 00:47:12 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/08 01:15:50 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	db_putvalue(char *str, int n, char *end)
 {
 	ft_putstr(str);
 	ft_putnbr(n);
-	ft_putstr(end);
+	ft_putendl(end);
 }
 
 #else

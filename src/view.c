@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/07 23:39:49 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/08 01:46:20 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void		pxl_on(t_env *w, int x, int y, unsigned int color)
 {
 	unsigned char	*t;
 	unsigned int	*c;
-	int				i;
 
 	if (0 <= x && x < w->wdim.d.width
 		&& 0 <= y && y < w->wdim.d.height)
@@ -25,14 +24,7 @@ void		pxl_on(t_env *w, int x, int y, unsigned int color)
 		t = (unsigned char *)w->pixel
 			+ y * w->line_size + x * w->bits_per_pixel / 8;
 		c = (unsigned int *)t;
-		if (*t == 255)
-			*c = color;
-		else
-		{
-			i = 3;
-			while (i-- > 0)
-				t[i] += ((color - t[i]) * *t) / 255;
-		}
+		*c = color;
 	}
 }
 

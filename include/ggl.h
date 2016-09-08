@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/08 00:36:09 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/08 01:02:09 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int				read_av(t_obj *w, int length, char **param);
 t_real			ft_ator(char *str);
 int				ggl_main(int ac, char **av, t_fnptr submain);
 int				render(t_env *w);
-int				raytrace(t_env *w);
+int				raytrace(void *w);
 void			pxl_on(t_env *w, int x, int y, unsigned int color);
 int				linear_interpolation(int const i,
 					int const dout, int const din);
