@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/08 00:51:29 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/08 02:20:51 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,12 @@ int			default_repaint(t_env *const w)
 	return (0);
 }
 
-int			raytrace(t_env *const w)
+int			raytrace(void *param)
 {
 	t_pnt2i p;
+	t_env *w;
 
+	w = (t_env *)param;
 	p.y = w->wdim.d.height;
 	while (p.y-- > 0)
 	{
@@ -51,33 +53,3 @@ int			raytrace(t_env *const w)
 	}
 	return (0);
 }
-
-/*
-int			tmp_repaint(t_env *const w)
-{
-	int		map[][] = {{1, 1, 1, 1},
-					   {1, 0, 1, 1},
-					   {1, 0, 0, 1},
-					   {1, 1, 1, 1}};
-	int		sw = 800;
-	int		sh = 600;
-	int		col;
-	t_vec2t	d;
-	t_vec2t	p = NEW_VEC2(1, 2);
-	t_vec2t	r;
-	t_vec2i	m;
-	t_real	theta;
-	t_real	alpha;
-
-	col = sw;
-	while (col-- > 0)
-	{
-		alpha = ((t_real)col * M_PI) / ((t_real)sw * 3) + theta - M_PI_6;
-		X(d) = cos(alpha);
-		Y(d) = sin(alpha);
-		m.c.x = (int)X(p) / 64;
-		m.c.y = (int)Y(p) / 64;
-		X(r) =
-	}
-}
-*/
