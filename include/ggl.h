@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/08 01:02:09 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/12 19:16:49 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 # define PIXEL(X,Y) w->pixel[(Y) * w->line_size + (X) * (w->bits_per_pixel / 8)]
 # define NEW_COLOR_ARGB(A,R,G,B) ((A << 24) + (R << 16) + (G << 8) + B)
-# define NEW_COLOR_RGB(R,G,B) NEW_COLOR_ARGB(255,R,G,B)
+# define NEW_COLOR_RGB(R,G,B) NEW_COLOR_ARGB(0,R,G,B)
 # define UINT unsigned
 
 typedef int		(*t_fnptr)();
@@ -69,6 +69,7 @@ typedef struct	s_env
 # undef UINT
 
 int				the_main(int ac, char **av);
+void			init_fnct(t_env *const w);
 int				default_expose_hook(void *param);
 int				default_key_hook(int keycode, void *param);
 int				default_mouse_hook(int button, int x, int y, void *param);

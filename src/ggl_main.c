@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/08 00:51:50 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/12 19:14:51 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int				destroy_env(t_env *const w)
 	return (0);
 }
 
-static void		init_fnct(t_env *const w)
+void			init_fnct(t_env *const w)
 {
 	mlx_expose_hook(w->win, w->fnct.expose, (void *)w);
 	mlx_hook(w->win, 2, 0, w->fnct.key_hook, (void *)w);
@@ -28,7 +28,7 @@ static void		init_fnct(t_env *const w)
 	mlx_mouse_hook(w->win, w->fnct.mouse_click, (void *)w);
 }
 
-static int		init_env(t_env *const w)
+int				init_env(t_env *const w)
 {
 	w->wdim = (t_vec2i){{DEFAULT_RESOLUTION}};
 	w->ratio = ((t_real)w->wdim.d.width) / (t_real)w->wdim.d.height;

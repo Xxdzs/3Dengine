@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/06 05:09:30 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/07 23:46:20 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/12 19:25:28 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void		place_tile(t_env *w, t_pnt2i o, t_fnray f)
 	local_render(w, (t_pnt2i){o.x * d + c / 2, o.y * d + c / 2},
 		(t_pnt2i){c, c}, f);
 	local_render(w, (t_pnt2i){o.x * d + c / 2, o.y * d + c / 2},
-		(t_pnt2i){c, c}, &stripesC);
+		(t_pnt2i){c, c}, &stripesD);
 	perspective_frac(w, (t_pnt2i){o.x * d + c / 2, o.y * d + c / 2},
 		(t_pnt2i){c, c});
 	perspective(w, (t_pnt2i){o.x * d + c / 2, o.y * d + c / 2},

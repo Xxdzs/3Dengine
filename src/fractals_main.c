@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 11:48:15 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/08 02:23:50 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/12 19:07:27 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			frac_submain(t_env *w, int ac, char **av)
 	w->frc.is_locked = 0;
 	w->frc.is_bonus = 0;
 	w->frc.power = 3;
-	w->frc.function =0;
+	w->frc.function = 0;
 	w->frc.c = NEW_CMPLX(0.285, 0.01);
 	if (!ft_strcmp(*av, "julia"))
 		w->frc.is_julia = 1;

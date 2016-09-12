@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/08 01:46:20 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/12 19:28:49 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void		pxl_on(t_env *w, int x, int y, unsigned int color)
 		t = (unsigned char *)w->pixel
 			+ y * w->line_size + x * w->bits_per_pixel / 8;
 		c = (unsigned int *)t;
-		*c = color;
+		if (*t == 0)
+			*c = color;
+		else
+			db_putstr("");
 	}
 }
 
@@ -34,7 +37,7 @@ int			plot_on(t_env *w, int x, int y, int c)
 
 	i = c * c;
 	while (i-- > 0)
-		pxl_on(w, x - c / 2 + i % c, y - c / 2 + i / c, 200 << 8);
+		pxl_on(w, x - c / 2 + i % c, y - c / 2 + i / c, w->draw.color);
 	return (0);
 }
 

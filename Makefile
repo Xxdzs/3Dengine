@@ -6,12 +6,12 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/09/08 01:18:49 by angagnie         ###   ########.fr        #
+#    Updated: 2016/09/12 17:24:32 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 # ==== Editable ====
-EXEC_NAME:=fractol
+EXEC_NAME:=wolf3d
 NAME:=libgg.a
 MODEL_PATH:=model/
 MODEL:=geometry \
