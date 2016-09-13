@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/06 05:18:16 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/06 08:03:30 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/13 18:34:07 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,15 @@ typedef struct	s_edtr
 {
 	size_t		tile;
 }				t_edtr;
+
+typedef struct	s_wlf
+{
+	t_vec2i		mdim;
+	t_pnt2		pos;
+	t_real		dir;
+	t_cell		*map;
+	t_real		fov;
+	t_real		width;
+}				t_wlf;
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/07 20:46:55 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/12 18:51:20 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/13 17:19:09 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
 
-unsigned    stripesA(t_env *w, t_pnt2i p, t_pnt2i d)
+unsigned    stripes1(t_env *w, t_pnt2i p, t_pnt2i d)
 {
 	(void)d;
 	if (p.x % w->draw.gap == p.y % w->draw.gap
@@ -22,7 +22,7 @@ unsigned    stripesA(t_env *w, t_pnt2i p, t_pnt2i d)
 	return (255 << 24);
 }
 
-unsigned    stripesB(t_env *w, t_pnt2i p, t_pnt2i d)
+unsigned    stripes2(t_env *w, t_pnt2i p, t_pnt2i d)
 {
 	(void)d;
 	if (!(p.x % w->draw.gap)
@@ -32,7 +32,7 @@ unsigned    stripesB(t_env *w, t_pnt2i p, t_pnt2i d)
 	return (255 << 24);
 }
 
-unsigned    stripesC(t_env *w, t_pnt2i p, t_pnt2i d)
+unsigned    stripes3(t_env *w, t_pnt2i p, t_pnt2i d)
 {
 	if ((((p.x % (d.x >> 2)) * d.y) / d.x) == p.y % (d.y >> 2)
 		|| ((((p.x - 1) % (d.x >> 1)) * d.y) / d.x) == p.y % (d.y >> 1)
@@ -41,7 +41,7 @@ unsigned    stripesC(t_env *w, t_pnt2i p, t_pnt2i d)
 	return (255 << 24);
 }
 
-unsigned    stripesD(t_env *w, t_pnt2i p, t_pnt2i d)
+unsigned    stripes4(t_env *w, t_pnt2i p, t_pnt2i d)
 {
 	if (!(p.x % (d.x >> 3))
 		|| !((p.x - 1) % (d.x >> 2))

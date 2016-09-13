@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/09/12 17:24:32 by angagnie         ###   ########.fr        #
+#    Updated: 2016/09/13 17:20:57 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -24,6 +24,7 @@ MODEL:=geometry \
 FILES=render reader parser ft_ator ggl_main main misc render_functions1 \
 	controller controller_mouse debug \
 	editor_controller editor_controller_mouse \
+	wolf_render \
 	fractals_controller fractals_controller_mouse \
 	view view_defaults view_interpolate \
 	fractals_main fractals_render fractals_functions fractals_misc \

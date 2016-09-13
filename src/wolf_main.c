@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/30 19:15:59 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/12 19:26:29 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/13 18:41:36 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ int		editor_submain(t_env *w, int ac, char **av)
 int		wolf_submain(t_env *w, int ac, char **av)
 {
 	db_putstr("Wolf Sub-main");
+	w->draw.gap = 9;
+	w->draw.color = NEW_COLOR_RGB(100, 150, 200);
+	w->fnct.repaint = &wolf_repaint;
+	init_fnct(w);
+/*
+** if (!(w->wolf.map = (t_cell *)malloc(sizeof(t_cell))))
+** ft_exit("wolf_sunmain", "Out of memory (malloc failed)");
+*/
+	w->wolf.fov = ((t_real)DEFAULT_FOV * M_PI) / 180.;
+	w->wolf.width = 2 * SCREEN_DISTANCE * tan(w->wolf.fov);
 	return (0);
 }
 
