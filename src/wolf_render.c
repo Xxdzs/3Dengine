@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 13:40:09 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/13 18:33:11 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/09/29 20:29:05 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 unsigned	texture_1(t_env *w, t_pnt2i p, t_pnt2i d)
 {
+	(void)w;
 	if (p.y < d.y / 5 || p.y > (4 * d.y) / 5)
 		return (NEW_COLOR_RGB(150, 50, 50));
 	else if (p.x < d.x / 5 || p.x > (4 * d.x) / 5)
@@ -30,9 +31,9 @@ t_real		raycast(t_env *w, t_real a)
 {
 	t_pnt2	s;
 
-	s.y = fmod(w->wolf.dir, M_PI) ? tan(w->wolf.dir) : -2147483648;
-	s.x = fmod(w->wolf.dir + M_PI_2, M_PI) ? 1 / s.y : -2147483648;
-
+	s.y = fmod(a, M_PI) ? tan(a) : -2147483648;
+	s.x = fmod(a + M_PI_2, M_PI) ? 1 / s.y : -2147483648;
+	return (1.);
 }
 
 int			wolf_repaint(t_env *w)
@@ -43,9 +44,14 @@ int			wolf_repaint(t_env *w)
 	p.x = w->wdim.d.width;
 	while (p.x-- > 0)
 	{
-		d = raycast(w, w->wolf.dir + (t_real)p.x);
+		d = raycast(w, w->wolf.dir + (t_real)p.x / w->wdim.c.x - w->wolf.fov / 2);
 		p.y = w->wdim.d.height;
 		while (p.y-- > 0)
-			;
+		{
+			w->wolf.fov / w->ratio;
+			w->wolf.width / w->ratio;
+			1. / d;
+		}
 	}
+	return (0);
 }
