@@ -1,42 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controller_mouse.c                                 :+:      :+:    :+:   */
+/*   tsp_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/12 22:31:25 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/08 00:41:12 by angagnie         ###   ########.fr       */
+/*   Created: 2016/11/24 20:11:01 by angagnie          #+#    #+#             */
+/*   Updated: 2016/11/25 02:18:55 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "keys.h"
 #include "ggl.h"
 
-int				editor_mouse_click(int button, int x, int y, void *param)
+int		tsp_submain(t_env *w, int ac, char **av)
 {
-	t_env *const	w = param;
-
-	(void)x;
-	(void)y;
-	db_putvalue("Mouse click : ", button, "");
-	if (button == 1 || button == 4)
-		;
-	else if (button == 2 || button == 5)
-		;
-	else if (button == 3)
-		;
-	w->fnct.repaint(w);
-	w->fnct.expose(w);
-	return (0);
+	if (ac > 0)
+		w->tsp.n = ft_atoi(av[0]);
+	else
+		w->tsp.n = 10;
 }
 
-int				editor_mouse_move(int x, int y, void *param)
+int		the_main(int ac, char **av)
 {
-	t_env *const	w = param;
-
-	(void)w;
-	(void)x;
-	(void)y;
+	ggl_main(ac, av, &tsp_submain);
 	return (0);
 }

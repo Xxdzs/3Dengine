@@ -6,17 +6,11 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 15:01:33 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/08 00:45:27 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/11/24 20:24:48 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
-
-#include <stdio.h>
-
-/*
-** Default main
-*/
 
 int		main(int ac, char **av)
 {
