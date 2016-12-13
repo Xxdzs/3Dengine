@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/12 19:14:51 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/12/09 19:50:16 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,9 @@ int				init_env(t_env *const w)
 	return (0);
 }
 
-int				ggl_main(int ac, char **av, t_fnptr submain)
+int				ggl_main(t_env *w, int ac, char **av, t_fnptr submain)
 {
-	t_env	w;
-
-	if (init_env(&w))
+	if (init_env(w))
 		ft_putstr_fd("Error : Initialisation failed\n", 2);
 	else
 	{

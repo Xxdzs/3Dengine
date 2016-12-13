@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/30 19:15:59 by angagnie          #+#    #+#             */
-/*   Updated: 2016/11/25 02:12:48 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/12/09 19:50:54 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int		wolf_submain(t_env *w, int ac, char **av)
 
 int		wolf_main(int ac, char **av)
 {
+	t_wolf	w;
+
 	if (ac == 0)
 		db_putstr("Missing arguments !!");
 	else if (!ft_strcmp("editor", *av))
@@ -62,9 +64,9 @@ int		wolf_main(int ac, char **av)
 			db_putstr(av[1]);
 		else
 			db_putstr("Tests");
-		ggl_main(ac, av, &editor_submain);
+		ggl_main((t_env *)&w, ac, av, &editor_submain);
 	}
 	else
-		ggl_main(ac, av, &wolf_submain);
+		ggl_main((t_env *)&w, ac, av, &wolf_submain);
 	return (0);
 }

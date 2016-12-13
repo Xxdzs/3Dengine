@@ -6,13 +6,13 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/11/25 02:12:07 by angagnie         ###   ########.fr        #
+#    Updated: 2016/12/09 14:35:45 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 # ==== Editable ====
 EXEC_NAME:=wolf3d
-NAME:=libgg.a
+LIB_NAME:=libgg.a
 # ------------------
 MODEL:=geometry \
 	matrices_mult matrices_axis matrices_axis4 matrices_misc \
@@ -87,7 +87,7 @@ $(EXEC_NAME): $(OBJ) $(DEP)
 	@echo $(GREEN) " - Compiling $@" $(EOC)
 	@$(CC) $(OBJ) -o $@ $(IFLAGS) $(LFLAGS)
 
-$(NAME): $(OBJ) $(DEP)
+$(LIB_NAME): $(OBJ) $(DEP)
 	@echo $(GREEN) " - Compiling $@" $(EOC)
 	@$(LINKER) $@ $(OBJ)
 	@ranlib $@
@@ -161,4 +161,6 @@ debug:
 	@echo $(CYAN)"Generating debug informations"$(EOC)
 	@$(CC) $(CFLAGS) $(LFLAGS) -o $(EXEC_NAME) $(SRC)
 
-.PHONY: all clean fclean re test norm x11 osx usage debug exec
+lib: $(LIB_NAME)
+
+.PHONY: all clean fclean re test norm x11 osx usage debug exec lib

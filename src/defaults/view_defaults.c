@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/08 02:20:51 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/12/09 14:55:39 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,9 @@ int			default_repaint(t_env *const w)
 
 int			raytrace(void *param)
 {
-	t_pnt2i p;
-	t_env *w;
+	t_pnt2i			p;
+	t_env *const	w = (t_env *)param;
 
-	w = (t_env *)param;
 	p.y = w->wdim.d.height;
 	while (p.y-- > 0)
 	{

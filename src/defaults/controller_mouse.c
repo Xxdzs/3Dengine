@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 22:31:25 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/08 00:37:09 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/12/09 14:57:26 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ int				default_mouse_hook(int button, int x, int y, void *param)
 
 int				default_mouse_move_hook(int x, int y, void *param)
 {
-	t_env *const	w = param;
-
 	(void)x;
 	(void)y;
-	(void)w;
+	(void)param;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/13 17:20:25 by angagnie         ###   ########.fr       */
+/*   Updated: 2016/12/09 14:52:26 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include "geometry.h"
 # include "matrices.h"
 # include "system_tree.h"
-# include "fractals.h"
 # include "wolf.h"
 
 # define PIXEL(X,Y) w->pixel[(Y) * w->line_size + (X) * (w->bits_per_pixel / 8)]
@@ -37,6 +36,7 @@ typedef UINT	(*t_fnray)();
 
 typedef struct	s_env
 {
+	t_grfx		g;
 	void		*mlx;
 	void		*win;
 	void		*img;
@@ -46,7 +46,6 @@ typedef struct	s_env
 	int			bits_per_pixel;
 	int			line_size;
 	int			endian;
-	t_grfx		g;
 	struct
 	{
 		t_fnptr	repaint;
@@ -56,9 +55,6 @@ typedef struct	s_env
 		t_fnptr	mouse_move;
 		t_fnray	raytrace;
 	}			fnct;
-	t_frac		frc;
-	t_edtr		edit;
-	t_wlf		wolf;
 	struct
 	{
 		UINT	color;
@@ -70,6 +66,7 @@ typedef struct	s_env
 # undef UINT
 
 int				the_main(int ac, char **av);
+
 void			init_fnct(t_env *const w);
 int				default_expose_hook(void *param);
 int				default_key_hook(int keycode, void *param);
@@ -108,14 +105,6 @@ unsigned		stripes1(t_env *w, t_pnt2i p, t_pnt2i d);
 unsigned		stripes2(t_env *w, t_pnt2i p, t_pnt2i d);
 unsigned		stripes3(t_env *w, t_pnt2i p, t_pnt2i d);
 unsigned		stripes4(t_env *w, t_pnt2i p, t_pnt2i d);
-
-t_cmplx			frac_transform(t_env *w, t_pnt2i p, t_pnt2i d);
-void			frac_zoom(t_env *w, t_pnt2i p, t_real zoom);
-int				frac_submain(t_env *w, int ac, char **av);
-unsigned		frac_render(t_env *w, t_pnt2i p, t_pnt2i d);
-int				frac_key_hook(int keycode, void *param);
-int				frac_mouse_click(int button, int x, int y, void *param);
-int				frac_mouse_move(int x, int y, void *param);
 
 int				wolf_repaint(t_env *w);
 
