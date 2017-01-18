@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/06/07 15:22:53 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/18 20:26:31 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static inline void	add_vrtx(char **buf, t_obj *cur)
 		tmp.vec.v.m[i] = ft_ator(*buf);
 		i++;
 	}
-	ft_dyna_append(&cur->vertices, &tmp, 1);
+	fta_append(&cur->vertices, &tmp, 1);
 }
 
 static inline void	add_face(char **buf, t_obj *cur)
@@ -91,7 +91,7 @@ int					parse_obj(t_obj *w, int fd)
 	{
 		if (*buf == 'o')
 		{
-			if (cur.vertices.chunck_count == 0)
+			if (cur.vertices.size == 0)
 				obj_del(&cur);
 			else
 				gnode_add_child((t_gnode *)w, (t_gnode *)&cur);

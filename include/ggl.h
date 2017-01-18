@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2016/12/09 14:52:26 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/18 20:42:31 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,5 @@ unsigned		stripes1(t_env *w, t_pnt2i p, t_pnt2i d);
 unsigned		stripes2(t_env *w, t_pnt2i p, t_pnt2i d);
 unsigned		stripes3(t_env *w, t_pnt2i p, t_pnt2i d);
 unsigned		stripes4(t_env *w, t_pnt2i p, t_pnt2i d);
-
-int				wolf_repaint(t_env *w);
-
-int				editor_repaint(t_env *w);
-int				editor_key_hook(int keycode, void *param);
-int				editor_mouse_click(int button, int x, int y, void *param);
-int				editor_mouse_move(int x, int y, void *param);
 
 #endif

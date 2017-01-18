@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2016/12/09 19:50:16 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/18 20:13:39 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int				init_env(t_env *const w)
 		return (1);
 	db_putstr("Librairy Initialised");
 	if (!(w->win = mlx_new_window(w->mlx, w->wdim.d.width,
-		w->wdim.d.height, "Fractol")))
+		w->wdim.d.height, "Wolf 3D")))
 		return (2);
 	db_putstr("Window Created");
 	if (!(w->img = mlx_new_image(w->mlx, w->wdim.d.width,

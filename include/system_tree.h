@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 16:27:17 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/13 01:49:02 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/18 17:06:38 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ typedef struct	s_face
 typedef struct	s_obj
 {
 	t_gnode		node;
-	t_dyna		vertices;
-	t_dyna		faces;
+	t_array		vertices;
+	t_array		faces;
 	char		*name;
 	t_vec3t		*dim;
 }				t_obj;
