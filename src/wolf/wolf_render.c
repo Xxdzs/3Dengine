@@ -6,11 +6,11 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 13:40:09 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/29 20:29:05 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/19 12:41:48 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ggl.h"
+#include "wolf.h"
 
 unsigned	texture_1(t_env *w, t_pnt2i p, t_pnt2i d)
 {
@@ -22,9 +22,9 @@ unsigned	texture_1(t_env *w, t_pnt2i p, t_pnt2i d)
 	return (NEW_COLOR_RGB(200, 210, 200));
 }
 
-t_cell		*get_tile_at(t_env *w, t_pnt2 p)
+t_cell		*get_tile_at(t_wlf *w, t_pnt2 p)
 {
-	return (w->wolf.map + (long)p.y * w->wolf.mdim.d.width + (long)p.x);
+	return (w->map + (long)p.y * w->mdim.d.width + (long)p.x);
 }
 
 t_real		raycast(t_env *w, t_real a)
@@ -36,20 +36,21 @@ t_real		raycast(t_env *w, t_real a)
 	return (1.);
 }
 
-int			wolf_repaint(t_env *w)
+int			wolf_repaint(t_wlf *w)
 {
 	t_pnt2i	p;
 	t_real	d;
 
-	p.x = w->wdim.d.width;
+	p.x = w->super.super.wdim.d.width;
 	while (p.x-- > 0)
 	{
-		d = raycast(w, w->wolf.dir + (t_real)p.x / w->wdim.c.x - w->wolf.fov / 2);
-		p.y = w->wdim.d.height;
+		d = raycast(w, w->dir + w->fov *
+			(t_real)p.x / w->super.super.wdim.c.x - w->fov / 2);
+		p.y = w->super.super.wdim.d.height;
 		while (p.y-- > 0)
 		{
-			w->wolf.fov / w->ratio;
-			w->wolf.width / w->ratio;
+			w->fov / w->super.super.ratio;
+			w->width / w->super.super.ratio;
 			1. / d;
 		}
 	}

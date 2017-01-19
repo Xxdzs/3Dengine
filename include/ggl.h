@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/18 20:42:31 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/19 11:53:25 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include "geometry.h"
 # include "matrices.h"
 # include "system_tree.h"
-# include "wolf.h"
 
 # define PIXEL(X,Y) w->pixel[(Y) * w->line_size + (X) * (w->bits_per_pixel / 8)]
 # define NEW_COLOR_ARGB(A,R,G,B) ((A << 24) + (R << 16) + (G << 8) + B)
@@ -76,7 +75,7 @@ int				default_repaint(t_env *w);
 int				destroy_env(t_env *const w);
 int				read_av(t_obj *w, int length, char **param);
 t_real			ft_ator(char *str);
-int				ggl_main(int ac, char **av, t_fnptr submain);
+int				ggl_main(t_env *w, int ac, char **av, t_fnptr submain);
 int				render(t_env *w);
 int				raytrace(void *w);
 void			pxl_on(t_env *w, int x, int y, unsigned int color);

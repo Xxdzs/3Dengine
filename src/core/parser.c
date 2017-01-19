@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2017/01/18 20:26:31 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/19 11:38:00 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int					parse_fdf(t_obj *o, int fd)
 		while (*buf != '\0')
 		{
 			Z(tmp.vec) = -ft_ator(buf);
-			ft_dyna_append(&cur.vertices, &tmp, 1);
+			fta_append(&cur.vertices, &tmp, 1);
 			next_word(&buf);
 			X(tmp.vec)++;
 			if (XP(cur.dim) < X(tmp.vec))
@@ -78,7 +78,7 @@ static inline void	add_face(char **buf, t_obj *cur)
 		tmp.index[i] = ft_atoi(*buf);
 		i++;
 	}
-	ft_dyna_append(&cur->faces, &tmp, 1);
+	fta_append(&cur->faces, &tmp, 1);
 }
 
 int					parse_obj(t_obj *w, int fd)

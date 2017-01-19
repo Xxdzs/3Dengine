@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/18 20:13:39 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/19 11:39:38 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ int				ggl_main(t_env *w, int ac, char **av, t_fnptr submain)
 		ft_putstr_fd("Error : Initialisation failed\n", 2);
 	else
 	{
-		submain(&w, ac, av);
-		init_fnct(&w);
-		w.fnct.repaint(&w);
-		mlx_loop(w.mlx);
-		destroy_env(&w);
+		submain(w, ac, av);
+		init_fnct(w);
+		w->fnct.repaint(w);
+		mlx_loop(w->mlx);
+		destroy_env(w);
 	}
 	return (0);
 }
