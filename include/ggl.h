@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/19 11:53:25 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/23 23:29:09 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,29 @@
 typedef int		(*t_fnptr)();
 typedef UINT	(*t_fnray)();
 
-typedef struct	s_env
+typedef struct	s_win
 {
-	t_grfx		g;
-	void		*mlx;
-	void		*win;
-	void		*img;
-	t_vec2i		wdim;
+	void		*data;
+	t_vec2i		dim;
+	t_real		ratio;
+}				t_win;
+
+typedef struct	s_img
+{
+	void		*data;
+	t_vec2i		dim;
 	t_real		ratio;
 	char		*pixel;
 	int			bits_per_pixel;
 	int			line_size;
 	int			endian;
+}				t_img;
+
+typedef struct	s_env
+{
+	void		*mlx;
+	t_win		win;
+	t_img		img;
 	struct
 	{
 		t_fnptr	repaint;
@@ -52,7 +63,6 @@ typedef struct	s_env
 		t_fnptr	expose;
 		t_fnptr	mouse_click;
 		t_fnptr	mouse_move;
-		t_fnray	raytrace;
 	}			fnct;
 	struct
 	{

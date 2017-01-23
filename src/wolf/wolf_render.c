@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 13:40:09 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/19 12:41:48 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/23 22:49:11 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_cell		*get_tile_at(t_wlf *w, t_pnt2 p)
 	return (w->map + (long)p.y * w->mdim.d.width + (long)p.x);
 }
 
-t_real		raycast(t_env *w, t_real a)
+t_real		raycast(t_wlf *w, t_real a)
 {
 	t_pnt2	s;
 
@@ -49,9 +49,6 @@ int			wolf_repaint(t_wlf *w)
 		p.y = w->super.super.wdim.d.height;
 		while (p.y-- > 0)
 		{
-			w->fov / w->super.super.ratio;
-			w->width / w->super.super.ratio;
-			1. / d;
 		}
 	}
 	return (0);

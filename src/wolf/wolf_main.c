@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/30 19:15:59 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/19 12:58:11 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/23 22:50:05 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,10 @@ int		editor_submain(t_env *e, int ac, char **av)
 	e->fnct.key_hook = &editor_key_hook;
 	e->fnct.mouse_click = &editor_mouse_click;
 	e->fnct.mouse_move = &editor_mouse_move;
-	init_fnct(w);
+	init_fnct(e);
 	e->draw.color = NEW_COLOR_RGB(100,150,200);
 	e->draw.gap = 9;
 	w->tile = 256;
-
 	w->super.is_julia = 0;
 	w->super.is_locked = 1;
 	w->super.zoom = 4;
