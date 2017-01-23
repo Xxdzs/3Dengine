@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/12/09 14:35:45 by angagnie         ###   ########.fr        #
+#    Updated: 2017/01/24 00:26:22 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -20,22 +20,21 @@ MODEL:=geometry \
 	conversion_polar conversion_spher \
 	quaternion_conj quaternion_misc quaternion_new quaternion_prod \
 	quaternion_rotate quaternion_sum \
-	complex_math complex_math2 complex_new
+	complex_math complex_math2 complex_new \
+	ft_ator
 FILES=main debug
-CORE=render reader parser ft_ator ggl_main misc view view_interpolate
+CORE=reader parser ggl_main misc view view_interpolate
 DEFAULT=controller controller_mouse view_defaults
 EDITOR=render_functions1 editor_controller editor_controller_mouse editor
 WOLF=wolf_render wolf_main
 FRACTAL=fractals_controller fractals_controller_mouse \
 	fractals_main fractals_render fractals_functions fractals_misc
-TSP=tsp_main
-MODEL_PATH:=model/
+MODEL_PATH:=lib/
 CORE_PATH:=core/
 DEFAULT_PATH:=defaults/
 EDITOR_PATH:=editor/
 WOLF_PATH:=wolf/
 FRACTAL_PATH:=fractals/
-TSP_PATH:=TSP/
 LIBFT_PATH=Libft/
 LIBFT_HDR=Libft/include/
 # ==================
@@ -71,7 +70,6 @@ FILES+=$(addprefix $(DEFAULT_PATH),$(DEFAULT))
 FILES+=$(addprefix $(EDITOR_PATH),$(EDITOR))
 FILES+=$(addprefix $(WOLF_PATH),$(WOLF))
 FILES+=$(addprefix $(FRACTAL_PATH),$(FRACTAL))
-FILES+=$(addprefix $(TSP_PATH),$(TSP))
 FILES+=$(addprefix $(MODEL_PATH),$(MODEL))
 SRC=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES)))
 OBJ=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
@@ -107,7 +105,6 @@ $(CCHF):
 	@mkdir $(CCHPATH)$(EDITOR_PATH)
 	@mkdir $(CCHPATH)$(WOLF_PATH)
 	@mkdir $(CCHPATH)$(FRACTAL_PATH)
-	@mkdir $(CCHPATH)$(TSP_PATH)
 	@touch $(CCHF)
 
 clean:

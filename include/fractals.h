@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 18:17:22 by angagnie          #+#    #+#             */
-/*   Updated: 2016/12/09 14:58:00 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 00:30:26 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,10 @@ typedef struct	s_frac
 }				t_frac;
 
 /*
-** The two mains for fractol
+** The main for fractol
 */
 
 int				frac_main(int ac, char **av);
-int				frac_submain(t_frac *w, int ac, char **av);
 
 /*
 ** The three functions to handle user's input

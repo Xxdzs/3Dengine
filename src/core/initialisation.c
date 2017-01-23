@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 00:20:19 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 00:21:52 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int				destroy_env(t_env *const w)
 {
 	mlx_destroy_image(w->mlx, w->img);
 	mlx_destroy_window(w->mlx, w->win);
+	w->fnct.free(w);
 	db_putstr("\t\t--==  Clear  ==--");
 	return (0);
 }
@@ -62,20 +63,5 @@ int				init_env(t_env *const w)
 	w->fnct.mouse_move = default_mouse_move_hook;
 	init_fnct(w);
 	mlx_do_key_autorepeaton(w->mlx);
-	return (0);
-}
-
-int				ggl_main(t_env *w, int ac, char **av, t_fnptr submain)
-{
-	if (init_env(w))
-		ft_putstr_fd("Error : Initialisation failed\n", 2);
-	else
-	{
-		submain(w, ac, av);
-		init_fnct(w);
-		w->fnct.repaint(w);
-		mlx_loop(w->mlx);
-		destroy_env(w);
-	}
 	return (0);
 }
