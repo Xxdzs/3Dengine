@@ -1,43 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   debug.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/08 00:23:12 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/08 01:15:50 by angagnie         ###   ########.fr       */
+/*   Created: 2017/01/24 00:44:56 by angagnie          #+#    #+#             */
+/*   Updated: 2017/01/24 00:58:45 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef DEBUG_H
+# define DEBUG_H
 
-#ifdef DEBUG
+void	db_putvalue(char const *str, int n);
+void	db_putstr(char const *str);
 
-void	db_putstr(char const *str)
-{
-	ft_putendl(str);
-}
-
-void	db_putvalue(char *str, int n, char *end)
-{
-	ft_putstr(str);
-	ft_putnbr(n);
-	ft_putendl(end);
-}
-
-#else
-
-void	db_putstr(char const *str)
-{
-	(void)str;
-}
-
-void	db_putvalue(char const *str, int n, char const *end)
-{
-	(void)str;
-	(void)n;
-	(void)end;
-}
+# define DEBUG_INT(E) db_putvalue("The expression " #E " yields : ", E)
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 00:28:20 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 05:40:01 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "geometry.h"
 # include "matrices.h"
 # include "system_tree.h"
+# include "debug.h"
 
 /*
 ** # define PIXEL(X,Y)
@@ -59,13 +60,15 @@ typedef struct	s_fnct
 	t_fnptr		expose;
 	t_fnptr		mouse_click;
 	t_fnptr		mouse_move;
+	t_fnptr		free;
 }				t_fnct;
 
 typedef struct	s_brush
 {
-		unsigned	color;
-		char		line_style;
-		uint8_t		size;
+	unsigned	color;
+	unsigned	color2;
+	t_fnptr		easing;
+	uint8_t		size;
 }				t_brush;
 
 typedef struct	s_env
@@ -78,30 +81,17 @@ typedef struct	s_env
 }				t_env;
 
 int				the_main(int ac, char **av);
-int				ggl_main(t_env *w, int ac, char **av);
+int				ggl_main(t_env *w);
 
-void			init_fnct_env(t_env *const w);
-int				destroy_env(t_env *const w);
-void			pxl_on(t_img *w, t_pnt2i p, unsigned color);
-int				linear_interpolation(int const i,
-					int const dout, int const din);
-int				smooth_interpolation(int const i,
-					int const dout, int const din);
-int				ez_interpolation(int const i,
-					int const dout, int const din);
-int				interpolate(t_env *const w, const t_pnt2i *p1,
-					const t_pnt2i *p2, const t_fnptr algo);
-int				draw_line(t_env *const w, t_pnt2i *p1, t_pnt2i *p2);
-
-t_real			ft_ator(char *str);
+int             init_env(t_env *w);
+void			init_fnct_env(t_env *e);
+void			init_fnct(t_win *w, t_fnct *f, void *e);
+void			destroy_env(t_env *w);
 
 int				default_expose_hook(void *param);
 int				default_key_hook(int keycode, void *param);
 int				default_mouse_hook(int button, int x, int y, void *param);
 int				default_mouse_move_hook(int x, int y, void *param);
 int				default_repaint(t_env *w);
-
-void			db_putstr(char const *str);
-void			db_putvalue(char const *str, int n);
 
 #endif

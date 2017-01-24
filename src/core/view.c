@@ -6,63 +6,43 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/09/12 19:28:49 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 05:41:38 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "geometry.h"
 #include "ggl.h"
 
-void		pxl_on(t_env *w, int x, int y, unsigned int color)
+void		pxl_on(t_img *w, t_pnt2i p, unsigned color)
 {
 	unsigned char	*t;
-	unsigned int	*c;
+	unsigned		*c;
 
-	if (0 <= x && x < w->wdim.d.width
-		&& 0 <= y && y < w->wdim.d.height)
+	if (0 <= p.x && p.x < w->dim.d.width
+		&& 0 <= p.y && p.y < w->dim.d.width)
 	{
-		t = (unsigned char *)w->pixel
-			+ y * w->line_size + x * w->bits_per_pixel / 8;
-		c = (unsigned int *)t;
-		if (*t == 0)
-			*c = color;
-		else
-			db_putstr("");
+		t = (unsigned char *)w->data
+			+ p.y * w->line_size + p.x * w->bits_per_pixel / 8;
+		c = (unsigned *)t;
+		*c = color;
 	}
 }
 
-int			plot_on(t_env *w, int x, int y, int c)
+void		plot_on(t_img *w, t_brush *b, t_pnt2i p)
 {
 	int			i;
 
-	i = c * c;
+	i = b->size * b->size;
 	while (i-- > 0)
-		pxl_on(w, x - c / 2 + i % c, y - c / 2 + i / c, w->draw.color);
+		pxl_on(w, p.x - b->size / 2 + i % b->size,
+			p.y - b->size / 2 + i / b->size,
+			b->color);
 	return (0);
 }
 
-int			draw_line(t_env *const w, t_pnt2i *p1, t_pnt2i *p2)
+int			draw_line(t_img *w, t_brush *b, t_pnt2i p1, t_pnt2i p2)
 {
 	if (p1->x == p2->x && p1->y == p2->y)
-		pxl_on(w, p1->x, p2->y, 200 << 16);
-	if (w->draw.line_style == 1)
-		return (interpolate(w, p1, p2, &smooth_interpolation));
-	else if (w->draw.line_style == 2)
-		return (interpolate(w, p1, p2, &ez_interpolation));
-	else if (w->draw.line_style == 3)
-	{
-		plot_on(w, p1->x, p1->y, 3);
-		return (plot_on(w, p2->x, p2->y, 3));
-	}
-	else if (w->draw.line_style == 4)
-	{
-		plot_on(w, p1->x, p1->y, 5);
-		return (plot_on(w, p2->x, p2->y, 5));
-	}
-	else if (w->draw.line_style == 5)
-	{
-		plot_on(w, p1->x, p1->y, 7);
-		return (plot_on(w, p2->x, p2->y, 7));
-	}
-	return (interpolate(w, p1, p2, &linear_interpolation));
+		pxl_on(w, p1, b->color);
+	return (interpolate(w, b, p1, p2));
 }

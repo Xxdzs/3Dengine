@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/23 23:55:17 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 01:10:32 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,14 @@ typedef union	u_vec2i
 	int		m[2];
 	struct
 	{
+		int		width;
+		int		height;
+	}		d;
+	struct
+	{
 		unsigned	width;
 		unsigned	height;
-	}		d;
+	}		ud;
 }				t_vec2i;
 
 typedef struct	s_pnt2
@@ -98,6 +103,12 @@ typedef union	u_vec3i
 		unsigned	width;
 		unsigned	height;
 		unsigned	depth;
+	}		ud;
+	struct
+	{
+		int		width;
+		int		height;
+		int		depth;
 	}		d;
 }				t_vec3i;
 
@@ -185,9 +196,9 @@ typedef t_vec4t	t_qtrn;
 # define ZP(A) (A->v.c.z)
 # define WP(A) (A->v.c.z)
 
-# define WIDTH(A) (A->v.d.width)
-# define HEIGHT(A) (A->v.d.height)
-# define DEPTH(A) (A->v.d.depth)
+# define WIDTH(A) (A->v.ud.width)
+# define HEIGHT(A) (A->v.ud.height)
+# define DEPTH(A) (A->v.ud.depth)
 
 # define REP(A) (A.v.r.rep)
 # define IMP(A) (A.v.r.imp)

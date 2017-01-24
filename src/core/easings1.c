@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   view.c                                             :+:      :+:    :+:   */
+/*   easings1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/06 23:29:23 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 02:02:42 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ int			ez_interpolation(int const i, int const dout, int const din)
 	return ((int)(out * sin(M_PI_2 * x / in)));
 }
 
-int			interpolate(t_env *const w, const t_pnt2i *p1,
-	const t_pnt2i *p2, const t_fnptr algo)
+int			interpolate(t_img *w, t_brush *b, t_pnt2i p1, t_pnt2i p2)
 {
 	t_pnt2i	delta;
 	t_pnt2i	way;
@@ -55,11 +54,11 @@ int			interpolate(t_env *const w, const t_pnt2i *p1,
 	way.y = (p2->y > p1->y ? 1 : -1);
 	delta.x = abs(p1->x - p2->x);
 	delta.y = abs(p1->y - p2->y);
-	fx = (delta.x < delta.y ? algo : &identity);
-	fy = (delta.x > delta.y ? algo : &identity);
+	fx = (delta.x < delta.y ? b->line_style : &identity);
+	fy = (delta.x > delta.y ? b->line_style : &identity);
 	i = (delta.x > delta.y ? delta.x : delta.y) + 1;
 	while (i-- > 0)
-		pxl_on(w, p1->x + fx(i, delta.x, delta.y) * way.x,
-			p1->y + fy(i, delta.y, delta.x) * way.y, 200 << 16);
+		pxl_on(w, p 1->x + fx(i, delta.x, delta.y) * way.x,
+			p1->y + fy(i, delta.y, delta.x) * way.y, b->color);
 	return (0);
 }

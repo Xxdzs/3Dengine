@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/06 05:18:16 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/19 12:52:22 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 00:54:24 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ typedef enum	e_block
 
 typedef struct	s_cell
 {
-	char		wall;
+	uint8_t 	wall;
+	uint8_t		texture;
 	t_block		block;
-	// Textures
 }				t_cell;
 
 typedef struct	s_edtr

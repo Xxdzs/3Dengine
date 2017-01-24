@@ -1,26 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wolf_main.c                                        :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/30 19:15:59 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 05:31:01 by angagnie         ###   ########.fr       */
+/*   Created: 2016/09/08 00:23:12 by angagnie          #+#    #+#             */
+/*   Updated: 2017/01/24 01:01:17 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
 
-/*
-** Wolf Main
-*/
+#ifdef DEBUG
 
-int		the_main(int ac, char **av)
+void	db_putstr(char const *str)
 {
-	t_wlf			w[1];
-	t_env *const	e = w;
-
-	ggl_main(e);
-	return (0);
+	ft_putendl(str);
 }
+
+void	db_putvalue(char const *str, int n)
+{
+	ft_putstr(str);
+	ft_putnbr(n);
+	ft_putchar('\n');
+}
+
+#else
+
+void	db_putstr(char const *str)
+{
+	(void)str;
+}
+
+void	db_putvalue(char const *str, int n)
+{
+	(void)str;
+	(void)n;
+}
+
+#endif
