@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:07:57 by angagnie          #+#    #+#             */
-/*   Updated: 2016/06/01 11:07:56 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 01:10:32 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,14 @@ typedef union	u_vec2i
 	int		m[2];
 	struct
 	{
-		int	width;
-		int	height;
+		int		width;
+		int		height;
 	}		d;
+	struct
+	{
+		unsigned	width;
+		unsigned	height;
+	}		ud;
 }				t_vec2i;
 
 typedef struct	s_pnt2
@@ -95,9 +100,15 @@ typedef union	u_vec3i
 	int		m[3];
 	struct
 	{
-		int width;
-		int	height;
-		int	depth;
+		unsigned	width;
+		unsigned	height;
+		unsigned	depth;
+	}		ud;
+	struct
+	{
+		int		width;
+		int		height;
+		int		depth;
 	}		d;
 }				t_vec3i;
 
@@ -185,6 +196,10 @@ typedef t_vec4t	t_qtrn;
 # define ZP(A) (A->v.c.z)
 # define WP(A) (A->v.c.z)
 
+# define WIDTH(A) (A->v.ud.width)
+# define HEIGHT(A) (A->v.ud.height)
+# define DEPTH(A) (A->v.ud.depth)
+
 # define REP(A) (A.v.r.rep)
 # define IMP(A) (A.v.r.imp)
 # define MOD(A) (A.v.p.mod)
@@ -238,11 +253,16 @@ t_vec3t			*vec3_alloc(const t_real a, const t_real b, const t_real c);
 ** -----=====  Member Functions  =====-----
 */
 
-t_cmplx			cmplx_log(t_cmplx *c);
-t_cmplx			cmplx_cos(t_cmplx *c);
-t_cmplx			cmplx_sin(t_cmplx *c);
-t_real			cmplx_mod(t_cmplx *c);
-t_real			cmplx_rep(t_cmplx *c);
+t_cmplx			cmplx_log(const t_cmplx *c);
+t_cmplx			cmplx_exp(const t_cmplx *c);
+t_cmplx			cmplx_cos(const t_cmplx *c);
+t_cmplx			cmplx_sin(const t_cmplx *c);
+t_cmplx			cmplx_sinh(const t_cmplx *c);
+
+t_cmplx			cmplx_pow(const t_cmplx *c, const t_real n);
+t_real			cmplx_mod(const t_cmplx *c);
+t_real			cmplx_rep(const t_cmplx *c);
+t_cmplx			cmplx_square(const t_cmplx *z);
 
 t_qtrn			qtrn_external_prod(const t_qtrn *const a, const t_real s);
 void			qtrn_external_mult(t_qtrn *const a, const t_real s);

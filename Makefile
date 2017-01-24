@@ -6,22 +6,35 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2016/06/10 16:49:09 by angagnie         ###   ########.fr        #
+#    Updated: 2017/01/24 06:58:33 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 # ==== Editable ====
-EXEC_NAME:=ggl
-NAME:=libgg.a
-MODEL_PATH:=model/
+EXEC_NAME:=wolf3d
+LIB_NAME:=libgg.a
+# ------------------
 MODEL:=geometry \
 	matrices_mult matrices_axis matrices_axis4 matrices_misc \
 	system_tree_add system_tree_del system_tree_new system_tree_misc \
-	complex_math complex_new conversion_polar conversion_spher \
+	conversion_polar conversion_spher \
 	quaternion_conj quaternion_misc quaternion_new quaternion_prod \
-	quaternion_rotate quaternion_sum
-FILES=controller render reader parser ft_ator ggl_main main misc \
-	view view_defaults view_interpolate
+	quaternion_rotate quaternion_sum \
+	complex_math complex_math2 complex_new \
+	ft_ator parsers
+FILES=main
+CORE=reader ggl_main view easings1 debug initialisation
+DEFAULT=controller controller_mouse view_defaults
+#EDITOR=render_functions1 editor_controller editor_controller_mouse editor
+WOLF=wolf_render wolf_main
+#FRACTAL=fractals_controller fractals_controller_mouse \
+	fractals_main fractals_render fractals_functions fractals_misc
+MODEL_PATH:=lib/
+CORE_PATH:=core/
+DEFAULT_PATH:=defaults/
+#EDITOR_PATH:=editor/
+WOLF_PATH:=wolf/
+#FRACTAL_PATH:=fractals/
 LIBFT_PATH=Libft/
 LIBFT_HDR=Libft/include/
 # ==================
@@ -52,12 +65,16 @@ EOC:="\033[0m"
 # ==============
 
 # ====== Auto ======
+FILES+=$(addprefix $(CORE_PATH),$(CORE))
+FILES+=$(addprefix $(DEFAULT_PATH),$(DEFAULT))
+#FILES+=$(addprefix $(EDITOR_PATH),$(EDITOR))
+FILES+=$(addprefix $(WOLF_PATH),$(WOLF))
+#FILES+=$(addprefix $(FRACTAL_PATH),$(FRACTAL))
 FILES+=$(addprefix $(MODEL_PATH),$(MODEL))
 SRC=$(addprefix $(SRCPATH),$(addsuffix .c,$(FILES)))
 OBJ=$(addprefix $(CCHPATH),$(addsuffix .o,$(FILES)))
 # ==================
 CCHF:=.cache_exists
-
 
 usage: all
 	@echo $(WHITE) "Usage : make    < osx | x11 >    < all | re | clean | fclean | test >     [ debug ]" $(EOC)
@@ -68,7 +85,7 @@ $(EXEC_NAME): $(OBJ) $(DEP)
 	@echo $(GREEN) " - Compiling $@" $(EOC)
 	@$(CC) $(OBJ) -o $@ $(IFLAGS) $(LFLAGS)
 
-$(NAME): $(OBJ) $(DEP)
+$(LIB_NAME): $(OBJ) $(DEP)
 	@echo $(GREEN) " - Compiling $@" $(EOC)
 	@$(LINKER) $@ $(OBJ)
 	@ranlib $@
@@ -83,6 +100,11 @@ $(CCHPATH)%.o: $(SRCPATH)%.c $(CCHF)
 $(CCHF):
 	@mkdir $(CCHPATH)
 	@mkdir $(CCHPATH)$(MODEL_PATH)
+	@mkdir $(CCHPATH)$(CORE_PATH)
+	@mkdir $(CCHPATH)$(DEFAULT_PATH)
+#	@mkdir $(CCHPATH)$(EDITOR_PATH)
+	@mkdir $(CCHPATH)$(WOLF_PATH)
+#	@mkdir $(CCHPATH)$(FRACTAL_PATH)
 	@touch $(CCHF)
 
 clean:
@@ -132,8 +154,10 @@ osx:
 	$(eval DEP+=miniLibX_OSX/libmlx.a)
 
 debug:
-	$(eval CFLAGS+=-g)
+	$(eval CFLAGS+=-g -DDEBUG)
 	@echo $(CYAN)"Generating debug informations"$(EOC)
 	@$(CC) $(CFLAGS) $(LFLAGS) -o $(EXEC_NAME) $(SRC)
 
-.PHONY: all clean fclean re test norm x11 osx usage debug exec
+lib: $(LIB_NAME)
+
+.PHONY: all clean fclean re test norm x11 osx usage debug exec lib

@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/06/07 15:22:25 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/19 11:40:06 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_gnode				*obj_adjust(t_obj *o)
 	o->node.scale = rep / (ref + 2);
 	tmp[0] = -XP(o->dim) / 2;
 	tmp[1] = -YP(o->dim) / 2;
-	ft_dyna_iter2(&o->vertices, &vrtx_offset, tmp, tmp + 1);
+	fta_iter2(&o->vertices, &vrtx_offset, tmp, tmp + 1);
 	return ((t_gnode *)o);
 }
 

@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   settings.h                                         :+:      :+:    :+:   */
+/*   controller_mouse.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/06 11:07:04 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 00:19:29 by angagnie         ###   ########.fr       */
+/*   Created: 2016/06/12 22:31:25 by angagnie          #+#    #+#             */
+/*   Updated: 2017/01/24 06:01:01 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SETTINGS_H
-# define SETTINGS_H
+#include "keys.h"
+#include "ggl.h"
 
-/*
-** float, double or long double
-** speed <----------> precision
-** (and lightweight)
-*/
+int				default_mouse_hook(int button, int x, int y, void *param)
+{
+	t_env *const	w = param;
 
-typedef double	t_real;
+	(void)x;
+	(void)y;
+	db_putvalue("Mouse click : ", button);
+	w->fnct.repaint(w);
+	w->fnct.expose(w);
+	return (0);
+}
 
-# define DEFAULT_FOV 60
-# define DEFAULT_RESOLUTION 1920, 1080
-# define EULER
-# define OPENCL
-
-# define SUPPORTED_FORMATS SUPPORT(fdf),SUPPORT(obj)
-
-int		parse_obj();
-int		parse_fdf();
-
-# define SUPPORT(F) #F,&parse_##F
-
-#endif
+int				default_mouse_move_hook(int x, int y, void *param)
+{
+	(void)x;
+	(void)y;
+	(void)param;
+	return (0);
+}

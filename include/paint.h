@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   settings.h                                         :+:      :+:    :+:   */
+/*   paint.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/06 11:07:04 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 00:19:29 by angagnie         ###   ########.fr       */
+/*   Created: 2017/01/24 06:09:08 by angagnie          #+#    #+#             */
+/*   Updated: 2017/01/24 06:32:58 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SETTINGS_H
-# define SETTINGS_H
+#ifndef PAINT_H
+# define PAINT_H
 
-/*
-** float, double or long double
-** speed <----------> precision
-** (and lightweight)
-*/
+# include "ggl.h"
 
-typedef double	t_real;
+# define NEW_COLOR_ARGB(A,R,G,B) ((A << 24) + (R << 16) + (G << 8) + B)
+# define NEW_COLOR_RGB(R,G,B) NEW_COLOR_ARGB(0,R,G,B)
 
-# define DEFAULT_FOV 60
-# define DEFAULT_RESOLUTION 1920, 1080
-# define EULER
-# define OPENCL
-
-# define SUPPORTED_FORMATS SUPPORT(fdf),SUPPORT(obj)
-
-int		parse_obj();
-int		parse_fdf();
-
-# define SUPPORT(F) #F,&parse_##F
+void	pxl_on(t_img *w, t_pnt2i p, unsigned color);
+void	plot_on(t_img *w, t_brush *b, t_pnt2i p);
+int		interpolate(t_img *w, t_brush *b, t_pnt2i p1, t_pnt2i p2);
+int		draw_line(t_img *w, t_brush *b, t_pnt2i p1, t_pnt2i p2);
 
 #endif

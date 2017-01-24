@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   settings.h                                         :+:      :+:    :+:   */
+/*   fractals_misc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/06 11:07:04 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 00:19:29 by angagnie         ###   ########.fr       */
+/*   Created: 2016/06/12 17:54:01 by angagnie          #+#    #+#             */
+/*   Updated: 2016/09/06 04:23:24 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SETTINGS_H
-# define SETTINGS_H
+#include "ggl.h"
 
-/*
-** float, double or long double
-** speed <----------> precision
-** (and lightweight)
-*/
+void	frac_zoom(t_env *w, t_pnt2i p, t_real zoom)
+{
+	t_cmplx		z;
 
-typedef double	t_real;
-
-# define DEFAULT_FOV 60
-# define DEFAULT_RESOLUTION 1920, 1080
-# define EULER
-# define OPENCL
-
-# define SUPPORTED_FORMATS SUPPORT(fdf),SUPPORT(obj)
-
-int		parse_obj();
-int		parse_fdf();
-
-# define SUPPORT(F) #F,&parse_##F
-
-#endif
+	z = frac_transform(w, p, w->wdim.c);
+	w->frc.cntr = z;
+	w->frc.zoom *= zoom;
+	z = frac_transform(w, p, w->wdim.c);
+	X(w->frc.cntr) += X(w->frc.cntr) - X(z);
+	Y(w->frc.cntr) += Y(w->frc.cntr) - Y(z);
+}

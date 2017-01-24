@@ -1,36 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   settings.h                                         :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/06 11:07:04 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 00:19:29 by angagnie         ###   ########.fr       */
+/*   Created: 2016/09/08 00:23:12 by angagnie          #+#    #+#             */
+/*   Updated: 2017/01/24 01:01:17 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SETTINGS_H
-# define SETTINGS_H
+#include "libft.h"
 
-/*
-** float, double or long double
-** speed <----------> precision
-** (and lightweight)
-*/
+#ifdef DEBUG
 
-typedef double	t_real;
+void	db_putstr(char const *str)
+{
+	ft_putendl(str);
+}
 
-# define DEFAULT_FOV 60
-# define DEFAULT_RESOLUTION 1920, 1080
-# define EULER
-# define OPENCL
+void	db_putvalue(char const *str, int n)
+{
+	ft_putstr(str);
+	ft_putnbr(n);
+	ft_putchar('\n');
+}
 
-# define SUPPORTED_FORMATS SUPPORT(fdf),SUPPORT(obj)
+#else
 
-int		parse_obj();
-int		parse_fdf();
+void	db_putstr(char const *str)
+{
+	(void)str;
+}
 
-# define SUPPORT(F) #F,&parse_##F
+void	db_putvalue(char const *str, int n)
+{
+	(void)str;
+	(void)n;
+}
 
 #endif

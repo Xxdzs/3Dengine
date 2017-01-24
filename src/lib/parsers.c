@@ -6,10 +6,11 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2016/06/07 15:22:53 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 06:57:48 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "system_tree.h"
 #include "ggl.h"
 
 static inline void	next_word(char **buf)
@@ -36,7 +37,7 @@ int					parse_fdf(t_obj *o, int fd)
 		while (*buf != '\0')
 		{
 			Z(tmp.vec) = -ft_ator(buf);
-			ft_dyna_append(&cur.vertices, &tmp, 1);
+			fta_append(&cur.vertices, &tmp, 1);
 			next_word(&buf);
 			X(tmp.vec)++;
 			if (XP(cur.dim) < X(tmp.vec))
@@ -45,7 +46,7 @@ int					parse_fdf(t_obj *o, int fd)
 		Y(tmp.vec)++;
 	}
 	YP(cur.dim) = Y(tmp.vec);
-	gnode_add_child((t_gnode *)o, obj_adjust(&cur));
+	gnode_add_child((t_gnode *)o, (t_gnode *)&cur);
 	return (0);
 }
 
@@ -62,7 +63,7 @@ static inline void	add_vrtx(char **buf, t_obj *cur)
 		tmp.vec.v.m[i] = ft_ator(*buf);
 		i++;
 	}
-	ft_dyna_append(&cur->vertices, &tmp, 1);
+	fta_append(&cur->vertices, &tmp, 1);
 }
 
 static inline void	add_face(char **buf, t_obj *cur)
@@ -78,7 +79,7 @@ static inline void	add_face(char **buf, t_obj *cur)
 		tmp.index[i] = ft_atoi(*buf);
 		i++;
 	}
-	ft_dyna_append(&cur->faces, &tmp, 1);
+	fta_append(&cur->faces, &tmp, 1);
 }
 
 int					parse_obj(t_obj *w, int fd)
@@ -91,7 +92,7 @@ int					parse_obj(t_obj *w, int fd)
 	{
 		if (*buf == 'o')
 		{
-			if (cur.vertices.chunck_count == 0)
+			if (cur.vertices.size == 0)
 				obj_del(&cur);
 			else
 				gnode_add_child((t_gnode *)w, (t_gnode *)&cur);
