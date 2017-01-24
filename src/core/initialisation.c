@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ggl_main.c                                         :+:      :+:    :+:   */
+/*   initialisation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 07:55:31 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 18:12:20 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,16 @@ void			init_fnct(t_win *w, t_fnct *f, void *e)
 	mlx_mouse_hook(w->data, f->mouse_click, e);
 }
 
-void			env_new(t_env *e)
-{
-	e->mlx = 0;
-	e->win = (t_win){NULL, {{0, 0}}, 1};
-	e->img = (t_img){NULL, {{0, 0}}, 1, NULL, 0, 0, 0};
-	e->fnct = (t_fnct){
-		&default_repaint,
-		&default_key_hook,
-		&default_expose_hook,
-		&default_mouse_hook,
-		&default_mouse_move_hook,
-		NULL, NULL
-	};
-	e->brush = (t_brush){200, 100, &linear_interpolation, 5};
-}
-
 int				init_env(t_env *e)
 {
+	const t_vec2i	d = (t_vec2i){{DEFAULT_RESOLUTION}};
+
+	if (!(e->mlx = mlx_init))
+		return (1);
+	win_new(e->mlx, &e->win, d);
+	img_new(e->mlx, &e->img, d);
+	db_putstr("Libraray Initialised.");
+	init_fnct_env(e);
 	mlx_do_key_autorepeaton(e->mlx);
 	return (0);
 }

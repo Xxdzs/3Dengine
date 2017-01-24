@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 08:00:35 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 18:13:23 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int				the_main(int ac, char **av);
 int				ggl_main(t_env *w);
 
 void			env_new(t_env *e);
+int				win_new(void *mlx, t_win *w, t_vec2i dim);
+int				img_new(void *mlx, t_img *w, t_vec2i dim);
 int				init_env(t_env *w);
 void			init_fnct_env(t_env *e);
 void			init_fnct(t_win *w, t_fnct *f, void *e);

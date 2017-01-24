@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wolf_main.c                                        :+:      :+:    :+:   */
+/*   physics.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/30 19:15:59 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 18:11:09 by angagnie         ###   ########.fr       */
+/*   Created: 2017/01/24 18:19:00 by angagnie          #+#    #+#             */
+/*   Updated: 2017/01/24 18:49:55 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#ifndef PHYSICS_H
+# define PHYSICS_H
 
-/*
-** Wolf Main
-*/
+# include "libft.h"
+# include "geometry.h"
 
-int		the_main(int ac, char **av)
+typedef struct		s_physical
 {
-	t_wlf			w[1];
-	t_env *const	e = (t_env *)w;
+	t_vec3t		position;
+	t_vec3t		speed;
+	t_vec3t		acceleration;
+}					t_physical;
 
-	(void)ac;
-	(void)av;
-	env_new(e);
-	e->fnct.repaint = &wolf_repaint;
-	ggl_main(e);
-	w->fov = DEFAULT_FOV;
-	return (0);
-}
+# define NEW_PHYSICAL (t_physical){THRICE(NEW_VEC3(0,0,0))}
+
+#endif

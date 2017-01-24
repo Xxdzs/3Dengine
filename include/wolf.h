@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/06 05:18:16 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 07:46:53 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 18:51:32 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "ggl.h"
 # include "fractals.h"
+# include "physics.h"
 
 typedef enum	e_block
 {
@@ -48,11 +49,11 @@ typedef struct	s_wlf
 {
 	t_frac		super;
 	t_vec2i		mdim;
-	t_pnt2		pos;
+	t_physical	player;
 	t_real		dir;
 	t_cell		*map;
 	t_real		fov;
-	t_real		width;
+	t_real		omega;
 }				t_wlf;
 
 int				editor_repaint(t_edtr *w);
