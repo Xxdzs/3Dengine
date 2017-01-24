@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 05:40:01 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 06:13:32 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,7 @@
 # include "libft.h"
 # include "geometry.h"
 # include "matrices.h"
-# include "system_tree.h"
 # include "debug.h"
-
-/*
-** # define PIXEL(X,Y)
-** |	w->pixel[(Y) * w->line_size + (X) * (w->bits_per_pixel / 8)]
-** # define NEW_COLOR_ARGB(A,R,G,B) ((A << 24) + (R << 16) + (G << 8) + B)
-** # define NEW_COLOR_RGB(R,G,B) NEW_COLOR_ARGB(0,R,G,B)
-*/
 
 typedef int		(*t_fnptr)();
 

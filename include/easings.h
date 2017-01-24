@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wolf_main.c                                        :+:      :+:    :+:   */
+/*   easings.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/30 19:15:59 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 06:36:06 by angagnie         ###   ########.fr       */
+/*   Created: 2017/01/24 05:50:49 by angagnie          #+#    #+#             */
+/*   Updated: 2017/01/24 05:53:18 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#ifndef EASINGS_H
+# define EASINGS_H
 
-/*
-** Wolf Main
-*/
+int         identity(int const i, int const dout, const int din);
+int         linear_interpolation(int const i, int const dout, int const din);
+int         ease_out_sine(int const i, int const dout, int const din);
+int         ease_inout_sine(int const i, int const dout, int const din);
 
-int		the_main(int ac, char **av)
-{
-	t_wlf			w[1];
-	t_env *const	e = (t_env *)w;
-
-	ggl_main(e);
-	return (0);
-}
+#endif

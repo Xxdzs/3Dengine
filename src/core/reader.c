@@ -6,10 +6,11 @@
 /*   By: sid <angagnie@student.42.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2017/01/24 00:03:46 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 06:27:04 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "system_tree.h"
 #include "ggl.h"
 
 int					read_files(t_obj *w, int length, char **param)

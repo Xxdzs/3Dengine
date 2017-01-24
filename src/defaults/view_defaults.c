@@ -1,54 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   view.c                                             :+:      :+:    :+:   */
+/*   view_defaults.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2016/12/09 14:55:39 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 06:30:46 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ggl.h"
+#include "paint.h"
 
 int			default_expose_hook(void *param)
 {
-	t_env *const	w = param;
+	t_env *const	e = param;
 
-	db_putstr("Exposing");
-	mlx_put_image_to_window(w->mlx, w->win, w->img, 0, 0);
+	mlx_put_image_to_window(e->mlx, e->win.data, e->img.data, 0, 0);
 	return (0);
 }
 
-int			default_repaint(t_env *const w)
+int			default_repaint(t_env *const e)
 {
 	db_putstr("Repainting, but no custom repainting function provided");
-	interpolate(w, &(t_pnt2i){100, 100}, &(t_pnt2i){400, 200},
-		&smooth_interpolation);
-	interpolate(w, &(t_pnt2i){400, 300}, &(t_pnt2i){100, 400},
-		&smooth_interpolation);
-	interpolate(w, &(t_pnt2i){100, 100}, &(t_pnt2i){400, 300},
-		&smooth_interpolation);
-	interpolate(w, &(t_pnt2i){100, 400}, &(t_pnt2i){400, 200},
-		&smooth_interpolation);
-	draw_line(w, &(t_pnt2i){120, 400}, &(t_pnt2i){400, 350});
-	draw_line(w, &(t_pnt2i){400, 350}, &(t_pnt2i){400, 150});
-	draw_line(w, &(t_pnt2i){400, 150}, &(t_pnt2i){125, 100});
-	return (0);
-}
-
-int			raytrace(void *param)
-{
-	t_pnt2i			p;
-	t_env *const	w = (t_env *)param;
-
-	p.y = w->wdim.d.height;
-	while (p.y-- > 0)
-	{
-		p.x = w->wdim.d.width;
-		while (p.x-- > 0)
-			pxl_on(w, p.x, p.y, w->fnct.raytrace(w, p, w->wdim));
-	}
+	draw_line(&e->img, &e->brush, (t_pnt2i){100, 100}, (t_pnt2i){600, 400});
+	draw_line(&e->img, &e->brush, (t_pnt2i){600, 400}, (t_pnt2i){600, 100});
+	draw_line(&e->img, &e->brush, (t_pnt2i){400, 100}, (t_pnt2i){100, 100});
 	return (0);
 }

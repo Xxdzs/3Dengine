@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wolf_main.c                                        :+:      :+:    :+:   */
+/*   paint.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/30 19:15:59 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 06:36:06 by angagnie         ###   ########.fr       */
+/*   Created: 2017/01/24 06:09:08 by angagnie          #+#    #+#             */
+/*   Updated: 2017/01/24 06:32:58 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#ifndef PAINT_H
+# define PAINT_H
 
-/*
-** Wolf Main
-*/
+# include "ggl.h"
 
-int		the_main(int ac, char **av)
-{
-	t_wlf			w[1];
-	t_env *const	e = (t_env *)w;
+# define NEW_COLOR_ARGB(A,R,G,B) ((A << 24) + (R << 16) + (G << 8) + B)
+# define NEW_COLOR_RGB(R,G,B) NEW_COLOR_ARGB(0,R,G,B)
 
-	ggl_main(e);
-	return (0);
-}
+void	pxl_on(t_img *w, t_pnt2i p, unsigned color);
+void	plot_on(t_img *w, t_brush *b, t_pnt2i p);
+int		interpolate(t_img *w, t_brush *b, t_pnt2i p1, t_pnt2i p2);
+int		draw_line(t_img *w, t_brush *b, t_pnt2i p1, t_pnt2i p2);
+
+#endif

@@ -6,10 +6,11 @@
 /*   By: sid <angagnie@student.42.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/01 14:10:06 by sid               #+#    #+#             */
-/*   Updated: 2016/06/13 01:42:56 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 06:47:03 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "system_tree.h"
 #include "ggl.h"
 
 /*
@@ -40,11 +41,10 @@ t_obj		*obj_alloc(char *str)
 
 	if ((ans = (t_obj *)gnode_alloc(sizeof(t_obj))))
 	{
-		ans->vertices = ft_dyna_new(sizeof(t_vrtx));
-		ans->faces = ft_dyna_new(sizeof(t_face));
-		if (ft_dyna_datainit(&ans->vertices) || ft_dyna_datainit(&ans->faces))
-			ft_exit("obj_alloc", "Out of memory (malloc failed)");
-		ans->name = ft_strdup(str);
+		ans->vertices = NEW_ARRAY(t_vrtx);
+		ans->faces = NEW_ARRAY(t_face);
+		if (!(ans->name = ft_strdup(str)))
+			ft_putstr_fd("ERROR\tobj_alloc : Malloc failed\n", 2);
 		ans->dim = 0;
 	}
 	return (ans);
@@ -73,10 +73,8 @@ t_obj		obj_new(char *str)
 	ans.node.beta = 0;
 	ans.node.gamma = 0;
 	ans.node.scale = 1;
-	ans.vertices = ft_dyna_new(sizeof(t_vrtx));
-	ans.faces = ft_dyna_new(sizeof(t_vrtx));
-	if (ft_dyna_datainit(&ans.vertices) || ft_dyna_datainit(&ans.faces))
-		ft_exit("obj_new", "Out of memory (malloc failed)");
+	ans.vertices = NEW_ARRAY(t_vrtx);
+	ans.faces = NEW_ARRAY(t_vrtx);
 	if (!(ans.name = ft_strdup(str)))
 		ft_putstr_fd("ERROR\tobj_new : Malloc failed\n", 2);
 	ans.dim = 0;

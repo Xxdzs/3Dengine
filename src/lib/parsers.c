@@ -6,10 +6,11 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2017/01/19 11:38:00 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 06:48:04 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "system_tree.h"
 #include "ggl.h"
 
 static inline void	next_word(char **buf)

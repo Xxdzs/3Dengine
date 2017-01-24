@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 22:31:25 by angagnie          #+#    #+#             */
-/*   Updated: 2016/12/09 14:57:26 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 06:01:01 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int				default_mouse_hook(int button, int x, int y, void *param)
 
 	(void)x;
 	(void)y;
-	db_putvalue("Mouse click : ", button, "");
+	db_putvalue("Mouse click : ", button);
 	w->fnct.repaint(w);
 	w->fnct.expose(w);
 	return (0);

@@ -6,11 +6,12 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 13:40:09 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/23 22:49:11 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 06:35:30 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
+#include "paint.h"
 
 unsigned	texture_1(t_env *w, t_pnt2i p, t_pnt2i d)
 {
@@ -31,8 +32,6 @@ t_real		raycast(t_wlf *w, t_real a)
 {
 	t_pnt2	s;
 
-	s.y = fmod(a, M_PI) ? tan(a) : -2147483648;
-	s.x = fmod(a + M_PI_2, M_PI) ? 1 / s.y : -2147483648;
 	return (1.);
 }
 
@@ -41,15 +40,11 @@ int			wolf_repaint(t_wlf *w)
 	t_pnt2i	p;
 	t_real	d;
 
-	p.x = w->super.super.wdim.d.width;
+	p.x = w->super.super.win.dim.d.width;
 	while (p.x-- > 0)
 	{
 		d = raycast(w, w->dir + w->fov *
-			(t_real)p.x / w->super.super.wdim.c.x - w->fov / 2);
-		p.y = w->super.super.wdim.d.height;
-		while (p.y-- > 0)
-		{
-		}
+			(t_real)p.x / w->super.super.win.dim.c.x - w->fov / 2);
 	}
 	return (0);
 }
