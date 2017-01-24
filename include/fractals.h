@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 18:17:22 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 00:30:26 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 07:47:28 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct	s_frac
 	char	is_locked;
 	char	is_bonus;
 	char	is_julia;
-	char	function;;
+	char	function;
 	t_real	zoom;
 	t_real	light;
 	t_real	power;
@@ -49,10 +49,6 @@ int				frac_main(int ac, char **av);
 int				frac_key_hook(int keycode, void *param);
 int				frac_mouse_click(int button, int x, int y, void *param);
 int				frac_mouse_move(int x, int y, void *param);
-
-/*
-**
-*/
 
 unsigned int	frac_color(size_t ite, t_frac *f);
 t_cmplx			frac_julia(t_cmplx *z, t_cmplx *c);

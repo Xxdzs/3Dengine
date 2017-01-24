@@ -6,19 +6,15 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/06 05:18:16 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 00:54:24 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 07:46:53 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "ggl.h"
-#include "fractals.h"
 
 #ifndef WOLF_H
 # define WOLF_H
 
-/*
-**
-*/
+# include "ggl.h"
+# include "fractals.h"
 
 typedef enum	e_block
 {
@@ -37,7 +33,7 @@ typedef enum	e_block
 
 typedef struct	s_cell
 {
-	uint8_t 	wall;
+	uint8_t		wall;
 	uint8_t		texture;
 	t_block		block;
 }				t_cell;

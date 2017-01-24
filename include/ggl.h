@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 06:55:40 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 08:00:35 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct	s_fnct
 	t_fnptr		expose;
 	t_fnptr		mouse_click;
 	t_fnptr		mouse_move;
+	t_fnptr		loop_hook;
 	t_fnptr		free;
 }				t_fnct;
 
@@ -75,7 +76,8 @@ typedef struct	s_env
 int				the_main(int ac, char **av);
 int				ggl_main(t_env *w);
 
-int             init_env(t_env *w);
+void			env_new(t_env *e);
+int				init_env(t_env *w);
 void			init_fnct_env(t_env *e);
 void			init_fnct(t_win *w, t_fnct *f, void *e);
 void			destroy_env(t_env *w);
