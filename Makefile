@@ -6,7 +6,7 @@
 #    By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 17:38:00 by angagnie          #+#    #+#              #
-#    Updated: 2017/01/24 05:33:16 by angagnie         ###   ########.fr        #
+#    Updated: 2017/01/24 06:58:33 by angagnie         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -23,7 +23,7 @@ MODEL:=geometry \
 	complex_math complex_math2 complex_new \
 	ft_ator parsers
 FILES=main
-CORE=reader ggl_main view easings1
+CORE=reader ggl_main view easings1 debug initialisation
 DEFAULT=controller controller_mouse view_defaults
 #EDITOR=render_functions1 editor_controller editor_controller_mouse editor
 WOLF=wolf_render wolf_main

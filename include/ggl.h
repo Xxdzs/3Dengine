@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:39:13 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 06:13:32 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 06:55:40 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,7 @@ int				default_key_hook(int keycode, void *param);
 int				default_mouse_hook(int button, int x, int y, void *param);
 int				default_mouse_move_hook(int x, int y, void *param);
 int				default_repaint(t_env *w);
+
+t_real			ft_ator(char *str);
 
 #endif

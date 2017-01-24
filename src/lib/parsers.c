@@ -6,7 +6,7 @@
 /*   By: sid <sid@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 18:48:37 by sid               #+#    #+#             */
-/*   Updated: 2017/01/24 06:48:04 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/24 06:57:48 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int					parse_fdf(t_obj *o, int fd)
 		Y(tmp.vec)++;
 	}
 	YP(cur.dim) = Y(tmp.vec);
-	gnode_add_child((t_gnode *)o, obj_adjust(&cur));
+	gnode_add_child((t_gnode *)o, (t_gnode *)&cur);
 	return (0);
 }
 
