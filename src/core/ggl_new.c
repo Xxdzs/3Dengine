@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 08:20:52 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 17:59:20 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/26 03:34:08 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int				win_new(void *mlx, t_win *w, t_vec2i dim)
 
 void			env_new(t_env *e)
 {
+	db_putstr("env_new");
 	e->mlx = 0;
 	e->win = (t_win){NULL, {{0, 0}}, 1};
 	e->img = (t_img){NULL, {{0, 0}}, 1, NULL, 0, 0, 0};

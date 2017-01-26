@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 18:12:20 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/26 07:29:58 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void			destroy_env(t_env *e)
 
 void			init_fnct_env(t_env *e)
 {
+	db_putstr("init_fnct_env");
 	init_fnct(&e->win, &e->fnct, (void *)e);
 	if (e->fnct.loop_hook)
 		mlx_loop_hook(e->mlx, e->fnct.loop_hook, (void *)e);
@@ -31,6 +32,7 @@ void			init_fnct_env(t_env *e)
 
 void			init_fnct(t_win *w, t_fnct *f, void *e)
 {
+	db_putstr("init_fnct");
 	mlx_expose_hook(w->data, f->expose, e);
 	mlx_hook(w->data, 2, 0, f->key_hook, e);
 	mlx_hook(w->data, 6, 4, f->mouse_move, e);
@@ -41,11 +43,12 @@ int				init_env(t_env *e)
 {
 	const t_vec2i	d = (t_vec2i){{DEFAULT_RESOLUTION}};
 
-	if (!(e->mlx = mlx_init))
+	db_putstr("init_env");
+	if (!(e->mlx = mlx_init()))
 		return (1);
 	win_new(e->mlx, &e->win, d);
 	img_new(e->mlx, &e->img, d);
-	db_putstr("Libraray Initialised.");
+	db_putstr("Library Initialised.");
 	init_fnct_env(e);
 	mlx_do_key_autorepeaton(e->mlx);
 	return (0);

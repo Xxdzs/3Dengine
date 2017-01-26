@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 05:34:48 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/26 07:28:26 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int				ggl_main(t_env *w)
 {
+	db_putstr("ggl_main");
 	if (init_env(w))
 		ft_putstr_fd("Error : Initialisation failed\n", 2);
 	else

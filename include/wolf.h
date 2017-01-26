@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/06 05:18:16 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 18:51:32 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/26 07:49:19 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,23 @@ typedef struct	s_edtr
 	size_t		tile;
 }				t_edtr;
 
+typedef struct	s_map
+{
+	t_cell		*data;
+	t_vec2i		dim;
+}				t_map;
+
 typedef struct	s_wlf
 {
 	t_frac		super;
-	t_vec2i		mdim;
+	t_map		map;
 	t_physical	player;
-	t_real		dir;
-	t_cell		*map;
-	t_real		fov;
-	t_real		omega;
+	struct
+	{
+		t_real	dir;
+		t_real	fov;
+		t_real	omega;
+	}			camera;
 }				t_wlf;
 
 int				editor_repaint(t_edtr *w);
