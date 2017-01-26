@@ -6,14 +6,14 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 13:40:09 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/26 07:56:47 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/26 17:19:25 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 #include "paint.h"
 
-# define WENV_GET(W,F) ((W)->super.super.##F)
+# define WENV_GET(W) ((W)->super.super)
 
 unsigned	texture_1(t_env *w, t_pnt2i p, t_pnt2i d)
 {
@@ -41,7 +41,7 @@ void		wlf_column(t_wlf *w, int c)
 {
 	t_real	sigma;
 
-	sigma = 1 - 2 * (t_real)c / (t_real)WENV_GET(w,.img.dim).d.width;
+	sigma = 1 - 2 * (t_real)c / (t_real)WENV_GET(w).img.dim.d.width;
 	w->camera.dir = sigma;
 	w->camera.omega = tan(w->camera.fov);
 }
@@ -50,8 +50,8 @@ int			wolf_repaint(t_wlf *w)
 {
 	int		col;
 
-	col = WENV_GET(w,.img.dim).d.width;
+	col = WENV_GET(w).img.dim.d.width;
 	while (col-- > 0)
-		wlf_column(w, c);
+		wlf_column(w, col);
 	return (0);
 }

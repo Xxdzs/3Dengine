@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 12:36:43 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/26 07:29:58 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/26 17:34:02 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 void			destroy_env(t_env *e)
 {
+	db_putstr("destroy_env");
 	mlx_destroy_image(e->mlx, e->img.data);
 	mlx_destroy_window(e->mlx, e->win.data);
 	if (e->fnct.free)

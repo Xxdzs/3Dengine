@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/30 19:15:59 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/26 07:57:26 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/26 17:34:41 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int		the_main(int ac, char **av)
 	(void)ac;
 	(void)av;
 	env_new(e);
-	e->fnct.repaint = &wolf_repaint;
-	ggl_main(e);
+//	e->fnct.repaint = &wolf_repaint;
 	wolf_init(w);
+	ggl_main(e);
 	return (0);
 }

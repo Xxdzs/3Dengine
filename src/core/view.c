@@ -6,7 +6,7 @@
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 17:01:23 by angagnie          #+#    #+#             */
-/*   Updated: 2017/01/24 06:28:44 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/01/26 17:32:40 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int			interpolate(t_img *w, t_brush *b, t_pnt2i p1, t_pnt2i p2)
 	t_fnptr fx;
 	t_fnptr fy;
 
+	db_putstr("interpolate");
 	way.x = (p2.x > p1.x ? 1 : -1);
 	way.y = (p2.y > p1.y ? 1 : -1);
 	delta.x = abs(p1.x - p2.x);
@@ -62,6 +63,7 @@ int			interpolate(t_img *w, t_brush *b, t_pnt2i p1, t_pnt2i p2)
 
 int			draw_line(t_img *w, t_brush *b, t_pnt2i p1, t_pnt2i p2)
 {
+	db_putstr("draw_line");
 	if (p1.x == p2.x && p1.y == p2.y)
 		pxl_on(w, p1, b->color);
 	return (interpolate(w, b, p1, p2));
