@@ -1,14 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   menger2.c                                          :+:      :+:    :+:   */
+/*   Sierpinski.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angagnie <angagnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 22:23:47 by angagnie          #+#    #+#             */
-/*   Updated: 2017/04/26 16:04:45 by angagnie         ###   ########.fr       */
+/*   Updated: 2017/04/26 22:39:10 by angagnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+** This program generates the .obj of a Sierpinski carpet.
+** No duplicate vertices are created.
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -85,7 +90,13 @@ int		main(int ac, char **av)
 	int			depth = 4;
 
 	if (ac > 1)
+	{
 		depth = atoi(av[1]);
+		if (depth < 1)
+			depth = 1;
+		if (depth > 7)
+			depth = 7;
+	}
 	vertex(0.,0.);
 	vertex(1.,0.);
 	vertex(0.,1.);
